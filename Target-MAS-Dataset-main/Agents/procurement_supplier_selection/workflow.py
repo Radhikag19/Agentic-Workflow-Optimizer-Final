@@ -131,7 +131,7 @@ def run_procurement_workflow(
         dur3 = time.time() - t0
         tracker.log_agent_execution(AGENT_DELIVERY_ID, key_id, dur3, status="SUCCESS", tokens=tot3, prompt_tokens=p3, completion_tokens=c3, output=out3)
         stage_evidence["delivery"] = {"llm_output": out3, "schedule_calc": deliv_calc}
-        print(f" -> [Agent 3/9] {AGENT_DELIVERY_ID} completed in {dur2:.2f}s ({tot3} tokens)")
+        print(f" -> [Agent 3/9] {AGENT_DELIVERY_ID} completed in {dur3:.2f}s ({tot3} tokens)")
 
         # Agent 4: Supplier Risk
         t0 = time.time()
@@ -181,7 +181,7 @@ def run_procurement_workflow(
         # Agent 7: Weighted Evaluation
         t0 = time.time()
         _, _, key_id = get_key_for_agent(AGENT_WEIGHTED_ID)
-        scored_results = deterministic_weighted_scoring(cost_ranking, deliv_calc, risk_data, profile_data)
+        scored_results = deterministic_weighted_scoring(cost_ranking, deliv_calc, risk_data, profile_data, contract_data)
         agent7 = create_weighted_agent()
         task7 = create_weighted_task(agent7, scored_results)
         crew7 = Crew(agents=[agent7], tasks=[task7], verbose=False)

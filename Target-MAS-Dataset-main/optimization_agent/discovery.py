@@ -1,27 +1,23 @@
 """
 Discovery Analysis Engine for TraceProfiler Autonomous Optimization Discovery Agent.
 
-Systematically analyzes all 8 mandatory optimization dimensions:
-A. Agent Pruning
-B. Agent Consolidation
-C. Workflow Parallelization (with strict dependency independence verification)
-D. Model Selection (strictly marked as requires_validation=True)
-E. Prompt Optimization (prompt bloat, token overhead)
-F. Tool Optimization (unused tools, redundant calls)
-G. Communication & Data-Handoff Optimization (payload bloat, state pass-through)
-H. Additional Optimization Dimensions (caching, early exit, dynamic routing, reflection pruning)
+Systematically analyzes the 5 active optimization dimensions:
+- Agent Consolidation
+- Workflow Parallelization (with strict dependency independence verification)
+- Model Selection (strictly marked as requires_validation=True)
+- Prompt Optimization (prompt bloat, token overhead)
+- Communication & Data-Handoff Optimization (payload bloat, state pass-through)
 
 Uses dedicated Groq API keys per dimension without simple round-robin.
 """
 
 from __future__ import annotations
 
-import json
 import logging
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from optimization_agent.key_manager import GroqKeyManager, get_default_key_manager
-from optimization_agent.state import OptimizationAgentState, OptimizationCandidate
+from optimization_agent.state import OptimizationAgentState
 
 logger = logging.getLogger("optimization_agent.discovery")
 
@@ -96,7 +92,7 @@ def verify_dependency_independence(
 
 
 class OptimizationDiscoveryEngine:
-    """Discovers optimization opportunities across all 8 dimensions."""
+    """Discovers optimization opportunities across the 5 active dimensions."""
 
     def __init__(
         self,
@@ -111,7 +107,7 @@ class OptimizationDiscoveryEngine:
         self.handoff_client = handoff_client
 
     def discover_all_dimensions(self, state: OptimizationAgentState) -> Dict[str, Any]:
-        """Execute systematic analysis for Dimensions A through H."""
+        """Execute systematic analysis across the 5 active optimization dimensions."""
         candidates: List[Dict[str, Any]] = []
         dim_analyses: Dict[str, Any] = {}
 
@@ -119,121 +115,36 @@ class OptimizationDiscoveryEngine:
         graph = state.get("workflow_graph", {})
         reachability = _build_graph_reachability(graph)
 
-        # Dimension A: Agent Pruning
-        cand_a, ana_a = self._analyze_dimension_a_pruning(state)
-        candidates.extend(cand_a)
-        dim_analyses["agent_pruning"] = ana_a
-
-        # Dimension B: Agent Consolidation
+        # Agent Consolidation
         cand_b, ana_b = self._analyze_dimension_b_consolidation(state)
         candidates.extend(cand_b)
         dim_analyses["agent_consolidation"] = ana_b
 
-        # Dimension C: Workflow Parallelization
+        # Workflow Parallelization
         cand_c, ana_c = self._analyze_dimension_c_parallelization(state, reachability)
         candidates.extend(cand_c)
         dim_analyses["workflow_parallelization"] = ana_c
 
-        # Dimension D: Model Selection
+        # Model Selection
         cand_d, ana_d = self._analyze_dimension_d_model_selection(state)
         candidates.extend(cand_d)
         dim_analyses["model_selection"] = ana_d
 
-        # Dimension E: Prompt Optimization
+        # Prompt Optimization
         cand_e, ana_e = self._analyze_dimension_e_prompt_optimization(
             state, consolidation_candidates=cand_b
         )
         candidates.extend(cand_e)
         dim_analyses["prompt_optimization"] = ana_e
 
-        # Dimension F: Tool Optimization
-        cand_f, ana_f = self._analyze_dimension_f_tool_optimization(state)
-        candidates.extend(cand_f)
-        dim_analyses["tool_optimization"] = ana_f
-
-        # Dimension G: Communication & Data Handoff
+        # Communication & Data Handoff
         cand_g, ana_g = self._analyze_dimension_g_communication(state)
         candidates.extend(cand_g)
         dim_analyses["communication_optimization"] = ana_g
 
-        # Dimension H: Additional Dimensions (Caching, Early Exit, Routing)
-        cand_h, ana_h = self._analyze_dimension_h_additional(state)
-        candidates.extend(cand_h)
-        dim_analyses["additional_optimization"] = ana_h
-
         return {
             "optimization_candidates": candidates,
             "dimension_analyses": dim_analyses,
-        }
-
-    # =========================================================================
-    # Dimension A: Agent Pruning
-    # =========================================================================
-    def _analyze_dimension_a_pruning(
-        self, state: OptimizationAgentState
-    ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
-        raw_key, env_var, masked = self.key_mgr.get_key_for_task("agent_pruning")
-        wf_id = state.get("workflow_id", "")
-        agents = state.get("discovered_agents", [])
-        comparisons = state.get("agent_run_comparisons", {})
-        latency_map = state.get("latency_metrics", {}).get("agent_latency_metrics", {})
-        profiles = {p["agent_id"]: p for p in state.get("agent_profiles", {}).get("profiles", []) if isinstance(p, dict)}
-
-        candidates: List[Dict[str, Any]] = []
-
-        # Grounded heuristic evaluation of pass-through or low-delta review agents
-        for agent_id in agents:
-            p = profiles.get(agent_id, {})
-            lat = latency_map.get(agent_id, {})
-            mean_sec = lat.get("mean_seconds", 0.0)
-
-            # Look for secondary review / validation agents that exhibit high latency with minor output deltas
-            role = (p.get("role") or "").lower()
-            goal = (p.get("goal") or "").lower()
-            if any(term in agent_id for term in ["review", "validation", "checker", "independent"]) and "final" not in agent_id:
-                # Identified candidate for conditional pruning or task absorption
-                candidates.append({
-                    "candidate_id": f"PRUNE-{agent_id.upper()}",
-                    "dimension": "agent_pruning",
-                    "title": f"Conditional Pruning or Pass-Through Bypass of {agent_id}",
-                    "target_agents": [agent_id],
-                    "observed_problem": (
-                        f"Agent '{agent_id}' ({p.get('role', 'Auditor')}) performs repetitive secondary verification "
-                        f"consuming an average of {mean_sec:.2f}s per execution run. In non-deviating or low-risk cases, "
-                        f"its output merely confirms upstream agent findings without altering the workflow decision path."
-                    ),
-                    "supporting_evidence": {
-                        "mcp_stage_source": ["stage_4_profiles", "stage_6_latency", "stage_9_comparison"],
-                        "agent_mean_latency_seconds": mean_sec,
-                        "observation_count": lat.get("observation_count", 0),
-                        "role_definition": p.get("role"),
-                        "declared_responsibilities": p.get("declared_responsibilities", []),
-                    },
-                    "proposed_solution": (
-                        f"Prune '{agent_id}' from the standard baseline execution path, converting it into a dynamic, "
-                        f"conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected."
-                    ),
-                    "expected_benefit": {
-                        "latency_savings_pct": 10.0,
-                        "latency_savings_seconds": mean_sec,
-                        "token_savings_pct": 8.5,
-                        "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds.",
-                    },
-                    "tradeoffs_and_risks": {
-                        "latency_tradeoff": "Immediate latency reduction on baseline path.",
-                        "token_cost_tradeoff": "Direct reduction in prompt and completion tokens.",
-                        "output_quality_risk": "Low (auditing maintained via conditional routing).",
-                        "implementation_complexity": "Low",
-                    },
-                    "tier": "Tier 1",
-                    "requires_validation": False,
-                    "allocated_key": masked,
-                })
-
-        return candidates, {
-            "dimension": "agent_pruning",
-            "allocated_key": masked,
-            "candidates_found": len(candidates),
         }
 
     # =========================================================================
@@ -420,63 +331,6 @@ class OptimizationDiscoveryEngine:
         return engine.analyze(state, consolidation_candidates=consolidation_candidates)
 
     # =========================================================================
-    # Dimension F: Tool Optimization
-    # =========================================================================
-    def _analyze_dimension_f_tool_optimization(
-        self, state: OptimizationAgentState
-    ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
-        raw_key, env_var, masked = self.key_mgr.get_key_for_task("tool_optimization")
-        profiles = state.get("agent_profiles", {}).get("profiles", [])
-        candidates: List[Dict[str, Any]] = []
-
-        # Inspect declared tools vs usage
-        for p in profiles:
-            if not isinstance(p, dict):
-                continue
-            agent_id = p.get("agent_id", "")
-            tasks = p.get("tasks", [])
-            # In target MAS workflows, tools are often declared statically but some agents make purely LLM-based decisions
-            candidates.append({
-                "candidate_id": f"TOOL-{agent_id.upper()}",
-                "dimension": "tool_optimization",
-                "title": f"Deterministic Tool Result Caching for {agent_id}",
-                "target_agents": [agent_id],
-                "observed_problem": (
-                    f"Agent '{agent_id}' repeatedly evaluates static compliance policies and reference definitions "
-                    f"across runs without persistent local caching of deterministic lookup queries."
-                ),
-                "supporting_evidence": {
-                    "mcp_stage_source": ["stage_4_profiles", "stage_10_evidence"],
-                    "declared_tasks_count": len(tasks),
-                    "role": p.get("role"),
-                },
-                "proposed_solution": (
-                    f"Implement an in-memory TTL memoization cache for static policy lookups and clause reference matches."
-                ),
-                "expected_benefit": {
-                    "latency_savings_pct": 12.0,
-                    "token_savings_pct": 10.0,
-                    "quality_impact": "Zero risk for immutable policy reference lookups.",
-                },
-                "tradeoffs_and_risks": {
-                    "latency_tradeoff": "Sub-millisecond retrieval for cached policy checks.",
-                    "token_cost_tradeoff": "Saves repeated context fetching tokens.",
-                    "output_quality_risk": "Low (invalidated when policy files update).",
-                    "implementation_complexity": "Low",
-                },
-                "tier": "Tier 1",
-                "requires_validation": False,
-                "allocated_key": masked,
-            })
-            break  # Representative tool optimization candidate per workflow
-
-        return candidates, {
-            "dimension": "tool_optimization",
-            "allocated_key": masked,
-            "candidates_found": len(candidates),
-        }
-
-    # =========================================================================
     # Dimension G: Communication & Data-Handoff Optimization
     # =========================================================================
     def _analyze_dimension_g_communication(
@@ -490,67 +344,9 @@ class OptimizationDiscoveryEngine:
         )
         return engine.analyze(state)
 
-    # =========================================================================
-    # Dimension H: Additional Dimensions (Caching, Early Exit, Routing)
-    # =========================================================================
-    def _analyze_dimension_h_additional(
-        self, state: OptimizationAgentState
-    ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
-        raw_key, env_var, masked = self.key_mgr.get_key_for_task("additional_optimization")
-        agents = state.get("discovered_agents", [])
-        latency_info = state.get("latency_metrics", {}).get("workflow_latency", {})
-        mean_wf_lat = latency_info.get("mean_seconds", 50.0)
-
-        candidates: List[Dict[str, Any]] = []
-
-        # Early exit candidate
-        candidates.append({
-            "candidate_id": "ADDITIONAL-EARLY-EXIT",
-            "dimension": "additional_optimization",
-            "title": "Fast-Path Early Exit for Standard/Compliant Artifacts",
-            "target_agents": agents[-3:] if len(agents) >= 3 else agents,
-            "observed_problem": (
-                f"The target workflow runs through all {len(agents)} stages sequentially regardless of input complexity "
-                f"or deviation status. Standard contracts or clean inputs that pass initial verification without issues "
-                f"still execute all downstream remediation and deep analysis loops, consuming ~{mean_wf_lat:.1f}s."
-            ),
-            "supporting_evidence": {
-                "mcp_stage_source": ["stage_2_overview", "stage_6_latency", "stage_9_comparison"],
-                "total_agent_count": len(agents),
-                "workflow_mean_seconds": mean_wf_lat,
-            },
-            "proposed_solution": (
-                "Introduce a fast-path conditional checkpoint: if zero high-risk ambiguities or compliance deviations "
-                "are identified in early stages, bypass extensive multi-agent reconciliation and jump directly to "
-                "final report generation."
-            ),
-            "expected_benefit": {
-                "latency_savings_pct": 55.0,
-                "latency_savings_seconds": round(mean_wf_lat * 0.55, 2),
-                "token_savings_pct": 50.0,
-                "cost_savings_pct": 50.0,
-                "quality_impact": "Maintains strict rigor by restricting fast-path to zero-deviation verified cases.",
-            },
-            "tradeoffs_and_risks": {
-                "latency_tradeoff": "Over 50% latency reduction on clean input distributions.",
-                "token_cost_tradeoff": "Cuts token spend in half for routine standard cases.",
-                "output_quality_risk": "Moderate (requires robust false-negative guardrails).",
-                "implementation_complexity": "Medium",
-            },
-            "tier": "Tier 2",
-            "requires_validation": True,
-            "allocated_key": masked,
-        })
-
-        return candidates, {
-            "dimension": "additional_optimization",
-            "allocated_key": masked,
-            "candidates_found": len(candidates),
-        }
-
 
 def discovery_analysis(state: OptimizationAgentState) -> Dict[str, Any]:
-    """LangGraph Node 11: Execute systematic discovery analysis across all 8 dimensions."""
+    """LangGraph Node 11: Execute systematic discovery analysis across the 5 active dimensions."""
     track_status = dict(state.get("stage_status") or {})
     retrieval_errors = list(state.get("retrieval_errors") or [])
     key_usage_log = list(state.get("key_usage_log") or [])

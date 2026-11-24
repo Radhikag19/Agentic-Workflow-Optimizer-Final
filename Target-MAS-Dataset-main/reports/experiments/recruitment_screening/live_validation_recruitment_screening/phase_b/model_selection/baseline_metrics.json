@@ -1,0 +1,119 @@
+{
+  "workflow_id": "recruitment_screening",
+  "source": "historical_runtime_traces",
+  "execution_mode": "historical_recorded_execution",
+  "execution_modes": [
+    "historical_recorded_execution"
+  ],
+  "re_executed": false,
+  "groq_api_calls": 0,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\recruitment_screening",
+  "fixed_baseline_reference_id": "hist_ef23650339c0",
+  "measurement_period": {
+    "earliest_trace_timestamp": "2026-10-31T16:26:24.677059+00:00",
+    "latest_trace_timestamp": "2026-10-31T16:26:24.677059+00:00"
+  },
+  "total_runs": 1,
+  "successful_runs": 1,
+  "failed_runs": 0,
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 21.751,
+  "median_latency_seconds": 21.751,
+  "mean_agent_latency_seconds": 2.7169,
+  "mean_tokens": 15921.0,
+  "mean_prompt_tokens": 9941.0,
+  "mean_completion_tokens": 5980.0,
+  "mean_cost_usd_telemetry": 0.010589,
+  "mean_cost_usd_catalog_normalized": 0.005079,
+  "cost_calculation_basis": "historical_trace_catalog_normalized_from_recorded_tokens",
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 83.75,
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "per_agent_metrics": {
+    "resume_intake_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 2.514,
+      "mean_tokens": 1141.0,
+      "mean_prompt_tokens": 761.0,
+      "mean_completion_tokens": 380.0,
+      "mean_cost_usd": null
+    },
+    "qualification_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 2.332,
+      "mean_tokens": 1409.0,
+      "mean_prompt_tokens": 742.0,
+      "mean_completion_tokens": 667.0,
+      "mean_cost_usd": null
+    },
+    "job_criteria_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 2.386,
+      "mean_tokens": 1412.0,
+      "mean_prompt_tokens": 707.0,
+      "mean_completion_tokens": 705.0,
+      "mean_cost_usd": null
+    },
+    "evidence_mapping_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 3.241,
+      "mean_tokens": 2152.0,
+      "mean_prompt_tokens": 1179.0,
+      "mean_completion_tokens": 973.0,
+      "mean_cost_usd": null
+    },
+    "experience_assessment_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 2.399,
+      "mean_tokens": 1879.0,
+      "mean_prompt_tokens": 1202.0,
+      "mean_completion_tokens": 677.0,
+      "mean_cost_usd": null
+    },
+    "missing_evidence_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 2.51,
+      "mean_tokens": 1741.0,
+      "mean_prompt_tokens": 1017.0,
+      "mean_completion_tokens": 724.0,
+      "mean_cost_usd": null
+    },
+    "screening_review_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 2.326,
+      "mean_tokens": 2008.0,
+      "mean_prompt_tokens": 1416.0,
+      "mean_completion_tokens": 592.0,
+      "mean_cost_usd": null
+    },
+    "recruiter_summary_agent": {
+      "runs_count": 1,
+      "models_observed": [],
+      "mean_latency_seconds": 4.027,
+      "mean_tokens": 4179.0,
+      "mean_prompt_tokens": 2917.0,
+      "mean_completion_tokens": 1262.0,
+      "mean_cost_usd": null
+    }
+  },
+  "input_dataset_hashes": [
+    "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435"
+  ],
+  "matched_input_count": 30,
+  "unmatched_input_count": 0,
+  "excluded_records": [],
+  "historical_mcp_reference": {
+    "total_runs": 30,
+    "mean_latency_seconds": 44.7989,
+    "mean_tokens": 16909.5
+  }
+}

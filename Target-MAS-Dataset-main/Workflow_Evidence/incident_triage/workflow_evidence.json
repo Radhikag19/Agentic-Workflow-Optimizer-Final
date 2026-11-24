@@ -3,7 +3,7 @@
     "workflow_id": "incident_triage",
     "workflow_name": "incident_triage",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.395200+00:00",
+    "generated_at": "2026-11-24T19:33:01.112292+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -1730,7 +1730,7 @@
       },
       {
         "source": "workflow:incident_triage",
-        "target": "agent:intake_agent",
+        "target": "agent:review_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -1744,27 +1744,6 @@
       },
       {
         "source": "workflow:incident_triage",
-        "target": "agent:symptom_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:incident_triage",
-        "target": "agent:severity_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:incident_triage",
-        "target": "agent:review_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:incident_triage",
         "target": "agent:classification_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
@@ -1772,7 +1751,28 @@
       },
       {
         "source": "workflow:incident_triage",
+        "target": "agent:symptom_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:incident_triage",
+        "target": "agent:intake_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:incident_triage",
         "target": "agent:remediation_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:incident_triage",
+        "target": "agent:severity_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2028,7 +2028,7 @@
     ],
     "model_reconciliation": {
       "declared_model": "openai/gpt-oss-120b",
-      "statically_extracted_model": "intake_agent",
+      "statically_extracted_model": "runbook_agent",
       "runtime_observed_model": "openai/gpt-oss-120b",
       "status": "matching",
       "notes": "Declared model 'openai/gpt-oss-120b' matches runtime enforced model 'openai/gpt-oss-120b'."

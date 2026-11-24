@@ -12,7 +12,7 @@ Strict Requirements:
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from mcp_server import tools as evidence_tools
 from optimization_agent.state import OptimizationAgentState

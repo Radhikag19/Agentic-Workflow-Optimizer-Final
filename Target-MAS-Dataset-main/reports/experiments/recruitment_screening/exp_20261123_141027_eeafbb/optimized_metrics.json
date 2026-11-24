@@ -1,0 +1,72 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "exp_20261123_141027_eeafbb",
+  "variant": "optimized",
+  "source": "Matched Sandbox Runtime (optimized)",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "unavailable"
+  ],
+  "cost_calculation_basis": "estimated_from_historical_replay",
+  "total_runs": 2,
+  "successful_runs": 0,
+  "failed_runs": 2,
+  "incomplete_runs": [
+    {
+      "run_id": "sb_20261123_141030_a60109",
+      "run_index": 0,
+      "status": "FAILED",
+      "executed_agents": 1,
+      "expected_agents": 8,
+      "error": "Connection error."
+    },
+    {
+      "run_id": "sb_20261123_141033_3d2c07",
+      "run_index": 1,
+      "status": "FAILED",
+      "executed_agents": 1,
+      "expected_agents": 8,
+      "error": "Connection error."
+    }
+  ],
+  "success_rate_pct": 0.0,
+  "mean_latency_seconds": null,
+  "median_latency_seconds": null,
+  "mean_agent_latency_seconds": null,
+  "mean_tokens": null,
+  "mean_prompt_tokens": null,
+  "mean_completion_tokens": null,
+  "mean_cost_usd_catalog_normalized": null,
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 0.0,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141030_a60109",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141033_3d2c07",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Connection error."
+    }
+  ],
+  "per_agent_metrics": {},
+  "input_dataset_hashes": [
+    "28cc41cf1175eddb9d765f3b370bb5737a248f327f68f5dcd09f3954d5c3f6a0",
+    "1785cab64f791c1859ed8c306254d3a5fc0af098935295798ef3be2daaf7a525"
+  ]
+}

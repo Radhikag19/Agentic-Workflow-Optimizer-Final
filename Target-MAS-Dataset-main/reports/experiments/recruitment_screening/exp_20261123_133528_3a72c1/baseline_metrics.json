@@ -1,0 +1,15 @@
+{
+  "workflow_id": "recruitment_screening",
+  "source": "TraceProfiler MCP Evidence Server",
+  "total_runs": 30,
+  "successful_runs": 30,
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 44.7989,
+  "median_latency_seconds": 30.604,
+  "mean_tokens": 16909.5,
+  "mean_prompt_tokens": 10333.7,
+  "mean_completion_tokens": 6575.8,
+  "mean_cost_usd_telemetry": 0.011292,
+  "mean_cost_usd_catalog_normalized": 0.005496,
+  "cost_calculation_basis": "trace_telemetry_estimates"
+}

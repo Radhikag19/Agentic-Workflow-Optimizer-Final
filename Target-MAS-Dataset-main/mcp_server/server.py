@@ -8,8 +8,7 @@ downstream Trace Profiler Agent.
 
 import asyncio
 import json
-import sys
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 from mcp.server.mcpserver import MCPServer
 
 from mcp_server import tools as evidence_tools

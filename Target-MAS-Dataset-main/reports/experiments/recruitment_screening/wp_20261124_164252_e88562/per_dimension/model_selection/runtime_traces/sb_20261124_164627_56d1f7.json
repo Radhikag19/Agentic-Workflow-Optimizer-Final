@@ -1,0 +1,77 @@
+{
+  "run_id": "sb_20261124_164627_56d1f7",
+  "run_index": 1,
+  "variant": "optimized",
+  "workflow_name": "recruitment_screening",
+  "experiment_id": "wp_20261124_164252_e88562__dim_model_selection",
+  "model": "openai/gpt-oss-120b",
+  "status": "FAILED",
+  "execution_mode": "live_llm_execution",
+  "usage_sources": [
+    "unavailable"
+  ],
+  "input_hash": "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+  "input_snapshot": {
+    "run_index": 1,
+    "input_hash": "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+    "matched_baseline_run_id": "live_20261031_162635_trace02",
+    "matched_identifiers": {
+      "application_id": "APP-002",
+      "candidate_id": "CAND-002",
+      "job_id": "JOB-02"
+    },
+    "candidate_id": "CAND-002",
+    "application_id": "APP-002",
+    "candidate_name": "Jordan Martinez",
+    "job_id": "JOB-02",
+    "job_title": null
+  },
+  "duration_seconds": 1.018,
+  "agent_execution_count": 1,
+  "agent_execution_order": [
+    "resume_intake_agent"
+  ],
+  "concurrent_waves": [],
+  "agent_executions": [
+    {
+      "order": 1,
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 1.0164,
+      "status": "FAILED",
+      "tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "usage_source": "unavailable",
+      "schema_valid": false,
+      "missing_required_fields": [],
+      "output": null,
+      "mode": "live_llm_execution",
+      "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}",
+      "notes": "live_api_error=Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+    }
+  ],
+  "handoff_audits": [],
+  "total_tokens": 0,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "estimated_cost_usd": 0.0,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261124_164627_56d1f7",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+    }
+  ],
+  "fallback_events": [],
+  "schema_failures": [],
+  "invalid_replay_samples": [],
+  "final_output": null,
+  "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}",
+  "timestamp": "2026-11-24T16:46:28.516728+00:00"
+}

@@ -11,8 +11,8 @@ from common.settings import DATA_DIR
 
 AGENT_ID = "issue_investigation_agent"
 
-def deterministic_customer_lookup(customer_id: str) -> dict:
-    """Retrieves customer profile and historical records from local synthetic datasets."""
+def deterministic_customer_lookup(customer_id: str, ticket_category: str = "") -> dict:
+    """Retrieves matching customer profile and category-filtered historical cases from local synthetic datasets."""
     cust_file = DATA_DIR / "customer_support" / "customers.json"
     hist_file = DATA_DIR / "customer_support" / "historical_resolutions.json"
 
@@ -26,9 +26,17 @@ def deterministic_customer_lookup(customer_id: str) -> dict:
 
     related_history = []
     if hist_file.exists():
+        cat_norm = str(ticket_category or "").strip().lower()
         with open(hist_file, "r", encoding="utf-8") as f:
             all_hist = json.load(f)
-            related_history = all_hist[:3]
+            if cat_norm:
+                related_history = [
+                    h for h in all_hist
+                    if str(h.get("ticket_category") or "").strip().lower() == cat_norm
+                    or (customer_id and h.get("customer_id") == customer_id)
+                ][:3]
+            elif customer_id:
+                related_history = [h for h in all_hist if h.get("customer_id") == customer_id][:3]
 
     return {
         "customer_profile": found_customer,
@@ -48,7 +56,8 @@ def create_agent(llm=None) -> Agent:
 
 def create_task(agent: Agent, ticket_data: dict) -> Task:
     cust_id = ticket_data.get("customer_id", "")
-    customer_context = deterministic_customer_lookup(cust_id)
+    cust_cat = ticket_data.get("category", "")
+    customer_context = deterministic_customer_lookup(cust_id, ticket_category=cust_cat)
     description = (
         f"Investigate the customer's reported problem.\n"
         f"Ticket Data:\n{json.dumps(ticket_data, indent=2)}\n\n"

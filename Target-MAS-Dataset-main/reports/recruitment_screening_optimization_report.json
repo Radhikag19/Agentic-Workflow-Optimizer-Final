@@ -2,16 +2,16 @@
   "report_metadata": {
     "workflow_id": "recruitment_screening",
     "workflow_name": "recruitment_screening",
-    "timestamp": "2026-11-20T21:15:39.393538+00:00",
+    "timestamp": "2026-11-24T20:12:49.236447+00:00",
     "agent_version": "1.0.0",
     "orchestration_engine": "LangGraph StateGraph",
     "model_used": "openai/gpt-oss-120b",
-    "total_optimization_candidates_found": 15,
+    "total_optimization_candidates_found": 12,
     "evidence_source": "TraceProfiler MCP Evidence Server",
     "report_generated_with_key": "GROQ_API_KEY_13 (masked: gsk_...Ujsn)"
   },
   "executive_summary": {
-    "overview": "Autonomous optimization analysis for workflow 'recruitment_screening' across 8 mandatory dimensions discovered 15 high-impact optimization opportunities (3 Tier 1 immediate recommendations, 12 Tier 2 validated candidates, 0 Tier 3 caution candidates).",
+    "overview": "Autonomous optimization analysis for workflow 'recruitment_screening' across 5 optimization dimensions discovered 12 high-impact optimization opportunities (1 Tier 1 immediate recommendations, 11 Tier 2 validated candidates, 0 Tier 3 caution candidates).",
     "key_findings": [
       "Sequential execution bottlenecks identify 1 validated parallelization opportunities.",
       "Prompt optimization inspected 8 prompts and compressed 0 eligible prompt(s), saving 0 static prompt tokens (0.0% additional reduction; validation required).",
@@ -51,45 +51,6 @@
       "calculation_basis": "trace_telemetry_estimates"
     }
   },
-  "agent_pruning_opportunities": [
-    {
-      "candidate_id": "PRUNE-SCREENING_REVIEW_AGENT",
-      "dimension": "agent_pruning",
-      "title": "Conditional Pruning or Pass-Through Bypass of screening_review_agent",
-      "target_agents": [
-        "screening_review_agent"
-      ],
-      "observed_problem": "Agent 'screening_review_agent' (Screening Quality and Integrity Reviewer) performs repetitive secondary verification consuming an average of 18.10s per execution run. In non-deviating or low-risk cases, its output merely confirms upstream agent findings without altering the workflow decision path.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_4_profiles",
-          "stage_6_latency",
-          "stage_9_comparison"
-        ],
-        "agent_mean_latency_seconds": 18.1034,
-        "observation_count": 30,
-        "role_definition": "Screening Quality and Integrity Reviewer",
-        "declared_responsibilities": "Audit upstream findings for contradictions, verify traceability, confirm mandatory criteria."
-      },
-      "proposed_solution": "Prune 'screening_review_agent' from the standard baseline execution path, converting it into a dynamic, conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected.",
-      "expected_benefit": {
-        "latency_savings_pct": 10.0,
-        "latency_savings_seconds": 18.1034,
-        "token_savings_pct": 8.5,
-        "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Immediate latency reduction on baseline path.",
-        "token_cost_tradeoff": "Direct reduction in prompt and completion tokens.",
-        "output_quality_risk": "Low (auditing maintained via conditional routing).",
-        "implementation_complexity": "Low"
-      },
-      "tier": "Tier 1",
-      "requires_validation": false,
-      "allocated_key": "GROQ_API_KEY_3 (masked: gsk_...maHn)",
-      "feasibility_tier": "Tier 1: High potential, low trade-off"
-    }
-  ],
   "agent_consolidation_opportunities": {
     "summary": {
       "original_agent_count": 8,
@@ -691,47 +652,12 @@
           "job_criteria_agent"
         ],
         "originated_from_consolidation": false,
-        "rejection_reason": "dropped_required_input_fields:mandatory_criteria,preferred_criteria,title",
+        "rejection_reason": "llm_optimization_error:groq_api_error:APIConnectionError",
         "original_prompt_retained": true
       }
     ],
     "candidates": []
   },
-  "tool_optimization_opportunities": [
-    {
-      "candidate_id": "TOOL-EVIDENCE_MAPPING_AGENT",
-      "dimension": "tool_optimization",
-      "title": "Deterministic Tool Result Caching for evidence_mapping_agent",
-      "target_agents": [
-        "evidence_mapping_agent"
-      ],
-      "observed_problem": "Agent 'evidence_mapping_agent' repeatedly evaluates static compliance policies and reference definitions across runs without persistent local caching of deterministic lookup queries.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_4_profiles",
-          "stage_10_evidence"
-        ],
-        "declared_tasks_count": 1,
-        "role": "Candidate Evidence Mapping Specialist"
-      },
-      "proposed_solution": "Implement an in-memory TTL memoization cache for static policy lookups and clause reference matches.",
-      "expected_benefit": {
-        "latency_savings_pct": 12.0,
-        "token_savings_pct": 10.0,
-        "quality_impact": "Zero risk for immutable policy reference lookups."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Sub-millisecond retrieval for cached policy checks.",
-        "token_cost_tradeoff": "Saves repeated context fetching tokens.",
-        "output_quality_risk": "Low (invalidated when policy files update).",
-        "implementation_complexity": "Low"
-      },
-      "tier": "Tier 1",
-      "requires_validation": false,
-      "allocated_key": "GROQ_API_KEY_8 (masked: gsk_...AwPO)",
-      "feasibility_tier": "Tier 1: High potential, low trade-off"
-    }
-  ],
   "communication_optimization_opportunities": {
     "dimension": "communication_data_handoff",
     "summary": {
@@ -896,7 +822,7 @@
           "technical_skills"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       },
       {
@@ -933,7 +859,7 @@
           "partially_supported_count"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       },
       {
@@ -970,7 +896,7 @@
           "missing_sections"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       },
       {
@@ -1007,7 +933,7 @@
           "unsupported_count"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       },
       {
@@ -1044,7 +970,7 @@
           "partially_supported_count"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       },
       {
@@ -1079,7 +1005,7 @@
           "evidence_references"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       },
       {
@@ -1145,7 +1071,7 @@
           "issues_requiring_human_review"
         ],
         "analyzed_with_groq": true,
-        "groq_accepted": true,
+        "groq_accepted": false,
         "recommendation_generated": true
       }
     ],
@@ -1189,8 +1115,8 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "missing_sections",
             "candidate_name",
+            "missing_sections",
             "sections_identified"
           ],
           "fields_retained": [
@@ -1492,7 +1418,7 @@
             "used_groq": true,
             "accepted": false,
             "fallback_to_conservative_python": true,
-            "rejection_reason": "unsupported_fields:source_evidence_ids",
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
             "validated_result": null
           },
           "evidence_provenance": [
@@ -2268,91 +2194,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "qualification_agent",
-              "consumer_agent": "experience_assessment_agent",
-              "field_assessments": {
-                "candidate_id": {
-                  "assessment": "required",
-                  "rationale": "Explicit placeholder in consumer prompt and needed to tag the assessment output."
-                },
-                "experience_records": {
-                  "assessment": "required",
-                  "rationale": "Declared in consumer_input_schema and directly used to evaluate relevance, strengths, gaps, and evidence references."
-                },
-                "technical_skills": {
-                  "assessment": "uncertain",
-                  "rationale": "Not listed in consumer_input_schema but the consumer goal mentions transferable skills; the data could aid strength/gap analysis yet the same skill evidence is already embedded in experience_records."
-                },
-                "education": {
-                  "assessment": "redundant",
-                  "rationale": "Never referenced in consumer schema, prompt, or tasks; education data does not affect experience relevance evaluation."
-                },
-                "certifications": {
-                  "assessment": "redundant",
-                  "rationale": "Not required for assessing career trajectory or transferable skills in the current task."
-                },
-                "projects": {
-                  "assessment": "redundant",
-                  "rationale": "Consumer does not request project information; experience_records already capture work evidence."
-                },
-                "extraction_warnings": {
-                  "assessment": "redundant",
-                  "rationale": "Operational metadata not needed for downstream evaluation."
-                }
-              },
-              "redundant_fields": [
-                "education",
-                "certifications",
-                "projects",
-                "extraction_warnings"
-              ],
-              "duplicate_fields": [],
-              "required_fields": [
-                "candidate_id",
-                "experience_records"
-              ],
-              "uncertain_fields": [
-                "technical_skills"
-              ],
-              "proposed_compact_payload_schema": {
-                "candidate_id": "string",
-                "experience_records": [
-                  {
-                    "category": "string",
-                    "item_name": "string",
-                    "proficiency_or_duration": "string|null",
-                    "supporting_excerpt": "string",
-                    "evidence_id": "string"
-                  }
-                ],
-                "skill_summary": {
-                  "description": "A deduplicated list of skill names that appear in experience_records, each with the set of evidence_id(s) where the skill is mentioned. This replaces the full technical_skills array when the consumer only needs skill evidence for transferable\u2011skill analysis.",
-                  "type": "object",
-                  "properties": {
-                    "skill_name": {
-                      "type": "string",
-                      "example": "HTML"
-                    },
-                    "evidence_ids": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "example": [
-                        "EVD-001-EXP1"
-                      ]
-                    }
-                  }
-                }
-              },
-              "semantic_rationale": "The downstream consumer's declared inputs are limited to experience_records (and an implicit candidate_id). All evaluation steps\u2014relevance summary, strengths, gaps, transferable skills, and evidence references\u2014can be derived from the experience_records payload alone because each record already carries supporting excerpts and evidence IDs. Technical_skills may still be useful for quick lookup of skill names without scanning the full experience text, so a compact skill_summary derived from experience_records is offered as an optional field. Education, certifications, projects, and extraction_warnings provide no semantic value for the current assessment and can be omitted to reduce token usage.",
-              "confidence": 0.94,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -2446,8 +2291,8 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "supported_count",
-            "partially_supported_count"
+            "partially_supported_count",
+            "supported_count"
           ],
           "fields_retained": [
             "candidate_id",
@@ -2775,75 +2620,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "evidence_mapping_agent",
-              "consumer_agent": "experience_assessment_agent",
-              "field_assessments": [
-                {
-                  "field": "candidate_id",
-                  "classification": "required",
-                  "rationale": "Consumer prompt explicitly interpolates Candidate ID; needed for output JSON and traceability."
-                },
-                {
-                  "field": "job_id",
-                  "classification": "potentially_redundant",
-                  "rationale": "Not referenced in consumer input schema, prompt, or tasks; only useful for external audit, not for experience assessment."
-                },
-                {
-                  "field": "mappings",
-                  "classification": "required",
-                  "rationale": "Declared in consumer input schema; contains evidence links needed to justify strengths, gaps, and transferable skills."
-                },
-                {
-                  "field": "supported_count",
-                  "classification": "uncertain",
-                  "rationale": "Aggregated count could be used for quick summary statistics, but consumer prompt never mentions it; can be recomputed from mappings."
-                },
-                {
-                  "field": "unsupported_count",
-                  "classification": "redundant",
-                  "rationale": "Same information is derivable from mappings; consumer does not request this field."
-                },
-                {
-                  "field": "partially_supported_count",
-                  "classification": "uncertain",
-                  "rationale": "May aid a high\u2011level health check, yet not required by consumer tasks; derivable from mappings."
-                },
-                {
-                  "field": "unclear_count",
-                  "classification": "redundant",
-                  "rationale": "Never referenced downstream; can be inferred if needed."
-                }
-              ],
-              "required_fields": [
-                "candidate_id",
-                "mappings"
-              ],
-              "redundant_fields": [
-                "job_id",
-                "unsupported_count",
-                "unclear_count"
-              ],
-              "duplicate_fields": [],
-              "uncertain_fields": [
-                "supported_count",
-                "partially_supported_count"
-              ],
-              "proposed_compact_payload_schema": {
-                "candidate_id": "string",
-                "mappings": "array<object>",
-                "summary_counts": {
-                  "supported": "int (optional, can be computed)",
-                  "partial": "int (optional, can be computed)"
-                }
-              },
-              "semantic_rationale": "The downstream consumer only needs the candidate identifier and the detailed criterion\u2011to\u2011evidence mappings to generate relevance summaries, strengths, gaps, and transferable skills. All count fields are aggregates of the mappings array and can be recomputed on demand; they are therefore unnecessary for the core assessment logic. Job ID is useful for external reporting but does not influence the assessment output, so it is marked potentially redundant. The two count fields marked 'uncertain' are retained as optional in a compact 'summary_counts' sub\u2011object for cases where a quick health\u2011check is desired without re\u2011iterating the full mappings.",
-              "confidence": 0.93,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -2938,8 +2718,8 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "missing_sections",
             "candidate_name",
+            "missing_sections",
             "sections_identified"
           ],
           "fields_retained": [
@@ -3240,86 +3020,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "resume_intake_agent",
-              "consumer_agent": "missing_evidence_agent",
-              "field_assessments": {
-                "application_id": {
-                  "assessment": "potentially_redundant",
-                  "reason": "Consumer never references application_id; not part of declared input schema or audit logic."
-                },
-                "candidate_id": {
-                  "assessment": "required",
-                  "reason": "Explicitly interpolated into the consumer prompt and needed to tag audit results."
-                },
-                "candidate_name": {
-                  "assessment": "uncertain",
-                  "reason": "Helpful for human\u2011readable reports but not required by the consumer schema or logic."
-                },
-                "contact_info_present": {
-                  "assessment": "potentially_redundant",
-                  "reason": "Consumer does not use a boolean flag for contact info; presence can be inferred from raw_sections."
-                },
-                "sections_identified": {
-                  "assessment": "uncertain",
-                  "reason": "May aid downstream heuristics (e.g., detecting missing evidence) but not referenced directly."
-                },
-                "missing_sections": {
-                  "assessment": "uncertain",
-                  "reason": "Could be useful for flagging absent mandatory sections, yet consumer can derive this from raw_sections."
-                },
-                "raw_sections": {
-                  "assessment": "required",
-                  "reason": "Core payload for audit; listed in consumer declared inputs and used in every verification rule."
-                }
-              },
-              "redundant_fields": [
-                "application_id",
-                "contact_info_present"
-              ],
-              "duplicate_fields": [],
-              "required_fields": [
-                "candidate_id",
-                "raw_sections"
-              ],
-              "uncertain_fields": [
-                "candidate_name",
-                "sections_identified",
-                "missing_sections"
-              ],
-              "proposed_compact_payload_schema": {
-                "description": "Keep only the data the consumer must process, optionally retain a minimal human\u2011readable identifier.",
-                "fields": {
-                  "candidate_id": "string \u2013 unique identifier used to tag audit output.",
-                  "raw_sections": {
-                    "type": "object",
-                    "description": "Full normalized resume sections as produced by the intake agent. Required for timeline and evidence checks."
-                  },
-                  "candidate_name": {
-                    "type": "string",
-                    "description": "Optional friendly name for logging/reporting; can be omitted if storage cost is critical."
-                  }
-                },
-                "compact_alternatives": [
-                  {
-                    "name": "raw_sections_reference",
-                    "type": "string",
-                    "description": "URI or key pointing to a persisted resume document (e.g., S3 URL, DB ID). Use when the consumer can fetch the full object on demand, reducing handoff size."
-                  },
-                  {
-                    "name": "evidence_id_index",
-                    "type": "array[string]",
-                    "description": "List of evidence_id values extracted from raw_sections. Allows the consumer to retrieve only the evidence objects it needs."
-                  }
-                ]
-              },
-              "semantic_rationale": "The downstream auditor only needs the candidate identifier and the normalized resume content to perform its checks (date continuity, buzzword verification, missing evidence). All other fields either duplicate information already present in raw_sections (e.g., contact_info_present) or are not referenced by any rule. Candidate name and section metadata are retained only as optional enrichments for human reviewers; they can be dropped without breaking the audit logic. Providing a reference or index instead of the full raw_sections can further shrink payloads when the consumer has access to a shared storage layer.",
-              "confidence": 0.92,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -3744,84 +3448,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "evidence_mapping_agent",
-              "consumer_agent": "missing_evidence_agent",
-              "field_assessments": [
-                {
-                  "field": "candidate_id",
-                  "classification": "required",
-                  "reason": "Consumer task prompt embeds candidate ID for audit reports and uses it as primary identifier; appears conditionally in the prompt but essential for traceability."
-                },
-                {
-                  "field": "job_id",
-                  "classification": "redundant",
-                  "reason": "Job identifier is not referenced in consumer input schema, nor in the audit prompt; criterion IDs already encode the job context, making the separate job_id unnecessary."
-                },
-                {
-                  "field": "mappings",
-                  "classification": "required",
-                  "reason": "Explicitly declared in consumer input schema and central to all audit checks (missing evidence, unsupported requirements, inconsistencies)."
-                },
-                {
-                  "field": "supported_count",
-                  "classification": "redundant",
-                  "reason": "Consumer does not request aggregate counts; they can be derived from the mappings if needed."
-                },
-                {
-                  "field": "unsupported_count",
-                  "classification": "uncertain",
-                  "reason": "Not listed in consumer schema, but the term 'unsupported' appears in the consumer's goal (detect unsupported buzzword claims). May be used for quick prioritisation; retain until verified."
-                },
-                {
-                  "field": "partially_supported_count",
-                  "classification": "redundant",
-                  "reason": "No consumer logic references partial support; can be recomputed from mappings."
-                },
-                {
-                  "field": "unclear_count",
-                  "classification": "redundant",
-                  "reason": "Consumer does not handle an 'unclear' category; the information is already captured in the mappings' status fields."
-                }
-              ],
-              "redundant_fields": [
-                "job_id",
-                "supported_count",
-                "partially_supported_count",
-                "unclear_count"
-              ],
-              "duplicate_fields": [],
-              "required_fields": [
-                "candidate_id",
-                "mappings"
-              ],
-              "uncertain_fields": [
-                "unsupported_count"
-              ],
-              "proposed_compact_payload_schema": {
-                "candidate_id": "string",
-                "mappings": [
-                  {
-                    "criterion_id": "string",
-                    "requirement_type": "string",
-                    "status": "enum[supported,unsupported,partially_supported,unclear]",
-                    "candidate_evidence": "string (optional)",
-                    "evidence_ids": [
-                      "string"
-                    ],
-                    "is_missing_qualification": "bool",
-                    "notes": "string (optional)"
-                  }
-                ],
-                "unsupported_count": "int (optional)"
-              },
-              "semantic_rationale": "The downstream auditor only needs to know *who* is being audited (candidate_id) and the detailed cross\u2011reference data (mappings) to evaluate missing evidence, unreliable requirements, and inconsistencies. Aggregate counts are derivable from the mappings and therefore add payload size without adding new semantics. The job_id is duplicated by the criterion_id prefix and offers no extra discriminative power for the audit. The only field whose utility is ambiguous is unsupported_count; it could be used for quick scoring but the auditor can compute the same metric from the mappings, so we flag it as uncertain rather than outright redundant. By trimming the payload to the essential fields and optionally keeping unsupported_count, we reduce bandwidth while preserving all business\u2011critical information needed for the audit.",
-              "confidence": 0.92,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -3914,9 +3544,9 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "supported_count",
+            "unsupported_count",
             "partially_supported_count",
-            "unsupported_count"
+            "supported_count"
           ],
           "fields_retained": [
             "candidate_id",
@@ -4248,73 +3878,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "evidence_mapping_agent",
-              "consumer_agent": "screening_review_agent",
-              "field_assessments": {
-                "candidate_id": {
-                  "assessment": "required",
-                  "reason": "Explicit placeholder in consumer prompt and needed for audit traceability"
-                },
-                "job_id": {
-                  "assessment": "potentially_redundant",
-                  "reason": "Not referenced in consumer input schema or task; criterion IDs already embed job context"
-                },
-                "mappings": {
-                  "assessment": "required",
-                  "reason": "Core artifact the reviewer audits for traceability, contradictions, and mandatory criteria"
-                },
-                "supported_count": {
-                  "assessment": "uncertain",
-                  "reason": "Useful summary but consumer can recompute from mappings; not declared as input"
-                },
-                "unsupported_count": {
-                  "assessment": "uncertain",
-                  "reason": "Same as supported_count \u2013 helpful for quick checks but not strictly required"
-                },
-                "partially_supported_count": {
-                  "assessment": "uncertain",
-                  "reason": "May aid summary reporting; consumer could derive it"
-                },
-                "unclear_count": {
-                  "assessment": "potentially_redundant",
-                  "reason": "Never referenced in consumer schema or tasks and no unclear entries exist in example"
-                }
-              },
-              "redundant_fields": [
-                "job_id",
-                "unclear_count"
-              ],
-              "duplicate_fields": [],
-              "required_fields": [
-                "candidate_id",
-                "mappings"
-              ],
-              "uncertain_fields": [
-                "supported_count",
-                "unsupported_count",
-                "partially_supported_count"
-              ],
-              "proposed_compact_payload_schema": {
-                "candidate_id": "string",
-                "mappings": "array<object>",
-                "summary": {
-                  "supported_count": "int",
-                  "unsupported_count": "int",
-                  "partially_supported_count": "int"
-                },
-                "metadata": {
-                  "source_job_id": "string (optional, for logging only)",
-                  "mappings_uri": "string (optional URI to full mapping document if payload size is a concern)"
-                }
-              },
-              "semantic_rationale": "The downstream reviewer must verify each criterion mapping, evidence linkage, and mandatory\u2011criteria satisfaction; therefore the full 'mappings' array and the candidate identifier are indispensable. 'job_id' can be inferred from the criterion IDs and is only useful for logging, so it is marked potentially redundant. Count fields are not part of the declared consumer input schema; the reviewer can compute them from 'mappings', yet they provide a convenient sanity\u2011check, making their necessity ambiguous\u2014hence classified as uncertain. 'unclear_count' has no semantic role in the current consumer workflow and is therefore redundant. To reduce payload size without losing auditability, the counts can be nested under a single 'summary' object and an optional URI can point to the full mapping document when the array becomes large.",
-              "confidence": 0.93,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -4631,60 +4198,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "experience_assessment_agent",
-              "consumer_agent": "screening_review_agent",
-              "field_assessments": {
-                "candidate_id": {
-                  "required": true,
-                  "reason": "Explicit placeholder in consumer prompt and needed for audit record"
-                },
-                "strengths": {
-                  "required": true,
-                  "reason": "Declared in consumer input schema and used in quality check"
-                },
-                "experience_gaps": {
-                  "required": true,
-                  "reason": "Declared in consumer input schema and used to verify mandatory criteria"
-                },
-                "evidence_references": {
-                  "required": true,
-                  "reason": "Consumer task verifies evidence traceability; list of IDs is the only source of that information"
-                },
-                "relevance_summary": {
-                  "redundant": true,
-                  "reason": "Never referenced in consumer schema, prompt, or verification steps"
-                },
-                "transferable_skills": {
-                  "redundant": true,
-                  "reason": "Never referenced in consumer schema, prompt, or verification steps"
-                }
-              },
-              "redundant_fields": [
-                "relevance_summary",
-                "transferable_skills"
-              ],
-              "duplicate_fields": [],
-              "required_fields": [
-                "candidate_id",
-                "strengths",
-                "experience_gaps",
-                "evidence_references"
-              ],
-              "uncertain_fields": [],
-              "proposed_compact_payload_schema": {
-                "candidate_id": "string",
-                "strengths": "list<string>",
-                "experience_gaps": "list<string>",
-                "evidence_references": "list<string>"
-              },
-              "semantic_rationale": "The downstream screening_review_agent only needs identifiers (candidate_id) and the concrete findings it must audit (strengths, experience_gaps). It also must confirm that every finding can be linked to source evidence, which is supplied via evidence_references. The large free\u2011form relevance_summary and transferable_skills are not consumed by any of the consumer's declared inputs or verification logic, making them expendable for this handoff. Keeping only the four required fields reduces payload size while preserving all business\u2011critical information for contradiction detection, traceability, and mandatory\u2011criteria validation.",
-              "confidence": 0.93,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -5014,9 +4531,9 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "traceability_verified",
             "review_passed",
             "issues_requiring_human_review",
+            "traceability_verified",
             "mandatory_criteria_met"
           ],
           "fields_retained": [
@@ -5224,70 +4741,10 @@
           },
           "groq_semantic_analysis": {
             "used_groq": true,
-            "accepted": true,
-            "fallback_to_conservative_python": false,
-            "rejection_reason": null,
-            "validated_result": {
-              "producer_agent": "screening_review_agent",
-              "consumer_agent": "recruiter_summary_agent",
-              "field_assessments": {
-                "candidate_id": {
-                  "role": "identifier",
-                  "necessity": "required",
-                  "rationale": "Consumer builds report keyed by candidate and must include IDs in output JSON."
-                },
-                "review_passed": {
-                  "role": "overall pass/fail flag",
-                  "necessity": "uncertain",
-                  "rationale": "Not part of consumer's declared schema but can inform deterministic_match_score or human_review_required flag."
-                },
-                "contradictions_detected": {
-                  "role": "list of logical inconsistencies",
-                  "necessity": "uncertain",
-                  "rationale": "Consumer expects an \"inconsistencies\" field; this data can be transformed, but the consumer may already derive contradictions from other sources."
-                },
-                "traceability_verified": {
-                  "role": "evidence traceability boolean",
-                  "necessity": "uncertain",
-                  "rationale": "Useful for \"validation_warnings\" or \"score_limitations\" sections, yet not explicitly required."
-                },
-                "mandatory_criteria_met": {
-                  "role": "boolean indicating if all mandatory criteria are satisfied",
-                  "necessity": "uncertain",
-                  "rationale": "Can be folded into the \"criteria_matrix\" or \"evidence_gaps\" but consumer does not request it directly."
-                },
-                "issues_requiring_human_review": {
-                  "role": "list of items that must be escalated to a human reviewer",
-                  "necessity": "required",
-                  "rationale": "Directly maps to consumer's \"review_issues\" input and drives the mandatory human_review_required flag."
-                }
-              },
-              "redundant_fields": [],
-              "duplicate_fields": [],
-              "required_fields": [
-                "candidate_id",
-                "issues_requiring_human_review"
-              ],
-              "uncertain_fields": [
-                "review_passed",
-                "contradictions_detected",
-                "traceability_verified",
-                "mandatory_criteria_met"
-              ],
-              "proposed_compact_payload_schema": {
-                "candidate_id": "string",
-                "overall_pass": "bool",
-                "issues_for_human_review": "list<string>",
-                "summary_flags": {
-                  "traceability_verified": "bool",
-                  "mandatory_criteria_met": "bool"
-                },
-                "inconsistencies": "list<string>"
-              },
-              "semantic_rationale": "The downstream recruiter_summary_agent must produce a structured report that includes a candidate identifier and any items that trigger human review. Those two pieces of information are explicitly required by the consumer schema (candidate_overview, review_issues). All other fields supplied by the screening_review_agent provide context that can be folded into higher\u2011level flags or transformed into the consumer's \"inconsistencies\", \"criteria_matrix\", and \"validation_warnings\" sections. Because the consumer does not declare those fields verbatim, they are marked as uncertain rather than redundant \u2013 they may be valuable for scoring or for generating explanatory text. A compact payload replaces the six original fields with a minimal set of primitives and a nested \"summary_flags\" object, reducing payload size while preserving every semantic element needed for downstream synthesis.",
-              "confidence": 0.87,
-              "requires_human_or_empirical_validation": true
-            }
+            "accepted": false,
+            "fallback_to_conservative_python": true,
+            "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+            "validated_result": null
           },
           "evidence_provenance": [
             "stage_3_graph",
@@ -5342,62 +4799,8 @@
       }
     ]
   },
-  "additional_optimization_opportunities": [
-    {
-      "candidate_id": "ADDITIONAL-EARLY-EXIT",
-      "dimension": "additional_optimization",
-      "title": "Fast-Path Early Exit for Standard/Compliant Artifacts",
-      "target_agents": [
-        "recruiter_summary_agent",
-        "resume_intake_agent",
-        "screening_review_agent"
-      ],
-      "observed_problem": "The target workflow runs through all 8 stages sequentially regardless of input complexity or deviation status. Standard contracts or clean inputs that pass initial verification without issues still execute all downstream remediation and deep analysis loops, consuming ~44.8s.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_2_overview",
-          "stage_6_latency",
-          "stage_9_comparison"
-        ],
-        "total_agent_count": 8,
-        "workflow_mean_seconds": 44.7989
-      },
-      "proposed_solution": "Introduce a fast-path conditional checkpoint: if zero high-risk ambiguities or compliance deviations are identified in early stages, bypass extensive multi-agent reconciliation and jump directly to final report generation.",
-      "expected_benefit": {
-        "latency_savings_pct": 55.0,
-        "latency_savings_seconds": 24.64,
-        "token_savings_pct": 50.0,
-        "cost_savings_pct": 50.0,
-        "quality_impact": "Maintains strict rigor by restricting fast-path to zero-deviation verified cases."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Over 50% latency reduction on clean input distributions.",
-        "token_cost_tradeoff": "Cuts token spend in half for routine standard cases.",
-        "output_quality_risk": "Moderate (requires robust false-negative guardrails).",
-        "implementation_complexity": "Medium"
-      },
-      "tier": "Tier 2",
-      "requires_validation": true,
-      "allocated_key": "GROQ_API_KEY_10 (masked: gsk_...DBpq)",
-      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
-    }
-  ],
   "prioritized_action_plan": {
     "tier_1_immediate_implementation": [
-      {
-        "candidate_id": "PRUNE-SCREENING_REVIEW_AGENT",
-        "title": "Conditional Pruning or Pass-Through Bypass of screening_review_agent",
-        "target_agents": [
-          "screening_review_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 10.0,
-          "latency_savings_seconds": 18.1034,
-          "token_savings_pct": 8.5,
-          "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds."
-        },
-        "justification": "High expected benefit with low implementation complexity and zero functional risk."
-      },
       {
         "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
         "title": "Parallel Execution of qualification_agent and job_criteria_agent",
@@ -5410,19 +4813,6 @@
           "latency_savings_seconds": 2.82,
           "critical_path_impact": "Cuts 2.82s directly from sequential critical path.",
           "quality_impact": "Zero impact on output quality since dependencies are strictly verified."
-        },
-        "justification": "High expected benefit with low implementation complexity and zero functional risk."
-      },
-      {
-        "candidate_id": "TOOL-EVIDENCE_MAPPING_AGENT",
-        "title": "Deterministic Tool Result Caching for evidence_mapping_agent",
-        "target_agents": [
-          "evidence_mapping_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 12.0,
-          "token_savings_pct": 10.0,
-          "quality_impact": "Zero risk for immutable policy reference lookups."
         },
         "justification": "High expected benefit with low implementation complexity and zero functional risk."
       }
@@ -5711,23 +5101,6 @@
           "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
         },
         "validation_requirements": "Requires shadow execution testing against baseline traces to ensure full accuracy."
-      },
-      {
-        "candidate_id": "ADDITIONAL-EARLY-EXIT",
-        "title": "Fast-Path Early Exit for Standard/Compliant Artifacts",
-        "target_agents": [
-          "recruiter_summary_agent",
-          "resume_intake_agent",
-          "screening_review_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 55.0,
-          "latency_savings_seconds": 24.64,
-          "token_savings_pct": 50.0,
-          "cost_savings_pct": 50.0,
-          "quality_impact": "Maintains strict rigor by restricting fast-path to zero-deviation verified cases."
-        },
-        "validation_requirements": "Requires shadow execution testing against baseline traces to ensure full accuracy."
       }
     ],
     "tier_3_proceed_with_caution": [],
@@ -5745,16 +5118,14 @@
         "actions": [
           "Shadow test compact models for syntactic document intake nodes.",
           "Validate and deploy consolidated sequential agent prompts (Dimension B) against baseline regression traces.",
-          "Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout.",
-          "Implement fast-path early exit for verified zero-deviation artifacts."
+          "Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout."
         ],
         "projected_timeframe": "2-3 sprints"
       },
       {
         "phase": "Phase 3: Deep Architecture Refactoring (Tier 3)",
         "actions": [
-          "Migrate global state passing to strictly typed, delta-only Pydantic models.",
-          "Deploy centralized memory caching for immutable policy rules."
+          "Migrate global state passing to strictly typed, delta-only Pydantic models."
         ],
         "projected_timeframe": "3-4 sprints"
       }

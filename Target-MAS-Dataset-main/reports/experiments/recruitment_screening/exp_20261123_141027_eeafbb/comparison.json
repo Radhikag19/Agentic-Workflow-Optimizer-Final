@@ -1,0 +1,90 @@
+{
+  "comparability": {
+    "inputs_comparable": true,
+    "modes_compatible_for_live_claims": true,
+    "baseline_runs": 2,
+    "optimized_runs": 2,
+    "baseline_modes": [
+      "live_llm_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": null,
+    "optimized_seconds": null,
+    "improvement_pct": null,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": null,
+    "optimized_seconds": null,
+    "improvement_pct": null,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": null,
+    "optimized_seconds": null,
+    "improvement_pct": null,
+    "per_agent": {}
+  },
+  "latency": {
+    "baseline_mean_seconds": null,
+    "optimized_mean_seconds": null,
+    "improvement_pct": null,
+    "comparable_for_live_claim": true,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": null,
+    "baseline_catalog_normalized_usd": null,
+    "optimized_catalog_normalized_usd": null,
+    "improvement_pct_catalog_normalized": null,
+    "cost_basis": "estimated_from_historical_replay"
+  },
+  "execution_success_rate": {
+    "baseline_pct": 0.0,
+    "optimized_pct": 0.0,
+    "delta_pct_points": 0.0,
+    "improvement_pct": 0.0
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": 0.0,
+    "optimized_pass_rate_pct": 0.0,
+    "improvement_pct": 0.0
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": []
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": false,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

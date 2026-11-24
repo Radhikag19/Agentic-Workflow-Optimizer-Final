@@ -1,0 +1,1031 @@
+{
+  "run_id": "sb_20261124_151630_e1770b",
+  "run_index": 0,
+  "variant": "optimized",
+  "workflow_name": "recruitment_screening",
+  "experiment_id": "live_validation_recruitment_screening__phase_a_workflow_parallelization",
+  "model": "openai/gpt-oss-120b",
+  "status": "SUCCESS",
+  "execution_mode": "live_llm_execution",
+  "usage_sources": [
+    "api_reported"
+  ],
+  "input_hash": "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+  "input_snapshot": {
+    "run_index": 0,
+    "input_hash": "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+    "matched_baseline_run_id": "live_20261031_162602_trace01",
+    "matched_identifiers": {
+      "application_id": "APP-001",
+      "candidate_id": "CAND-001",
+      "job_id": "JOB-01"
+    },
+    "candidate_id": "CAND-001",
+    "application_id": "APP-001",
+    "candidate_name": "Dakota Chen",
+    "job_id": "JOB-01",
+    "job_title": null
+  },
+  "duration_seconds": 73.1854,
+  "agent_execution_count": 8,
+  "agent_execution_order": [
+    "resume_intake_agent",
+    "qualification_agent",
+    "job_criteria_agent",
+    "evidence_mapping_agent",
+    "experience_assessment_agent",
+    "missing_evidence_agent",
+    "screening_review_agent",
+    "recruiter_summary_agent"
+  ],
+  "concurrent_waves": [
+    [
+      "qualification_agent",
+      "job_criteria_agent"
+    ]
+  ],
+  "agent_executions": [
+    {
+      "order": 1,
+      "agent_id": "resume_intake_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 2.2265,
+      "status": "SUCCESS",
+      "tokens": 1481,
+      "prompt_tokens": 931,
+      "completion_tokens": 550,
+      "estimated_cost_usd": 0.00047,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}"
+      ],
+      "agent_task_input": "Agent resume_intake_agent (Resume Intake Specialist): Accurately normalize raw resume text, identify present and missing sections, and catalog candidate metadata without ever inventing qualifications.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1405
+      },
+      "output": {
+        "application_id": "APP-001",
+        "candidate_id": "CAND-001",
+        "candidate_name": "Dakota Chen",
+        "contact_info_present": true,
+        "sections_identified": [
+          "contact_information",
+          "education",
+          "experience",
+          "skills"
+        ],
+        "missing_sections": [
+          "summary",
+          "certifications",
+          "projects",
+          "publications",
+          "awards",
+          "languages",
+          "interests"
+        ],
+        "raw_sections": {
+          "contact_information": {
+            "name": "Dakota Chen",
+            "email": "dakota.chen1@example.org",
+            "phone": "+1-555-792-9935",
+            "location": "Remote"
+          },
+          "education": {
+            "evidence_id": "EVD-001-EDU",
+            "degree": "B.S. in Computer Science",
+            "institution": "State University",
+            "graduation_year": 2014
+          },
+          "experience": [
+            {
+              "evidence_id": "EVD-001-EXP1",
+              "title": "Software Engineer",
+              "company": "Apex Dynamics Corp",
+              "start_date": "2015-01",
+              "end_date": "2024-12",
+              "description": "Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%."
+            }
+          ],
+          "skills": {
+            "evidence_id": "EVD-001-SKL",
+            "technical_skills": [
+              "HTML",
+              "CSS",
+              "WordPress"
+            ]
+          }
+        },
+        "source_evidence_ids": [
+          "EVD-001-EDU",
+          "EVD-001-EXP1",
+          "EVD-001-SKL"
+        ],
+        "intake_notes": [
+          "Edge case identified: missing required technical skills for target role (Python/Go, cloud platforms).",
+          "Contact information is present and complete."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 2,
+      "agent_id": "qualification_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 2.8518,
+      "status": "SUCCESS",
+      "tokens": 2122,
+      "prompt_tokens": 1323,
+      "completion_tokens": 799,
+      "estimated_cost_usd": 0.000678,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.resume_intake_agent] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"contact_info_present\": true, \"sections_identified\": [\"contact_information\", \"education\", \"experience\", \"skills\"], \"missing_sections\": [\"summary\", \"certifications\", \"projects\", \"publications\", \"awards\", \"languages\", \"interests\"], \"raw_sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"], \"intake_notes\": [\"Edge case identified: missing required technical skills for target role (Python/Go, cloud platforms).\", \"Contact information is present and complete.\"]}"
+      ],
+      "agent_task_input": "Agent qualification_agent (Candidate Qualification Extractor): Extract factual technical skills, degrees, certifications, and work experience from the normalized resume sections, linking each item to exact excerpts and evidence IDs.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1806
+      },
+      "output": {
+        "candidate_id": "CAND-001",
+        "technical_skills": [
+          {
+            "category": "technical_skill",
+            "item_name": "HTML",
+            "proficiency_or_duration": null,
+            "supporting_excerpt": "HTML",
+            "evidence_id": "EVD-001-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "CSS",
+            "proficiency_or_duration": null,
+            "supporting_excerpt": "CSS",
+            "evidence_id": "EVD-001-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "WordPress",
+            "proficiency_or_duration": null,
+            "supporting_excerpt": "WordPress",
+            "evidence_id": "EVD-001-SKL"
+          }
+        ],
+        "education": [
+          {
+            "category": "education",
+            "item_name": "B.S. in Computer Science",
+            "proficiency_or_duration": null,
+            "supporting_excerpt": "B.S. in Computer Science, State University, 2014",
+            "evidence_id": "EVD-001-EDU"
+          }
+        ],
+        "certifications": [],
+        "experience_records": [
+          {
+            "category": "experience",
+            "item_name": "Software Engineer",
+            "proficiency_or_duration": "2015-01 to 2024-12",
+            "supporting_excerpt": "Software Engineer at Apex Dynamics Corp (2015-01 to 2024-12): Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.",
+            "evidence_id": "EVD-001-EXP1"
+          }
+        ],
+        "projects": [],
+        "extraction_warnings": [
+          "Missing required technical skills for target role: Python, Go, AWS/GCP, Docker, Kubernetes."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 3,
+      "agent_id": "job_criteria_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 2.278,
+      "status": "SUCCESS",
+      "tokens": 1630,
+      "prompt_tokens": 1008,
+      "completion_tokens": 622,
+      "estimated_cost_usd": 0.000524,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}"
+      ],
+      "agent_task_input": "Agent job_criteria_agent (Job Criteria Analyst): Parse the job description into discrete mandatory and preferred evaluation criteria, assigning stable criterion IDs and flagging any ambiguous requirements.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1674
+      },
+      "output": {
+        "job_id": "JOB-01",
+        "job_title": "Senior Cloud Backend Engineer",
+        "mandatory_criteria": [
+          {
+            "criterion_id": "JOB-01-CRIT-M1",
+            "category": "technical_skill",
+            "requirement_type": "mandatory",
+            "description": "Minimum 5 years of Python or Go backend systems experience",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-M2",
+            "category": "technical_skill",
+            "requirement_type": "mandatory",
+            "description": "Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-M3",
+            "category": "education",
+            "requirement_type": "mandatory",
+            "description": "Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          }
+        ],
+        "preferred_criteria": [
+          {
+            "criterion_id": "JOB-01-CRIT-P1",
+            "category": "technical_skill",
+            "requirement_type": "preferred",
+            "description": "Experience with gRPC and high-throughput event streaming",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-P2",
+            "category": "certification",
+            "requirement_type": "preferred",
+            "description": "AWS Certified Solutions Architect or equivalent professional certificate",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          }
+        ],
+        "total_criteria_count": 5,
+        "parsing_notes": []
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 4,
+      "agent_id": "evidence_mapping_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 3.1252,
+      "status": "SUCCESS",
+      "tokens": 2521,
+      "prompt_tokens": 1666,
+      "completion_tokens": 855,
+      "estimated_cost_usd": 0.000763,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.qualification_agent] {\"candidate_id\": \"CAND-001\", \"technical_skills\": [{\"category\": \"technical_skill\", \"item_name\": \"HTML\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"HTML\", \"evidence_id\": \"EVD-001-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"CSS\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"CSS\", \"evidence_id\": \"EVD-001-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"WordPress\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"WordPress\", \"evidence_id\": \"EVD-001-SKL\"}], \"education\": [{\"category\": \"education\", \"item_name\": \"B.S. in Computer Science\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"B.S. in Computer Science, State University, 2014\", \"evidence_id\": \"EVD-001-EDU\"}], \"certifications\": [], \"experience_records\": [{\"category\": \"experience\", \"item_name\": \"Software Engineer\", \"proficiency_or_duration\": \"2015-01 to 2024-12\", \"supporting_excerpt\": \"Software Engineer at Apex Dynamics Corp (2015-01 to 2024-12): Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\", \"evidence_id\": \"EVD-001-EXP1\"}], \"projects\": [], \"extraction_warnings\": [\"Missing required technical skills for target role: Python, Go, AWS/GCP, Docker, Kubernetes.\"]}",
+        "[upstream.job_criteria_agent] {\"job_id\": \"JOB-01\", \"job_title\": \"Senior Cloud Backend Engineer\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"requirement_type\": \"mandatory\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"is_ambiguous\": false, \"ambiguity_notes\": null}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"requirement_type\": \"mandatory\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"is_ambiguous\": false, \"ambiguity_notes\": null}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"requirement_type\": \"mandatory\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"is_ambiguous\": false, \"ambiguity_notes\": null}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"requirement_type\": \"preferred\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"is_ambiguous\": false, \"ambiguity_notes\": null}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"requirement_type\": \"preferred\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"is_ambiguous\": false, \"ambiguity_notes\": null}], \"total_criteria_count\": 5, \"parsing_notes\": []}"
+      ],
+      "agent_task_input": "Agent evidence_mapping_agent (Candidate Evidence Mapping Specialist): Cross-reference every job criterion against extracted candidate qualifications, classifying fulfillment status and linking evidence IDs while clearly distinguishing a confirmed missing qualification from mere missing documentation.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 2028
+      },
+      "output": {
+        "candidate_id": "CAND-001",
+        "job_id": "JOB-01",
+        "mappings": [
+          {
+            "criterion_id": "JOB-01-CRIT-M1",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No Python or Go backend experience documented."
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-M2",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No AWS/GCP cloud or containerization (Docker, Kubernetes) experience documented."
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-M3",
+            "requirement_type": "mandatory",
+            "status": "supported",
+            "candidate_evidence": "B.S. in Computer Science, State University, 2014",
+            "evidence_ids": [
+              "EVD-001-EDU"
+            ],
+            "is_missing_qualification": false,
+            "is_missing_evidence_only": false,
+            "notes": ""
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-P1",
+            "requirement_type": "preferred",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No gRPC or event streaming experience documented."
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-P2",
+            "requirement_type": "preferred",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No AWS Certified Solutions Architect or equivalent certification documented."
+          }
+        ],
+        "supported_count": 1,
+        "unsupported_count": 4,
+        "partially_supported_count": 0,
+        "unclear_count": 0
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 5,
+      "agent_id": "experience_assessment_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 13.16,
+      "status": "SUCCESS",
+      "tokens": 2109,
+      "prompt_tokens": 1530,
+      "completion_tokens": 579,
+      "estimated_cost_usd": 0.000577,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.qualification_agent] {\"candidate_id\": \"CAND-001\", \"technical_skills\": [{\"category\": \"technical_skill\", \"item_name\": \"HTML\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"HTML\", \"evidence_id\": \"EVD-001-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"CSS\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"CSS\", \"evidence_id\": \"EVD-001-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"WordPress\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"WordPress\", \"evidence_id\": \"EVD-001-SKL\"}], \"education\": [{\"category\": \"education\", \"item_name\": \"B.S. in Computer Science\", \"proficiency_or_duration\": null, \"supporting_excerpt\": \"B.S. in Computer Science, State University, 2014\", \"evidence_id\": \"EVD-001-EDU\"}], \"certifications\": [], \"experience_records\": [{\"category\": \"experience\", \"item_name\": \"Software Engineer\", \"proficiency_or_duration\": \"2015-01 to 2024-12\", \"supporting_excerpt\": \"Software Engineer at Apex Dynamics Corp (2015-01 to 2024-12): Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\", \"evidence_id\": \"EVD-001-EXP1\"}], \"projects\": [], \"extraction_warnings\": [\"Missing required technical skills for target role: Python, Go, AWS/GCP, Docker, Kubernetes.\"]}",
+        "[upstream.evidence_mapping_agent] {\"candidate_id\": \"CAND-001\", \"job_id\": \"JOB-01\", \"mappings\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No Python or Go backend experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No AWS/GCP cloud or containerization (Docker, Kubernetes) experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"requirement_type\": \"mandatory\", \"status\": \"supported\", \"candidate_evidence\": \"B.S. in Computer Science, State University, 2014\", \"evidence_ids\": [\"EVD-001-EDU\"], \"is_missing_qualification\": false, \"is_missing_evidence_only\": false, \"notes\": \"\"}, {\"criterion_id\": \"JOB-01-CRIT-P1\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No gRPC or event streaming experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No AWS Certified Solutions Architect or equivalent certification documented.\"}], \"supported_count\": 1, \"unsupported_count\": 4, \"partially_supported_count\": 0, \"unclear_count\": 0}"
+      ],
+      "agent_task_input": "Agent experience_assessment_agent (Experience Assessment Evaluator): Evaluate candidate career trajectory, domain depth, and transferable skills relative to the target position, documenting strengths and concrete gaps without bias.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1203
+      },
+      "output": {
+        "candidate_id": "CAND-001",
+        "relevance_summary": "The candidate holds a CS degree and 10 years of software engineering experience, but the documented work focuses on HTML, CSS, and WordPress site development with limited evidence of backend programming, cloud architecture, or containerization required for a Senior Cloud Backend Engineer role.",
+        "strengths": [
+          "B.S. in Computer Science (EVD-001-EDU)",
+          "10+ years of continuous software engineering experience (EVD-001-EXP1)",
+          "Demonstrated ability to design and deploy scalable services (EVD-001-EXP1)",
+          "Quantifiable performance improvement (35% query latency reduction)"
+        ],
+        "experience_gaps": [
+          "No Python or Go backend development experience (mandatory)",
+          "No AWS/GCP cloud architecture or services experience (mandatory)",
+          "No Docker/Kubernetes containerization experience (mandatory)",
+          "No gRPC or high\u2011throughput event streaming experience (preferred)",
+          "No relevant cloud certifications such as AWS Solutions Architect (preferred)"
+        ],
+        "transferable_skills": [
+          "Web development fundamentals (HTML, CSS, WordPress) (EVD-001-SKL)",
+          "Performance optimization and latency reduction (EVD-001-EXP1)",
+          "Scalable service design principles (EVD-001-EXP1)",
+          "Problem\u2011solving and long\u2011term project ownership (EVD-001-EXP1)"
+        ],
+        "evidence_references": [
+          "EVD-001-EDU",
+          "EVD-001-EXP1",
+          "EVD-001-SKL"
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 6,
+      "agent_id": "missing_evidence_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 19.597,
+      "status": "SUCCESS",
+      "tokens": 2288,
+      "prompt_tokens": 1644,
+      "completion_tokens": 644,
+      "estimated_cost_usd": 0.000633,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.resume_intake_agent] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"contact_info_present\": true, \"sections_identified\": [\"contact_information\", \"education\", \"experience\", \"skills\"], \"missing_sections\": [\"summary\", \"certifications\", \"projects\", \"publications\", \"awards\", \"languages\", \"interests\"], \"raw_sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"], \"intake_notes\": [\"Edge case identified: missing required technical skills for target role (Python/Go, cloud platforms).\", \"Contact information is present and complete.\"]}",
+        "[upstream.evidence_mapping_agent] {\"candidate_id\": \"CAND-001\", \"job_id\": \"JOB-01\", \"mappings\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No Python or Go backend experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No AWS/GCP cloud or containerization (Docker, Kubernetes) experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"requirement_type\": \"mandatory\", \"status\": \"supported\", \"candidate_evidence\": \"B.S. in Computer Science, State University, 2014\", \"evidence_ids\": [\"EVD-001-EDU\"], \"is_missing_qualification\": false, \"is_missing_evidence_only\": false, \"notes\": \"\"}, {\"criterion_id\": \"JOB-01-CRIT-P1\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No gRPC or event streaming experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No AWS Certified Solutions Architect or equivalent certification documented.\"}], \"supported_count\": 1, \"unsupported_count\": 4, \"partially_supported_count\": 0, \"unclear_count\": 0}"
+      ],
+      "agent_task_input": "Agent missing_evidence_agent (Recruitment Consistency and Verification Auditor): Audit the resume and qualification records for chronological anomalies, unsupported buzzword claims, missing mandatory evidence, and ambiguous statements.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1642
+      },
+      "output": {
+        "candidate_id": "CAND-001",
+        "missing_evidence_items": [
+          "Python/Go backend experience",
+          "AWS/GCP cloud architecture and containerization experience"
+        ],
+        "unreliable_requirements": [
+          "Claim of designing and deploying scalable services using only HTML, CSS, and WordPress (front\u2011end technologies)"
+        ],
+        "inconsistencies": [
+          {
+            "issue_type": "unsupported_claim",
+            "description": "Candidate claims designing scalable services but only lists front\u2011end technologies (HTML, CSS, WordPress) which are not typical backend technologies for the target role",
+            "is_confirmed_inconsistency": true,
+            "requires_recruiter_clarification": false,
+            "evidence_ids": [
+              "EVD-001-EXP1"
+            ]
+          }
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 7,
+      "agent_id": "screening_review_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 17.8466,
+      "status": "SUCCESS",
+      "tokens": 2447,
+      "prompt_tokens": 1736,
+      "completion_tokens": 711,
+      "estimated_cost_usd": 0.000687,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.evidence_mapping_agent] {\"candidate_id\": \"CAND-001\", \"job_id\": \"JOB-01\", \"mappings\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No Python or Go backend experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No AWS/GCP cloud or containerization (Docker, Kubernetes) experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"requirement_type\": \"mandatory\", \"status\": \"supported\", \"candidate_evidence\": \"B.S. in Computer Science, State University, 2014\", \"evidence_ids\": [\"EVD-001-EDU\"], \"is_missing_qualification\": false, \"is_missing_evidence_only\": false, \"notes\": \"\"}, {\"criterion_id\": \"JOB-01-CRIT-P1\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No gRPC or event streaming experience documented.\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No AWS Certified Solutions Architect or equivalent certification documented.\"}], \"supported_count\": 1, \"unsupported_count\": 4, \"partially_supported_count\": 0, \"unclear_count\": 0}",
+        "[upstream.experience_assessment_agent] {\"candidate_id\": \"CAND-001\", \"relevance_summary\": \"The candidate holds a CS degree and 10 years of software engineering experience, but the documented work focuses on HTML, CSS, and WordPress site development with limited evidence of backend programming, cloud architecture, or containerization required for a Senior Cloud Backend Engineer role.\", \"strengths\": [\"B.S. in Computer Science (EVD-001-EDU)\", \"10+ years of continuous software engineering experience (EVD-001-EXP1)\", \"Demonstrated ability to design and deploy scalable services (EVD-001-EXP1)\", \"Quantifiable performance improvement (35% query latency reduction)\"], \"experience_gaps\": [\"No Python or Go backend development experience (mandatory)\", \"No AWS/GCP cloud architecture or services experience (mandatory)\", \"No Docker/Kubernetes containerization experience (mandatory)\", \"No gRPC or high\\u2011throughput event streaming experience (preferred)\", \"No relevant cloud certifications such as AWS Solutions Architect (preferred)\"], \"transferable_skills\": [\"Web development fundamentals (HTML, CSS, WordPress) (EVD-001-SKL)\", \"Performance optimization and latency reduction (EVD-001-EXP1)\", \"Scalable service design principles (EVD-001-EXP1)\", \"Problem\\u2011solving and long\\u2011term project ownership (EVD-001-EXP1)\"], \"evidence_references\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[upstream.missing_evidence_agent] {\"candidate_id\": \"CAND-001\", \"missing_evidence_items\": [\"Python/Go backend experience\", \"AWS/GCP cloud architecture and containerization experience\"], \"unreliable_requirements\": [\"Claim of designing and deploying scalable services using only HTML, CSS, and WordPress (front\\u2011end technologies)\"], \"inconsistencies\": [{\"issue_type\": \"unsupported_claim\", \"description\": \"Candidate claims designing scalable services but only lists front\\u2011end technologies (HTML, CSS, WordPress) which are not typical backend technologies for the target role\", \"is_confirmed_inconsistency\": true, \"requires_recruiter_clarification\": false, \"evidence_ids\": [\"EVD-001-EXP1\"]}]}"
+      ],
+      "agent_task_input": "Agent screening_review_agent (Screening Quality and Integrity Reviewer): Conduct an independent quality check across prior agent findings, ensuring evidence traceability, non-contradiction, and distinct treatment of mandatory vs preferred criteria.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1263
+      },
+      "output": {
+        "candidate_id": "CAND-001",
+        "review_passed": false,
+        "contradictions_detected": [
+          "Experience assessment lists \"design and deploy scalable services\" as a strength while missing\u2011evidence agent flags this claim as unreliable because only front\u2011end technologies (HTML/CSS/WordPress) are documented"
+        ],
+        "traceability_verified": true,
+        "mandatory_criteria_met": false,
+        "issues_requiring_human_review": [
+          "Candidate lacks mandatory backend experience (Python/Go) and cloud architecture/containerization (AWS/GCP, Docker/Kubernetes) required for Senior Cloud Backend Engineer",
+          "Clarify the candidate's claim of designing scalable services using only front\u2011end technologies",
+          "Determine if transferable web\u2011development skills are sufficient or if the role should be rejected"
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 8,
+      "agent_id": "recruiter_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 14.3738,
+      "status": "SUCCESS",
+      "tokens": 3217,
+      "prompt_tokens": 1678,
+      "completion_tokens": 1539,
+      "estimated_cost_usd": 0.001175,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-001\", \"candidate_id\": \"CAND-001\", \"candidate_name\": \"Dakota Chen\", \"target_job_id\": \"JOB-01\", \"target_job_title\": \"Senior Cloud Backend Engineer\", \"edge_case_type\": \"missing_skills\", \"sections\": {\"contact_information\": {\"name\": \"Dakota Chen\", \"email\": \"dakota.chen1@example.org\", \"phone\": \"+1-555-792-9935\", \"location\": \"Remote\"}, \"education\": {\"evidence_id\": \"EVD-001-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2014}, \"experience\": [{\"evidence_id\": \"EVD-001-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2015-01\", \"end_date\": \"2024-12\", \"description\": \"Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-001-SKL\", \"technical_skills\": [\"HTML\", \"CSS\", \"WordPress\"]}}, \"source_evidence_ids\": [\"EVD-001-EDU\", \"EVD-001-EXP1\", \"EVD-001-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-01\", \"title\": \"Senior Cloud Backend Engineer\", \"department\": \"Engineering\", \"location\": \"Remote\", \"summary\": \"We are seeking an experienced Senior Cloud Backend Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 5 years of Python or Go backend systems experience\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Hands-on expertise with AWS or GCP cloud architecture and containerization (Docker, Kubernetes)\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-01-CRIT-M3\", \"category\": \"education\", \"description\": \"Bachelor's degree in Computer Science, Software Engineering, or equivalent practical experience\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-01-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with gRPC and high-throughput event streaming\", \"requirement_type\": \"preferred\"}, {\"criterion_id\": \"JOB-01-CRIT-P2\", \"category\": \"certification\", \"description\": \"AWS Certified Solutions Architect or equivalent professional certificate\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.screening_review_agent] {\"candidate_id\": \"CAND-001\", \"review_passed\": false, \"contradictions_detected\": [\"Experience assessment lists \\\"design and deploy scalable services\\\" as a strength while missing\\u2011evidence agent flags this claim as unreliable because only front\\u2011end technologies (HTML/CSS/WordPress) are documented\"], \"traceability_verified\": true, \"mandatory_criteria_met\": false, \"issues_requiring_human_review\": [\"Candidate lacks mandatory backend experience (Python/Go) and cloud architecture/containerization (AWS/GCP, Docker/Kubernetes) required for Senior Cloud Backend Engineer\", \"Clarify the candidate's claim of designing scalable services using only front\\u2011end technologies\", \"Determine if transferable web\\u2011development skills are sufficient or if the role should be rejected\"]}"
+      ],
+      "agent_task_input": "Agent recruiter_summary_agent (Executive Recruiter Summary Synthesizer): Synthesize all screening findings into a structured, transparent recruiter report, providing actionable follow-up interview questions and deterministic scoring while explicitly preserving final decision authority for human hiring teams.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 3364
+      },
+      "output": {
+        "run_id": "sb_20261124_151630_e1770b",
+        "application_id": "APP-001",
+        "candidate_id": "CAND-001",
+        "candidate_name": "Dakota Chen",
+        "job_id": "JOB-01",
+        "job_title": "Senior Cloud Backend Engineer",
+        "executive_candidate_overview": "Dakota Chen holds a B.S. in Computer Science (2014) and has 9+ years of experience as a Software Engineer at Apex Dynamics Corp, primarily focused on front\u2011end web technologies (HTML, CSS, WordPress). The resume highlights design and deployment of scalable services and a 35% query latency improvement, but all documented work is limited to front\u2011end stacks. No evidence of Python/Go backend development, cloud platforms (AWS/GCP), containerization (Docker/Kubernetes), gRPC, event streaming, or relevant certifications is provided.",
+        "criteria_matrix": [
+          {
+            "criterion_id": "JOB-01-CRIT-M1",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No backend language (Python/Go) experience documented."
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-M2",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No cloud architecture or containerization experience documented."
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-M3",
+            "requirement_type": "mandatory",
+            "status": "supported",
+            "candidate_evidence": "B.S. in Computer Science",
+            "evidence_ids": [
+              "EVD-001-EDU"
+            ],
+            "is_missing_qualification": false,
+            "is_missing_evidence_only": false,
+            "notes": ""
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-P1",
+            "requirement_type": "preferred",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No evidence of gRPC or high\u2011throughput event streaming."
+          },
+          {
+            "criterion_id": "JOB-01-CRIT-P2",
+            "requirement_type": "preferred",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No AWS or equivalent certification documented."
+          }
+        ],
+        "key_strengths": [
+          "B.S. in Computer Science (2014)",
+          "9+ years of software engineering experience",
+          "Designed and deployed scalable services (front\u2011end)",
+          "Improved query latency by 35%"
+        ],
+        "evidence_gaps": [
+          "Backend development experience with Python or Go",
+          "AWS/GCP cloud architecture experience",
+          "Docker/Kubernetes containerization experience",
+          "gRPC and event\u2011streaming experience",
+          "AWS Certified Solutions Architect or equivalent certification"
+        ],
+        "identified_inconsistencies": [
+          "Resume claims \"designed and deployed scalable services\" but only front\u2011end technologies (HTML/CSS/WordPress) are listed, creating a reliability concern",
+          "Candidate\u2019s experience does not align with mandatory backend and cloud requirements for the Senior Cloud Backend Engineer role"
+        ],
+        "recommended_follow_up_questions": [
+          "Can you describe any experience you have with backend programming languages such as Python or Go?",
+          "Do you have hands\u2011on experience with cloud platforms (AWS, GCP) or container technologies (Docker, Kubernetes)?",
+          "What specific scalable services have you designed, and which technologies were used to implement them?",
+          "Do you have experience with gRPC, event streaming, or similar high\u2011throughput communication patterns?",
+          "Have you earned any cloud\u2011related certifications (e.g., AWS Solutions Architect) or are you planning to obtain one?",
+          "How do you assess the transferability of your front\u2011end development skills to a backend cloud engineering role?"
+        ],
+        "deterministic_match_score": 100.0,
+        "score_calculation_method": "Deterministic weighted ratio: Mandatory criteria (70%), Preferred criteria (30%). Supported=1.0, Partially Supported=0.5, Unclear=0.25, Unsupported=0.0.",
+        "score_limitations": "Numerical score reflects documented resume keyword and experience overlap only. It does not measure soft skills, motivation, or unlisted capabilities.",
+        "human_review_required": true,
+        "non_autonomous_decision_statement": "This is an automated screening assistant summary. It does NOT make autonomous hiring decisions.",
+        "validation_warnings": [
+          "Score of 100.0 is inconsistent with multiple mandatory criteria marked as unsupported; review score calculation logic."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    }
+  ],
+  "handoff_audits": [
+    {
+      "edge": "resume_intake_agent->qualification_agent",
+      "projected": false,
+      "original_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "retained_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "qualification_agent->evidence_mapping_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "job_criteria_agent->evidence_mapping_agent",
+      "projected": false,
+      "original_fields": [
+        "job_id",
+        "job_title",
+        "mandatory_criteria",
+        "preferred_criteria",
+        "total_criteria_count",
+        "parsing_notes"
+      ],
+      "retained_fields": [
+        "job_id",
+        "job_title",
+        "mandatory_criteria",
+        "preferred_criteria",
+        "total_criteria_count",
+        "parsing_notes"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "qualification_agent->experience_assessment_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "evidence_mapping_agent->experience_assessment_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "resume_intake_agent->missing_evidence_agent",
+      "projected": false,
+      "original_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "retained_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "evidence_mapping_agent->missing_evidence_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "evidence_mapping_agent->screening_review_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "experience_assessment_agent->screening_review_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "relevance_summary",
+        "strengths",
+        "experience_gaps",
+        "transferable_skills",
+        "evidence_references"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "relevance_summary",
+        "strengths",
+        "experience_gaps",
+        "transferable_skills",
+        "evidence_references"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "missing_evidence_agent->screening_review_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "missing_evidence_items",
+        "unreliable_requirements",
+        "inconsistencies"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "missing_evidence_items",
+        "unreliable_requirements",
+        "inconsistencies"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "screening_review_agent->recruiter_summary_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "review_passed",
+        "contradictions_detected",
+        "traceability_verified",
+        "mandatory_criteria_met",
+        "issues_requiring_human_review"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "review_passed",
+        "contradictions_detected",
+        "traceability_verified",
+        "mandatory_criteria_met",
+        "issues_requiring_human_review"
+      ],
+      "removed_fields": []
+    }
+  ],
+  "total_tokens": 17815,
+  "prompt_tokens": 11516,
+  "completion_tokens": 6299,
+  "estimated_cost_usd": 0.005507,
+  "api_errors": [],
+  "fallback_events": [],
+  "schema_failures": [],
+  "invalid_replay_samples": [],
+  "final_output": {
+    "run_id": "sb_20261124_151630_e1770b",
+    "application_id": "APP-001",
+    "candidate_id": "CAND-001",
+    "candidate_name": "Dakota Chen",
+    "job_id": "JOB-01",
+    "job_title": "Senior Cloud Backend Engineer",
+    "executive_candidate_overview": "Dakota Chen holds a B.S. in Computer Science (2014) and has 9+ years of experience as a Software Engineer at Apex Dynamics Corp, primarily focused on front\u2011end web technologies (HTML, CSS, WordPress). The resume highlights design and deployment of scalable services and a 35% query latency improvement, but all documented work is limited to front\u2011end stacks. No evidence of Python/Go backend development, cloud platforms (AWS/GCP), containerization (Docker/Kubernetes), gRPC, event streaming, or relevant certifications is provided.",
+    "criteria_matrix": [
+      {
+        "criterion_id": "JOB-01-CRIT-M1",
+        "requirement_type": "mandatory",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": true,
+        "is_missing_evidence_only": false,
+        "notes": "No backend language (Python/Go) experience documented."
+      },
+      {
+        "criterion_id": "JOB-01-CRIT-M2",
+        "requirement_type": "mandatory",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": true,
+        "is_missing_evidence_only": false,
+        "notes": "No cloud architecture or containerization experience documented."
+      },
+      {
+        "criterion_id": "JOB-01-CRIT-M3",
+        "requirement_type": "mandatory",
+        "status": "supported",
+        "candidate_evidence": "B.S. in Computer Science",
+        "evidence_ids": [
+          "EVD-001-EDU"
+        ],
+        "is_missing_qualification": false,
+        "is_missing_evidence_only": false,
+        "notes": ""
+      },
+      {
+        "criterion_id": "JOB-01-CRIT-P1",
+        "requirement_type": "preferred",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": true,
+        "is_missing_evidence_only": false,
+        "notes": "No evidence of gRPC or high\u2011throughput event streaming."
+      },
+      {
+        "criterion_id": "JOB-01-CRIT-P2",
+        "requirement_type": "preferred",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": true,
+        "is_missing_evidence_only": false,
+        "notes": "No AWS or equivalent certification documented."
+      }
+    ],
+    "key_strengths": [
+      "B.S. in Computer Science (2014)",
+      "9+ years of software engineering experience",
+      "Designed and deployed scalable services (front\u2011end)",
+      "Improved query latency by 35%"
+    ],
+    "evidence_gaps": [
+      "Backend development experience with Python or Go",
+      "AWS/GCP cloud architecture experience",
+      "Docker/Kubernetes containerization experience",
+      "gRPC and event\u2011streaming experience",
+      "AWS Certified Solutions Architect or equivalent certification"
+    ],
+    "identified_inconsistencies": [
+      "Resume claims \"designed and deployed scalable services\" but only front\u2011end technologies (HTML/CSS/WordPress) are listed, creating a reliability concern",
+      "Candidate\u2019s experience does not align with mandatory backend and cloud requirements for the Senior Cloud Backend Engineer role"
+    ],
+    "recommended_follow_up_questions": [
+      "Can you describe any experience you have with backend programming languages such as Python or Go?",
+      "Do you have hands\u2011on experience with cloud platforms (AWS, GCP) or container technologies (Docker, Kubernetes)?",
+      "What specific scalable services have you designed, and which technologies were used to implement them?",
+      "Do you have experience with gRPC, event streaming, or similar high\u2011throughput communication patterns?",
+      "Have you earned any cloud\u2011related certifications (e.g., AWS Solutions Architect) or are you planning to obtain one?",
+      "How do you assess the transferability of your front\u2011end development skills to a backend cloud engineering role?"
+    ],
+    "deterministic_match_score": 100.0,
+    "score_calculation_method": "Deterministic weighted ratio: Mandatory criteria (70%), Preferred criteria (30%). Supported=1.0, Partially Supported=0.5, Unclear=0.25, Unsupported=0.0.",
+    "score_limitations": "Numerical score reflects documented resume keyword and experience overlap only. It does not measure soft skills, motivation, or unlisted capabilities.",
+    "human_review_required": true,
+    "non_autonomous_decision_statement": "This is an automated screening assistant summary. It does NOT make autonomous hiring decisions.",
+    "validation_warnings": [
+      "Score of 100.0 is inconsistent with multiple mandatory criteria marked as unsupported; review score calculation logic."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-11-24T15:17:43.364027+00:00"
+}

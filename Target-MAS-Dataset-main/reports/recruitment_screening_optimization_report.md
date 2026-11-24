@@ -1,14 +1,14 @@
 # Autonomous Optimization Discovery Report: `recruitment_screening`
 
 > **TraceProfiler Autonomous Optimization Discovery Agent**  
-> **Generated:** 2026-11-20T21:15:39.393538+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
+> **Generated:** 2026-11-24T20:12:49.236447+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
 > **Key Allocation:** `GROQ_API_KEY_13 (masked: gsk_...Ujsn)`
 
 ---
 
 ## 1. Executive Summary
 
-Autonomous optimization analysis for workflow 'recruitment_screening' across 8 mandatory dimensions discovered 15 high-impact optimization opportunities (3 Tier 1 immediate recommendations, 12 Tier 2 validated candidates, 0 Tier 3 caution candidates).
+Autonomous optimization analysis for workflow 'recruitment_screening' across 5 optimization dimensions discovered 12 high-impact optimization opportunities (1 Tier 1 immediate recommendations, 11 Tier 2 validated candidates, 0 Tier 3 caution candidates).
 
 ### Key Findings:
 
@@ -40,13 +40,6 @@ Autonomous optimization analysis for workflow 'recruitment_screening' across 8 m
 ---
 
 ## 3. Discovered Opportunities by Dimension
-
-### Agent Pruning Opportunities (1 candidates)
-#### [Tier 1] Conditional Pruning or Pass-Through Bypass of screening_review_agent
-- **Target Agents:** `screening_review_agent`
-- **Observed Problem:** Agent 'screening_review_agent' (Screening Quality and Integrity Reviewer) performs repetitive secondary verification consuming an average of 18.10s per execution run. In non-deviating or low-risk cases, its output merely confirms upstream agent findings without altering the workflow decision path.
-- **Proposed Solution:** Prune 'screening_review_agent' from the standard baseline execution path, converting it into a dynamic, conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected.
-- **Expected Benefit:** Latency: 10.0% reduction | Tokens: 8.5% savings | Negligible risk when paired with strict upstream confidence thresholds.
 
 ### Agent Consolidation Opportunities (0 candidates)
 
@@ -99,13 +92,6 @@ No candidates identified for this dimension based on available trace evidence.
 | Cumulative Savings (Consolidation + Prompt Opt) | N/A (no consolidated prompt baseline) |
 
 No candidates identified for this dimension based on available trace evidence.
-
-### Tool Optimization Opportunities (1 candidates)
-#### [Tier 1] Deterministic Tool Result Caching for evidence_mapping_agent
-- **Target Agents:** `evidence_mapping_agent`
-- **Observed Problem:** Agent 'evidence_mapping_agent' repeatedly evaluates static compliance policies and reference definitions across runs without persistent local caching of deterministic lookup queries.
-- **Proposed Solution:** Implement an in-memory TTL memoization cache for static policy lookups and clause reference matches.
-- **Expected Benefit:** Latency: 12.0% reduction | Tokens: 10.0% savings | Zero risk for immutable policy reference lookups.
 
 ### Communication & Data-Handoff Optimization (10 candidates)
 
@@ -317,24 +303,14 @@ No candidates identified for this dimension based on available trace evidence.
 
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
-### Additional Optimization Opportunities (1 candidates)
-#### [Tier 2] Fast-Path Early Exit for Standard/Compliant Artifacts
-- **Target Agents:** `recruiter_summary_agent`, `resume_intake_agent`, `screening_review_agent`
-- **Observed Problem:** The target workflow runs through all 8 stages sequentially regardless of input complexity or deviation status. Standard contracts or clean inputs that pass initial verification without issues still execute all downstream remediation and deep analysis loops, consuming ~44.8s.
-- **Proposed Solution:** Introduce a fast-path conditional checkpoint: if zero high-risk ambiguities or compliance deviations are identified in early stages, bypass extensive multi-agent reconciliation and jump directly to final report generation.
-- **Expected Benefit:** Latency: 55.0% reduction | Tokens: 50.0% savings | Maintains strict rigor by restricting fast-path to zero-deviation verified cases.
-- **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
-
 ---
 
 ## 4. Prioritized Action Plan & Implementation Roadmap
 
-### Tier 1: Immediate Implementation (3 items)
-- **Conditional Pruning or Pass-Through Bypass of screening_review_agent**: High expected benefit with low implementation complexity and zero functional risk.
+### Tier 1: Immediate Implementation (1 items)
 - **Parallel Execution of qualification_agent and job_criteria_agent**: High expected benefit with low implementation complexity and zero functional risk.
-- **Deterministic Tool Result Caching for evidence_mapping_agent**: High expected benefit with low implementation complexity and zero functional risk.
 
-### Tier 2: Validated Enhancements (12 items)
+### Tier 2: Validated Enhancements (11 items)
 - **Route resume_intake_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for resume_intake_agent -> qualification_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for qualification_agent -> evidence_mapping_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
@@ -346,7 +322,6 @@ No candidates identified for this dimension based on available trace evidence.
 - **Compact Handoff Payload Schema for experience_assessment_agent -> screening_review_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for missing_evidence_agent -> screening_review_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for screening_review_agent -> recruiter_summary_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
-- **Fast-Path Early Exit for Standard/Compliant Artifacts**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 
 ### Phased Roadmap:
 
@@ -357,8 +332,6 @@ No candidates identified for this dimension based on available trace evidence.
 - Shadow test compact models for syntactic document intake nodes.
 - Validate and deploy consolidated sequential agent prompts (Dimension B) against baseline regression traces.
 - Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout.
-- Implement fast-path early exit for verified zero-deviation artifacts.
 
 #### Phase 3: Deep Architecture Refactoring (Tier 3) (3-4 sprints)
 - Migrate global state passing to strictly typed, delta-only Pydantic models.
-- Deploy centralized memory caching for immutable policy rules.

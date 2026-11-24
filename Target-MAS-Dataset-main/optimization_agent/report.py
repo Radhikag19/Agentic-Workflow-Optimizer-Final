@@ -3,7 +3,7 @@ Report Generator for Optimization Discovery Agent.
 
 Produces:
 1. Machine-readable JSON optimization report (`reports/<workflow_id>_optimization_report.json`)
-   containing exactly the 12 required sections.
+   containing exactly the 9 required sections.
 2. Human-readable Markdown summary report (`reports/<workflow_id>_optimization_report.md`).
 """
 
@@ -13,9 +13,9 @@ import datetime
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
-from optimization_agent.key_manager import GroqKeyManager, get_default_key_manager
+from optimization_agent.key_manager import get_default_key_manager
 from optimization_agent.state import OptimizationAgentState
 
 logger = logging.getLogger("optimization_agent.report")
@@ -38,7 +38,7 @@ def _resolve_reports_dir() -> Path:
 
 
 def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict[str, Any]:
-    """Compile the exact 12-section structured JSON report."""
+    """Compile the exact 9-section structured JSON report."""
     wf_id = state.get("workflow_id", "unknown_workflow")
     meta = state.get("workflow_metadata", {})
     overview = state.get("workflow_overview", {})
@@ -81,7 +81,7 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
     )
     executive_summary = {
         "overview": (
-            f"Autonomous optimization analysis for workflow '{wf_id}' across 8 mandatory dimensions discovered "
+            f"Autonomous optimization analysis for workflow '{wf_id}' across 5 optimization dimensions discovered "
             f"{len(candidates)} high-impact optimization opportunities ({tier_1_cnt} Tier 1 immediate recommendations, "
             f"{tier_2_cnt} Tier 2 validated candidates, {tier_3_cnt} Tier 3 caution candidates)."
         ),
@@ -127,8 +127,7 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
         },
     }
 
-    # 4 - 11: Dimension sections
-    agent_pruning_opportunities = by_dim.get("agent_pruning", [])
+    # 4 - 8: Active dimension sections (5 optimization dimensions)
     consolidation_analysis = state.get("dimension_analyses", {}).get("agent_consolidation", {})
     consolidation_cands = by_dim.get("agent_consolidation", [])
     default_summary = {
@@ -179,7 +178,6 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
         "rejected_optimizations": prompt_opt_analysis.get("rejected_optimizations", []),
         "candidates": prompt_cands,
     }
-    tool_optimization_opportunities = by_dim.get("tool_optimization", [])
     comm_analysis = (
         state.get("dimension_analyses", {}).get("communication_data_handoff")
         or state.get("dimension_analyses", {}).get("communication_optimization")
@@ -209,9 +207,8 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
         "handoffs_analyzed": comm_analysis.get("handoffs_analyzed", []),
         "candidates": comm_cands,
     }
-    additional_optimization_opportunities = by_dim.get("additional_optimization", [])
 
-    # 12. prioritized_action_plan
+    # 9. prioritized_action_plan
     prioritized_action_plan = {
         "tier_1_immediate_implementation": [
             {
@@ -266,7 +263,6 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
                     "Shadow test compact models for syntactic document intake nodes.",
                     "Validate and deploy consolidated sequential agent prompts (Dimension B) against baseline regression traces.",
                     "Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout.",
-                    "Implement fast-path early exit for verified zero-deviation artifacts.",
                 ],
                 "projected_timeframe": "2-3 sprints",
             },
@@ -274,7 +270,6 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
                 "phase": "Phase 3: Deep Architecture Refactoring (Tier 3)",
                 "actions": [
                     "Migrate global state passing to strictly typed, delta-only Pydantic models.",
-                    "Deploy centralized memory caching for immutable policy rules.",
                 ],
                 "projected_timeframe": "3-4 sprints",
             },
@@ -285,14 +280,11 @@ def generate_json_report(state: OptimizationAgentState, masked_key: str) -> Dict
         "report_metadata": report_metadata,
         "executive_summary": executive_summary,
         "workflow_baseline": workflow_baseline,
-        "agent_pruning_opportunities": agent_pruning_opportunities,
         "agent_consolidation_opportunities": agent_consolidation_opportunities,
         "workflow_parallelization_opportunities": workflow_parallelization_opportunities,
         "model_selection_recommendations": model_selection_recommendations,
         "prompt_optimization_opportunities": prompt_optimization_opportunities,
-        "tool_optimization_opportunities": tool_optimization_opportunities,
         "communication_optimization_opportunities": communication_optimization_opportunities,
-        "additional_optimization_opportunities": additional_optimization_opportunities,
         "prioritized_action_plan": prioritized_action_plan,
     }
 
@@ -353,14 +345,11 @@ def generate_markdown_report(report_json: Dict[str, Any]) -> str:
     ])
 
     dim_headers = [
-        ("Agent Pruning Opportunities", "agent_pruning_opportunities"),
         ("Agent Consolidation Opportunities", "agent_consolidation_opportunities"),
         ("Workflow Parallelization Opportunities", "workflow_parallelization_opportunities"),
         ("Model Selection Recommendations (Requires Validation)", "model_selection_recommendations"),
         ("Prompt Optimization Opportunities", "prompt_optimization_opportunities"),
-        ("Tool Optimization Opportunities", "tool_optimization_opportunities"),
         ("Communication & Data-Handoff Optimization", "communication_optimization_opportunities"),
-        ("Additional Optimization Opportunities", "additional_optimization_opportunities"),
     ]
 
     for title, key in dim_headers:

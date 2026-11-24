@@ -2,16 +2,16 @@
   "report_metadata": {
     "workflow_id": "contract_review",
     "workflow_name": "contract_review",
-    "timestamp": "2026-11-22T09:15:57.813858+00:00",
+    "timestamp": "2026-11-24T20:12:54.482680+00:00",
     "agent_version": "1.0.0",
     "orchestration_engine": "LangGraph StateGraph",
     "model_used": "openai/gpt-oss-120b",
-    "total_optimization_candidates_found": 13,
+    "total_optimization_candidates_found": 9,
     "evidence_source": "TraceProfiler MCP Evidence Server",
-    "report_generated_with_key": "GROQ_API_KEY_13 (masked: gsk_...Ujsn)"
+    "report_generated_with_key": "GROQ_API_KEY_14 (masked: gsk_...l7b1)"
   },
   "executive_summary": {
-    "overview": "Autonomous optimization analysis for workflow 'contract_review' across 8 mandatory dimensions discovered 13 high-impact optimization opportunities (4 Tier 1 immediate recommendations, 9 Tier 2 validated candidates, 0 Tier 3 caution candidates).",
+    "overview": "Autonomous optimization analysis for workflow 'contract_review' across 5 optimization dimensions discovered 9 high-impact optimization opportunities (1 Tier 1 immediate recommendations, 8 Tier 2 validated candidates, 0 Tier 3 caution candidates).",
     "key_findings": [
       "Sequential execution bottlenecks identify 1 validated parallelization opportunities.",
       "Prompt optimization inspected 10 prompts and compressed 0 eligible prompt(s), saving 0 static prompt tokens (0.0% additional reduction; validation required).",
@@ -51,82 +51,6 @@
       "calculation_basis": "trace_telemetry_estimates"
     }
   },
-  "agent_pruning_opportunities": [
-    {
-      "candidate_id": "PRUNE-CONTRACT_INDEPENDENT_REVIEW_AGENT",
-      "dimension": "agent_pruning",
-      "title": "Conditional Pruning or Pass-Through Bypass of contract_independent_review_agent",
-      "target_agents": [
-        "contract_independent_review_agent"
-      ],
-      "observed_problem": "Agent 'contract_independent_review_agent' (Senior Contract Compliance Reviewer) performs repetitive secondary verification consuming an average of 3.67s per execution run. In non-deviating or low-risk cases, its output merely confirms upstream agent findings without altering the workflow decision path.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_4_profiles",
-          "stage_6_latency",
-          "stage_9_comparison"
-        ],
-        "agent_mean_latency_seconds": 3.6738,
-        "observation_count": 30,
-        "role_definition": "Senior Contract Compliance Reviewer",
-        "declared_responsibilities": "Deduplicate findings, calibrate severity ratings, and highlight issues needing legal counsel."
-      },
-      "proposed_solution": "Prune 'contract_independent_review_agent' from the standard baseline execution path, converting it into a dynamic, conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected.",
-      "expected_benefit": {
-        "latency_savings_pct": 10.0,
-        "latency_savings_seconds": 3.6738,
-        "token_savings_pct": 8.5,
-        "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Immediate latency reduction on baseline path.",
-        "token_cost_tradeoff": "Direct reduction in prompt and completion tokens.",
-        "output_quality_risk": "Low (auditing maintained via conditional routing).",
-        "implementation_complexity": "Low"
-      },
-      "tier": "Tier 1",
-      "requires_validation": false,
-      "allocated_key": "GROQ_API_KEY_3 (masked: gsk_...maHn)",
-      "feasibility_tier": "Tier 1: High potential, low trade-off"
-    },
-    {
-      "candidate_id": "PRUNE-EVIDENCE_VALIDATION_AGENT",
-      "dimension": "agent_pruning",
-      "title": "Conditional Pruning or Pass-Through Bypass of evidence_validation_agent",
-      "target_agents": [
-        "evidence_validation_agent"
-      ],
-      "observed_problem": "Agent 'evidence_validation_agent' (Legal Evidence and Citation Validator) performs repetitive secondary verification consuming an average of 1.99s per execution run. In non-deviating or low-risk cases, its output merely confirms upstream agent findings without altering the workflow decision path.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_4_profiles",
-          "stage_6_latency",
-          "stage_9_comparison"
-        ],
-        "agent_mean_latency_seconds": 1.9872,
-        "observation_count": 30,
-        "role_definition": "Legal Evidence and Citation Validator",
-        "declared_responsibilities": "Verify all findings reference real clause IDs and that quoted excerpts support claims."
-      },
-      "proposed_solution": "Prune 'evidence_validation_agent' from the standard baseline execution path, converting it into a dynamic, conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected.",
-      "expected_benefit": {
-        "latency_savings_pct": 10.0,
-        "latency_savings_seconds": 1.9872,
-        "token_savings_pct": 8.5,
-        "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Immediate latency reduction on baseline path.",
-        "token_cost_tradeoff": "Direct reduction in prompt and completion tokens.",
-        "output_quality_risk": "Low (auditing maintained via conditional routing).",
-        "implementation_complexity": "Low"
-      },
-      "tier": "Tier 1",
-      "requires_validation": false,
-      "allocated_key": "GROQ_API_KEY_3 (masked: gsk_...maHn)",
-      "feasibility_tier": "Tier 1: High potential, low trade-off"
-    }
-  ],
   "agent_consolidation_opportunities": {
     "summary": {
       "original_agent_count": 10,
@@ -951,41 +875,6 @@
     ],
     "candidates": []
   },
-  "tool_optimization_opportunities": [
-    {
-      "candidate_id": "TOOL-CLAUSE_EXTRACTION_AGENT",
-      "dimension": "tool_optimization",
-      "title": "Deterministic Tool Result Caching for clause_extraction_agent",
-      "target_agents": [
-        "clause_extraction_agent"
-      ],
-      "observed_problem": "Agent 'clause_extraction_agent' repeatedly evaluates static compliance policies and reference definitions across runs without persistent local caching of deterministic lookup queries.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_4_profiles",
-          "stage_10_evidence"
-        ],
-        "declared_tasks_count": 1,
-        "role": "Contract Clause Extraction Specialist"
-      },
-      "proposed_solution": "Implement an in-memory TTL memoization cache for static policy lookups and clause reference matches.",
-      "expected_benefit": {
-        "latency_savings_pct": 12.0,
-        "token_savings_pct": 10.0,
-        "quality_impact": "Zero risk for immutable policy reference lookups."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Sub-millisecond retrieval for cached policy checks.",
-        "token_cost_tradeoff": "Saves repeated context fetching tokens.",
-        "output_quality_risk": "Low (invalidated when policy files update).",
-        "implementation_complexity": "Low"
-      },
-      "tier": "Tier 1",
-      "requires_validation": false,
-      "allocated_key": "GROQ_API_KEY_8 (masked: gsk_...AwPO)",
-      "feasibility_tier": "Tier 1: High potential, low trade-off"
-    }
-  ],
   "communication_optimization_opportunities": {
     "dimension": "communication_data_handoff",
     "summary": {
@@ -1441,14 +1330,14 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
+            "contract_version",
             "contract_title",
-            "document_id",
+            "policy_id",
             "policy_version",
+            "section_count",
             "contract_type",
             "document_complete",
-            "section_count",
-            "contract_version",
-            "policy_id"
+            "document_id"
           ],
           "fields_retained": [
             "document_id",
@@ -1883,8 +1772,8 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "contract_version",
-            "contract_type"
+            "contract_type",
+            "contract_version"
           ],
           "fields_retained": [
             "contract_type",
@@ -3216,8 +3105,8 @@
           ],
           "duplicate_fields": [],
           "uncertain_fields": [
-            "invalid_or_unsupported_findings",
-            "verified_finding_ids"
+            "verified_finding_ids",
+            "invalid_or_unsupported_findings"
           ],
           "fields_retained": [
             "contract_id",
@@ -3474,76 +3363,8 @@
       }
     ]
   },
-  "additional_optimization_opportunities": [
-    {
-      "candidate_id": "ADDITIONAL-EARLY-EXIT",
-      "dimension": "additional_optimization",
-      "title": "Fast-Path Early Exit for Standard/Compliant Artifacts",
-      "target_agents": [
-        "final_compliance_report_agent",
-        "policy_interpretation_agent",
-        "risk_ambiguity_agent"
-      ],
-      "observed_problem": "The target workflow runs through all 10 stages sequentially regardless of input complexity or deviation status. Standard contracts or clean inputs that pass initial verification without issues still execute all downstream remediation and deep analysis loops, consuming ~57.1s.",
-      "supporting_evidence": {
-        "mcp_stage_source": [
-          "stage_2_overview",
-          "stage_6_latency",
-          "stage_9_comparison"
-        ],
-        "total_agent_count": 10,
-        "workflow_mean_seconds": 57.1346
-      },
-      "proposed_solution": "Introduce a fast-path conditional checkpoint: if zero high-risk ambiguities or compliance deviations are identified in early stages, bypass extensive multi-agent reconciliation and jump directly to final report generation.",
-      "expected_benefit": {
-        "latency_savings_pct": 55.0,
-        "latency_savings_seconds": 31.42,
-        "token_savings_pct": 50.0,
-        "cost_savings_pct": 50.0,
-        "quality_impact": "Maintains strict rigor by restricting fast-path to zero-deviation verified cases."
-      },
-      "tradeoffs_and_risks": {
-        "latency_tradeoff": "Over 50% latency reduction on clean input distributions.",
-        "token_cost_tradeoff": "Cuts token spend in half for routine standard cases.",
-        "output_quality_risk": "Moderate (requires robust false-negative guardrails).",
-        "implementation_complexity": "Medium"
-      },
-      "tier": "Tier 2",
-      "requires_validation": true,
-      "allocated_key": "GROQ_API_KEY_10 (masked: gsk_...DBpq)",
-      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
-    }
-  ],
   "prioritized_action_plan": {
     "tier_1_immediate_implementation": [
-      {
-        "candidate_id": "PRUNE-CONTRACT_INDEPENDENT_REVIEW_AGENT",
-        "title": "Conditional Pruning or Pass-Through Bypass of contract_independent_review_agent",
-        "target_agents": [
-          "contract_independent_review_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 10.0,
-          "latency_savings_seconds": 3.6738,
-          "token_savings_pct": 8.5,
-          "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds."
-        },
-        "justification": "High expected benefit with low implementation complexity and zero functional risk."
-      },
-      {
-        "candidate_id": "PRUNE-EVIDENCE_VALIDATION_AGENT",
-        "title": "Conditional Pruning or Pass-Through Bypass of evidence_validation_agent",
-        "target_agents": [
-          "evidence_validation_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 10.0,
-          "latency_savings_seconds": 1.9872,
-          "token_savings_pct": 8.5,
-          "quality_impact": "Negligible risk when paired with strict upstream confidence thresholds."
-        },
-        "justification": "High expected benefit with low implementation complexity and zero functional risk."
-      },
       {
         "candidate_id": "PARALLEL-COMPLIANCE_DEVIATION_AGENT-RISK_AMBIGUITY_AGENT",
         "title": "Parallel Execution of compliance_deviation_agent and risk_ambiguity_agent",
@@ -3556,19 +3377,6 @@
           "latency_savings_seconds": 1.85,
           "critical_path_impact": "Cuts 1.85s directly from sequential critical path.",
           "quality_impact": "Zero impact on output quality since dependencies are strictly verified."
-        },
-        "justification": "High expected benefit with low implementation complexity and zero functional risk."
-      },
-      {
-        "candidate_id": "TOOL-CLAUSE_EXTRACTION_AGENT",
-        "title": "Deterministic Tool Result Caching for clause_extraction_agent",
-        "target_agents": [
-          "clause_extraction_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 12.0,
-          "token_savings_pct": 10.0,
-          "quality_impact": "Zero risk for immutable policy reference lookups."
         },
         "justification": "High expected benefit with low implementation complexity and zero functional risk."
       }
@@ -3763,23 +3571,6 @@
           "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
         },
         "validation_requirements": "Requires shadow execution testing against baseline traces to ensure full accuracy."
-      },
-      {
-        "candidate_id": "ADDITIONAL-EARLY-EXIT",
-        "title": "Fast-Path Early Exit for Standard/Compliant Artifacts",
-        "target_agents": [
-          "final_compliance_report_agent",
-          "policy_interpretation_agent",
-          "risk_ambiguity_agent"
-        ],
-        "expected_benefit": {
-          "latency_savings_pct": 55.0,
-          "latency_savings_seconds": 31.42,
-          "token_savings_pct": 50.0,
-          "cost_savings_pct": 50.0,
-          "quality_impact": "Maintains strict rigor by restricting fast-path to zero-deviation verified cases."
-        },
-        "validation_requirements": "Requires shadow execution testing against baseline traces to ensure full accuracy."
       }
     ],
     "tier_3_proceed_with_caution": [],
@@ -3797,16 +3588,14 @@
         "actions": [
           "Shadow test compact models for syntactic document intake nodes.",
           "Validate and deploy consolidated sequential agent prompts (Dimension B) against baseline regression traces.",
-          "Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout.",
-          "Implement fast-path early exit for verified zero-deviation artifacts."
+          "Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout."
         ],
         "projected_timeframe": "2-3 sprints"
       },
       {
         "phase": "Phase 3: Deep Architecture Refactoring (Tier 3)",
         "actions": [
-          "Migrate global state passing to strictly typed, delta-only Pydantic models.",
-          "Deploy centralized memory caching for immutable policy rules."
+          "Migrate global state passing to strictly typed, delta-only Pydantic models."
         ],
         "projected_timeframe": "3-4 sprints"
       }

@@ -12,12 +12,8 @@ import argparse
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import List, Optional
 
-from schemas.workflow_context_schema import (
-    ValidationError,
-    validate_workflow_context,
-)
 from ingestion.ast_parser import ASTParser, default_ast_parser
 from ingestion.workflow_analyzer import WorkflowAnalyzer
 from ingestion.context_generator import ContextGenerator

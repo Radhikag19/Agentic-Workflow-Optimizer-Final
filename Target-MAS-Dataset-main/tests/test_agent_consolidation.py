@@ -903,15 +903,18 @@ def test_18_compatibility_with_all_other_dimensions():
     rep_json = generate_json_report(state, "GROQ_API_KEY_13 (masked: gsk_***...test)")
 
     for dim in [
-        "agent_pruning", "agent_consolidation", "workflow_parallelization",
-        "model_selection", "prompt_optimization", "tool_optimization",
-        "communication_optimization", "additional_optimization",
+        "agent_consolidation",
+        "workflow_parallelization",
+        "model_selection",
+        "prompt_optimization",
+        "communication_optimization",
     ]:
         assert dim in state["dimension_analyses"]
 
     assert isinstance(rep_json["agent_consolidation_opportunities"], dict)
     assert rep_json["agent_consolidation_opportunities"]["summary"]["original_agent_count"] == 6
     assert rep_json["agent_consolidation_opportunities"]["summary"]["sequential_chains_identified"] >= 1
-    assert "agent_pruning_opportunities" in rep_json
     assert isinstance(rep_json["prompt_optimization_opportunities"], dict)
-    assert isinstance(rep_json["tool_optimization_opportunities"], list)
+    assert "agent_pruning_opportunities" not in rep_json
+    assert "tool_optimization_opportunities" not in rep_json
+    assert "additional_optimization_opportunities" not in rep_json

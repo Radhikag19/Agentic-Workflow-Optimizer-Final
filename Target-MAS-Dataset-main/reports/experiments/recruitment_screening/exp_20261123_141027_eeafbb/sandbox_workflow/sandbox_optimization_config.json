@@ -1,0 +1,75 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "exp_20261123_141027_eeafbb",
+  "consolidations": [],
+  "parallel_groups": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "agents": [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      "verification_reason": "Verified mutually independent in sandbox DAG: ['qualification_agent', 'job_criteria_agent']"
+    }
+  ],
+  "model_overrides": {
+    "resume_intake_agent": {
+      "previous_model": "openai/gpt-oss-120b",
+      "updated_model": "llama-3.3-70b-versatile",
+      "provider": "Groq",
+      "assigned_key_env": "GROQ_API_KEY_5",
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT"
+    }
+  },
+  "prompt_overrides": {},
+  "handoff_projections": {
+    "qualification_agent->experience_assessment_agent": {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "producer_agent": "qualification_agent",
+      "consumer_agent": "experience_assessment_agent",
+      "retained_fields": [
+        "candidate_id",
+        "technical_skills",
+        "experience_records"
+      ],
+      "excluded_fields": [
+        "education",
+        "certifications",
+        "projects",
+        "extraction_warnings"
+      ],
+      "consumer_required_fields": [
+        "candidate_id",
+        "experience_records"
+      ],
+      "typed_delta_projection": true
+    },
+    "experience_assessment_agent->screening_review_agent": {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "producer_agent": "experience_assessment_agent",
+      "consumer_agent": "screening_review_agent",
+      "retained_fields": [
+        "candidate_id",
+        "strengths",
+        "experience_gaps",
+        "evidence_references"
+      ],
+      "excluded_fields": [
+        "relevance_summary",
+        "transferable_skills"
+      ],
+      "consumer_required_fields": [
+        "candidate_id",
+        "strengths",
+        "experience_gaps"
+      ],
+      "typed_delta_projection": true
+    }
+  },
+  "applied_candidates": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ]
+}

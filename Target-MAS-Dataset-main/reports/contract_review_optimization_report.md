@@ -1,14 +1,14 @@
 # Autonomous Optimization Discovery Report: `contract_review`
 
 > **TraceProfiler Autonomous Optimization Discovery Agent**  
-> **Generated:** 2026-11-22T09:15:57.813858+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
-> **Key Allocation:** `GROQ_API_KEY_13 (masked: gsk_...Ujsn)`
+> **Generated:** 2026-11-24T20:12:54.482680+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
+> **Key Allocation:** `GROQ_API_KEY_14 (masked: gsk_...l7b1)`
 
 ---
 
 ## 1. Executive Summary
 
-Autonomous optimization analysis for workflow 'contract_review' across 8 mandatory dimensions discovered 13 high-impact optimization opportunities (4 Tier 1 immediate recommendations, 9 Tier 2 validated candidates, 0 Tier 3 caution candidates).
+Autonomous optimization analysis for workflow 'contract_review' across 5 optimization dimensions discovered 9 high-impact optimization opportunities (1 Tier 1 immediate recommendations, 8 Tier 2 validated candidates, 0 Tier 3 caution candidates).
 
 ### Key Findings:
 
@@ -40,19 +40,6 @@ Autonomous optimization analysis for workflow 'contract_review' across 8 mandato
 ---
 
 ## 3. Discovered Opportunities by Dimension
-
-### Agent Pruning Opportunities (2 candidates)
-#### [Tier 1] Conditional Pruning or Pass-Through Bypass of contract_independent_review_agent
-- **Target Agents:** `contract_independent_review_agent`
-- **Observed Problem:** Agent 'contract_independent_review_agent' (Senior Contract Compliance Reviewer) performs repetitive secondary verification consuming an average of 3.67s per execution run. In non-deviating or low-risk cases, its output merely confirms upstream agent findings without altering the workflow decision path.
-- **Proposed Solution:** Prune 'contract_independent_review_agent' from the standard baseline execution path, converting it into a dynamic, conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected.
-- **Expected Benefit:** Latency: 10.0% reduction | Tokens: 8.5% savings | Negligible risk when paired with strict upstream confidence thresholds.
-
-#### [Tier 1] Conditional Pruning or Pass-Through Bypass of evidence_validation_agent
-- **Target Agents:** `evidence_validation_agent`
-- **Observed Problem:** Agent 'evidence_validation_agent' (Legal Evidence and Citation Validator) performs repetitive secondary verification consuming an average of 1.99s per execution run. In non-deviating or low-risk cases, its output merely confirms upstream agent findings without altering the workflow decision path.
-- **Proposed Solution:** Prune 'evidence_validation_agent' from the standard baseline execution path, converting it into a dynamic, conditional auditor triggered only when upstream ambiguity or high-risk deviations are detected.
-- **Expected Benefit:** Latency: 10.0% reduction | Tokens: 8.5% savings | Negligible risk when paired with strict upstream confidence thresholds.
 
 ### Agent Consolidation Opportunities (0 candidates)
 
@@ -112,13 +99,6 @@ No candidates identified for this dimension based on available trace evidence.
 | Cumulative Savings (Consolidation + Prompt Opt) | N/A (no consolidated prompt baseline) |
 
 No candidates identified for this dimension based on available trace evidence.
-
-### Tool Optimization Opportunities (1 candidates)
-#### [Tier 1] Deterministic Tool Result Caching for clause_extraction_agent
-- **Target Agents:** `clause_extraction_agent`
-- **Observed Problem:** Agent 'clause_extraction_agent' repeatedly evaluates static compliance policies and reference definitions across runs without persistent local caching of deterministic lookup queries.
-- **Proposed Solution:** Implement an in-memory TTL memoization cache for static policy lookups and clause reference matches.
-- **Expected Benefit:** Latency: 12.0% reduction | Tokens: 10.0% savings | Zero risk for immutable policy reference lookups.
 
 ### Communication & Data-Handoff Optimization (6 candidates)
 
@@ -254,25 +234,14 @@ No candidates identified for this dimension based on available trace evidence.
 
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
-### Additional Optimization Opportunities (1 candidates)
-#### [Tier 2] Fast-Path Early Exit for Standard/Compliant Artifacts
-- **Target Agents:** `final_compliance_report_agent`, `policy_interpretation_agent`, `risk_ambiguity_agent`
-- **Observed Problem:** The target workflow runs through all 10 stages sequentially regardless of input complexity or deviation status. Standard contracts or clean inputs that pass initial verification without issues still execute all downstream remediation and deep analysis loops, consuming ~57.1s.
-- **Proposed Solution:** Introduce a fast-path conditional checkpoint: if zero high-risk ambiguities or compliance deviations are identified in early stages, bypass extensive multi-agent reconciliation and jump directly to final report generation.
-- **Expected Benefit:** Latency: 55.0% reduction | Tokens: 50.0% savings | Maintains strict rigor by restricting fast-path to zero-deviation verified cases.
-- **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
-
 ---
 
 ## 4. Prioritized Action Plan & Implementation Roadmap
 
-### Tier 1: Immediate Implementation (4 items)
-- **Conditional Pruning or Pass-Through Bypass of contract_independent_review_agent**: High expected benefit with low implementation complexity and zero functional risk.
-- **Conditional Pruning or Pass-Through Bypass of evidence_validation_agent**: High expected benefit with low implementation complexity and zero functional risk.
+### Tier 1: Immediate Implementation (1 items)
 - **Parallel Execution of compliance_deviation_agent and risk_ambiguity_agent**: High expected benefit with low implementation complexity and zero functional risk.
-- **Deterministic Tool Result Caching for clause_extraction_agent**: High expected benefit with low implementation complexity and zero functional risk.
 
-### Tier 2: Validated Enhancements (9 items)
+### Tier 2: Validated Enhancements (8 items)
 - **Route clause_extraction_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Route contract_intake_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for contract_intake_agent -> clause_extraction_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
@@ -281,7 +250,6 @@ No candidates identified for this dimension based on available trace evidence.
 - **Compact Handoff Payload Schema for clause_extraction_agent -> risk_ambiguity_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for clause_extraction_agent -> cross_clause_consistency_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for evidence_validation_agent -> contract_independent_review_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
-- **Fast-Path Early Exit for Standard/Compliant Artifacts**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 
 ### Phased Roadmap:
 
@@ -292,8 +260,6 @@ No candidates identified for this dimension based on available trace evidence.
 - Shadow test compact models for syntactic document intake nodes.
 - Validate and deploy consolidated sequential agent prompts (Dimension B) against baseline regression traces.
 - Validate compressed agent and unified prompts (Dimension E) against baseline traces prior to rollout.
-- Implement fast-path early exit for verified zero-deviation artifacts.
 
 #### Phase 3: Deep Architecture Refactoring (Tier 3) (3-4 sprints)
 - Migrate global state passing to strictly typed, delta-only Pydantic models.
-- Deploy centralized memory caching for immutable policy rules.

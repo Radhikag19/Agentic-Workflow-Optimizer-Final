@@ -1,0 +1,123 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "wp_20261124_183147_914004__dim_model_selection",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 2,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261124_183147_914004\\per_dimension\\model_selection\\runtime_traces",
+  "execution_status": "FAILED",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "unavailable"
+  ],
+  "cost_calculation_basis": "unavailable",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261124_183147_914004\\per_dimension\\model_selection\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261124_183147_914004\\per_dimension\\model_selection\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "FAILED",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 6.8711,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261124_183147_914004\\per_dimension\\model_selection\\sandbox_workflow",
+    "error_details": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}; Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+  },
+  "total_runs": 2,
+  "successful_runs": 0,
+  "failed_runs": 2,
+  "incomplete_runs": [
+    {
+      "run_id": "sb_20261124_183912_8f0ad6",
+      "run_index": 0,
+      "status": "FAILED",
+      "executed_agents": 1,
+      "expected_agents": 8,
+      "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+    },
+    {
+      "run_id": "sb_20261124_183926_789740",
+      "run_index": 1,
+      "status": "FAILED",
+      "executed_agents": 1,
+      "expected_agents": 8,
+      "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+    }
+  ],
+  "success_rate_pct": 0.0,
+  "mean_latency_seconds": null,
+  "median_latency_seconds": null,
+  "mean_agent_latency_seconds": null,
+  "mean_tokens": null,
+  "mean_prompt_tokens": null,
+  "mean_completion_tokens": null,
+  "mean_cost_usd_catalog_normalized": null,
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 0.0,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261124_183912_8f0ad6",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261124_183926_789740",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}"
+    }
+  ],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261124_183912_8f0ad6",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261031_162602_trace01",
+      "input_hash": "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+      "status": "FAILED",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 3.2389,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "schema_valid": false
+    },
+    {
+      "run_id": "sb_20261124_183926_789740",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261031_162635_trace02",
+      "input_hash": "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+      "status": "FAILED",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 3.1831,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "schema_valid": false
+    }
+  ],
+  "per_agent_metrics": {},
+  "input_dataset_hashes": [
+    "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+    "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e"
+  ]
+}

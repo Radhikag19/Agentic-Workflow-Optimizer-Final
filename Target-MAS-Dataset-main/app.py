@@ -28,11 +28,13 @@ if str(NESTED_DIR) not in sys.path:
 # Import Optimization Agent components
 try:
     from optimization_agent.agent import build_optimization_graph
+    from optimization_agent.review.ui import render_candidate_review_interface
     from optimization_agent.state import OptimizationAgentState
     AGENT_AVAILABLE = True
 except Exception as e:
     AGENT_AVAILABLE = False
     AGENT_IMPORT_ERROR = str(e)
+    render_candidate_review_interface = None
 
 # Workflow metadata definition
 WORKFLOW_METADATA = {
@@ -164,7 +166,7 @@ STAGE_SPECS = [
         "id": "discovery_analysis",
         "title": "Stage 11: Multi-Dimensional Optimization Discovery",
         "tool": "discovery_engine.discover_all_dimensions()",
-        "desc": "Applies programmatic graph reachability and heuristic algorithms across all 8 mandatory dimensions (Pruning, Parallelization, etc.).",
+        "desc": "Applies programmatic graph reachability and semantic discovery across the 5 active optimization dimensions (Consolidation, Parallelization, Model Selection, Prompt Optimization, Communication Handoff).",
     },
     {
         "id": "tradeoff_assessment",
@@ -176,7 +178,7 @@ STAGE_SPECS = [
         "id": "generate_report",
         "title": "Stage 13: Report Generation & Serialization",
         "tool": "report_generator.generate_reports()",
-        "desc": "Compiles the exact 12-section structured JSON and Markdown reports and writes them to reports/.",
+        "desc": "Compiles the exact 9-section structured JSON and Markdown reports and writes them to reports/.",
     },
 ]
 
@@ -284,9 +286,13 @@ st.markdown(
 )
 
 # Tabs
-tab_pipeline, tab_results, tab_inspect, tab_architecture = st.tabs(
-    ["🚀 Execution & Progress", "📋 Optimization Findings & Report", "🔍 Evidence Inspector", "🏛️ Architecture Blueprint"]
-)
+tab_pipeline, tab_results, tab_review, tab_inspect, tab_architecture = st.tabs([
+    "🚀 Execution & Progress",
+    "📋 Optimization Findings & Report",
+    "✅ Candidate Review & Approval",
+    "🔍 Evidence Inspector",
+    "🏛️ Architecture Blueprint",
+])
 
 # --- TAB 1: Live Execution & Progress ---
 with tab_pipeline:
@@ -294,7 +300,7 @@ with tab_pipeline:
     with col_ctrl1:
         st.markdown(
             f"Click the button below to trigger the **TraceProfiler Autonomous Optimization Discovery Agent** on `{selected_wf_key}`. "
-            "The system sequentially retrieves evidence via MCP tools, executes graph-theoretic discovery across 8 dimensions, assesses trade-offs, and compiles the final report."
+            "The system sequentially retrieves evidence via MCP tools, executes graph-theoretic discovery across 5 dimensions, assesses trade-offs, and compiles the final report."
         )
     with col_ctrl2:
         run_button = st.button("▶️ Execute Optimization Pipeline", type="primary", use_container_width=True)
@@ -400,7 +406,7 @@ with tab_results:
         # KPI Metrics
         m1, m2, m3, m4 = st.columns(4)
         with m1:
-            st.metric("Total Candidates", meta.get("total_optimization_candidates_found", "14"), "Across 8 Dimensions")
+            st.metric("Total Candidates", meta.get("total_optimization_candidates_found", "—"), "Across 5 Dimensions")
         with m2:
             st.metric("Latency Reduction", f"~{impact.get('estimated_critical_path_latency_reduction_pct', 35)}%", "Critical Path")
         with m3:
@@ -426,7 +432,7 @@ with tab_results:
         st.markdown("#### 🎯 Prioritized Action Plan by Feasibility Tiers")
 
         subtab_t1, subtab_t2, subtab_roadmap, subtab_all, subtab_raw = st.tabs(
-            ["🟢 Tier 1 (Immediate)", "🟡 Tier 2 (With Validation)", "🗺️ Implementation Roadmap", "📑 All 8 Dimensions", "📄 Full Markdown & JSON"]
+            ["🟢 Tier 1 (Immediate)", "🟡 Tier 2 (With Validation)", "🗺️ Implementation Roadmap", "📑 All 5 Dimensions", "📄 Full Markdown & JSON"]
         )
 
         with subtab_t1:
@@ -472,16 +478,13 @@ with tab_results:
                         st.markdown("---")
 
         with subtab_all:
-            st.markdown("##### Breakdown Across All 8 Optimization Dimensions:")
+            st.markdown("##### Breakdown Across All 5 Optimization Dimensions:")
             dimensions = [
-                ("agent_pruning_opportunities", "✂️ Dimension A: Agent Pruning"),
                 ("agent_consolidation_opportunities", "🔗 Dimension B: Agent Consolidation"),
                 ("workflow_parallelization_opportunities", "⚡ Dimension C: Workflow Parallelization"),
                 ("model_selection_recommendations", "🧠 Dimension D: Model Selection"),
                 ("prompt_optimization_opportunities", "📝 Dimension E: Prompt Optimization"),
-                ("tool_optimization_opportunities", "🛠️ Dimension F: Tool Optimization"),
                 ("communication_optimization_opportunities", "💬 Dimension G: Communication Handoff"),
-                ("additional_optimization_opportunities", "🔄 Dimension H: Additional (Caching & Routing)"),
             ]
             for dim_key, dim_title in dimensions:
                 dim_val = report_data.get(dim_key, [])
@@ -531,6 +534,27 @@ with tab_results:
                     md_text = "Markdown report file not found."
 
             st.json(report_data, expanded=False)
+
+# --- TAB: Candidate Review & Approval ---
+with tab_review:
+    st.markdown(f"### ✅ Candidate Review & Approval: `{selected_wf_key}`")
+    rev_json_path, _ = resolve_report_files(selected_wf_key)
+
+    if not rev_json_path:
+        st.warning(
+            f"No existing optimization report found for '{selected_wf_key}'. "
+            "Run the pipeline in the 'Execution & Progress' tab first!"
+        )
+    elif render_candidate_review_interface is None:
+        st.error(f"Candidate Review module unavailable: {AGENT_IMPORT_ERROR}")
+    else:
+        with open(rev_json_path, "r", encoding="utf-8") as rf:
+            rev_report_data = json.load(rf)
+        render_candidate_review_interface(
+            workflow_id=selected_wf_key,
+            report_data=rev_report_data,
+            reports_dir=rev_json_path.parent,
+        )
 
 # --- TAB 3: Evidence Inspector ---
 with tab_inspect:
@@ -604,7 +628,7 @@ with tab_architecture:
                 H --> I["Stages 1-10: Evidence Retrieval"]
                 I --> J["Stage 11: 8-Dimension Discovery"]
                 J --> K["Stage 12: Feasibility & Risk Tiers"]
-                K --> L["Stage 13: 12-Section Reports"]
+                K --> L["Stage 13: 9-Section Reports"]
             end
         ```
         """

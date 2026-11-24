@@ -3,7 +3,7 @@
     "workflow_id": "sales_lead_qualification",
     "workflow_name": "sales_lead_qualification",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.798531+00:00",
+    "generated_at": "2026-11-24T19:33:01.288842+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -1607,20 +1607,6 @@
       },
       {
         "source": "workflow:sales_lead_qualification",
-        "target": "agent:lead_scoring_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:sales_lead_qualification",
-        "target": "agent:opportunity_assessment_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:sales_lead_qualification",
         "target": "agent:next_action_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
@@ -1628,14 +1614,7 @@
       },
       {
         "source": "workflow:sales_lead_qualification",
-        "target": "agent:lead_fit_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:sales_lead_qualification",
-        "target": "agent:lead_enrichment_agent",
+        "target": "agent:final_review_agent_sales",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -1649,7 +1628,28 @@
       },
       {
         "source": "workflow:sales_lead_qualification",
-        "target": "agent:final_review_agent_sales",
+        "target": "agent:opportunity_assessment_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:sales_lead_qualification",
+        "target": "agent:lead_enrichment_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:sales_lead_qualification",
+        "target": "agent:lead_fit_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:sales_lead_qualification",
+        "target": "agent:lead_scoring_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"

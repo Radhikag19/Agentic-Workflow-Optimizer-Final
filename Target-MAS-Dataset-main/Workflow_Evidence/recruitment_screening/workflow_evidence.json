@@ -3,7 +3,7 @@
     "workflow_id": "recruitment_screening",
     "workflow_name": "recruitment_screening",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.743574+00:00",
+    "generated_at": "2026-11-24T19:33:01.262406+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -1890,35 +1890,7 @@
       },
       {
         "source": "workflow:recruitment_screening",
-        "target": "agent:recruiter_summary_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:recruitment_screening",
         "target": "agent:resume_intake_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:recruitment_screening",
-        "target": "agent:screening_review_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:recruitment_screening",
-        "target": "agent:experience_assessment_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:recruitment_screening",
-        "target": "agent:job_criteria_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -1932,14 +1904,42 @@
       },
       {
         "source": "workflow:recruitment_screening",
-        "target": "agent:qualification_agent",
+        "target": "agent:missing_evidence_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
       },
       {
         "source": "workflow:recruitment_screening",
-        "target": "agent:missing_evidence_agent",
+        "target": "agent:screening_review_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:recruitment_screening",
+        "target": "agent:recruiter_summary_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:recruitment_screening",
+        "target": "agent:job_criteria_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:recruitment_screening",
+        "target": "agent:experience_assessment_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:recruitment_screening",
+        "target": "agent:qualification_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"

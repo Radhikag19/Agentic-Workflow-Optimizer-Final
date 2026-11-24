@@ -3,7 +3,7 @@
     "workflow_id": "expense_reimbursement",
     "workflow_name": "expense_reimbursement",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.321227+00:00",
+    "generated_at": "2026-11-24T19:33:01.074329+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -1607,34 +1607,6 @@
       },
       {
         "source": "workflow:expense_reimbursement",
-        "target": "agent:category_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:expense_reimbursement",
-        "target": "agent:expense_review_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:expense_reimbursement",
-        "target": "agent:policy_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:expense_reimbursement",
-        "target": "agent:duplicate_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:expense_reimbursement",
         "target": "agent:normalize_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
@@ -1649,6 +1621,20 @@
       },
       {
         "source": "workflow:expense_reimbursement",
+        "target": "agent:exception_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:expense_reimbursement",
+        "target": "agent:policy_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:expense_reimbursement",
         "target": "agent:receipt_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
@@ -1656,7 +1642,21 @@
       },
       {
         "source": "workflow:expense_reimbursement",
-        "target": "agent:exception_agent",
+        "target": "agent:category_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:expense_reimbursement",
+        "target": "agent:expense_review_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:expense_reimbursement",
+        "target": "agent:duplicate_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -1935,7 +1935,7 @@
     ],
     "model_reconciliation": {
       "declared_model": "openai/gpt-oss-120b",
-      "statically_extracted_model": "category_agent",
+      "statically_extracted_model": "normalize_agent",
       "runtime_observed_model": "openai/gpt-oss-120b",
       "status": "matching",
       "notes": "Declared model 'openai/gpt-oss-120b' matches runtime enforced model 'openai/gpt-oss-120b'."

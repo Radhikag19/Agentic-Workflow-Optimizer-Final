@@ -110,12 +110,28 @@ def run_expense_workflow(
         agent_durations["category_agent"] = time.perf_counter() - t0
         category_text = str(category_output.raw if hasattr(category_output, "raw") else category_output)
 
-        # Extract assigned category for policy lookup
+        # Extract assigned category cleanly from JSON response before substring fallback
         assigned_category = claim_input.get("category", "Meals & Entertainment")
-        for cat in ["Travel", "Meals & Entertainment", "Accommodation", "Transport", "Office Supplies", "Software & Cloud"]:
-            if cat.lower() in category_text.lower():
-                assigned_category = cat
-                break
+        allowed_cats = ["Travel", "Meals & Entertainment", "Accommodation", "Transport", "Office Supplies", "Software & Cloud"]
+        parsed_cat = None
+        try:
+            clean_cat_json = category_text.strip()
+            if clean_cat_json.startswith("```"):
+                clean_cat_json = clean_cat_json.split("```")[1]
+                if clean_cat_json.lstrip().startswith("json"):
+                    clean_cat_json = clean_cat_json.lstrip()[4:]
+            parsed_obj = json.loads(clean_cat_json.strip())
+            if isinstance(parsed_obj, dict) and isinstance(parsed_obj.get("category"), str):
+                parsed_cat = parsed_obj["category"].strip()
+        except Exception:
+            parsed_cat = None
+        if parsed_cat and parsed_cat in allowed_cats:
+            assigned_category = parsed_cat
+        else:
+            for cat in allowed_cats:
+                if cat.lower() in category_text.lower():
+                    assigned_category = cat
+                    break
 
         # 4. Amount Agent (Deterministic arithmetic + LLM verification)
         t0 = time.perf_counter()

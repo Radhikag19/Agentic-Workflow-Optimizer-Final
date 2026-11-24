@@ -7,7 +7,7 @@ and evidence provenance of generated workflow_evidence.json files.
 
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Dict, List, Tuple
 
 from evidence_aggregation.schema import WorkflowEvidenceDocument
 

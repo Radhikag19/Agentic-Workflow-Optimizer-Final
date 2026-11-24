@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import json
 import re
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 from optimization_agent.consolidation.groq_client import GroqConsolidationClient
 from optimization_agent.consolidation.prompt_combiner import _extract_schema_field_names

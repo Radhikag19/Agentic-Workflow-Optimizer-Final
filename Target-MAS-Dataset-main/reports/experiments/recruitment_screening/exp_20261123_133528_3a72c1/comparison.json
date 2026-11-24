@@ -1,0 +1,30 @@
+{
+  "latency": {
+    "baseline_mean_seconds": 44.7989,
+    "optimized_mean_seconds": 11.8314,
+    "improvement_pct": 73.59,
+    "note": "Measured wall-clock timing reflects simulated replay latency in offline mode rather than live API latency."
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": 16909.5,
+    "optimized_mean_tokens": 16633.0,
+    "improvement_pct": 1.64
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": 0.011292,
+    "baseline_catalog_normalized_usd": 0.005496,
+    "optimized_catalog_normalized_usd": 0.005453,
+    "improvement_pct_catalog_normalized": 0.78
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": false,
+    "semantic_quality_evaluation": "unavailable",
+    "note": "Structured schema validity verified where Pydantic output models exist; automated semantic output-quality scoring is unavailable."
+  },
+  "execution_success_rate": {
+    "baseline_pct": 100.0,
+    "optimized_pct": 100.0,
+    "delta_pct_points": 0.0
+  }
+}

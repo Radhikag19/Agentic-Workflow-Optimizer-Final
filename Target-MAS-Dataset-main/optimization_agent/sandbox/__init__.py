@@ -1,0 +1,117 @@
+"""
+Sandbox Optimization Execution Engine Package.
+"""
+
+from optimization_agent.sandbox.candidate_router import (
+    DIMENSION_EXECUTION_ORDER,
+    EXECUTOR_REGISTRY,
+    CandidateExecutionRouter,
+    detect_conflicts,
+)
+from optimization_agent.sandbox.evaluation import (
+    RAGAS_METRICS_ORDER,
+    QualityAcceptanceCriteria,
+    build_ragas_samples,
+    check_ragas_environment,
+    classify_final_experiment_assessment,
+    compute_canonical_input_hash,
+    evaluate_agent_output_quality,
+    evaluate_dimension_result,
+    evaluate_experiment,
+    evaluate_quality_acceptance,
+    evaluate_with_ragas,
+    evaluate_workflow_quality,
+    extract_record_identifiers,
+    load_historical_baseline_evidence,
+    match_baseline_traces_to_inputs,
+    select_best_workflows_pareto,
+)
+from optimization_agent.sandbox.experiment import (
+    SandboxExperimentRunner,
+    build_dimension_scoped_approval,
+    normalize_selected_dimensions,
+)
+from optimization_agent.sandbox.langgraph_nodes import (
+    build_optimization_graph_with_sandbox_execution,
+    candidate_router_execution_node,
+    sandbox_evaluation_node,
+    sandbox_experiment_report_node,
+    sandbox_historical_baseline_loading_node,
+    sandbox_optimized_execution_node,
+    sandbox_performance_comparison_node,
+    sandbox_preparation_node,
+    sandbox_quality_evaluation_node,
+    sandbox_runtime_execution_node,
+    sandbox_validation_node,
+)
+from optimization_agent.sandbox.manager import (
+    SandboxEnvironment,
+    SandboxManager,
+    assert_path_inside_sandbox,
+    compute_directory_hashes,
+    load_approved_scope,
+    resolve_experiments_base_dir,
+    resolve_original_workflow_dir,
+)
+from optimization_agent.sandbox.reports import (
+    generate_ablation_suite_reports,
+    generate_experiment_reports,
+    generate_two_phase_study_reports,
+)
+from optimization_agent.sandbox.runtime import (
+    LocalSubprocessExecutionManager,
+    SandboxWorkflowRunner,
+    build_subprocess_env,
+)
+from optimization_agent.sandbox.validation import validate_sandbox
+
+__all__ = [
+    "DIMENSION_EXECUTION_ORDER",
+    "EXECUTOR_REGISTRY",
+    "RAGAS_METRICS_ORDER",
+    "CandidateExecutionRouter",
+    "LocalSubprocessExecutionManager",
+    "QualityAcceptanceCriteria",
+    "SandboxEnvironment",
+    "SandboxExperimentRunner",
+    "SandboxManager",
+    "SandboxWorkflowRunner",
+    "assert_path_inside_sandbox",
+    "build_dimension_scoped_approval",
+    "build_optimization_graph_with_sandbox_execution",
+    "build_ragas_samples",
+    "build_subprocess_env",
+    "candidate_router_execution_node",
+    "check_ragas_environment",
+    "classify_final_experiment_assessment",
+    "compute_canonical_input_hash",
+    "compute_directory_hashes",
+    "detect_conflicts",
+    "evaluate_agent_output_quality",
+    "evaluate_dimension_result",
+    "evaluate_experiment",
+    "evaluate_quality_acceptance",
+    "evaluate_with_ragas",
+    "evaluate_workflow_quality",
+    "extract_record_identifiers",
+    "generate_ablation_suite_reports",
+    "generate_experiment_reports",
+    "generate_two_phase_study_reports",
+    "load_approved_scope",
+    "load_historical_baseline_evidence",
+    "match_baseline_traces_to_inputs",
+    "normalize_selected_dimensions",
+    "resolve_experiments_base_dir",
+    "resolve_original_workflow_dir",
+    "sandbox_evaluation_node",
+    "sandbox_experiment_report_node",
+    "sandbox_historical_baseline_loading_node",
+    "sandbox_optimized_execution_node",
+    "sandbox_performance_comparison_node",
+    "sandbox_preparation_node",
+    "sandbox_quality_evaluation_node",
+    "sandbox_runtime_execution_node",
+    "sandbox_validation_node",
+    "select_best_workflows_pareto",
+    "validate_sandbox",
+]

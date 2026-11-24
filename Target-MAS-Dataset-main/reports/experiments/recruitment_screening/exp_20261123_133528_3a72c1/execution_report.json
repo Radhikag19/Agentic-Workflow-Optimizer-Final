@@ -1,0 +1,337 @@
+{
+  "experiment_id": "exp_20261123_133528_3a72c1",
+  "workflow_id": "recruitment_screening",
+  "generated_at": "2026-11-23T13:35:52.247440+00:00",
+  "original_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening",
+  "sandbox_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow",
+  "approved_candidate_ids": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "applied_candidate_ids": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "failed_candidate_ids": [],
+  "conflicting_candidate_ids": [],
+  "candidates_requiring_manual_intervention": [],
+  "conflicts": [],
+  "modified_files": [
+    "intake_agent.py",
+    "sandbox_optimization_config.json",
+    "workflow.json",
+    "workflow.py"
+  ],
+  "modifications": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "dimension": "workflow_parallelization",
+      "status": "applied",
+      "target_agents": [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured concurrent scatter-gather group ['qualification_agent', 'job_criteria_agent'] in sandbox workflow after verifying strict DAG & I/O independence.",
+      "details": {
+        "parallel_group": [
+          "qualification_agent",
+          "job_criteria_agent"
+        ],
+        "dependency_verification": "Verified mutually independent in sandbox DAG: ['qualification_agent', 'job_criteria_agent']"
+      },
+      "error": null
+    },
+    {
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
+      "dimension": "model_selection",
+      "status": "applied",
+      "target_agents": [
+        "resume_intake_agent"
+      ],
+      "modified_files": [
+        "intake_agent.py",
+        "workflow.json",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Updated model configuration for ['resume_intake_agent'] to 'llama-3.3-70b-versatile' (provider=Groq) in sandbox while preserving API key bindings.",
+      "details": {
+        "model_transitions": {
+          "resume_intake_agent": {
+            "previous_model": "openai/gpt-oss-120b",
+            "updated_model": "llama-3.3-70b-versatile"
+          }
+        },
+        "provider": "Groq"
+      },
+      "error": null
+    },
+    {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "dimension": "communication_data_handoff",
+      "status": "applied",
+      "target_agents": [
+        "qualification_agent",
+        "experience_assessment_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured compact handoff projection on 'qualification_agent->experience_assessment_agent' retaining 3 field(s) and excluding ['education', 'certifications', 'projects', 'extraction_warnings'].",
+      "details": {
+        "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+        "producer_agent": "qualification_agent",
+        "consumer_agent": "experience_assessment_agent",
+        "retained_fields": [
+          "candidate_id",
+          "technical_skills",
+          "experience_records"
+        ],
+        "excluded_fields": [
+          "education",
+          "certifications",
+          "projects",
+          "extraction_warnings"
+        ],
+        "consumer_required_fields": [
+          "candidate_id",
+          "experience_records"
+        ],
+        "typed_delta_projection": true
+      },
+      "error": null
+    },
+    {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "dimension": "communication_data_handoff",
+      "status": "applied",
+      "target_agents": [
+        "experience_assessment_agent",
+        "screening_review_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured compact handoff projection on 'experience_assessment_agent->screening_review_agent' retaining 4 field(s) and excluding ['relevance_summary', 'transferable_skills'].",
+      "details": {
+        "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+        "producer_agent": "experience_assessment_agent",
+        "consumer_agent": "screening_review_agent",
+        "retained_fields": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps",
+          "evidence_references"
+        ],
+        "excluded_fields": [
+          "relevance_summary",
+          "transferable_skills"
+        ],
+        "consumer_required_fields": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps"
+        ],
+        "typed_delta_projection": true
+      },
+      "error": null
+    }
+  ],
+  "candidate_outcomes": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "dimension": "workflow_parallelization",
+      "modification_status": "applied",
+      "requires_validation": false,
+      "outcome": "succeeded_in_sandbox"
+    },
+    {
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
+      "dimension": "model_selection",
+      "modification_status": "applied",
+      "requires_validation": true,
+      "outcome": "applied_requires_further_validation"
+    },
+    {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "dimension": "communication_data_handoff",
+      "modification_status": "applied",
+      "requires_validation": true,
+      "outcome": "applied_requires_further_validation"
+    },
+    {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "dimension": "communication_data_handoff",
+      "modification_status": "applied",
+      "requires_validation": true,
+      "outcome": "applied_requires_further_validation"
+    }
+  ],
+  "validation_results": {
+    "validation_passed": true,
+    "original_workflow_integrity": {
+      "original_unchanged": true,
+      "checked_file_count": 12,
+      "changed_files": [],
+      "missing_files": [],
+      "added_files": []
+    },
+    "python_syntax_checks": {
+      "passed": true,
+      "files_checked": 10,
+      "errors": []
+    },
+    "import_checks": {
+      "passed": true,
+      "errors": []
+    },
+    "configuration_validation": {
+      "passed": true,
+      "errors": []
+    },
+    "reference_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "dependency_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "modification_verification": {
+      "passed": true,
+      "errors": []
+    },
+    "secret_hygiene": {
+      "passed": true,
+      "leaked_files": []
+    }
+  },
+  "runtime_execution_results": {
+    "execution_passed": true,
+    "execution_modes": [
+      "offline_trace_replay_sandbox"
+    ],
+    "runs_executed": 2,
+    "successful_runs": 2,
+    "failed_runs": 0,
+    "concurrent_waves_executed": [
+      [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      [
+        "qualification_agent",
+        "job_criteria_agent"
+      ]
+    ],
+    "trace_files": [
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\runtime_traces\\sb_20261123_133528_1330fd.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\runtime_traces\\sb_20261123_133540_1120eb.json"
+    ],
+    "schema_validation_summary": {
+      "all_schemas_valid": false,
+      "failures": [
+        {
+          "agent_id": "recruiter_summary_agent",
+          "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  "
+        },
+        {
+          "agent_id": "recruiter_summary_agent",
+          "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  "
+        }
+      ]
+    },
+    "errors": []
+  },
+  "baseline_metrics": {
+    "workflow_id": "recruitment_screening",
+    "source": "TraceProfiler MCP Evidence Server",
+    "total_runs": 30,
+    "successful_runs": 30,
+    "success_rate_pct": 100.0,
+    "mean_latency_seconds": 44.7989,
+    "median_latency_seconds": 30.604,
+    "mean_tokens": 16909.5,
+    "mean_prompt_tokens": 10333.7,
+    "mean_completion_tokens": 6575.8,
+    "mean_cost_usd_telemetry": 0.011292,
+    "mean_cost_usd_catalog_normalized": 0.005496,
+    "cost_calculation_basis": "trace_telemetry_estimates"
+  },
+  "optimized_metrics": {
+    "workflow_id": "recruitment_screening",
+    "experiment_id": "exp_20261123_133528_3a72c1",
+    "execution_modes": [
+      "offline_trace_replay_sandbox"
+    ],
+    "total_runs": 2,
+    "successful_runs": 2,
+    "success_rate_pct": 100.0,
+    "mean_latency_seconds": 11.8314,
+    "mean_tokens": 16633.0,
+    "mean_prompt_tokens": 10057.0,
+    "mean_completion_tokens": 6576.0,
+    "mean_cost_usd_catalog_normalized": 0.005453,
+    "schema_validation_passed": false,
+    "schema_validation_failures": [
+      {
+        "agent_id": "recruiter_summary_agent",
+        "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  "
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  "
+      }
+    ],
+    "semantic_quality_evaluation": "unavailable"
+  },
+  "before_and_after_comparison": {
+    "latency": {
+      "baseline_mean_seconds": 44.7989,
+      "optimized_mean_seconds": 11.8314,
+      "improvement_pct": 73.59,
+      "note": "Measured wall-clock timing reflects simulated replay latency in offline mode rather than live API latency."
+    },
+    "token_consumption": {
+      "baseline_mean_tokens": 16909.5,
+      "optimized_mean_tokens": 16633.0,
+      "improvement_pct": 1.64
+    },
+    "execution_cost": {
+      "baseline_telemetry_usd": 0.011292,
+      "baseline_catalog_normalized_usd": 0.005496,
+      "optimized_catalog_normalized_usd": 0.005453,
+      "improvement_pct_catalog_normalized": 0.78
+    },
+    "output_quality": {
+      "baseline_quality": "unavailable",
+      "optimized_schema_valid": false,
+      "semantic_quality_evaluation": "unavailable",
+      "note": "Structured schema validity verified where Pydantic output models exist; automated semantic output-quality scoring is unavailable."
+    },
+    "execution_success_rate": {
+      "baseline_pct": 100.0,
+      "optimized_pct": 100.0,
+      "delta_pct_points": 0.0
+    }
+  },
+  "outcome_flags": {
+    "modification_applied": true,
+    "validation_passed": true,
+    "execution_passed": true,
+    "evaluation_passed": false
+  },
+  "overall_experiment_status": "completed"
+}

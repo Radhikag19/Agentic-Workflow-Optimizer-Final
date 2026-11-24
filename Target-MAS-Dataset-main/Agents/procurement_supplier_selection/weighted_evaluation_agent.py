@@ -15,7 +15,8 @@ def deterministic_weighted_scoring(
     cost_data: list,
     delivery_data: list,
     risk_data: dict,
-    profile_data: dict
+    profile_data: dict,
+    contract_data: dict | None = None,
 ) -> list:
     """Computes deterministic multi-criteria score (0-100) per supplier."""
     crit_file = DATA_DIR / "procurement_supplier_selection" / "evaluation_criteria.json"
@@ -46,8 +47,25 @@ def deterministic_weighted_scoring(
         defect_rate = float(r.get("quality_defect_rate", 0.02))
         risk_s = max(0.0, round(100.0 - (fail_rate * 300.0) - (defect_rate * 400.0), 2))
 
-        # Contract terms score: baseline 85, 95 if Net 45
-        contract_s = 90.0
+        # Contract terms score evaluated from supplier contract record
+        c_info = (contract_data or {}).get(sup_id, {})
+        if isinstance(c_info, dict) and c_info:
+            pay_terms = str(c_info.get("payment_terms") or "").lower()
+            if "net 60" in pay_terms or "net 45" in pay_terms:
+                contract_s = 95.0
+            elif "net 30" in pay_terms:
+                contract_s = 85.0
+            elif any(k in pay_terms for k in ("prepay", "advance", "cod", "receipt")):
+                contract_s = 70.0
+            else:
+                contract_s = 80.0
+            if c_info.get("delay_penalty_clause") or c_info.get("late_delivery_penalty"):
+                contract_s += 5.0
+            if c_info.get("restrictive_clauses") or c_info.get("unfavorable_terms"):
+                contract_s -= 10.0
+            contract_s = max(0.0, min(100.0, round(contract_s, 2)))
+        else:
+            contract_s = 85.0
 
         # Capability score: 90 if ISO certified
         prof = profile_data.get(sup_id, {})

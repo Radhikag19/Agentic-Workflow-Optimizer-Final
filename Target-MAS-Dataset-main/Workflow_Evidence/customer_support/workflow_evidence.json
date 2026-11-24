@@ -3,7 +3,7 @@
     "workflow_id": "customer_support",
     "workflow_name": "customer_support",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.251008+00:00",
+    "generated_at": "2026-11-24T19:33:01.051213+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -1426,7 +1426,14 @@
       },
       {
         "source": "workflow:customer_support",
-        "target": "agent:resolution_agent",
+        "target": "agent:response_drafting_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:customer_support",
+        "target": "agent:resolution_verification_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -1447,21 +1454,14 @@
       },
       {
         "source": "workflow:customer_support",
+        "target": "agent:resolution_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:customer_support",
         "target": "agent:ticket_classification_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:customer_support",
-        "target": "agent:response_drafting_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:customer_support",
-        "target": "agent:resolution_verification_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"

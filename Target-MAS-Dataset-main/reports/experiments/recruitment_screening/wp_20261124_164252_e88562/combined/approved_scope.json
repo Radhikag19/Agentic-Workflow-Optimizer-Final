@@ -1,0 +1,790 @@
+{
+  "workflow_id": "recruitment_screening",
+  "selected_dimensions": [
+    "workflow_parallelization",
+    "model_selection",
+    "communication_data_handoff"
+  ],
+  "approved_candidate_ids": [
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "excluded_candidate_ids": [
+    "HANDOFF-RESUME_INTAKE_AGENT-TO-QUALIFICATION_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EVIDENCE_MAPPING_AGENT",
+    "HANDOFF-EVIDENCE_MAPPING_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-RESUME_INTAKE_AGENT-TO-MISSING_EVIDENCE_AGENT",
+    "HANDOFF-EVIDENCE_MAPPING_AGENT-TO-MISSING_EVIDENCE_AGENT",
+    "HANDOFF-EVIDENCE_MAPPING_AGENT-TO-SCREENING_REVIEW_AGENT",
+    "HANDOFF-MISSING_EVIDENCE_AGENT-TO-SCREENING_REVIEW_AGENT",
+    "HANDOFF-SCREENING_REVIEW_AGENT-TO-RECRUITER_SUMMARY_AGENT"
+  ],
+  "approved_candidates": [
+    {
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
+      "dimension": "model_selection",
+      "title": "Route resume_intake_agent to Smaller/Faster Model (requires validation)",
+      "target_agents": [
+        "resume_intake_agent"
+      ],
+      "observed_problem": "Agent 'resume_intake_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (2.52s) and compute overhead for straightforward parsing tasks.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_2_overview",
+          "stage_4_profiles",
+          "stage_7_tokens"
+        ],
+        "current_model": "openai/gpt-oss-120b",
+        "proposed_candidate_models": [
+          "llama-3.3-70b-versatile",
+          "llama-3.1-8b-instant"
+        ],
+        "task_complexity": "Low-to-Moderate (Structured entity extraction, JSON mapping)",
+        "mean_tokens_per_call": 1186.8
+      },
+      "proposed_solution": "Switch 'resume_intake_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.",
+      "expected_benefit": {
+        "latency_savings_pct": 40.0,
+        "latency_savings_seconds": 1.01,
+        "cost_savings_pct": 65.0,
+        "quality_impact": "High accuracy on standard schema parsing; edge case validation required."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Substantial speedup on first-stage document intake.",
+        "token_cost_tradeoff": "Over 60% compute cost reduction for this node.",
+        "output_quality_risk": "Moderate (smaller models may miss subtle domain-specific abbreviations).",
+        "implementation_complexity": "Low"
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_6 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for qualification_agent -> experience_assessment_agent",
+      "target_agents": [
+        "qualification_agent",
+        "experience_assessment_agent"
+      ],
+      "observed_problem": "Verified handoff 'qualification_agent -> experience_assessment_agent' transmits 7 field(s) (['candidate_id', 'technical_skills', 'education', 'certifications', 'experience_records', 'projects', 'extraction_warnings']), of which 4 (['education', 'certifications', 'projects', 'extraction_warnings']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 370 tokens (1107 bytes, runtime_payload_observed); compact projection reduces payload to 265 tokens (810 bytes, -105 tokens / 28.38%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "qualification_agent",
+        "consumer_agent": "experience_assessment_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "candidate_id",
+          "technical_skills",
+          "education",
+          "certifications",
+          "experience_records",
+          "projects",
+          "extraction_warnings"
+        ],
+        "consumer_required_fields": [
+          "candidate_id",
+          "experience_records"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "certifications",
+          "education",
+          "extraction_warnings",
+          "projects"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [
+          "technical_skills"
+        ],
+        "fields_retained": [
+          "candidate_id",
+          "technical_skills",
+          "experience_records"
+        ],
+        "fields_excluded": [
+          "education",
+          "certifications",
+          "projects",
+          "extraction_warnings"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "candidate_id": "Explicit input field placeholder in consumer prompt",
+          "technical_skills": "Conservatively retained (uncertain necessity).",
+          "education": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "certifications": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "experience_records": "Explicitly listed in consumer declared_inputs",
+          "projects": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "extraction_warnings": "Not in consumer declared_inputs and unreferenced in consumer task/prompt."
+        },
+        "original_payload_tokens": 370,
+        "proposed_payload_tokens": 265,
+        "tokens_saved": 105,
+        "savings_percentage": 28.38,
+        "original_payload_bytes": 1107,
+        "proposed_payload_bytes": 810,
+        "bytes_saved": 297,
+        "byte_savings_percentage": 26.83,
+        "observation_count": 30,
+        "repeated_across_handoffs": [
+          "candidate_id",
+          "technical_skills",
+          "education",
+          "certifications",
+          "experience_records",
+          "projects",
+          "extraction_warnings"
+        ],
+        "tokenization_method": "conservative_bpe_heuristic",
+        "is_exact_tokenizer": false,
+        "measurement_type": "estimated_heuristic_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "candidate_id": "CAND-001",
+          "technical_skills": [
+            {
+              "category": "technical_skill",
+              "item_name": "HTML",
+              "proficiency_or_duration": null,
+              "supporting_excerpt": "HTML",
+              "evidence_id": "EVD-001-SKL"
+            },
+            {
+              "category": "technical_skill",
+              "item_name": "CSS",
+              "proficiency_or_duration": null,
+              "supporting_excerpt": "CSS",
+              "evidence_id": "EVD-001-SKL"
+            },
+            {
+              "category": "technical_skill",
+              "item_name": "WordPress",
+              "proficiency_or_duration": null,
+              "supporting_excerpt": "WordPress",
+              "evidence_id": "EVD-001-SKL"
+            }
+          ],
+          "education": [
+            {
+              "category": "education",
+              "item_name": "B.S. in Computer Science",
+              "proficiency_or_duration": "Graduated 2014",
+              "supporting_excerpt": "B.S. in Computer Science, State University, 2014",
+              "evidence_id": "EVD-001-EDU"
+            }
+          ],
+          "certifications": [],
+          "experience_records": [
+            {
+              "category": "experience",
+              "item_name": "Software Engineer at Apex Dynamics Corp",
+              "proficiency_or_duration": "2015-01 - 2024-12",
+              "supporting_excerpt": "Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.",
+              "evidence_id": "EVD-001-EXP1"
+            }
+          ],
+          "projects": [],
+          "extraction_warnings": []
+        },
+        "proposed_compact_payload_sample": {
+          "candidate_id": "CAND-001",
+          "technical_skills": [
+            {
+              "category": "technical_skill",
+              "item_name": "HTML",
+              "proficiency_or_duration": null,
+              "supporting_excerpt": "HTML",
+              "evidence_id": "EVD-001-SKL"
+            },
+            {
+              "category": "technical_skill",
+              "item_name": "CSS",
+              "proficiency_or_duration": null,
+              "supporting_excerpt": "CSS",
+              "evidence_id": "EVD-001-SKL"
+            },
+            {
+              "category": "technical_skill",
+              "item_name": "WordPress",
+              "proficiency_or_duration": null,
+              "supporting_excerpt": "WordPress",
+              "evidence_id": "EVD-001-SKL"
+            }
+          ],
+          "experience_records": [
+            {
+              "category": "experience",
+              "item_name": "Software Engineer at Apex Dynamics Corp",
+              "proficiency_or_duration": "2015-01 - 2024-12",
+              "supporting_excerpt": "Designed and deployed scalable services using HTML, CSS, WordPress. Improved query latency by 35%.",
+              "evidence_id": "EVD-001-EXP1"
+            }
+          ]
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 370,
+            "original_payload_bytes": 1107,
+            "transmitted_field_count": 7,
+            "is_large_payload": true,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [
+              "technical_skills"
+            ],
+            "repeated_across_handoffs": [
+              "candidate_id",
+              "technical_skills",
+              "education",
+              "certifications",
+              "experience_records",
+              "projects",
+              "extraction_warnings"
+            ],
+            "repeated_metadata_fields": [],
+            "repeated_static_fields": [
+              "education",
+              "experience_records",
+              "technical_skills"
+            ],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "candidate_id": {
+                "bytes": 28,
+                "tokens": 13,
+                "type": "str",
+                "handoff_frequency": 10
+              },
+              "technical_skills": {
+                "bytes": 471,
+                "tokens": 160,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "education": {
+                "bytes": 232,
+                "tokens": 82,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "certifications": {
+                "bytes": 22,
+                "tokens": 10,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "experience_records": {
+                "bytes": 311,
+                "tokens": 95,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "projects": {
+                "bytes": 16,
+                "tokens": 10,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "extraction_warnings": {
+                "bytes": 27,
+                "tokens": 10,
+                "type": "list",
+                "handoff_frequency": 2
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "qualification_agent",
+            "consumer_agent": "experience_assessment_agent",
+            "consumer_declared_inputs": [
+              "experience_records",
+              "mappings"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "candidate_id": {
+                "field": "candidate_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 28,
+                "tokens": 13
+              },
+              "technical_skills": {
+                "field": "technical_skills",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['skill', 'skills', 'technical'] with consumer instructions/goal.",
+                "bytes": 471,
+                "tokens": 160
+              },
+              "education": {
+                "field": "education",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 232,
+                "tokens": 82
+              },
+              "certifications": {
+                "field": "certifications",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 22,
+                "tokens": 10
+              },
+              "experience_records": {
+                "field": "experience_records",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 311,
+                "tokens": 95
+              },
+              "projects": {
+                "field": "projects",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 16,
+                "tokens": 10
+              },
+              "extraction_warnings": {
+                "field": "extraction_warnings",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 27,
+                "tokens": 10
+              }
+            },
+            "required_fields": [
+              "candidate_id",
+              "experience_records"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "education",
+              "certifications",
+              "projects",
+              "extraction_warnings"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [
+              "technical_skills"
+            ],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": true,
+            "semantic_ambiguity_reasons": [
+              "Field 'technical_skills': semantic stem overlap ['skill', 'skills', 'technical'] despite missing from declared_inputs."
+            ]
+          }
+        },
+        "groq_semantic_analysis": {
+          "used_groq": true,
+          "accepted": false,
+          "fallback_to_conservative_python": true,
+          "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+          "validated_result": null
+        },
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "candidate_id",
+          "technical_skills",
+          "experience_records"
+        ],
+        "excluded_fields": [
+          "education",
+          "certifications",
+          "projects",
+          "extraction_warnings"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['candidate_id', 'technical_skills', 'experience_records'] from 'qualification_agent' to 'experience_assessment_agent' (excluding ['education', 'certifications', 'projects', 'extraction_warnings'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 370,
+        "proposed_payload_tokens_per_handoff": 265,
+        "tokens_saved_per_handoff": 105,
+        "token_savings_pct": 28.38,
+        "original_payload_bytes_per_handoff": 1107,
+        "proposed_payload_bytes_per_handoff": 810,
+        "bytes_saved_per_handoff": 297,
+        "byte_savings_pct": 26.83,
+        "fields_removed_count": 4,
+        "fields_retained_count": 3,
+        "observation_count": 30,
+        "estimated_repeated_transmissions_eliminated_per_run": 4,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "estimated_heuristic_tokenizer",
+        "is_estimate": true,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 105 fewer payload tokens per execution (28.38% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for experience_assessment_agent -> screening_review_agent",
+      "target_agents": [
+        "experience_assessment_agent",
+        "screening_review_agent"
+      ],
+      "observed_problem": "Verified handoff 'experience_assessment_agent -> screening_review_agent' transmits 6 field(s) (['candidate_id', 'relevance_summary', 'strengths', 'experience_gaps', 'transferable_skills', 'evidence_references']), of which 2 (['relevance_summary', 'transferable_skills']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 502 tokens (1773 bytes, runtime_payload_observed); compact projection reduces payload to 286 tokens (965 bytes, -216 tokens / 43.03%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "experience_assessment_agent",
+        "consumer_agent": "screening_review_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "candidate_id",
+          "relevance_summary",
+          "strengths",
+          "experience_gaps",
+          "transferable_skills",
+          "evidence_references"
+        ],
+        "consumer_required_fields": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "relevance_summary",
+          "transferable_skills"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [
+          "evidence_references"
+        ],
+        "fields_retained": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps",
+          "evidence_references"
+        ],
+        "fields_excluded": [
+          "relevance_summary",
+          "transferable_skills"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "candidate_id": "Explicit input field placeholder in consumer prompt",
+          "relevance_summary": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "strengths": "Explicitly listed in consumer declared_inputs",
+          "experience_gaps": "Explicitly listed in consumer declared_inputs",
+          "transferable_skills": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "evidence_references": "Conservatively retained (uncertain necessity)."
+        },
+        "original_payload_tokens": 502,
+        "proposed_payload_tokens": 286,
+        "tokens_saved": 216,
+        "savings_percentage": 43.03,
+        "original_payload_bytes": 1773,
+        "proposed_payload_bytes": 965,
+        "bytes_saved": 808,
+        "byte_savings_percentage": 45.57,
+        "observation_count": 30,
+        "repeated_across_handoffs": [
+          "candidate_id"
+        ],
+        "tokenization_method": "conservative_bpe_heuristic",
+        "is_exact_tokenizer": false,
+        "measurement_type": "estimated_heuristic_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "candidate_id": "CAND-001",
+          "relevance_summary": "The candidate has a solid nine\u2011year software engineering background focused on front\u2011end web technologies (HTML, CSS, WordPress) and demonstrated ability to improve service performance. However, the experience does not align with the core backend cloud competencies (e.g., Python/Go, AWS/GCP, container orchestration) required for a Senior Cloud Backend Engineer role.",
+          "strengths": [
+            "Bachelor's degree in Computer Science (evidence EVD-001-EDU).",
+            "Long\u2011term tenure (2015\u20112024) as a Software Engineer at Apex Dynamics, indicating stability and growth (evidence EVD-001-EXP1).",
+            "Proven performance optimization: improved query latency by 35% (evidence EVD-001-EXP1).",
+            "Proficiency with front\u2011end web technologies (HTML, CSS, WordPress) as listed in skill evidence (evidence EVD-001-SKL)."
+          ],
+          "experience_gaps": [
+            "No demonstrated experience with backend programming languages such as Python, Go, or Java.",
+            "Absence of cloud platform experience (AWS, GCP, Azure) and related services.",
+            "Lack of containerization and orchestration knowledge (Docker, Kubernetes).",
+            "Missing exposure to gRPC, event\u2011streaming architectures, or micro\u2011service patterns.",
+            "No relevant certifications (e.g., AWS Certified Solutions Architect)."
+          ],
+          "transferable_skills": [
+            "Web development fundamentals (HTML, CSS, WordPress) that translate to API design and UI integration.",
+            "Performance tuning and query optimization skills applicable to backend data services.",
+            "Software engineering best practices, including design, testing, and deployment processes.",
+            "Problem\u2011solving and analytical abilities demonstrated through measurable latency improvements."
+          ],
+          "evidence_references": [
+            "EVD-001-EDU",
+            "EVD-001-EXP1",
+            "EVD-001-SKL"
+          ]
+        },
+        "proposed_compact_payload_sample": {
+          "candidate_id": "CAND-001",
+          "strengths": [
+            "Bachelor's degree in Computer Science (evidence EVD-001-EDU).",
+            "Long\u2011term tenure (2015\u20112024) as a Software Engineer at Apex Dynamics, indicating stability and growth (evidence EVD-001-EXP1).",
+            "Proven performance optimization: improved query latency by 35% (evidence EVD-001-EXP1).",
+            "Proficiency with front\u2011end web technologies (HTML, CSS, WordPress) as listed in skill evidence (evidence EVD-001-SKL)."
+          ],
+          "experience_gaps": [
+            "No demonstrated experience with backend programming languages such as Python, Go, or Java.",
+            "Absence of cloud platform experience (AWS, GCP, Azure) and related services.",
+            "Lack of containerization and orchestration knowledge (Docker, Kubernetes).",
+            "Missing exposure to gRPC, event\u2011streaming architectures, or micro\u2011service patterns.",
+            "No relevant certifications (e.g., AWS Certified Solutions Architect)."
+          ],
+          "evidence_references": [
+            "EVD-001-EDU",
+            "EVD-001-EXP1",
+            "EVD-001-SKL"
+          ]
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 502,
+            "original_payload_bytes": 1773,
+            "transmitted_field_count": 6,
+            "is_large_payload": true,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "candidate_id"
+            ],
+            "repeated_metadata_fields": [],
+            "repeated_static_fields": [],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "candidate_id": {
+                "bytes": 28,
+                "tokens": 13,
+                "type": "str",
+                "handoff_frequency": 10
+              },
+              "relevance_summary": {
+                "bytes": 397,
+                "tokens": 113,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "strengths": {
+                "bytes": 429,
+                "tokens": 129,
+                "type": "list",
+                "handoff_frequency": 1
+              },
+              "experience_gaps": {
+                "bytes": 437,
+                "tokens": 124,
+                "type": "list",
+                "handoff_frequency": 1
+              },
+              "transferable_skills": {
+                "bytes": 411,
+                "tokens": 117,
+                "type": "list",
+                "handoff_frequency": 1
+              },
+              "evidence_references": {
+                "bytes": 71,
+                "tokens": 36,
+                "type": "list",
+                "handoff_frequency": 1
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "experience_assessment_agent",
+            "consumer_agent": "screening_review_agent",
+            "consumer_declared_inputs": [
+              "mappings",
+              "strengths",
+              "experience_gaps",
+              "inconsistencies"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "candidate_id": {
+                "field": "candidate_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 28,
+                "tokens": 13
+              },
+              "relevance_summary": {
+                "field": "relevance_summary",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 397,
+                "tokens": 113
+              },
+              "strengths": {
+                "field": "strengths",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 429,
+                "tokens": 129
+              },
+              "experience_gaps": {
+                "field": "experience_gaps",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 437,
+                "tokens": 124
+              },
+              "transferable_skills": {
+                "field": "transferable_skills",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 411,
+                "tokens": 117
+              },
+              "evidence_references": {
+                "field": "evidence_references",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['evidence'] with consumer instructions/goal.",
+                "bytes": 71,
+                "tokens": 36
+              }
+            },
+            "required_fields": [
+              "candidate_id",
+              "strengths",
+              "experience_gaps"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "relevance_summary",
+              "transferable_skills"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [
+              "evidence_references"
+            ],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": true,
+            "semantic_ambiguity_reasons": [
+              "Field 'evidence_references': semantic stem overlap ['evidence'] despite missing from declared_inputs."
+            ]
+          }
+        },
+        "groq_semantic_analysis": {
+          "used_groq": true,
+          "accepted": false,
+          "fallback_to_conservative_python": true,
+          "rejection_reason": "groq_semantic_error:groq_api_error:APIConnectionError",
+          "validated_result": null
+        },
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps",
+          "evidence_references"
+        ],
+        "excluded_fields": [
+          "relevance_summary",
+          "transferable_skills"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['candidate_id', 'strengths', 'experience_gaps', 'evidence_references'] from 'experience_assessment_agent' to 'screening_review_agent' (excluding ['relevance_summary', 'transferable_skills'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 502,
+        "proposed_payload_tokens_per_handoff": 286,
+        "tokens_saved_per_handoff": 216,
+        "token_savings_pct": 43.03,
+        "original_payload_bytes_per_handoff": 1773,
+        "proposed_payload_bytes_per_handoff": 965,
+        "bytes_saved_per_handoff": 808,
+        "byte_savings_pct": 45.57,
+        "fields_removed_count": 2,
+        "fields_retained_count": 4,
+        "observation_count": 30,
+        "estimated_repeated_transmissions_eliminated_per_run": 0,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "estimated_heuristic_tokenizer",
+        "is_estimate": true,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 216 fewer payload tokens per execution (43.03% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    }
+  ],
+  "candidate_tiers": {
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT": "Tier 1",
+    "MODEL-RESUME_INTAKE_AGENT": "Tier 2",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT": "Tier 2",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT": "Tier 2"
+  },
+  "validation_required_candidate_ids": [
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "risk_acknowledged_candidate_ids": [
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "approval_status": "approved",
+  "approved_at": "2026-11-23T13:35:28.324430+00:00"
+}

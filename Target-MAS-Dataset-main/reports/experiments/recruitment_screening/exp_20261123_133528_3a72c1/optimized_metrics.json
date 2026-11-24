@@ -1,0 +1,27 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "exp_20261123_133528_3a72c1",
+  "execution_modes": [
+    "offline_trace_replay_sandbox"
+  ],
+  "total_runs": 2,
+  "successful_runs": 2,
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 11.8314,
+  "mean_tokens": 16633.0,
+  "mean_prompt_tokens": 10057.0,
+  "mean_completion_tokens": 6576.0,
+  "mean_cost_usd_catalog_normalized": 0.005453,
+  "schema_validation_passed": false,
+  "schema_validation_failures": [
+    {
+      "agent_id": "recruiter_summary_agent",
+      "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  "
+    },
+    {
+      "agent_id": "recruiter_summary_agent",
+      "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  "
+    }
+  ],
+  "semantic_quality_evaluation": "unavailable"
+}

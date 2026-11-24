@@ -33,11 +33,13 @@ except Exception as e:
 
 try:
     from optimization_agent.agent import build_optimization_graph
+    from optimization_agent.review.ui import render_candidate_review_interface
     from optimization_agent.state import OptimizationAgentState
     AGENT_AVAILABLE = True
 except Exception as e:
     AGENT_AVAILABLE = False
     AGENT_ERROR = str(e)
+    render_candidate_review_interface = None
 
 
 # Path Resolvers
@@ -257,8 +259,12 @@ st.caption(
     "MCP Tools, and 13-Stage Autonomous Optimization Discovery."
 )
 
-# Top Tabs: Exactly 2 Tabs
-tab_pipeline, tab_results = st.tabs(["Execution Pipeline", "Optimization Results & Final Report"])
+# Top Tabs: Execution, Results, and Candidate Review & Approval
+tab_pipeline, tab_results, tab_review = st.tabs([
+    "Execution Pipeline",
+    "Optimization Results & Final Report",
+    "Candidate Review & Approval",
+])
 
 
 # =============================================================================
@@ -492,19 +498,16 @@ with tab_pipeline:
             "Result: A consolidated in-memory state dictionary containing ~6,300 lines of empirical evidence (~66,000 tokens)."
         )
 
-    with st.expander("Stage 11: Autonomous Optimization Discovery Agent (8 Dimensions)", expanded=False):
+    with st.expander("Stage 11: Autonomous Optimization Discovery Agent (5 Dimensions)", expanded=False):
         st.write(
-            "The Optimization Discovery Agent systematically evaluates the accumulated evidence across 8 dimensions:\n"
-            "1. **Dimension A: Agent Pruning** - Identifies low-variance, non-terminal secondary review nodes for bypass.\n"
-            "2. **Dimension B: Agent Consolidation** - Merges tightly coupled sequential extraction agents to eliminate serialization overhead.\n"
-            "3. **Dimension C: Workflow Parallelization** - Evaluates transitive DAG reachability closure to prove independence:\n"
+            "The Optimization Discovery Agent systematically evaluates the accumulated evidence across 5 dimensions:\n"
+            "1. **Dimension B: Agent Consolidation** - Merges tightly coupled sequential extraction agents to eliminate serialization overhead.\n"
+            "2. **Dimension C: Workflow Parallelization** - Evaluates transitive DAG reachability closure to prove independence:\n"
             "   $$\\text{Independent} \\iff B \\notin \\mathcal{R}(A) \\;\\land\\; A \\notin \\mathcal{R}(B)$$\n"
             "   Calculates exact critical-path latency reduction: $\\Delta T = (T_A + T_B) - \\max(T_A, T_B)$.\n"
-            "4. **Dimension D: Model Selection** - Routes syntactic parsing nodes to compact models (enforcing `requires_validation=True`).\n"
-            "5. **Dimension E: Prompt Optimization** - Identifies compressible boilerplate and redundant dictionary schemas.\n"
-            "6. **Dimension F: Tool Optimization** - Detects declared tools that were never invoked across the 30 traces.\n"
-            "7. **Dimension G: Communication Optimization** - Replaces full-document payload passing with typed delta models.\n"
-            "8. **Dimension H: Additional Dimensions** - Evaluates deterministic caching and fast-path early exits."
+            "3. **Dimension D: Model Selection** - Routes syntactic parsing nodes to compact models (enforcing `requires_validation=True`).\n"
+            "4. **Dimension E: Prompt Optimization** - Identifies compressible boilerplate and redundant dictionary schemas.\n"
+            "5. **Dimension G: Communication Optimization** - Replaces full-document payload passing with typed delta models."
         )
 
     with st.expander("Stage 12: Feasibility & Risk Trade-Off Assessment Agent", expanded=False):
@@ -600,7 +603,7 @@ with tab_results:
 
         # Top Macro KPI Cards
         kpi1, kpi2, kpi3, kpi4 = st.columns(4)
-        kpi1.metric("Optimization Candidates", meta.get("total_optimization_candidates_found", "—"), "Across 8 Dimensions")
+        kpi1.metric("Optimization Candidates", meta.get("total_optimization_candidates_found", "—"), "Across 5 Dimensions")
         kpi2.metric("Critical-Path Latency Reduction", f"~{impact.get('estimated_critical_path_latency_reduction_pct', 35)}%", "Sequential Speedup")
         kpi3.metric("Workflow Token Savings", f"~{impact.get('estimated_total_token_reduction_pct', 28)}%", "Prompt & Completion")
         kpi4.metric("Operational Cost Savings", f"~{impact.get('estimated_operational_cost_reduction_pct', 32)}%", "Inference Spend")
@@ -630,7 +633,7 @@ with tab_results:
             "Tier 2: Implementation with Validation",
             "Tier 3 & 4: Caution / Insufficient Evidence",
             "Strategic Implementation Roadmap",
-            "All 8 Dimensions Deep-Dive",
+            "All 5 Dimensions Deep-Dive",
         ])
 
         # Tier 1
@@ -690,17 +693,14 @@ with tab_results:
                         st.markdown(f"- {act}")
                     st.divider()
 
-        # All 8 Dimensions
+        # All 5 Dimensions
         with dim_tab:
             dimensions = [
-                ("agent_pruning_opportunities", "Dimension A: Agent Pruning"),
                 ("agent_consolidation_opportunities", "Dimension B: Agent Consolidation"),
                 ("workflow_parallelization_opportunities", "Dimension C: Workflow Parallelization"),
                 ("model_selection_recommendations", "Dimension D: Model Selection"),
                 ("prompt_optimization_opportunities", "Dimension E: Prompt Optimization"),
-                ("tool_optimization_opportunities", "Dimension F: Tool Optimization"),
                 ("communication_optimization_opportunities", "Dimension G: Communication Handoff"),
-                ("additional_optimization_opportunities", "Dimension H: Additional Dimensions"),
             ]
             for dim_key, dim_title in dimensions:
                 dim_val = report_data.get(dim_key, [])
@@ -749,4 +749,29 @@ with tab_results:
             st.markdown(md_content)
         with doc_tab2:
             st.json(report_data, expanded=False)
+
+
+# =============================================================================
+# TAB 3: CANDIDATE REVIEW, SELECTION & APPROVAL
+# =============================================================================
+with tab_review:
+    st.subheader(f"Candidate Review & Approval: {WORKFLOW_TITLES.get(selected_wf, selected_wf)}")
+    review_reports_dir = get_reports_base_dir()
+    review_json_path = review_reports_dir / f"{selected_wf}_optimization_report.json"
+
+    if not review_json_path.exists():
+        st.info(
+            f"No optimization report found on disk for '{selected_wf}'. "
+            "Please return to the 'Execution Pipeline' tab and run the Optimization Discovery Agent first."
+        )
+    elif render_candidate_review_interface is None:
+        st.error(f"Candidate Review module unavailable: {AGENT_ERROR}")
+    else:
+        with open(review_json_path, "r", encoding="utf-8") as rf:
+            review_report_data = json.load(rf)
+        render_candidate_review_interface(
+            workflow_id=selected_wf,
+            report_data=review_report_data,
+            reports_dir=review_reports_dir,
+        )
 

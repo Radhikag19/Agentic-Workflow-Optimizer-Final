@@ -14,7 +14,6 @@ from __future__ import annotations
 
 import logging
 import os
-import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -23,15 +22,12 @@ logger = logging.getLogger("optimization_agent.key_manager")
 # Task-to-key logical mapping
 TASK_KEY_MAPPING: Dict[str, List[str]] = {
     "discovery_overview": ["GROQ_API_KEY_1", "GROQ_API_KEY_2"],
-    "agent_pruning": ["GROQ_API_KEY_3"],
     "agent_consolidation": ["GROQ_API_KEY_4"],
     "workflow_parallelization": ["GROQ_API_KEY_5"],
     "model_selection": ["GROQ_API_KEY_6"],
     "prompt_optimization": ["GROQ_API_KEY_7"],
-    "tool_optimization": ["GROQ_API_KEY_8"],
     "communication_optimization": ["GROQ_API_KEY_9"],
     "communication_data_handoff": ["GROQ_API_KEY_9"],
-    "additional_optimization": ["GROQ_API_KEY_10"],
     "tradeoff_assessment": ["GROQ_API_KEY_11", "GROQ_API_KEY_12"],
     "report_generation": ["GROQ_API_KEY_13", "GROQ_API_KEY_14"],
 }

@@ -1,0 +1,167 @@
+{
+  "workflow_id": "recruitment_screening",
+  "baseline_quality": {
+    "evaluated_executions": 2,
+    "dimension_summary": {
+      "structural_validity": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "correctness": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "completeness": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "consistency": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "instruction_adherence": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "semantic_quality": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      }
+    },
+    "agent_evaluations": [
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "failed",
+        "correctness": "failed",
+        "completeness": "failed",
+        "consistency": "failed",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Agent execution failed or returned empty output: Connection error."
+        ],
+        "rationale": "Execution failed before a structured output was produced.",
+        "evaluation_status": "failed",
+        "run_id": "base_20261123_141027_382534",
+        "run_index": 0
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "failed",
+        "correctness": "failed",
+        "completeness": "failed",
+        "consistency": "failed",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Agent execution failed or returned empty output: Connection error."
+        ],
+        "rationale": "Execution failed before a structured output was produced.",
+        "evaluation_status": "failed",
+        "run_id": "base_20261123_141032_d41073",
+        "run_index": 1
+      }
+    ]
+  },
+  "optimized_quality": {
+    "evaluated_executions": 2,
+    "dimension_summary": {
+      "structural_validity": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "correctness": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "completeness": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "consistency": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "instruction_adherence": {
+        "status": "failed",
+        "pass_rate_pct": 0.0,
+        "passed_count": 0,
+        "failed_count": 2,
+        "evaluated_count": 2
+      },
+      "semantic_quality": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      }
+    },
+    "agent_evaluations": [
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "failed",
+        "correctness": "failed",
+        "completeness": "failed",
+        "consistency": "failed",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Agent execution failed or returned empty output: Connection error."
+        ],
+        "rationale": "Execution failed before a structured output was produced.",
+        "evaluation_status": "failed",
+        "run_id": "sb_20261123_141030_a60109",
+        "run_index": 0
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "failed",
+        "correctness": "failed",
+        "completeness": "failed",
+        "consistency": "failed",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Agent execution failed or returned empty output: Connection error."
+        ],
+        "rationale": "Execution failed before a structured output was produced.",
+        "evaluation_status": "failed",
+        "run_id": "sb_20261123_141033_3d2c07",
+        "run_index": 1
+      }
+    ]
+  },
+  "identified_regressions": [],
+  "has_quality_regression": false
+}

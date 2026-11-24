@@ -8,11 +8,10 @@ compact, and LLM-ready `WorkflowContext` dictionary or JSON document.
 from __future__ import annotations
 
 import json
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Set
 
 from schemas.workflow_context_schema import (
     TOKEN_ESTIMATION_DEFAULT_METHOD,
-    WorkflowContext,
     validate_workflow_context,
 )
 from ingestion.workflow_analyzer import WorkflowAnalysisResult

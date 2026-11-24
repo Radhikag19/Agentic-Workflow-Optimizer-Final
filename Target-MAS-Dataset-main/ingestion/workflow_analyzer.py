@@ -9,19 +9,13 @@ evidence-backed dependency graphs.
 from __future__ import annotations
 
 import ast
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-from schemas.workflow_context_schema import (
-    CONTROLLED_EXECUTION_OPERATIONS,
-    CONTROLLED_NODE_TYPES,
-    RELATIONSHIP_TYPES,
-)
 from ingestion.ast_parser import (
     ASTParser,
     CallInfo,
-    FunctionDefInfo,
     ParsedModule,
     default_ast_parser,
     safe_eval_literal,

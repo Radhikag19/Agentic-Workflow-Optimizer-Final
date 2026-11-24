@@ -13,7 +13,7 @@ from typing_extensions import TypedDict
 class OptimizationCandidate(TypedDict, total=False):
     """Schema for a discovered optimization candidate."""
     candidate_id: str
-    dimension: str  # e.g., 'agent_pruning', 'workflow_parallelization', etc.
+    dimension: str  # e.g., 'workflow_parallelization', 'model_selection', etc.
     title: str
     target_agents: List[str]
     observed_problem: str
@@ -72,4 +72,25 @@ class OptimizationAgentState(TypedDict, total=False):
     final_report: Dict[str, Any]
     final_markdown_report: str
     key_usage_log: List[Dict[str, Any]]
+
+    # Candidate Review, User Selection, Approval & Next-Stage Handoff
+    candidate_review_session: Dict[str, Any]
+    user_approval_decision: Optional[Dict[str, Any]]
+    approved_optimization_scope: Dict[str, Any]
+    approved_candidates: List[Dict[str, Any]]
+    approval_status: str
+    next_stage_input: Dict[str, Any]
+
+    # Sandbox Optimization Execution Engine (Post-Approval Stages)
+    sandbox_options: Dict[str, Any]
+    sandbox_experiment_metadata: Dict[str, Any]
+    sandbox_path: str
+    sandbox_execution_results: Dict[str, Any]
+    sandbox_validation_results: Dict[str, Any]
+    sandbox_baseline_runtime_results: Dict[str, Any]
+    sandbox_runtime_results: Dict[str, Any]
+    sandbox_quality_evaluation: Dict[str, Any]
+    sandbox_evaluation_results: Dict[str, Any]
+    sandbox_experiment_report: Dict[str, Any]
+    experiment_report_path: str
 

@@ -602,9 +602,11 @@ def test_23_compatibility_with_all_other_dimensions_real_mcp():
     rep = generate_json_report(state, "GROQ_API_KEY_13 (masked: gsk_***...test)")
 
     assert set(res["dimension_analyses"].keys()) == {
-        "agent_pruning", "agent_consolidation", "workflow_parallelization",
-        "model_selection", "prompt_optimization", "tool_optimization",
-        "communication_optimization", "additional_optimization",
+        "agent_consolidation",
+        "workflow_parallelization",
+        "model_selection",
+        "prompt_optimization",
+        "communication_optimization",
     }
     comm = rep["communication_optimization_opportunities"]
     assert comm["summary"]["total_verified_handoffs_identified"] == 12

@@ -208,19 +208,19 @@ def test_checkpoint_3_discovery_dimensions_and_constraints():
     candidates = result["optimization_candidates"]
     analyses = result["dimension_analyses"]
 
-    # Verify all 8 dimensions are analyzed
+    # Verify all 5 active dimensions are analyzed and removed dimensions are absent
     required_dims = [
-        "agent_pruning",
         "agent_consolidation",
         "workflow_parallelization",
         "model_selection",
         "prompt_optimization",
-        "tool_optimization",
         "communication_optimization",
-        "additional_optimization",
     ]
     for dim in required_dims:
         assert dim in analyses, f"Missing analysis for dimension {dim}"
+    for removed_dim in ("agent_pruning", "tool_optimization", "additional_optimization"):
+        assert removed_dim not in analyses, f"Removed dimension {removed_dim} still present"
+        assert all(c.get("dimension") != removed_dim for c in candidates)
 
     # Verify candidates cite concrete MCP evidence
     assert len(candidates) > 0
@@ -305,10 +305,10 @@ def test_checkpoint_4_tradeoff_assessment_and_tiers():
         },
         {
             "candidate_id": "C3",
-            "dimension": "agent_pruning",
-            "title": "Prune Deep Logic",
-            "target_agents": ["a3"],
-            "supporting_evidence": {"stage": "stage_4"},
+            "dimension": "workflow_parallelization",
+            "title": "Parallelize Coupled Flow",
+            "target_agents": ["a3", "a4"],
+            "supporting_evidence": {"stage": "stage_3"},
             "expected_benefit": {"latency_savings_pct": 50.0},
             "tradeoffs_and_risks": {
                 "output_quality_risk": "High",
@@ -318,9 +318,9 @@ def test_checkpoint_4_tradeoff_assessment_and_tiers():
         },
         {
             "candidate_id": "C4",
-            "dimension": "tool_optimization",
-            "title": "Speculative Tool Idea",
-            "target_agents": ["a4"],
+            "dimension": "model_selection",
+            "title": "Speculative Model Change",
+            "target_agents": ["a5"],
             "supporting_evidence": {},  # Insufficient
             "expected_benefit": {},
             "tradeoffs_and_risks": {},
@@ -354,17 +354,15 @@ def test_checkpoint_5_key_distribution_and_masking():
     km = GroqKeyManager()
     assert km.total_loaded_keys >= 20
 
-    # 1. Distinct key allocation across dimensions
+    # 1. Distinct key allocation across active tasks/dimensions
     keys_used = set()
     dimensions_to_test = [
-        "agent_pruning",
+        "discovery_overview",
         "agent_consolidation",
         "workflow_parallelization",
         "model_selection",
         "prompt_optimization",
-        "tool_optimization",
         "communication_optimization",
-        "additional_optimization",
         "tradeoff_assessment",
         "report_generation",
     ]
@@ -379,7 +377,7 @@ def test_checkpoint_5_key_distribution_and_masking():
         keys_used.add(ev)
 
     # Must NOT be a simple round-robin or single key
-    assert len(keys_used) >= 8, f"Expected distinct key allocations across dimensions, got {len(keys_used)}"
+    assert len(keys_used) >= 7, f"Expected distinct key allocations across dimensions, got {len(keys_used)}"
 
     # 2. Secret Protection: Verify no secret leakage
     sample_text = f"Allocated key: {km.get_masked_identifier('GROQ_API_KEY_1')} successfully."
@@ -434,24 +432,27 @@ def test_checkpoint_6_end_to_end_contract_review():
     assert json_path.exists(), f"JSON report file not found at {json_path}"
     assert md_path.exists(), f"Markdown report file not found at {md_path}"
 
-    # Verify all 12 sections in JSON report
+    # Verify all 9 active sections in JSON report and removed sections are absent
     report_data = json.loads(json_path.read_text(encoding="utf-8"))
-    required_12_sections = [
+    required_9_sections = [
         "report_metadata",
         "executive_summary",
         "workflow_baseline",
-        "agent_pruning_opportunities",
         "agent_consolidation_opportunities",
         "workflow_parallelization_opportunities",
         "model_selection_recommendations",
         "prompt_optimization_opportunities",
-        "tool_optimization_opportunities",
         "communication_optimization_opportunities",
-        "additional_optimization_opportunities",
         "prioritized_action_plan",
     ]
-    for sec in required_12_sections:
+    for sec in required_9_sections:
         assert sec in report_data, f"Section '{sec}' missing in JSON report"
+    for removed_sec in (
+        "agent_pruning_opportunities",
+        "tool_optimization_opportunities",
+        "additional_optimization_opportunities",
+    ):
+        assert removed_sec not in report_data, f"Removed section '{removed_sec}' still present"
 
     # Verify Markdown report content
     md_content = md_path.read_text(encoding="utf-8")

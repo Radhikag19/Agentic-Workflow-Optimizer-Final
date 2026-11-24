@@ -1,0 +1,56 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "wp_20261124_164252_e88562__dim_communication_data_handoff",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {
+    "qualification_agent->experience_assessment_agent": {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "producer_agent": "qualification_agent",
+      "consumer_agent": "experience_assessment_agent",
+      "retained_fields": [
+        "candidate_id",
+        "technical_skills",
+        "experience_records"
+      ],
+      "excluded_fields": [
+        "education",
+        "certifications",
+        "projects",
+        "extraction_warnings"
+      ],
+      "consumer_required_fields": [
+        "candidate_id",
+        "experience_records"
+      ],
+      "typed_delta_projection": true
+    },
+    "experience_assessment_agent->screening_review_agent": {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "producer_agent": "experience_assessment_agent",
+      "consumer_agent": "screening_review_agent",
+      "retained_fields": [
+        "candidate_id",
+        "strengths",
+        "experience_gaps",
+        "evidence_references"
+      ],
+      "excluded_fields": [
+        "relevance_summary",
+        "transferable_skills"
+      ],
+      "consumer_required_fields": [
+        "candidate_id",
+        "strengths",
+        "experience_gaps"
+      ],
+      "typed_delta_projection": true
+    }
+  },
+  "applied_candidates": [
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ]
+}

@@ -1,0 +1,316 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "exp_20261123_141035_637e9d",
+  "variant": "optimized",
+  "source": "Matched Sandbox Runtime (optimized)",
+  "execution_modes": [
+    "offline_trace_replay_sandbox"
+  ],
+  "usage_sources": [
+    "historical_trace_replay"
+  ],
+  "cost_calculation_basis": "estimated_from_historical_replay",
+  "total_runs": 2,
+  "successful_runs": 2,
+  "failed_runs": 0,
+  "incomplete_runs": [],
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 12.0012,
+  "median_latency_seconds": 12.0012,
+  "mean_agent_latency_seconds": 1.7067,
+  "mean_tokens": 16633.0,
+  "mean_prompt_tokens": 10057.0,
+  "mean_completion_tokens": 6576.0,
+  "mean_cost_usd_catalog_normalized": 0.005453,
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 87.5,
+  "schema_validation_failures": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "recruiter_summary_agent",
+      "missing_required_fields": [
+        "identified_inconsistencies",
+        "recommended_follow_up_questions",
+        "score_calculation_method",
+        "score_limitations"
+      ],
+      "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, inpu"
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "recruiter_summary_agent",
+      "missing_required_fields": [
+        "identified_inconsistencies",
+        "recommended_follow_up_questions",
+        "score_calculation_method",
+        "score_limitations"
+      ],
+      "error": "4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, inpu"
+    }
+  ],
+  "invalid_replay_samples": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "agent_id": "recruiter_summary_agent",
+      "missing_required_fields": [
+        "identified_inconsistencies",
+        "recommended_follow_up_questions",
+        "score_calculation_method",
+        "score_limitations"
+      ],
+      "reason": "Historical trace replay sample for 'recruiter_summary_agent' is incomplete or incompatible with Pydantic schema (missing required fields: ['identified_inconsistencies', 'recommended_follow_up_questions', 'score_calculation_method', 'score_limitations']). Preserved unmodified."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "agent_id": "recruiter_summary_agent",
+      "missing_required_fields": [
+        "identified_inconsistencies",
+        "recommended_follow_up_questions",
+        "score_calculation_method",
+        "score_limitations"
+      ],
+      "reason": "Historical trace replay sample for 'recruiter_summary_agent' is incomplete or incompatible with Pydantic schema (missing required fields: ['identified_inconsistencies', 'recommended_follow_up_questions', 'score_calculation_method', 'score_limitations']). Preserved unmodified."
+    }
+  ],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "job_criteria_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "qualification_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "evidence_mapping_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "experience_assessment_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "missing_evidence_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "screening_review_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261123_141050_4257ee",
+      "agent_id": "recruiter_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "resume_intake_agent",
+      "model": "llama-3.3-70b-versatile",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "qualification_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "job_criteria_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "evidence_mapping_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "experience_assessment_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "missing_evidence_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "screening_review_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261123_141116_15bde0",
+      "agent_id": "recruiter_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    }
+  ],
+  "per_agent_metrics": {
+    "resume_intake_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "llama-3.3-70b-versatile"
+      ],
+      "mean_latency_seconds": 1.6717,
+      "mean_tokens": 1187.0,
+      "mean_prompt_tokens": 786.0,
+      "mean_completion_tokens": 401.0,
+      "mean_cost_usd": 0.000358,
+      "schema_valid_rate_pct": 100.0
+    },
+    "qualification_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.6637,
+      "mean_tokens": 1763.0,
+      "mean_prompt_tokens": 757.0,
+      "mean_completion_tokens": 1006.0,
+      "mean_cost_usd": 0.000717,
+      "schema_valid_rate_pct": 100.0
+    },
+    "job_criteria_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.7834,
+      "mean_tokens": 1307.0,
+      "mean_prompt_tokens": 642.0,
+      "mean_completion_tokens": 665.0,
+      "mean_cost_usd": 0.000495,
+      "schema_valid_rate_pct": 100.0
+    },
+    "evidence_mapping_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.8573,
+      "mean_tokens": 2486.0,
+      "mean_prompt_tokens": 1394.0,
+      "mean_completion_tokens": 1092.0,
+      "mean_cost_usd": 0.000864,
+      "schema_valid_rate_pct": 100.0
+    },
+    "experience_assessment_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.5842,
+      "mean_tokens": 2109.0,
+      "mean_prompt_tokens": 1346.0,
+      "mean_completion_tokens": 763.0,
+      "mean_cost_usd": 0.00066,
+      "schema_valid_rate_pct": 100.0
+    },
+    "missing_evidence_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.7428,
+      "mean_tokens": 1727.0,
+      "mean_prompt_tokens": 990.0,
+      "mean_completion_tokens": 737.0,
+      "mean_cost_usd": 0.000591,
+      "schema_valid_rate_pct": 100.0
+    },
+    "screening_review_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.6073,
+      "mean_tokens": 1821.0,
+      "mean_prompt_tokens": 1230.0,
+      "mean_completion_tokens": 591.0,
+      "mean_cost_usd": 0.000539,
+      "schema_valid_rate_pct": 100.0
+    },
+    "recruiter_summary_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.7434,
+      "mean_tokens": 4233.0,
+      "mean_prompt_tokens": 2912.0,
+      "mean_completion_tokens": 1321.0,
+      "mean_cost_usd": 0.001229,
+      "schema_valid_rate_pct": 0.0
+    }
+  },
+  "input_dataset_hashes": [
+    "28cc41cf1175eddb9d765f3b370bb5737a248f327f68f5dcd09f3954d5c3f6a0",
+    "1785cab64f791c1859ed8c306254d3a5fc0af098935295798ef3be2daaf7a525"
+  ]
+}

@@ -8,7 +8,7 @@ Handles JSON extraction from agent text outputs and enforces schema consistency.
 import json
 import re
 from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field, ValidationError
+from pydantic import BaseModel, Field
 
 
 class JSONParsingError(ValueError):

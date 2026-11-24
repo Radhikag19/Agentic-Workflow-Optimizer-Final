@@ -1,0 +1,42 @@
+{
+  "experiment_id": "exp_20261123_133528_3a72c1",
+  "workflow_id": "recruitment_screening",
+  "original_workflow_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening",
+  "sandbox_workflow_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow",
+  "runtime_traces_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\runtime_traces",
+  "approved_candidate_ids": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "original_to_sandbox_map": {
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\__init__.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\__init__.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\evidence_mapping_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\evidence_mapping_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\experience_assessment_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\experience_assessment_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\intake_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\intake_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\job_criteria_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\job_criteria_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\missing_evidence_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\missing_evidence_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\qualification_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\qualification_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\recruiter_summary_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\recruiter_summary_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\review_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\review_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\workflow.json": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\workflow.json",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\workflow.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\workflow.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening\\workflow_context.json": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_133528_3a72c1\\sandbox_workflow\\workflow_context.json"
+  },
+  "original_file_hashes": {
+    "__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evidence_mapping_agent.py": "c6a95e7961539d7ca655ad293f7ebb03c14ffde1f008aad3a99ea6ef9a3dbc5d",
+    "experience_assessment_agent.py": "d85fbff93fe6a9a6cb20c0880eb22b9cbf2253243378102bc7430d346671ad6a",
+    "intake_agent.py": "beff5428c462f60e64deb4a51a2969c5f36adb093a0351c67dbee47aa51a3695",
+    "job_criteria_agent.py": "283f8c4fbb4425dec8630788467de5197beebc8bf6457a0e0fee5496f936ee55",
+    "missing_evidence_agent.py": "674e0b10b9bc576b1c6b3217fb1f9e2625ce74820319047199fa04be720764d8",
+    "qualification_agent.py": "047cfec07d3f408d23cd68933b4dca78368b9878368a52ea3988853374b27ef7",
+    "recruiter_summary_agent.py": "09462487d61ac5dcec3de4dadccca40aac5da2b11e174155bcbb087417f90b95",
+    "review_agent.py": "02a725dff2a070d8d8ca454511280d1294141ace37a16c844c58393c10eeaaee",
+    "workflow.json": "8a2f98730aae5aeb2b9292d0c2c9c836162ecb4e4ccb00d313d13c7e566071a2",
+    "workflow.py": "5c4edce63cfad85c7727a36d32cc8f3e5bb339d055dc1cd84a83f7529d0e2a02",
+    "workflow_context.json": "0b7fa0fe47b5aa34cec5e6e4d9e6348f55f135eeb1cfcdf8ca9d18c56bbb4b3e"
+  },
+  "created_at": "2026-11-23T13:35:28.413775+00:00"
+}

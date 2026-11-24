@@ -3,7 +3,7 @@
     "workflow_id": "market_research",
     "workflow_name": "market_research",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.609009+00:00",
+    "generated_at": "2026-11-24T19:33:01.204238+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -2462,7 +2462,7 @@
       },
       {
         "source": "workflow:market_research",
-        "target": "agent:feedback_agent",
+        "target": "agent:comparison_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2476,7 +2476,14 @@
       },
       {
         "source": "workflow:market_research",
-        "target": "agent:comparison_agent",
+        "target": "agent:profile_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:market_research",
+        "target": "agent:synthesis_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2490,13 +2497,6 @@
       },
       {
         "source": "workflow:market_research",
-        "target": "agent:evidence_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:market_research",
         "target": "agent:planning_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
@@ -2504,7 +2504,7 @@
       },
       {
         "source": "workflow:market_research",
-        "target": "agent:profile_agent",
+        "target": "agent:feedback_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2518,7 +2518,7 @@
       },
       {
         "source": "workflow:market_research",
-        "target": "agent:synthesis_agent",
+        "target": "agent:evidence_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2844,7 +2844,7 @@
     ],
     "model_reconciliation": {
       "declared_model": "openai/gpt-oss-120b",
-      "statically_extracted_model": "feedback_agent",
+      "statically_extracted_model": "comparison_agent",
       "runtime_observed_model": "openai/gpt-oss-120b",
       "status": "matching",
       "notes": "Declared model 'openai/gpt-oss-120b' matches runtime enforced model 'openai/gpt-oss-120b'."

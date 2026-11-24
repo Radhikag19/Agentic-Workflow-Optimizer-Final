@@ -1,0 +1,81 @@
+{
+  "workflow_id": "recruitment_screening",
+  "selected_dimensions": [
+    "workflow_parallelization",
+    "model_selection",
+    "communication_data_handoff"
+  ],
+  "approved_candidate_ids": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT"
+  ],
+  "excluded_candidate_ids": [
+    "HANDOFF-RESUME_INTAKE_AGENT-TO-QUALIFICATION_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EVIDENCE_MAPPING_AGENT",
+    "HANDOFF-EVIDENCE_MAPPING_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-RESUME_INTAKE_AGENT-TO-MISSING_EVIDENCE_AGENT",
+    "HANDOFF-EVIDENCE_MAPPING_AGENT-TO-MISSING_EVIDENCE_AGENT",
+    "HANDOFF-EVIDENCE_MAPPING_AGENT-TO-SCREENING_REVIEW_AGENT",
+    "HANDOFF-MISSING_EVIDENCE_AGENT-TO-SCREENING_REVIEW_AGENT",
+    "HANDOFF-SCREENING_REVIEW_AGENT-TO-RECRUITER_SUMMARY_AGENT"
+  ],
+  "approved_candidates": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "dimension": "workflow_parallelization",
+      "title": "Parallel Execution of qualification_agent and job_criteria_agent",
+      "target_agents": [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      "observed_problem": "Agents 'qualification_agent' (3.41s) and 'job_criteria_agent' (2.82s) are currently executed sequentially (total: 6.23s), despite having completely independent processing scopes and no mutual data dependencies.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_6_latency",
+          "stage_10_evidence"
+        ],
+        "dependency_verification": "Verified independent: No direct/transitive edge between qualification_agent and job_criteria_agent, and no shared I/O coupling.",
+        "is_dependency_independent": true,
+        "current_sequential_latency_seconds": 6.23,
+        "projected_parallel_latency_seconds": 3.41,
+        "critical_path_latency_reduction_seconds": 2.82
+      },
+      "proposed_solution": "Execute 'qualification_agent' and 'job_criteria_agent' concurrently using an asynchronous scatter-gather branch. Join their outputs prior to downstream synthesis.",
+      "expected_benefit": {
+        "latency_savings_pct": 45.3,
+        "latency_savings_seconds": 2.82,
+        "critical_path_impact": "Cuts 2.82s directly from sequential critical path.",
+        "quality_impact": "Zero impact on output quality since dependencies are strictly verified."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Immediate latency win with concurrency.",
+        "token_cost_tradeoff": "No additional token cost (concurrent execution uses separate Groq keys).",
+        "output_quality_risk": "None (data dependencies rigorously verified).",
+        "implementation_complexity": "Medium (requires async orchestrator branch)."
+      },
+      "tier": "Tier 1",
+      "requires_validation": false,
+      "dependency_verified": true,
+      "allocated_key": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "feasibility_tier": "Tier 1: High potential, low trade-off"
+    }
+  ],
+  "candidate_tiers": {
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT": "Tier 1",
+    "MODEL-RESUME_INTAKE_AGENT": "Tier 2",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT": "Tier 2",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT": "Tier 2"
+  },
+  "validation_required_candidate_ids": [
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "risk_acknowledged_candidate_ids": [
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "approval_status": "approved",
+  "approved_at": "2026-11-23T13:35:28.324430+00:00"
+}

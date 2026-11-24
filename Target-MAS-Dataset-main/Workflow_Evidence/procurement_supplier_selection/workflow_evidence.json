@@ -3,7 +3,7 @@
     "workflow_id": "procurement_supplier_selection",
     "workflow_name": "procurement_supplier_selection",
     "evidence_schema_version": "1.0",
-    "generated_at": "2026-11-22T09:16:01.676329+00:00",
+    "generated_at": "2026-11-24T19:33:01.236626+00:00",
     "traces_discovered": 30,
     "traces_processed": 30,
     "traces_failed": 0,
@@ -2071,13 +2071,6 @@
       },
       {
         "source": "workflow:procurement_supplier_selection",
-        "target": "agent:selection_recommendation_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:procurement_supplier_selection",
         "target": "agent:final_review_agent_procurement",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
@@ -2085,7 +2078,7 @@
       },
       {
         "source": "workflow:procurement_supplier_selection",
-        "target": "agent:delivery_analysis_agent",
+        "target": "agent:contract_analysis_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2106,14 +2099,7 @@
       },
       {
         "source": "workflow:procurement_supplier_selection",
-        "target": "agent:supplier_profile_agent",
-        "relationship": "agent_invocation",
-        "provenance": "statically_observed",
-        "evidence_ref": "outer_workflow_flow"
-      },
-      {
-        "source": "workflow:procurement_supplier_selection",
-        "target": "agent:contract_analysis_agent",
+        "target": "agent:cost_comparison_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"
@@ -2127,7 +2113,21 @@
       },
       {
         "source": "workflow:procurement_supplier_selection",
-        "target": "agent:cost_comparison_agent",
+        "target": "agent:delivery_analysis_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:procurement_supplier_selection",
+        "target": "agent:selection_recommendation_agent",
+        "relationship": "agent_invocation",
+        "provenance": "statically_observed",
+        "evidence_ref": "outer_workflow_flow"
+      },
+      {
+        "source": "workflow:procurement_supplier_selection",
+        "target": "agent:supplier_profile_agent",
         "relationship": "agent_invocation",
         "provenance": "statically_observed",
         "evidence_ref": "outer_workflow_flow"

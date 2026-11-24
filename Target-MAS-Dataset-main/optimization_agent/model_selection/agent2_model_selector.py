@@ -7,7 +7,6 @@ executes model selection, and rigorously validates the recommendation against sa
 
 from __future__ import annotations
 
-import json
 import logging
 from typing import Any, Dict, List, Optional
 from optimization_agent.model_selection.jev_client import call_jev

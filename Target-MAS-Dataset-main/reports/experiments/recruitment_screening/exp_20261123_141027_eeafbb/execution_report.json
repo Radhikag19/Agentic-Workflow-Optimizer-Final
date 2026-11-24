@@ -1,0 +1,891 @@
+{
+  "experiment_id": "exp_20261123_141027_eeafbb",
+  "workflow_id": "recruitment_screening",
+  "generated_at": "2026-11-23T14:10:35.802768+00:00",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "runs_executed": 2,
+  "model_and_provider_info": {
+    "baseline_model": "openai/gpt-oss-120b",
+    "llm_provider": "Groq",
+    "assigned_groq_key_env": "GROQ_API_KEY_5",
+    "agent_model_overrides": {
+      "resume_intake_agent": {
+        "previous_model": "openai/gpt-oss-120b",
+        "updated_model": "llama-3.3-70b-versatile",
+        "provider": "Groq",
+        "candidate_id": "MODEL-RESUME_INTAKE_AGENT"
+      }
+    }
+  },
+  "original_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening",
+  "sandbox_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_141027_eeafbb\\sandbox_workflow",
+  "approved_candidate_ids": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "applied_candidate_ids": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+    "MODEL-RESUME_INTAKE_AGENT",
+    "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+    "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+  ],
+  "failed_candidate_ids": [],
+  "conflicting_candidate_ids": [],
+  "candidates_requiring_manual_intervention": [],
+  "conflicts": [],
+  "modified_files": [
+    "intake_agent.py",
+    "sandbox_optimization_config.json",
+    "workflow.json",
+    "workflow.py"
+  ],
+  "modifications": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "dimension": "workflow_parallelization",
+      "status": "applied",
+      "target_agents": [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured concurrent scatter-gather group ['qualification_agent', 'job_criteria_agent'] in sandbox workflow after verifying strict DAG & I/O independence.",
+      "details": {
+        "parallel_group": [
+          "qualification_agent",
+          "job_criteria_agent"
+        ],
+        "dependency_verification": "Verified mutually independent in sandbox DAG: ['qualification_agent', 'job_criteria_agent']"
+      },
+      "error": null
+    },
+    {
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
+      "dimension": "model_selection",
+      "status": "applied",
+      "target_agents": [
+        "resume_intake_agent"
+      ],
+      "modified_files": [
+        "intake_agent.py",
+        "workflow.json",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Updated model configuration for ['resume_intake_agent'] to 'llama-3.3-70b-versatile' (provider=Groq) in sandbox while preserving API key bindings.",
+      "details": {
+        "model_transitions": {
+          "resume_intake_agent": {
+            "previous_model": "openai/gpt-oss-120b",
+            "updated_model": "llama-3.3-70b-versatile"
+          }
+        },
+        "provider": "Groq"
+      },
+      "error": null
+    },
+    {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "dimension": "communication_data_handoff",
+      "status": "applied",
+      "target_agents": [
+        "qualification_agent",
+        "experience_assessment_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured compact handoff projection on 'qualification_agent->experience_assessment_agent' retaining 3 field(s) and excluding ['education', 'certifications', 'projects', 'extraction_warnings'].",
+      "details": {
+        "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+        "producer_agent": "qualification_agent",
+        "consumer_agent": "experience_assessment_agent",
+        "retained_fields": [
+          "candidate_id",
+          "technical_skills",
+          "experience_records"
+        ],
+        "excluded_fields": [
+          "education",
+          "certifications",
+          "projects",
+          "extraction_warnings"
+        ],
+        "consumer_required_fields": [
+          "candidate_id",
+          "experience_records"
+        ],
+        "typed_delta_projection": true
+      },
+      "error": null
+    },
+    {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "dimension": "communication_data_handoff",
+      "status": "applied",
+      "target_agents": [
+        "experience_assessment_agent",
+        "screening_review_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured compact handoff projection on 'experience_assessment_agent->screening_review_agent' retaining 4 field(s) and excluding ['relevance_summary', 'transferable_skills'].",
+      "details": {
+        "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+        "producer_agent": "experience_assessment_agent",
+        "consumer_agent": "screening_review_agent",
+        "retained_fields": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps",
+          "evidence_references"
+        ],
+        "excluded_fields": [
+          "relevance_summary",
+          "transferable_skills"
+        ],
+        "consumer_required_fields": [
+          "candidate_id",
+          "strengths",
+          "experience_gaps"
+        ],
+        "typed_delta_projection": true
+      },
+      "error": null
+    }
+  ],
+  "candidate_outcomes": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "dimension": "workflow_parallelization",
+      "target_agents": [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      "handoff_edge": null,
+      "modification_applied": true,
+      "modification_status": "applied",
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "validation_result": "passed",
+      "execution_result": "failed",
+      "baseline_metric_observations": {},
+      "optimized_metric_observations": {},
+      "output_quality_impact": {
+        "qualification_agent": {
+          "baseline_structural": [],
+          "optimized_structural": [],
+          "optimized_semantic": []
+        },
+        "job_criteria_agent": {
+          "baseline_structural": [],
+          "optimized_structural": [],
+          "optimized_semantic": []
+        }
+      },
+      "evaluation_result": "applied",
+      "outcome": "applied",
+      "requires_validation": false,
+      "failure_reasons": [
+        "Optimized runtime execution failed or incomplete."
+      ],
+      "attribution_note": "Multiple candidates (4) applied concurrently in this experiment; combined workflow deltas reflect joint execution and are not attributed to individual candidates without isolated ablation runs."
+    },
+    {
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
+      "dimension": "model_selection",
+      "target_agents": [
+        "resume_intake_agent"
+      ],
+      "handoff_edge": null,
+      "modification_applied": true,
+      "modification_status": "applied",
+      "modified_files": [
+        "intake_agent.py",
+        "workflow.json",
+        "sandbox_optimization_config.json"
+      ],
+      "validation_result": "passed",
+      "execution_result": "failed",
+      "baseline_metric_observations": {},
+      "optimized_metric_observations": {},
+      "output_quality_impact": {
+        "resume_intake_agent": {
+          "baseline_structural": [
+            "failed",
+            "failed"
+          ],
+          "optimized_structural": [
+            "failed",
+            "failed"
+          ],
+          "optimized_semantic": [
+            "unavailable",
+            "unavailable"
+          ]
+        }
+      },
+      "evaluation_result": "applied",
+      "outcome": "applied",
+      "requires_validation": true,
+      "failure_reasons": [
+        "Optimized runtime execution failed or incomplete."
+      ],
+      "attribution_note": "Multiple candidates (4) applied concurrently in this experiment; combined workflow deltas reflect joint execution and are not attributed to individual candidates without isolated ablation runs."
+    },
+    {
+      "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+      "dimension": "communication_data_handoff",
+      "target_agents": [
+        "qualification_agent",
+        "experience_assessment_agent"
+      ],
+      "handoff_edge": "qualification_agent->experience_assessment_agent",
+      "modification_applied": true,
+      "modification_status": "applied",
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "validation_result": "passed",
+      "execution_result": "failed",
+      "baseline_metric_observations": {},
+      "optimized_metric_observations": {},
+      "output_quality_impact": {
+        "qualification_agent": {
+          "baseline_structural": [],
+          "optimized_structural": [],
+          "optimized_semantic": []
+        },
+        "experience_assessment_agent": {
+          "baseline_structural": [],
+          "optimized_structural": [],
+          "optimized_semantic": []
+        }
+      },
+      "evaluation_result": "applied",
+      "outcome": "applied",
+      "requires_validation": true,
+      "failure_reasons": [
+        "Optimized runtime execution failed or incomplete."
+      ],
+      "attribution_note": "Multiple candidates (4) applied concurrently in this experiment; combined workflow deltas reflect joint execution and are not attributed to individual candidates without isolated ablation runs."
+    },
+    {
+      "candidate_id": "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT",
+      "dimension": "communication_data_handoff",
+      "target_agents": [
+        "experience_assessment_agent",
+        "screening_review_agent"
+      ],
+      "handoff_edge": "experience_assessment_agent->screening_review_agent",
+      "modification_applied": true,
+      "modification_status": "applied",
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "validation_result": "passed",
+      "execution_result": "failed",
+      "baseline_metric_observations": {},
+      "optimized_metric_observations": {},
+      "output_quality_impact": {
+        "experience_assessment_agent": {
+          "baseline_structural": [],
+          "optimized_structural": [],
+          "optimized_semantic": []
+        },
+        "screening_review_agent": {
+          "baseline_structural": [],
+          "optimized_structural": [],
+          "optimized_semantic": []
+        }
+      },
+      "evaluation_result": "applied",
+      "outcome": "applied",
+      "requires_validation": true,
+      "failure_reasons": [
+        "Optimized runtime execution failed or incomplete."
+      ],
+      "attribution_note": "Multiple candidates (4) applied concurrently in this experiment; combined workflow deltas reflect joint execution and are not attributed to individual candidates without isolated ablation runs."
+    }
+  ],
+  "validation_results": {
+    "validation_passed": true,
+    "original_workflow_integrity": {
+      "original_unchanged": true,
+      "checked_file_count": 12,
+      "changed_files": [],
+      "missing_files": [],
+      "added_files": []
+    },
+    "python_syntax_checks": {
+      "passed": true,
+      "files_checked": 10,
+      "errors": []
+    },
+    "import_checks": {
+      "passed": true,
+      "errors": []
+    },
+    "configuration_validation": {
+      "passed": true,
+      "errors": []
+    },
+    "reference_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "dependency_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "modification_verification": {
+      "passed": true,
+      "errors": []
+    },
+    "secret_hygiene": {
+      "passed": true,
+      "leaked_files": []
+    }
+  },
+  "baseline_runtime_execution_results": {
+    "execution_passed": false,
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "runs_executed": 2,
+    "successful_runs": 0,
+    "failed_runs": 2,
+    "trace_files": [
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_141027_eeafbb\\baseline_traces\\base_20261123_141027_382534.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_141027_eeafbb\\baseline_traces\\base_20261123_141032_d41073.json"
+    ],
+    "schema_validation_summary": {
+      "all_schemas_valid": false,
+      "failures": []
+    },
+    "invalid_replay_samples": [],
+    "api_errors": [
+      {
+        "variant": "baseline",
+        "run_index": 0,
+        "run_id": "base_20261123_141027_382534",
+        "agent_id": "resume_intake_agent",
+        "model": "openai/gpt-oss-120b",
+        "error": "Connection error."
+      },
+      {
+        "variant": "baseline",
+        "run_index": 1,
+        "run_id": "base_20261123_141032_d41073",
+        "agent_id": "resume_intake_agent",
+        "model": "openai/gpt-oss-120b",
+        "error": "Connection error."
+      }
+    ],
+    "errors": [
+      "Connection error.",
+      "Connection error."
+    ]
+  },
+  "runtime_execution_results": {
+    "execution_passed": false,
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "unavailable"
+    ],
+    "runs_executed": 2,
+    "successful_runs": 0,
+    "failed_runs": 2,
+    "incomplete_runs": [
+      {
+        "run_id": "sb_20261123_141030_a60109",
+        "run_index": 0,
+        "status": "FAILED",
+        "executed_agents": 1,
+        "expected_agents": 8,
+        "error": "Connection error."
+      },
+      {
+        "run_id": "sb_20261123_141033_3d2c07",
+        "run_index": 1,
+        "status": "FAILED",
+        "executed_agents": 1,
+        "expected_agents": 8,
+        "error": "Connection error."
+      }
+    ],
+    "concurrent_waves_executed": [],
+    "trace_files": [
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_141027_eeafbb\\runtime_traces\\sb_20261123_141030_a60109.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\exp_20261123_141027_eeafbb\\runtime_traces\\sb_20261123_141033_3d2c07.json"
+    ],
+    "schema_validation_summary": {
+      "all_schemas_valid": false,
+      "failures": []
+    },
+    "invalid_replay_samples": [],
+    "api_errors": [
+      {
+        "variant": "optimized",
+        "run_index": 0,
+        "run_id": "sb_20261123_141030_a60109",
+        "agent_id": "resume_intake_agent",
+        "model": "llama-3.3-70b-versatile",
+        "error": "Connection error."
+      },
+      {
+        "variant": "optimized",
+        "run_index": 1,
+        "run_id": "sb_20261123_141033_3d2c07",
+        "agent_id": "resume_intake_agent",
+        "model": "llama-3.3-70b-versatile",
+        "error": "Connection error."
+      }
+    ],
+    "fallback_events": [],
+    "errors": [
+      "Connection error.",
+      "Connection error."
+    ]
+  },
+  "quality_evaluation": {
+    "workflow_id": "recruitment_screening",
+    "baseline_quality": {
+      "evaluated_executions": 2,
+      "dimension_summary": {
+        "structural_validity": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "correctness": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "completeness": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "consistency": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "instruction_adherence": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "semantic_quality": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        }
+      },
+      "agent_evaluations": [
+        {
+          "agent_id": "resume_intake_agent",
+          "structural_validity": "failed",
+          "correctness": "failed",
+          "completeness": "failed",
+          "consistency": "failed",
+          "instruction_adherence": "failed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [
+            "Agent execution failed or returned empty output: Connection error."
+          ],
+          "rationale": "Execution failed before a structured output was produced.",
+          "evaluation_status": "failed",
+          "run_id": "base_20261123_141027_382534",
+          "run_index": 0
+        },
+        {
+          "agent_id": "resume_intake_agent",
+          "structural_validity": "failed",
+          "correctness": "failed",
+          "completeness": "failed",
+          "consistency": "failed",
+          "instruction_adherence": "failed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [
+            "Agent execution failed or returned empty output: Connection error."
+          ],
+          "rationale": "Execution failed before a structured output was produced.",
+          "evaluation_status": "failed",
+          "run_id": "base_20261123_141032_d41073",
+          "run_index": 1
+        }
+      ]
+    },
+    "optimized_quality": {
+      "evaluated_executions": 2,
+      "dimension_summary": {
+        "structural_validity": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "correctness": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "completeness": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "consistency": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "instruction_adherence": {
+          "status": "failed",
+          "pass_rate_pct": 0.0,
+          "passed_count": 0,
+          "failed_count": 2,
+          "evaluated_count": 2
+        },
+        "semantic_quality": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        }
+      },
+      "agent_evaluations": [
+        {
+          "agent_id": "resume_intake_agent",
+          "structural_validity": "failed",
+          "correctness": "failed",
+          "completeness": "failed",
+          "consistency": "failed",
+          "instruction_adherence": "failed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [
+            "Agent execution failed or returned empty output: Connection error."
+          ],
+          "rationale": "Execution failed before a structured output was produced.",
+          "evaluation_status": "failed",
+          "run_id": "sb_20261123_141030_a60109",
+          "run_index": 0
+        },
+        {
+          "agent_id": "resume_intake_agent",
+          "structural_validity": "failed",
+          "correctness": "failed",
+          "completeness": "failed",
+          "consistency": "failed",
+          "instruction_adherence": "failed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [
+            "Agent execution failed or returned empty output: Connection error."
+          ],
+          "rationale": "Execution failed before a structured output was produced.",
+          "evaluation_status": "failed",
+          "run_id": "sb_20261123_141033_3d2c07",
+          "run_index": 1
+        }
+      ]
+    },
+    "identified_regressions": [],
+    "has_quality_regression": false
+  },
+  "baseline_metrics": {
+    "workflow_id": "recruitment_screening",
+    "experiment_id": "exp_20261123_141027_eeafbb",
+    "variant": "baseline",
+    "source": "Matched Sandbox Runtime (baseline)",
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "unavailable"
+    ],
+    "cost_calculation_basis": "estimated_from_historical_replay",
+    "total_runs": 2,
+    "successful_runs": 0,
+    "failed_runs": 2,
+    "incomplete_runs": [
+      {
+        "run_id": "base_20261123_141027_382534",
+        "run_index": 0,
+        "status": "FAILED",
+        "executed_agents": 1,
+        "expected_agents": 8,
+        "error": "Connection error."
+      },
+      {
+        "run_id": "base_20261123_141032_d41073",
+        "run_index": 1,
+        "status": "FAILED",
+        "executed_agents": 1,
+        "expected_agents": 8,
+        "error": "Connection error."
+      }
+    ],
+    "success_rate_pct": 0.0,
+    "mean_latency_seconds": null,
+    "median_latency_seconds": null,
+    "mean_agent_latency_seconds": null,
+    "mean_tokens": null,
+    "mean_prompt_tokens": null,
+    "mean_completion_tokens": null,
+    "mean_cost_usd_catalog_normalized": null,
+    "schema_validation_passed": false,
+    "structural_validity_pass_rate_pct": 0.0,
+    "schema_validation_failures": [],
+    "invalid_replay_samples": [],
+    "semantic_quality_evaluation": "unavailable",
+    "semantic_quality_status": "unavailable",
+    "semantic_quality_pass_rate_pct": null,
+    "api_errors": [
+      {
+        "variant": "baseline",
+        "run_index": 0,
+        "run_id": "base_20261123_141027_382534",
+        "agent_id": "resume_intake_agent",
+        "model": "openai/gpt-oss-120b",
+        "error": "Connection error."
+      },
+      {
+        "variant": "baseline",
+        "run_index": 1,
+        "run_id": "base_20261123_141032_d41073",
+        "agent_id": "resume_intake_agent",
+        "model": "openai/gpt-oss-120b",
+        "error": "Connection error."
+      }
+    ],
+    "per_agent_metrics": {},
+    "input_dataset_hashes": [
+      "28cc41cf1175eddb9d765f3b370bb5737a248f327f68f5dcd09f3954d5c3f6a0",
+      "1785cab64f791c1859ed8c306254d3a5fc0af098935295798ef3be2daaf7a525"
+    ],
+    "historical_mcp_reference": {
+      "total_runs": 30,
+      "mean_latency_seconds": 44.7989,
+      "mean_tokens": 16909.5
+    }
+  },
+  "optimized_metrics": {
+    "workflow_id": "recruitment_screening",
+    "experiment_id": "exp_20261123_141027_eeafbb",
+    "variant": "optimized",
+    "source": "Matched Sandbox Runtime (optimized)",
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "unavailable"
+    ],
+    "cost_calculation_basis": "estimated_from_historical_replay",
+    "total_runs": 2,
+    "successful_runs": 0,
+    "failed_runs": 2,
+    "incomplete_runs": [
+      {
+        "run_id": "sb_20261123_141030_a60109",
+        "run_index": 0,
+        "status": "FAILED",
+        "executed_agents": 1,
+        "expected_agents": 8,
+        "error": "Connection error."
+      },
+      {
+        "run_id": "sb_20261123_141033_3d2c07",
+        "run_index": 1,
+        "status": "FAILED",
+        "executed_agents": 1,
+        "expected_agents": 8,
+        "error": "Connection error."
+      }
+    ],
+    "success_rate_pct": 0.0,
+    "mean_latency_seconds": null,
+    "median_latency_seconds": null,
+    "mean_agent_latency_seconds": null,
+    "mean_tokens": null,
+    "mean_prompt_tokens": null,
+    "mean_completion_tokens": null,
+    "mean_cost_usd_catalog_normalized": null,
+    "schema_validation_passed": false,
+    "structural_validity_pass_rate_pct": 0.0,
+    "schema_validation_failures": [],
+    "invalid_replay_samples": [],
+    "semantic_quality_evaluation": "unavailable",
+    "semantic_quality_status": "unavailable",
+    "semantic_quality_pass_rate_pct": null,
+    "api_errors": [
+      {
+        "variant": "optimized",
+        "run_index": 0,
+        "run_id": "sb_20261123_141030_a60109",
+        "agent_id": "resume_intake_agent",
+        "model": "llama-3.3-70b-versatile",
+        "error": "Connection error."
+      },
+      {
+        "variant": "optimized",
+        "run_index": 1,
+        "run_id": "sb_20261123_141033_3d2c07",
+        "agent_id": "resume_intake_agent",
+        "model": "llama-3.3-70b-versatile",
+        "error": "Connection error."
+      }
+    ],
+    "per_agent_metrics": {},
+    "input_dataset_hashes": [
+      "28cc41cf1175eddb9d765f3b370bb5737a248f327f68f5dcd09f3954d5c3f6a0",
+      "1785cab64f791c1859ed8c306254d3a5fc0af098935295798ef3be2daaf7a525"
+    ]
+  },
+  "before_and_after_comparison": {
+    "comparability": {
+      "inputs_comparable": true,
+      "modes_compatible_for_live_claims": true,
+      "baseline_runs": 2,
+      "optimized_runs": 2,
+      "baseline_modes": [
+        "live_llm_execution"
+      ],
+      "optimized_modes": [
+        "live_llm_execution"
+      ]
+    },
+    "mean_workflow_latency": {
+      "baseline_seconds": null,
+      "optimized_seconds": null,
+      "improvement_pct": null,
+      "raw_replay_delta_pct": null
+    },
+    "median_workflow_latency": {
+      "baseline_seconds": null,
+      "optimized_seconds": null,
+      "improvement_pct": null,
+      "raw_replay_delta_pct": null
+    },
+    "mean_agent_latency": {
+      "baseline_seconds": null,
+      "optimized_seconds": null,
+      "improvement_pct": null,
+      "per_agent": {}
+    },
+    "latency": {
+      "baseline_mean_seconds": null,
+      "optimized_mean_seconds": null,
+      "improvement_pct": null,
+      "comparable_for_live_claim": true,
+      "note": "Measured live workflow execution latency on matched inputs."
+    },
+    "input_tokens": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": null,
+      "improvement_pct": null
+    },
+    "output_tokens": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": null,
+      "improvement_pct": null
+    },
+    "total_tokens": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": null,
+      "improvement_pct": null
+    },
+    "token_consumption": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": null,
+      "improvement_pct": null
+    },
+    "execution_cost": {
+      "baseline_telemetry_usd": null,
+      "baseline_catalog_normalized_usd": null,
+      "optimized_catalog_normalized_usd": null,
+      "improvement_pct_catalog_normalized": null,
+      "cost_basis": "estimated_from_historical_replay"
+    },
+    "execution_success_rate": {
+      "baseline_pct": 0.0,
+      "optimized_pct": 0.0,
+      "delta_pct_points": 0.0,
+      "improvement_pct": 0.0
+    },
+    "output_structural_validity": {
+      "baseline_pass_rate_pct": 0.0,
+      "optimized_pass_rate_pct": 0.0,
+      "improvement_pct": 0.0
+    },
+    "semantic_quality": {
+      "baseline_status_or_pct": "unavailable",
+      "optimized_status_or_pct": "unavailable",
+      "improvement_pct": null,
+      "identified_regressions": []
+    },
+    "output_quality": {
+      "baseline_quality": "unavailable",
+      "optimized_schema_valid": false,
+      "semantic_quality_evaluation": "unavailable",
+      "identified_regressions": [],
+      "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+    }
+  },
+  "outcome_flags": {
+    "modification_applied": true,
+    "validation_passed": true,
+    "execution_passed": false,
+    "evaluation_passed": false
+  },
+  "final_experiment_assessment": {
+    "status": "failed",
+    "reasons": [
+      "Optimized workflow runtime execution failed or produced incomplete runs."
+    ]
+  },
+  "overall_experiment_status": "failed"
+}

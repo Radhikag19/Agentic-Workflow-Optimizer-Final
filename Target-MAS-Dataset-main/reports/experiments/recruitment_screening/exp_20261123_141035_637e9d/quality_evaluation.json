@@ -1,0 +1,593 @@
+{
+  "workflow_id": "recruitment_screening",
+  "baseline_quality": {
+    "evaluated_executions": 16,
+    "dimension_summary": {
+      "structural_validity": {
+        "status": "failed",
+        "pass_rate_pct": 87.5,
+        "passed_count": 14,
+        "failed_count": 2,
+        "evaluated_count": 16
+      },
+      "correctness": {
+        "status": "failed",
+        "pass_rate_pct": 50.0,
+        "passed_count": 7,
+        "failed_count": 7,
+        "evaluated_count": 14
+      },
+      "completeness": {
+        "status": "failed",
+        "pass_rate_pct": 87.5,
+        "passed_count": 14,
+        "failed_count": 2,
+        "evaluated_count": 16
+      },
+      "consistency": {
+        "status": "passed",
+        "pass_rate_pct": 100.0,
+        "passed_count": 10,
+        "failed_count": 0,
+        "evaluated_count": 10
+      },
+      "instruction_adherence": {
+        "status": "failed",
+        "pass_rate_pct": 87.5,
+        "passed_count": 14,
+        "failed_count": 2,
+        "evaluated_count": 16
+      },
+      "semantic_quality": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      }
+    },
+    "agent_evaluations": [
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "qualification_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "job_criteria_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "evidence_mapping_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "experience_assessment_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "missing_evidence_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "screening_review_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "structural_validity": "failed",
+        "correctness": "unavailable",
+        "completeness": "failed",
+        "consistency": "unavailable",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Schema validation failed: 4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, inpu",
+          "Replayed historical sample is incomplete / missing required fields ['identified_inconsistencies', 'recommended_follow_up_questions', 'score_calculation_method', 'score_limitations']."
+        ],
+        "rationale": "Historical trace sample is insufficient for reliable semantic evaluation.",
+        "evaluation_status": "insufficient_sample",
+        "run_id": "base_20261123_141036_22af14",
+        "run_index": 0
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "qualification_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "job_criteria_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on job_id: expected 'JOB-02', got 'JOB-01'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "evidence_mapping_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'.",
+          "Input grounding mismatch on job_id: expected 'JOB-02', got 'JOB-01'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "experience_assessment_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "missing_evidence_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "screening_review_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "structural_validity": "failed",
+        "correctness": "unavailable",
+        "completeness": "failed",
+        "consistency": "unavailable",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Schema validation failed: 4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, inpu",
+          "Replayed historical sample is incomplete / missing required fields ['identified_inconsistencies', 'recommended_follow_up_questions', 'score_calculation_method', 'score_limitations']."
+        ],
+        "rationale": "Historical trace sample is insufficient for reliable semantic evaluation.",
+        "evaluation_status": "insufficient_sample",
+        "run_id": "base_20261123_141102_4d39ca",
+        "run_index": 1
+      }
+    ]
+  },
+  "optimized_quality": {
+    "evaluated_executions": 16,
+    "dimension_summary": {
+      "structural_validity": {
+        "status": "failed",
+        "pass_rate_pct": 87.5,
+        "passed_count": 14,
+        "failed_count": 2,
+        "evaluated_count": 16
+      },
+      "correctness": {
+        "status": "failed",
+        "pass_rate_pct": 50.0,
+        "passed_count": 7,
+        "failed_count": 7,
+        "evaluated_count": 14
+      },
+      "completeness": {
+        "status": "failed",
+        "pass_rate_pct": 87.5,
+        "passed_count": 14,
+        "failed_count": 2,
+        "evaluated_count": 16
+      },
+      "consistency": {
+        "status": "passed",
+        "pass_rate_pct": 100.0,
+        "passed_count": 10,
+        "failed_count": 0,
+        "evaluated_count": 10
+      },
+      "instruction_adherence": {
+        "status": "failed",
+        "pass_rate_pct": 87.5,
+        "passed_count": 14,
+        "failed_count": 2,
+        "evaluated_count": 16
+      },
+      "semantic_quality": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      }
+    },
+    "agent_evaluations": [
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "qualification_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "job_criteria_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "evidence_mapping_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "experience_assessment_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "missing_evidence_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "screening_review_agent",
+        "structural_validity": "passed",
+        "correctness": "passed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "structural_validity": "failed",
+        "correctness": "unavailable",
+        "completeness": "failed",
+        "consistency": "unavailable",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Schema validation failed: 4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, inpu",
+          "Replayed historical sample is incomplete / missing required fields ['identified_inconsistencies', 'recommended_follow_up_questions', 'score_calculation_method', 'score_limitations']."
+        ],
+        "rationale": "Historical trace sample is insufficient for reliable semantic evaluation.",
+        "evaluation_status": "insufficient_sample",
+        "run_id": "sb_20261123_141050_4257ee",
+        "run_index": 0
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "qualification_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "job_criteria_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on job_id: expected 'JOB-02', got 'JOB-01'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "evidence_mapping_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'.",
+          "Input grounding mismatch on job_id: expected 'JOB-02', got 'JOB-01'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "experience_assessment_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "missing_evidence_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "screening_review_agent",
+        "structural_validity": "passed",
+        "correctness": "failed",
+        "completeness": "passed",
+        "consistency": "passed",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Input grounding mismatch on candidate_id: expected 'CAND-002', got 'CAND-001'."
+        ],
+        "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+        "evaluation_status": "completed",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "structural_validity": "failed",
+        "correctness": "unavailable",
+        "completeness": "failed",
+        "consistency": "unavailable",
+        "instruction_adherence": "failed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Schema validation failed: 4 validation errors for RecruiterSummaryOutput\nidentified_inconsistencies\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecommended_follow_up_questions\n  Field required [type=missing, input_value={'run_id': 'live_20261031...ation': 'NOT_QUALIFIED'}, inpu",
+          "Replayed historical sample is incomplete / missing required fields ['identified_inconsistencies', 'recommended_follow_up_questions', 'score_calculation_method', 'score_limitations']."
+        ],
+        "rationale": "Historical trace sample is insufficient for reliable semantic evaluation.",
+        "evaluation_status": "insufficient_sample",
+        "run_id": "sb_20261123_141116_15bde0",
+        "run_index": 1
+      }
+    ]
+  },
+  "identified_regressions": [],
+  "has_quality_regression": false
+}

@@ -637,14 +637,17 @@ def test_15_end_to_end_consolidation_plus_prompt_opt_reports_and_compatibility()
     assert "Original consolidated prompt" in md
     assert "Generated Optimized Prompt" in md
 
-    # Verify other dimensions remained intact
+    # Verify other active dimensions remained intact
     for key in (
-        "agent_pruning_opportunities",
         "agent_consolidation_opportunities",
         "workflow_parallelization_opportunities",
         "model_selection_recommendations",
-        "tool_optimization_opportunities",
         "communication_optimization_opportunities",
-        "additional_optimization_opportunities",
     ):
         assert key in rep_json
+    for removed in (
+        "agent_pruning_opportunities",
+        "tool_optimization_opportunities",
+        "additional_optimization_opportunities",
+    ):
+        assert removed not in rep_json

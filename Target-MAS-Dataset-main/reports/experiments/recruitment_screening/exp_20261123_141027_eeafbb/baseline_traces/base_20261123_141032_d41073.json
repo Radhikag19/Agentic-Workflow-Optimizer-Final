@@ -1,0 +1,71 @@
+{
+  "run_id": "base_20261123_141032_d41073",
+  "run_index": 1,
+  "variant": "baseline",
+  "workflow_name": "recruitment_screening",
+  "experiment_id": "exp_20261123_141027_eeafbb",
+  "model": "openai/gpt-oss-120b",
+  "status": "FAILED",
+  "execution_mode": "live_llm_execution",
+  "usage_sources": [
+    "unavailable"
+  ],
+  "input_hash": "1785cab64f791c1859ed8c306254d3a5fc0af098935295798ef3be2daaf7a525",
+  "input_snapshot": {
+    "run_index": 1,
+    "input_hash": "1785cab64f791c1859ed8c306254d3a5fc0af098935295798ef3be2daaf7a525",
+    "candidate_id": "CAND-002",
+    "application_id": "APP-002",
+    "candidate_name": "Jordan Martinez",
+    "job_id": "JOB-02",
+    "job_title": null
+  },
+  "duration_seconds": 1.8054,
+  "agent_execution_count": 1,
+  "agent_execution_order": [
+    "resume_intake_agent"
+  ],
+  "concurrent_waves": [],
+  "agent_executions": [
+    {
+      "order": 1,
+      "agent_id": "resume_intake_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 1.8053,
+      "status": "FAILED",
+      "tokens": 0,
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "estimated_cost_usd": 0.0,
+      "usage_source": "unavailable",
+      "schema_valid": false,
+      "missing_required_fields": [],
+      "output": null,
+      "mode": "live_llm_execution",
+      "error": "Connection error.",
+      "notes": "live_api_error=Connection error."
+    }
+  ],
+  "handoff_audits": [],
+  "total_tokens": 0,
+  "prompt_tokens": 0,
+  "completion_tokens": 0,
+  "estimated_cost_usd": 0.0,
+  "api_errors": [
+    {
+      "variant": "baseline",
+      "run_index": 1,
+      "run_id": "base_20261123_141032_d41073",
+      "agent_id": "resume_intake_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Connection error."
+    }
+  ],
+  "fallback_events": [],
+  "schema_failures": [],
+  "invalid_replay_samples": [],
+  "final_output": null,
+  "error": "Connection error.",
+  "timestamp": "2026-11-23T14:10:33.938757+00:00"
+}
