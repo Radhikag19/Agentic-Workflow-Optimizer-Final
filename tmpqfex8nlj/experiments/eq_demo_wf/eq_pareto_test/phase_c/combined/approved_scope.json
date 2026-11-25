@@ -1,0 +1,26 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "approval_status": "approved",
+  "approved_candidate_ids": [
+    "M1"
+  ],
+  "approved_candidates": [
+    {
+      "candidate_id": "M1",
+      "dimension": "model_selection",
+      "target_agents": [
+        "a1"
+      ],
+      "selected_model": "openai/gpt-oss-20b",
+      "recommended_model": "openai/gpt-oss-20b",
+      "supporting_evidence": {
+        "current_model": "openai/gpt-oss-120b",
+        "proposed_candidate_models": [
+          {
+            "model": "openai/gpt-oss-20b"
+          }
+        ]
+      }
+    }
+  ]
+}

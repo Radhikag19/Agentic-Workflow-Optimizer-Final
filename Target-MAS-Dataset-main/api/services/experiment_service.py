@@ -15,6 +15,9 @@ from typing import Any, Dict, List, Optional
 from api.schemas.experiment import ExperimentStartRequest
 from api.services.artifact_service import ArtifactService, validate_safe_id
 from api.services.event_service import EventService
+from optimization_agent.sandbox.evaluation.equivalence_evaluator import (
+    EquivalenceAcceptanceCriteria,
+)
 from optimization_agent.sandbox.evaluation.ragas_evaluator import QualityAcceptanceCriteria
 from optimization_agent.sandbox.experiment import SandboxExperimentRunner
 
@@ -113,10 +116,12 @@ class ExperimentService:
         kind = rec["experiment_type"]
         if kind == "two_phase_study":
             setup = rep.get("experimental_setup") or {}
+            ev_mode = rep.get("evaluation_mode") or setup.get("evaluation_mode") or "ragas"
             return self.artifacts.sanitize_obj({
                 "experiment_id": exp_id,
                 "workflow_id": rec["workflow_id"],
                 "experiment_type": kind,
+                "evaluation_mode": ev_mode,
                 "status": rec["status"],
                 "fixed_optimization_foundation": rep.get("fixed_optimization_foundation") or [],
                 "baseline_runtime_results": {
@@ -162,6 +167,7 @@ class ExperimentService:
                 "experiment_id": exp_id,
                 "workflow_id": wf_id,
                 "experiment_type": exp_type,
+                "evaluation_mode": res.get("evaluation_mode") or "ragas",
                 "status": "completed",
                 "fixed_optimization_foundation": res.get("fixed_optimization_foundation") or [],
                 "baseline_runtime_results": res.get("baseline_runtime_results") or {},
@@ -316,13 +322,22 @@ class ExperimentService:
                         max_regression_vs_foundation=0.10,
                     )
                 )
-                res = runner.run_two_phase_optimization_study(
-                    scope,
-                    study_id=exp_id,
-                    quality_criteria=criteria,
-                    selected_variable_dimensions=req.selected_dimensions or None,
-                    num_runs=req.num_runs,
+                eq_criteria = (
+                    EquivalenceAcceptanceCriteria.from_dict(req.equivalence_criteria.model_dump())
+                    if req.equivalence_criteria is not None
+                    else EquivalenceAcceptanceCriteria()
                 )
+                study_kwargs: Dict[str, Any] = {
+                    "study_id": exp_id,
+                    "quality_criteria": criteria,
+                    "selected_variable_dimensions": req.selected_dimensions or None,
+                    "num_runs": req.num_runs,
+                }
+                if req.evaluation_mode == "equivalence":
+                    study_kwargs["evaluation_mode"] = "equivalence"
+                    study_kwargs["equivalence_criteria"] = eq_criteria
+                    study_kwargs["enable_equivalence_llm_judge"] = req.enable_equivalence_llm_judge
+                res = runner.run_two_phase_optimization_study(scope, **study_kwargs)
             elif req.experiment_type == "dimension_ablation_suite":
                 res = runner.run_dimension_ablation_suite(
                     scope,

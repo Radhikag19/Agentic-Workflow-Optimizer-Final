@@ -129,6 +129,15 @@ export interface ExperimentStartRequest {
   selected_dimensions?: OptimizationDimension[];
   num_runs: number;
   approved_scope_reference?: string | null;
+  evaluation_mode?: 'equivalence' | 'ragas';
+  enable_equivalence_llm_judge?: boolean;
+  equivalence_criteria?: {
+    min_structural_decision_score?: number;
+    min_semantic_cosine?: number;
+    min_llm_judge_score?: number;
+    max_decision_flips?: number;
+    max_regression_vs_foundation?: number;
+  };
   quality_criteria?: {
     max_faithfulness_drop?: number;
     max_context_precision_drop?: number;
@@ -161,6 +170,7 @@ export interface ExperimentResultsResponse {
   experiment_id: string;
   workflow_id: string;
   experiment_type: string;
+  evaluation_mode?: string;
   status: string;
   fixed_optimization_foundation?: string[] | null;
   baseline_runtime_results: Record<string, any>;

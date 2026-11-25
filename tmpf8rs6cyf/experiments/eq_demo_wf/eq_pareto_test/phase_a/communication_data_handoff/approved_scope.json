@@ -1,0 +1,40 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "approval_status": "approved",
+  "approved_candidate_ids": [
+    "H1"
+  ],
+  "approved_candidates": [
+    {
+      "candidate_id": "H1",
+      "dimension": "communication_data_handoff",
+      "target_agents": [
+        "a1",
+        "a3"
+      ],
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "candidate_id",
+          "skills"
+        ],
+        "excluded_fields": [
+          "extra"
+        ]
+      },
+      "supporting_evidence": {
+        "producer_agent": "a1",
+        "consumer_agent": "a3",
+        "fields_retained": [
+          "candidate_id",
+          "skills"
+        ],
+        "fields_excluded": [
+          "extra"
+        ],
+        "consumer_required_fields": [
+          "skills"
+        ]
+      }
+    }
+  ]
+}

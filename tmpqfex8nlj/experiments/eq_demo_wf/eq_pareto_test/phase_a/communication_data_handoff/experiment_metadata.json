@@ -1,0 +1,25 @@
+{
+  "experiment_id": "eq_pareto_test__phase_a_communication_data_handoff",
+  "workflow_id": "eq_demo_wf",
+  "original_workflow_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf",
+  "sandbox_workflow_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\sandbox_workflow",
+  "runtime_traces_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\runtime_traces",
+  "approved_candidate_ids": [
+    "H1"
+  ],
+  "original_to_sandbox_map": {
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf\\a1.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\sandbox_workflow\\a1.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf\\a2.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\sandbox_workflow\\a2.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf\\a3.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\sandbox_workflow\\a3.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf\\workflow.json": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\sandbox_workflow\\workflow.json",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf\\workflow.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\communication_data_handoff\\sandbox_workflow\\workflow.py"
+  },
+  "original_file_hashes": {
+    "a1.py": "e1766696313977b891052a9c86c7f8bfb282642e46ad6373117580268e22826a",
+    "a2.py": "4c262c22bfe0ccb93cad1f9f229d1c58a69cbcc318f46750a0f58c94e983b8e0",
+    "a3.py": "a2f766c51c63aab959afc02f2a805a92aa2bdd9992ab96911989fa4b2ed76f0b",
+    "workflow.json": "eff14d6d5995010f8ed67760b011132daef5dadff97cb7d0aeaa3f4b1b028d87",
+    "workflow.py": "fc920b1ed54e0e53a6182eff3fe1ef26f3a80ba27f00a94a2b08e4b4b7eba37a"
+  },
+  "created_at": "2026-11-25T06:01:55.401297+00:00"
+}

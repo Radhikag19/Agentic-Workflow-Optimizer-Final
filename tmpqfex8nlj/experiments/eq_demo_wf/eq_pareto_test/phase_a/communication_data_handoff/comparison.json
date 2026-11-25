@@ -1,0 +1,124 @@
+{
+  "comparison_type": "historical_baseline_vs_live_optimized",
+  "comparability": {
+    "inputs_comparable": false,
+    "modes_compatible_for_live_claims": true,
+    "baseline_re_executed": false,
+    "baseline_measurement_period": {
+      "earliest_trace_timestamp": null,
+      "latest_trace_timestamp": null
+    },
+    "fixed_baseline_reference_id": "hist_586e788e111c",
+    "matched_input_count": 0,
+    "unmatched_input_count": 1,
+    "baseline_runs": 0,
+    "optimized_runs": 1,
+    "baseline_modes": [
+      "historical_recorded_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": null,
+    "optimized_seconds": 1.7,
+    "improvement_pct": null,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": null,
+    "optimized_seconds": 1.7,
+    "improvement_pct": null,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": null,
+    "optimized_seconds": 0.5667,
+    "improvement_pct": null,
+    "per_agent": {
+      "a1": {
+        "baseline_mean_latency_seconds": null,
+        "optimized_mean_latency_seconds": 0.68,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": null,
+        "optimized_mean_tokens": 390.0,
+        "token_improvement_pct": null
+      },
+      "a2": {
+        "baseline_mean_latency_seconds": null,
+        "optimized_mean_latency_seconds": 0.51,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": null,
+        "optimized_mean_tokens": 195.0,
+        "token_improvement_pct": null
+      },
+      "a3": {
+        "baseline_mean_latency_seconds": null,
+        "optimized_mean_latency_seconds": 0.51,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": null,
+        "optimized_mean_tokens": 195.0,
+        "token_improvement_pct": null
+      }
+    }
+  },
+  "latency": {
+    "baseline_mean_seconds": null,
+    "optimized_mean_seconds": 1.7,
+    "improvement_pct": null,
+    "comparable_for_live_claim": false,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": 390.0,
+    "improvement_pct": null
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": 390.0,
+    "improvement_pct": null
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": 780.0,
+    "improvement_pct": null
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": null,
+    "optimized_mean_tokens": 780.0,
+    "improvement_pct": null
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": null,
+    "baseline_catalog_normalized_usd": null,
+    "optimized_catalog_normalized_usd": 0.00078,
+    "improvement_pct_catalog_normalized": null,
+    "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+  },
+  "execution_success_rate": {
+    "baseline_pct": null,
+    "optimized_pct": 100.0,
+    "delta_pct_points": null,
+    "improvement_pct": null
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": null,
+    "optimized_pass_rate_pct": 100.0,
+    "improvement_pct": null
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": []
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": true,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

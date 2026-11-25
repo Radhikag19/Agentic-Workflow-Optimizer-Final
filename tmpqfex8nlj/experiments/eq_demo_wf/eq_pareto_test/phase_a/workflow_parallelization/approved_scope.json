@@ -1,0 +1,17 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "approval_status": "approved",
+  "approved_candidate_ids": [
+    "P1"
+  ],
+  "approved_candidates": [
+    {
+      "candidate_id": "P1",
+      "dimension": "workflow_parallelization",
+      "target_agents": [
+        "a1",
+        "a2"
+      ]
+    }
+  ]
+}

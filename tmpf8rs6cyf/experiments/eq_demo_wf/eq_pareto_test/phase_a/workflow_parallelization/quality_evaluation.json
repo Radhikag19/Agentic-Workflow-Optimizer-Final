@@ -1,0 +1,146 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "baseline_quality": {
+    "evaluated_executions": 0,
+    "dimension_summary": {
+      "structural_validity": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "correctness": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "completeness": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "consistency": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "instruction_adherence": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "semantic_quality": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      }
+    },
+    "agent_evaluations": []
+  },
+  "optimized_quality": {
+    "evaluated_executions": 3,
+    "dimension_summary": {
+      "structural_validity": {
+        "status": "passed",
+        "pass_rate_pct": 100.0,
+        "passed_count": 3,
+        "failed_count": 0,
+        "evaluated_count": 3
+      },
+      "correctness": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "completeness": {
+        "status": "failed",
+        "pass_rate_pct": 66.67,
+        "passed_count": 2,
+        "failed_count": 1,
+        "evaluated_count": 3
+      },
+      "consistency": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      },
+      "instruction_adherence": {
+        "status": "passed",
+        "pass_rate_pct": 100.0,
+        "passed_count": 3,
+        "failed_count": 0,
+        "evaluated_count": 3
+      },
+      "semantic_quality": {
+        "status": "unavailable",
+        "pass_rate_pct": null,
+        "passed_count": 0,
+        "failed_count": 0,
+        "evaluated_count": 0
+      }
+    },
+    "agent_evaluations": [
+      {
+        "agent_id": "a1",
+        "structural_validity": "passed",
+        "correctness": "unavailable",
+        "completeness": "failed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [
+          "Missing declared workflow output_fields: ['extra']"
+        ],
+        "rationale": "Semantically equivalent",
+        "evaluation_status": "completed",
+        "run_id": "eq_pareto_test__phase_a_workflow_parallelization_r0",
+        "run_index": 0
+      },
+      {
+        "agent_id": "a2",
+        "structural_validity": "passed",
+        "correctness": "unavailable",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Semantically equivalent",
+        "evaluation_status": "completed",
+        "run_id": "eq_pareto_test__phase_a_workflow_parallelization_r0",
+        "run_index": 0
+      },
+      {
+        "agent_id": "a3",
+        "structural_validity": "passed",
+        "correctness": "unavailable",
+        "completeness": "passed",
+        "consistency": "unavailable",
+        "instruction_adherence": "passed",
+        "semantic_quality": "unavailable",
+        "identified_issues": [],
+        "rationale": "Semantically equivalent",
+        "evaluation_status": "completed",
+        "run_id": "eq_pareto_test__phase_a_workflow_parallelization_r0",
+        "run_index": 0
+      }
+    ]
+  },
+  "identified_regressions": [],
+  "has_quality_regression": false
+}

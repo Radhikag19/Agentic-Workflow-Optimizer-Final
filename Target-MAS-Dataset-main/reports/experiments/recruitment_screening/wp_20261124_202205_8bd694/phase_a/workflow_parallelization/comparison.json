@@ -1,0 +1,186 @@
+{
+  "comparison_type": "historical_baseline_vs_live_optimized",
+  "comparability": {
+    "inputs_comparable": true,
+    "modes_compatible_for_live_claims": true,
+    "baseline_re_executed": false,
+    "baseline_measurement_period": {
+      "earliest_trace_timestamp": "2026-10-31T16:26:24.677059+00:00",
+      "latest_trace_timestamp": "2026-10-31T16:26:59.186247+00:00"
+    },
+    "fixed_baseline_reference_id": "hist_ef23650339c0",
+    "matched_input_count": 30,
+    "unmatched_input_count": 0,
+    "baseline_runs": 2,
+    "optimized_runs": 2,
+    "baseline_modes": [
+      "historical_recorded_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": 22.7775,
+    "optimized_seconds": 102.8806,
+    "improvement_pct": -351.68,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": 22.7775,
+    "optimized_seconds": 102.8806,
+    "improvement_pct": -351.68,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": 2.8453,
+    "optimized_seconds": 13.5046,
+    "improvement_pct": -374.63,
+    "per_agent": {
+      "evidence_mapping_agent": {
+        "baseline_mean_latency_seconds": 3.17,
+        "optimized_mean_latency_seconds": 9.1151,
+        "latency_improvement_pct": -187.54,
+        "baseline_mean_tokens": 2324.5,
+        "optimized_mean_tokens": 2490.0,
+        "token_improvement_pct": -7.12
+      },
+      "experience_assessment_agent": {
+        "baseline_mean_latency_seconds": 2.7325,
+        "optimized_mean_latency_seconds": 19.7285,
+        "latency_improvement_pct": -621.99,
+        "baseline_mean_tokens": 2174.5,
+        "optimized_mean_tokens": 2207.0,
+        "token_improvement_pct": -1.49
+      },
+      "job_criteria_agent": {
+        "baseline_mean_latency_seconds": 2.3145,
+        "optimized_mean_latency_seconds": 5.41,
+        "latency_improvement_pct": -133.74,
+        "baseline_mean_tokens": 1323.5,
+        "optimized_mean_tokens": 1816.5,
+        "token_improvement_pct": -37.25
+      },
+      "missing_evidence_agent": {
+        "baseline_mean_latency_seconds": 2.71,
+        "optimized_mean_latency_seconds": 13.5495,
+        "latency_improvement_pct": -399.98,
+        "baseline_mean_tokens": 1775.0,
+        "optimized_mean_tokens": 2321.0,
+        "token_improvement_pct": -30.76
+      },
+      "qualification_agent": {
+        "baseline_mean_latency_seconds": 2.838,
+        "optimized_mean_latency_seconds": 12.6913,
+        "latency_improvement_pct": -347.19,
+        "baseline_mean_tokens": 1680.5,
+        "optimized_mean_tokens": 2109.5,
+        "token_improvement_pct": -25.53
+      },
+      "recruiter_summary_agent": {
+        "baseline_mean_latency_seconds": 4.1565,
+        "optimized_mean_latency_seconds": 16.118,
+        "latency_improvement_pct": -287.78,
+        "baseline_mean_tokens": 4202.0,
+        "optimized_mean_tokens": 3102.5,
+        "token_improvement_pct": 26.17
+      },
+      "resume_intake_agent": {
+        "baseline_mean_latency_seconds": 2.444,
+        "optimized_mean_latency_seconds": 9.1244,
+        "latency_improvement_pct": -273.34,
+        "baseline_mean_tokens": 1218.5,
+        "optimized_mean_tokens": 1581.5,
+        "token_improvement_pct": -29.79
+      },
+      "screening_review_agent": {
+        "baseline_mean_latency_seconds": 2.397,
+        "optimized_mean_latency_seconds": 22.2996,
+        "latency_improvement_pct": -830.31,
+        "baseline_mean_tokens": 2056.5,
+        "optimized_mean_tokens": 2410.5,
+        "token_improvement_pct": -17.21
+      }
+    }
+  },
+  "latency": {
+    "baseline_mean_seconds": 22.7775,
+    "optimized_mean_seconds": 102.8806,
+    "improvement_pct": -351.68,
+    "comparable_for_live_claim": true,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": 10078.0,
+    "optimized_mean_tokens": 11215.0,
+    "improvement_pct": -11.28
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": 6677.0,
+    "optimized_mean_tokens": 13647.0,
+    "improvement_pct": -104.39
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": 16755.0,
+    "optimized_mean_tokens": 36077.0,
+    "improvement_pct": -115.32
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": 16755.0,
+    "optimized_mean_tokens": 36077.0,
+    "improvement_pct": -115.32
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": 0.01122,
+    "baseline_catalog_normalized_usd": 0.005518,
+    "optimized_catalog_normalized_usd": 0.011554,
+    "improvement_pct_catalog_normalized": -109.39,
+    "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+  },
+  "execution_success_rate": {
+    "baseline_pct": 100.0,
+    "optimized_pct": 100.0,
+    "delta_pct_points": 0.0,
+    "improvement_pct": 0.0
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": 83.75,
+    "optimized_pass_rate_pct": 100.0,
+    "improvement_pct": 19.4
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": [
+      {
+        "agent_id": "recruiter_summary_agent",
+        "metric": "consistency",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=0.0.",
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=0.0."
+        ]
+      }
+    ]
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": true,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [
+      {
+        "agent_id": "recruiter_summary_agent",
+        "metric": "consistency",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=0.0.",
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=0.0."
+        ]
+      }
+    ],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

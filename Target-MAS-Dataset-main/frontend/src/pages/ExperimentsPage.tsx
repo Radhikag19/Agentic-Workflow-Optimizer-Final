@@ -44,6 +44,11 @@ export const ExperimentsPage: React.FC = () => {
     'prompt_optimization',
   ]);
   const [numRuns, setNumRuns] = useState<number>(2);
+  const [evaluationMode, setEvaluationMode] = useState<'equivalence' | 'ragas'>('equivalence');
+  const [minStructDecision, setMinStructDecision] = useState<number>(0.75);
+  const [minSemanticCosine, setMinSemanticCosine] = useState<number>(0.75);
+  const [maxDecisionFlips, setMaxDecisionFlips] = useState<number>(0);
+  const [enableLlmJudge, setEnableLlmJudge] = useState<boolean>(false);
   const [maxFaithfulnessDrop, setMaxFaithfulnessDrop] = useState<number>(0.1);
   const [maxPrecisionDrop, setMaxPrecisionDrop] = useState<number>(0.1);
   const [maxRecallDrop, setMaxRecallDrop] = useState<number>(0.1);
@@ -110,6 +115,13 @@ export const ExperimentsPage: React.FC = () => {
       experiment_type: experimentType,
       selected_dimensions: experimentType === 'dimension_ablation_suite' ? selectedDims : undefined,
       num_runs: numRuns,
+      evaluation_mode: evaluationMode,
+      enable_equivalence_llm_judge: enableLlmJudge,
+      equivalence_criteria: {
+        min_structural_decision_score: minStructDecision,
+        min_semantic_cosine: minSemanticCosine,
+        max_decision_flips: maxDecisionFlips,
+      },
       quality_criteria: {
         max_faithfulness_drop: maxFaithfulnessDrop,
         max_context_precision_drop: maxPrecisionDrop,
@@ -203,6 +215,19 @@ export const ExperimentsPage: React.FC = () => {
           </div>
         )}
 
+        <label style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: 13 }}>
+          <strong>Quality Evaluation Engine</strong>
+          <select
+            className="pixel-select"
+            aria-label="Quality Evaluation Engine"
+            value={evaluationMode}
+            onChange={(e) => setEvaluationMode(e.target.value as 'equivalence' | 'ragas')}
+          >
+            <option value="equivalence">3-Layer Behavioral Equivalence (0 Groq Calls)</option>
+            <option value="ragas">RAGAS Retrieval Metrics (Legacy)</option>
+          </select>
+        </label>
+
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: 8 }}>
           <label style={{ fontSize: 12 }}>
             <strong>Evaluated Runs (num_runs)</strong>
@@ -216,46 +241,103 @@ export const ExperimentsPage: React.FC = () => {
               onChange={(e) => setNumRuns(Math.max(1, Math.min(10, Number(e.target.value) || 1)))}
             />
           </label>
-          <label style={{ fontSize: 12 }}>
-            <strong>Max Faithfulness Drop</strong>
-            <input
-              type="number"
-              step="0.01"
-              min={0}
-              max={0.5}
-              className="pixel-input"
-              style={{ width: '100%', marginTop: 4 }}
-              value={maxFaithfulnessDrop}
-              onChange={(e) => setMaxFaithfulnessDrop(Number(e.target.value))}
-            />
-          </label>
-          <label style={{ fontSize: 12 }}>
-            <strong>Max Context Precision Drop</strong>
-            <input
-              type="number"
-              step="0.01"
-              min={0}
-              max={0.5}
-              className="pixel-input"
-              style={{ width: '100%', marginTop: 4 }}
-              value={maxPrecisionDrop}
-              onChange={(e) => setMaxPrecisionDrop(Number(e.target.value))}
-            />
-          </label>
-          <label style={{ fontSize: 12 }}>
-            <strong>Max Context Recall Drop</strong>
-            <input
-              type="number"
-              step="0.01"
-              min={0}
-              max={0.5}
-              className="pixel-input"
-              style={{ width: '100%', marginTop: 4 }}
-              value={maxRecallDrop}
-              onChange={(e) => setMaxRecallDrop(Number(e.target.value))}
-            />
-          </label>
+          {evaluationMode === 'equivalence' ? (
+            <>
+              <label style={{ fontSize: 12 }}>
+                <strong>Min Structural/Decision Match</strong>
+                <input
+                  type="number"
+                  step="0.05"
+                  min={0.5}
+                  max={1}
+                  className="pixel-input"
+                  style={{ width: '100%', marginTop: 4 }}
+                  value={minStructDecision}
+                  onChange={(e) => setMinStructDecision(Number(e.target.value))}
+                />
+              </label>
+              <label style={{ fontSize: 12 }}>
+                <strong>Min Semantic Cosine</strong>
+                <input
+                  type="number"
+                  step="0.05"
+                  min={0.5}
+                  max={1}
+                  className="pixel-input"
+                  style={{ width: '100%', marginTop: 4 }}
+                  value={minSemanticCosine}
+                  onChange={(e) => setMinSemanticCosine(Number(e.target.value))}
+                />
+              </label>
+              <label style={{ fontSize: 12 }}>
+                <strong>Max Decision Flips</strong>
+                <input
+                  type="number"
+                  step="1"
+                  min={0}
+                  max={10}
+                  className="pixel-input"
+                  style={{ width: '100%', marginTop: 4 }}
+                  value={maxDecisionFlips}
+                  onChange={(e) => setMaxDecisionFlips(Math.max(0, Number(e.target.value) || 0))}
+                />
+              </label>
+            </>
+          ) : (
+            <>
+              <label style={{ fontSize: 12 }}>
+                <strong>Max Faithfulness Drop</strong>
+                <input
+                  type="number"
+                  step="0.01"
+                  min={0}
+                  max={0.5}
+                  className="pixel-input"
+                  style={{ width: '100%', marginTop: 4 }}
+                  value={maxFaithfulnessDrop}
+                  onChange={(e) => setMaxFaithfulnessDrop(Number(e.target.value))}
+                />
+              </label>
+              <label style={{ fontSize: 12 }}>
+                <strong>Max Context Precision Drop</strong>
+                <input
+                  type="number"
+                  step="0.01"
+                  min={0}
+                  max={0.5}
+                  className="pixel-input"
+                  style={{ width: '100%', marginTop: 4 }}
+                  value={maxPrecisionDrop}
+                  onChange={(e) => setMaxPrecisionDrop(Number(e.target.value))}
+                />
+              </label>
+              <label style={{ fontSize: 12 }}>
+                <strong>Max Context Recall Drop</strong>
+                <input
+                  type="number"
+                  step="0.01"
+                  min={0}
+                  max={0.5}
+                  className="pixel-input"
+                  style={{ width: '100%', marginTop: 4 }}
+                  value={maxRecallDrop}
+                  onChange={(e) => setMaxRecallDrop(Number(e.target.value))}
+                />
+              </label>
+            </>
+          )}
         </div>
+
+        {evaluationMode === 'equivalence' && (
+          <label className="mono" style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12 }}>
+            <input
+              type="checkbox"
+              checked={enableLlmJudge}
+              onChange={(e) => setEnableLlmJudge(e.target.checked)}
+            />
+            Enable Layer 3: 1-Call Pairwise LLM Judge (optional)
+          </label>
+        )}
 
         <button
           type="submit"

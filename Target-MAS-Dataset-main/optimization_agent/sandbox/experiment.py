@@ -24,8 +24,11 @@ from optimization_agent.sandbox.candidate_router import (
     _canonical_dimension,
 )
 from optimization_agent.sandbox.evaluation import (
+    EquivalenceAcceptanceCriteria,
     QualityAcceptanceCriteria,
+    evaluate_behavioral_equivalence,
     evaluate_dimension_result,
+    evaluate_equivalence_acceptance,
     evaluate_experiment,
     evaluate_quality_acceptance,
     evaluate_with_ragas,
@@ -199,44 +202,68 @@ def _evaluate_study_configuration(
     ragas_runner: Optional[Callable[..., Dict[str, Any]]],
     foundation_ragas_scores: Optional[Dict[str, Any]] = None,
     is_foundation_gate: bool = False,
+    evaluation_mode: str = "ragas",
+    equivalence_criteria: Optional[EquivalenceAcceptanceCriteria] = None,
+    enable_equivalence_llm_judge: bool = False,
+    judge_callable: Optional[Callable[..., Dict[str, Any]]] = None,
+    foundation_eq_scores: Optional[Dict[str, Any]] = None,
 ) -> Tuple[Dict[str, Any], Dict[str, Any], Dict[str, Any], Dict[str, Any]]:
-    """Run RAGAS + acceptance gate + dimension evaluation and return a uniform selection row."""
+    """Run quality evaluation (3-layer equivalence or RAGAS) + acceptance gate + dimension summary."""
     target_agents: List[str] = []
     for r in (exp_result.get("execution_results") or {}).get("candidate_results") or []:
         for aid in (r.get("target_agents") or []):
             if aid not in target_agents:
                 target_agents.append(aid)
 
-    ragas_res = evaluate_with_ragas(
-        baseline_runtime_results=baseline_bundle,
-        optimized_runtime_results=exp_result.get("runtime_results"),
-        target_agents=target_agents or None,
-        ragas_runner=ragas_runner,
-    )
     opt_m = (exp_result.get("evaluation_results") or {}).get("optimized_metrics") or {}
     val_passed = bool((exp_result.get("validation_results") or {}).get("validation_passed", False))
     exec_passed = bool((exp_result.get("runtime_results") or {}).get("execution_passed", False))
     schema_valid = bool(opt_m.get("schema_validation_passed", False))
 
-    acceptance = evaluate_quality_acceptance(
-        ragas_res,
-        criteria,
-        execution_passed=exec_passed,
-        validation_passed=val_passed,
-        schema_valid=schema_valid,
-        foundation_ragas_scores=foundation_ragas_scores,
-    )
+    if evaluation_mode == "equivalence":
+        eval_res_payload = evaluate_behavioral_equivalence(
+            baseline_runtime_results=baseline_bundle,
+            optimized_runtime_results=exp_result.get("runtime_results"),
+            target_agents=target_agents or None,
+            enable_llm_judge=enable_equivalence_llm_judge,
+            judge_callable=judge_callable,
+        )
+        acceptance = evaluate_equivalence_acceptance(
+            eval_res_payload,
+            equivalence_criteria,
+            execution_passed=exec_passed,
+            validation_passed=val_passed,
+            schema_valid=schema_valid,
+            foundation_eq_scores=foundation_eq_scores,
+        )
+    else:
+        eval_res_payload = evaluate_with_ragas(
+            baseline_runtime_results=baseline_bundle,
+            optimized_runtime_results=exp_result.get("runtime_results"),
+            target_agents=target_agents or None,
+            ragas_runner=ragas_runner,
+        )
+        acceptance = evaluate_quality_acceptance(
+            eval_res_payload,
+            criteria,
+            execution_passed=exec_passed,
+            validation_passed=val_passed,
+            schema_valid=schema_valid,
+            foundation_ragas_scores=foundation_ragas_scores,
+        )
+
     dim_eval = evaluate_dimension_result(
         dimension_key,
         exp_result,
-        ragas_res,
+        eval_res_payload,
         acceptance,
         is_foundation_gate=is_foundation_gate,
     )
-    config_row = {
+    config_row: Dict[str, Any] = {
         "name": name,
         "scope_kind": scope_kind,
         "dimension": dimension_key,
+        "evaluation_mode": evaluation_mode,
         "applied_dimensions": list(applied_dimensions),
         "applied_candidate_ids": list((exp_result.get("execution_results") or {}).get("applied_candidate_ids") or []),
         "experiment_id": exp_result.get("experiment_id"),
@@ -249,16 +276,21 @@ def _evaluate_study_configuration(
         "mean_completion_tokens": opt_m.get("mean_completion_tokens"),
         "mean_tokens": opt_m.get("mean_tokens"),
         "mean_cost_usd": opt_m.get("mean_cost_usd_catalog_normalized"),
-        "faithfulness": ragas_res.get("faithfulness"),
-        "context_precision": ragas_res.get("context_precision"),
-        "context_recall": ragas_res.get("context_recall"),
+        "faithfulness": eval_res_payload.get("faithfulness", "not_used" if evaluation_mode == "equivalence" else None),
+        "context_precision": eval_res_payload.get("context_precision", "not_used" if evaluation_mode == "equivalence" else None),
+        "context_recall": eval_res_payload.get("context_recall", "not_used" if evaluation_mode == "equivalence" else None),
+        "structural_decision_score": eval_res_payload.get("structural_decision_score"),
+        "semantic_cosine_similarity": eval_res_payload.get("semantic_cosine_similarity"),
+        "llm_judge_equivalence": eval_res_payload.get("llm_judge_equivalence"),
+        "overall_equivalence_score": eval_res_payload.get("overall_equivalence_score"),
+        "decision_flip_count": eval_res_payload.get("decision_flip_count"),
         "quality_accepted": bool(dim_eval.get("accepted", False)),
         "quality_status": acceptance.get("status"),
         "quality_reasons": list(dim_eval.get("gate_reasons") or acceptance.get("reasons") or []),
         "json_report_path": exp_result.get("json_report_path"),
         "markdown_report_path": exp_result.get("markdown_report_path"),
     }
-    return ragas_res, acceptance, dim_eval, config_row
+    return eval_res_payload, acceptance, dim_eval, config_row
 
 
 class SandboxExperimentRunner:
@@ -629,6 +661,17 @@ class SandboxExperimentRunner:
                 preloaded_baseline_bundle=baseline_bundle,
                 num_runs=num_runs,
             )
+            dim_targets = [
+                aid
+                for r in (dim_res.get("execution_results") or {}).get("candidate_results") or []
+                for aid in (r.get("target_agents") or [])
+            ]
+            dim_res["ragas_evaluation"] = evaluate_behavioral_equivalence(
+                baseline_runtime_results=baseline_bundle,
+                optimized_runtime_results=dim_res.get("runtime_results"),
+                target_agents=dim_targets or None,
+                enable_llm_judge=False,
+            )
             per_dimension_results[dim] = dim_res
             executed_dimensions.append(dim)
 
@@ -643,6 +686,11 @@ class SandboxExperimentRunner:
                     experiment_dir_override=suite_dir / "combined",
                     preloaded_baseline_bundle=baseline_bundle,
                     num_runs=num_runs,
+                )
+                combined_result["ragas_evaluation"] = evaluate_behavioral_equivalence(
+                    baseline_runtime_results=baseline_bundle,
+                    optimized_runtime_results=combined_result.get("runtime_results"),
+                    enable_llm_judge=False,
                 )
 
         # Suite-wide post-execution original integrity check
@@ -703,13 +751,17 @@ class SandboxExperimentRunner:
         ragas_runner: Optional[Callable[..., Dict[str, Any]]] = None,
         selected_variable_dimensions: Optional[List[str]] = None,
         num_runs: int = 2,
+        evaluation_mode: str = "ragas",
+        equivalence_criteria: Optional[Union[EquivalenceAcceptanceCriteria, Dict[str, Any]]] = None,
+        enable_equivalence_llm_judge: bool = False,
     ) -> Dict[str, Any]:
         """
         Execute the strict Two-Phase + Combined Optimization Study against fixed historical baseline:
           - Phase A: Data Handoff only & Parallelization only -> establish Fixed Optimization Foundation.
           - Phase B: Fixed Foundation + each remaining variable dimension independently (no leakage).
           - Phase C: Combined configuration (Fixed Foundation + all executed variable dimensions).
-          - Selection: Pareto-efficient workflow selection over latency, tokens, cost & RAGAS quality.
+          - Selection: Pareto-efficient workflow selection over latency, tokens, cost & quality gate
+            (either 3-layer Behavioral Equivalence or legacy RAGAS).
         """
         scope = load_approved_scope(approved_scope)
         wf_id = scope["workflow_id"]
@@ -719,6 +771,7 @@ class SandboxExperimentRunner:
         study_dir = (self.manager.experiments_base_dir / wf_id / eff_study_id).resolve()
         study_dir.mkdir(parents=True, exist_ok=True)
 
+        eff_eval_mode = "equivalence" if str(evaluation_mode).strip().lower() == "equivalence" else "ragas"
         eff_criteria = (
             quality_criteria
             if isinstance(quality_criteria, QualityAcceptanceCriteria)
@@ -727,6 +780,11 @@ class SandboxExperimentRunner:
                 if quality_criteria is not None
                 else self.quality_acceptance_criteria
             )
+        )
+        eff_eq_criteria = (
+            equivalence_criteria
+            if isinstance(equivalence_criteria, EquivalenceAcceptanceCriteria)
+            else EquivalenceAcceptanceCriteria.from_dict(equivalence_criteria)
         )
         eff_ragas_runner = ragas_runner if ragas_runner is not None else self.ragas_runner
 
@@ -801,6 +859,10 @@ class SandboxExperimentRunner:
                 criteria=eff_criteria,
                 ragas_runner=eff_ragas_runner,
                 is_foundation_gate=True,
+                evaluation_mode=eff_eval_mode,
+                equivalence_criteria=eff_eq_criteria,
+                enable_equivalence_llm_judge=enable_equivalence_llm_judge,
+                judge_callable=self.judge_callable,
             )
             _accumulate_eval_usage(eval_usage_totals, rag_res)
             phase_a_exp_results[dim] = exp_res
@@ -821,6 +883,7 @@ class SandboxExperimentRunner:
         fixed_foundation_verification: Optional[Dict[str, Any]] = None
         fixed_foundation_row: Optional[Dict[str, Any]] = None
         foundation_ragas_scores: Optional[Dict[str, Any]] = None
+        foundation_eq_scores: Optional[Dict[str, Any]] = None
 
         if len(fixed_foundation) == 2:
             ff_scope = build_dimension_scoped_approval(scope, fixed_foundation)
@@ -843,18 +906,24 @@ class SandboxExperimentRunner:
                     baseline_bundle=baseline_bundle,
                     criteria=eff_criteria,
                     ragas_runner=eff_ragas_runner,
+                    evaluation_mode=eff_eval_mode,
+                    equivalence_criteria=eff_eq_criteria,
+                    enable_equivalence_llm_judge=enable_equivalence_llm_judge,
+                    judge_callable=self.judge_callable,
                 )
                 _accumulate_eval_usage(eval_usage_totals, ff_rag)
                 fixed_foundation_verification = ff_ev
                 fixed_foundation_row = ff_row
                 comparative_rows.append(ff_row)
                 foundation_ragas_scores = ff_ev["ragas"]
+                foundation_eq_scores = ff_ev.get("equivalence")
         elif len(fixed_foundation) == 1:
             sole_dim = fixed_foundation[0]
             fixed_foundation_result = phase_a_exp_results[sole_dim]
             fixed_foundation_verification = phase_a_evals[sole_dim]
             fixed_foundation_row = phase_a_rows[0]
             foundation_ragas_scores = phase_a_evals[sole_dim]["ragas"]
+            foundation_eq_scores = phase_a_evals[sole_dim].get("equivalence")
 
         # ---------------- Phase B: Remaining 3 Variable Dimensions ----------------
         phase_b_exp_results: Dict[str, Dict[str, Any]] = {}
@@ -892,6 +961,11 @@ class SandboxExperimentRunner:
                 criteria=eff_criteria,
                 ragas_runner=eff_ragas_runner,
                 foundation_ragas_scores=foundation_ragas_scores,
+                evaluation_mode=eff_eval_mode,
+                equivalence_criteria=eff_eq_criteria,
+                enable_equivalence_llm_judge=enable_equivalence_llm_judge,
+                judge_callable=self.judge_callable,
+                foundation_eq_scores=foundation_eq_scores,
             )
             _accumulate_eval_usage(eval_usage_totals, rag_res)
             phase_b_exp_results[var_dim] = exp_res
@@ -931,6 +1005,11 @@ class SandboxExperimentRunner:
                     criteria=eff_criteria,
                     ragas_runner=eff_ragas_runner,
                     foundation_ragas_scores=foundation_ragas_scores,
+                    evaluation_mode=eff_eval_mode,
+                    equivalence_criteria=eff_eq_criteria,
+                    enable_equivalence_llm_judge=enable_equivalence_llm_judge,
+                    judge_callable=self.judge_callable,
+                    foundation_eq_scores=foundation_eq_scores,
                 )
                 _accumulate_eval_usage(eval_usage_totals, combined_ragas)
                 comparative_rows.append(combined_row)
@@ -1019,10 +1098,12 @@ class SandboxExperimentRunner:
             "workflow_id": wf_id,
             "study_dir": str(study_dir),
             "num_runs": int(num_runs),
+            "evaluation_mode": eff_eval_mode,
             "live_execution_mode": "in_process_mock_or_callable"
             if not self._should_use_local_subprocess()
             else ("offline_trace_replay_sandbox" if self.enable_trace_replay_fallback else "local_subprocess_live_groq"),
             "quality_acceptance_criteria": eff_criteria.to_dict(),
+            "equivalence_acceptance_criteria": eff_eq_criteria.to_dict(),
             "experiment_ids": experiment_ids,
             "baseline_runtime_results": baseline_bundle,
             "fixed_optimization_foundation": fixed_foundation,

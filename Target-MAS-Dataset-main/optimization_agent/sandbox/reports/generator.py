@@ -499,16 +499,23 @@ def generate_two_phase_study_reports(
     limitations = list(study_payload.get("limitations") or [])
     integrity = study_payload.get("original_integrity_after") or {}
 
+    eval_mode = str(study_payload.get("evaluation_mode") or "ragas")
     report_obj: Dict[str, Any] = {
         "study_id": study_payload.get("study_id"),
         "workflow_id": study_payload.get("workflow_id"),
+        "evaluation_mode": eval_mode,
         "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "study_dir": str(target_dir),
         "num_runs": int(study_payload.get("num_runs") or 0),
-        "quality_acceptance_criteria": study_payload.get("quality_acceptance_criteria"),
+        "quality_acceptance_criteria": (
+            study_payload.get("equivalence_acceptance_criteria")
+            if eval_mode == "equivalence"
+            else study_payload.get("quality_acceptance_criteria")
+        ),
         "fixed_optimization_foundation": list(study_payload.get("fixed_optimization_foundation") or []),
         "experimental_setup": {
             "workflow_id": study_payload.get("workflow_id"),
+            "evaluation_mode": eval_mode,
             "fixed_baseline_reference_id": baseline_b.get("fixed_baseline_reference_id"),
             "baseline_re_executed": bool(baseline_b.get("re_executed", False)),
             "baseline_groq_api_calls": int(baseline_b.get("groq_api_calls") or 0),
@@ -559,24 +566,34 @@ def generate_two_phase_study_reports(
         f"- **Accepted Fixed Optimization Foundation:** {foundation_str}",
     ]
 
+    def _fmt_quality_tag(d_info: Dict[str, Any]) -> str:
+        if eval_mode == "equivalence":
+            eq = d_info.get("equivalence") or {}
+            return (
+                f"Equivalence=(L1:`{eq.get('structural_decision_score')}`, "
+                f"L2:`{eq.get('semantic_cosine_similarity')}`, "
+                f"L3:`{eq.get('llm_judge_equivalence')}`, "
+                f"Flips:`{eq.get('decision_flip_count')}`)"
+            )
+        rag = d_info.get("ragas") or {}
+        return f"RAGAS=(F:`{rag.get('faithfulness')}`, CP:`{rag.get('context_precision')}`, CR:`{rag.get('context_recall')}`)"
+
     for dim in ("communication_data_handoff", "workflow_parallelization"):
         d_info = (phase_a.get("dimension_evaluations") or {}).get(dim)
         if not d_info:
             lines.append(f"- `{dim}`: skipped (no approved candidates)")
             continue
-        rag = d_info.get("ragas") or {}
         lines.append(
             f"- **`{dim}`**: accepted=`{d_info.get('accepted')}`, status=`{(d_info.get('quality_acceptance') or {}).get('status')}`, "
             f"latency_delta=`{_fmt_val(d_info.get('latency_improvement_pct'), '%')}`, token_delta=`{_fmt_val(d_info.get('token_improvement_pct'), '%')}`, "
-            f"RAGAS=(F:`{rag.get('faithfulness')}`, CP:`{rag.get('context_precision')}`, CR:`{rag.get('context_recall')}`)"
+            f"{_fmt_quality_tag(d_info)}"
         )
     if phase_a.get("fixed_foundation_verification"):
         ff_v = phase_a["fixed_foundation_verification"]
-        ff_rag = ff_v.get("ragas") or {}
         lines.append(
             f"- **`fixed_foundation` Combined Gate**: latency=`{_fmt_val(ff_v.get('mean_latency_seconds'), 's')}`, "
             f"tokens=`{_fmt_val(ff_v.get('mean_tokens'))}`, cost=`${_fmt_val(ff_v.get('mean_cost_usd'))}`, "
-            f"RAGAS=(F:`{ff_rag.get('faithfulness')}`, CP:`{ff_rag.get('context_precision')}`, CR:`{ff_rag.get('context_recall')}`)"
+            f"{_fmt_quality_tag(ff_v)}"
         )
 
     lines.extend(["", "## 3. Individual Variable-Dimension Evaluation", ""])
@@ -584,14 +601,13 @@ def generate_two_phase_study_reports(
     if not var_evals:
         lines.append("- No variable-dimension experiments executed.")
     for dim, d_info in var_evals.items():
-        rag = d_info.get("ragas") or {}
         lines.append(
             f"- **Fixed Foundation + `{dim}`**: accepted=`{d_info.get('accepted')}`, "
             f"quality_status=`{(d_info.get('quality_acceptance') or {}).get('status')}`, "
             f"latency=`{_fmt_val(d_info.get('mean_latency_seconds'), 's')}` ({_fmt_val(d_info.get('latency_improvement_pct'), '%')}), "
             f"tokens=`{_fmt_val(d_info.get('mean_tokens'))}` ({_fmt_val(d_info.get('token_improvement_pct'), '%')}), "
             f"cost=`${_fmt_val(d_info.get('mean_cost_usd'))}` ({_fmt_val(d_info.get('cost_improvement_pct'), '%')}), "
-            f"RAGAS=(F:`{rag.get('faithfulness')}`, CP:`{rag.get('context_precision')}`, CR:`{rag.get('context_recall')}`)"
+            f"{_fmt_quality_tag(d_info)}"
         )
 
     lines.extend(["", "## 4. Combined Optimization", ""])
@@ -599,7 +615,6 @@ def generate_two_phase_study_reports(
     if not comb_eval:
         lines.append("- Combined optimization was not executed.")
     else:
-        c_rag = comb_eval.get("ragas") or {}
         lines.append(
             f"- **Applied Dimensions:** {', '.join(f'`{d}`' for d in (phase_c.get('applied_dimensions') or []))}"
         )
@@ -607,26 +622,44 @@ def generate_two_phase_study_reports(
             f"- **Performance & Quality:** latency=`{_fmt_val(comb_eval.get('mean_latency_seconds'), 's')}`, "
             f"tokens=`{_fmt_val(comb_eval.get('mean_tokens'))}`, cost=`${_fmt_val(comb_eval.get('mean_cost_usd'))}`, "
             f"quality_accepted=`{comb_eval.get('accepted')}`, "
-            f"RAGAS=(F:`{c_rag.get('faithfulness')}`, CP:`{c_rag.get('context_precision')}`, CR:`{c_rag.get('context_recall')}`)"
+            f"{_fmt_quality_tag(comb_eval)}"
         )
         if phase_c.get("interaction_notes"):
             lines.append(f"- **Interactions / Regressions:** {'; '.join(phase_c['interaction_notes'])}")
 
-    lines.extend([
-        "",
-        "## 5. Comparative Metrics",
-        "",
-        "| Configuration | Scope | Execution Passed | Mean Latency (s) | Input Tokens | Output Tokens | Total Tokens | Cost (USD) | Faithfulness | Context Precision | Context Recall | Quality Status |",
-        "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
-    ])
-    for row in comp_rows:
-        lines.append(
-            f"| `{row.get('name')}` | `{row.get('scope_kind')}` | `{row.get('execution_passed')}` | "
-            f"{_fmt_val(row.get('mean_latency_seconds'))} | {_fmt_val(row.get('mean_prompt_tokens'))} | "
-            f"{_fmt_val(row.get('mean_completion_tokens'))} | {_fmt_val(row.get('mean_tokens'))} | "
-            f"{_fmt_val(row.get('mean_cost_usd'))} | `{row.get('faithfulness')}` | "
-            f"`{row.get('context_precision')}` | `{row.get('context_recall')}` | `{row.get('quality_status')}` |"
-        )
+    if eval_mode == "equivalence":
+        lines.extend([
+            "",
+            "## 5. Comparative Metrics",
+            "",
+            "| Configuration | Scope | Execution Passed | Mean Latency (s) | Input Tokens | Output Tokens | Total Tokens | Cost (USD) | Struct/Decision (L1) | Semantic Cosine (L2) | LLM Judge (L3) | Decision Flips | Quality Status |",
+            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+        ])
+        for row in comp_rows:
+            lines.append(
+                f"| `{row.get('name')}` | `{row.get('scope_kind')}` | `{row.get('execution_passed')}` | "
+                f"{_fmt_val(row.get('mean_latency_seconds'))} | {_fmt_val(row.get('mean_prompt_tokens'))} | "
+                f"{_fmt_val(row.get('mean_completion_tokens'))} | {_fmt_val(row.get('mean_tokens'))} | "
+                f"{_fmt_val(row.get('mean_cost_usd'))} | `{row.get('structural_decision_score', 'reference_only')}` | "
+                f"`{row.get('semantic_cosine_similarity', 'reference_only')}` | `{row.get('llm_judge_equivalence', 'disabled')}` | "
+                f"`{row.get('decision_flip_count', 0)}` | `{row.get('quality_status')}` |"
+            )
+    else:
+        lines.extend([
+            "",
+            "## 5. Comparative Metrics",
+            "",
+            "| Configuration | Scope | Execution Passed | Mean Latency (s) | Input Tokens | Output Tokens | Total Tokens | Cost (USD) | Faithfulness | Context Precision | Context Recall | Quality Status |",
+            "| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |",
+        ])
+        for row in comp_rows:
+            lines.append(
+                f"| `{row.get('name')}` | `{row.get('scope_kind')}` | `{row.get('execution_passed')}` | "
+                f"{_fmt_val(row.get('mean_latency_seconds'))} | {_fmt_val(row.get('mean_prompt_tokens'))} | "
+                f"{_fmt_val(row.get('mean_completion_tokens'))} | {_fmt_val(row.get('mean_tokens'))} | "
+                f"{_fmt_val(row.get('mean_cost_usd'))} | `{row.get('faithfulness')}` | "
+                f"`{row.get('context_precision')}` | `{row.get('context_recall')}` | `{row.get('quality_status')}` |"
+            )
 
     lines.extend(["", "## 6. Best Configuration Selection", ""])
     pareto_names = [p.get("name") for p in (pareto.get("pareto_efficient_configurations") or [])]

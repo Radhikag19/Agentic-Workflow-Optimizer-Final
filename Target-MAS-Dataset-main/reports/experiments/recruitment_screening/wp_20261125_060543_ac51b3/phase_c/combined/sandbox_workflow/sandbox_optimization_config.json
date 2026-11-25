@@ -1,0 +1,20 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "wp_20261125_060543_ac51b3__phase_c_combined",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {
+    "resume_intake_agent": {
+      "previous_model": "openai/gpt-oss-120b",
+      "updated_model": "llama-3.3-70b-versatile",
+      "provider": "Groq",
+      "assigned_key_env": "GROQ_API_KEY_5",
+      "candidate_id": "MODEL-RESUME_INTAKE_AGENT"
+    }
+  },
+  "prompt_overrides": {},
+  "handoff_projections": {},
+  "applied_candidates": [
+    "MODEL-RESUME_INTAKE_AGENT"
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "wp_20261125_060543_ac51b3__phase_a_communication_data_handoff",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 16,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_060543_ac51b3\\phase_a\\communication_data_handoff\\runtime_traces",
+  "execution_status": "SUCCESS",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_060543_ac51b3\\phase_a\\communication_data_handoff\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_060543_ac51b3\\phase_a\\communication_data_handoff\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "SUCCESS",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 206.0438,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_060543_ac51b3\\phase_a\\communication_data_handoff\\sandbox_workflow",
+    "error_details": null
+  },
+  "total_runs": 2,
+  "successful_runs": 2,
+  "failed_runs": 0,
+  "incomplete_runs": [],
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 102.9413,
+  "median_latency_seconds": 102.9413,
+  "mean_agent_latency_seconds": 12.8624,
+  "mean_tokens": 36085.0,
+  "mean_prompt_tokens": 10882.0,
+  "mean_completion_tokens": 14321.0,
+  "mean_cost_usd_catalog_normalized": 0.011856,
+  "schema_validation_passed": true,
+  "structural_validity_pass_rate_pct": 100.0,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261125_060551_971098",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261031_162602_trace01",
+      "input_hash": "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 78.8957,
+      "prompt_tokens": 11081,
+      "completion_tokens": 13934,
+      "total_tokens": 36096,
+      "estimated_cost_usd": 0.011684,
+      "schema_valid": true
+    },
+    {
+      "run_id": "sb_20261125_060719_01c79a",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261031_162635_trace02",
+      "input_hash": "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 126.9869,
+      "prompt_tokens": 10683,
+      "completion_tokens": 14708,
+      "total_tokens": 36074,
+      "estimated_cost_usd": 0.012028,
+      "schema_valid": true
+    }
+  ],
+  "per_agent_metrics": {
+    "resume_intake_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 3.7131,
+      "mean_tokens": 1514.5,
+      "mean_prompt_tokens": 900.5,
+      "mean_completion_tokens": 614.0,
+      "mean_cost_usd": 0.000503,
+      "schema_valid_rate_pct": 100.0
+    },
+    "qualification_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 11.4569,
+      "mean_tokens": 2191.0,
+      "mean_prompt_tokens": 1295.0,
+      "mean_completion_tokens": 896.0,
+      "mean_cost_usd": 0.000732,
+      "schema_valid_rate_pct": 100.0
+    },
+    "job_criteria_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 8.1215,
+      "mean_tokens": 1754.5,
+      "mean_prompt_tokens": 977.5,
+      "mean_completion_tokens": 777.0,
+      "mean_cost_usd": 0.000612,
+      "schema_valid_rate_pct": 100.0
+    },
+    "evidence_mapping_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 9.9081,
+      "mean_tokens": 2621.0,
+      "mean_prompt_tokens": 1615.0,
+      "mean_completion_tokens": 1006.0,
+      "mean_cost_usd": 0.000846,
+      "schema_valid_rate_pct": 100.0
+    },
+    "experience_assessment_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 14.5409,
+      "mean_tokens": 1965.5,
+      "mean_prompt_tokens": 1361.5,
+      "mean_completion_tokens": 604.0,
+      "mean_cost_usd": 0.000566,
+      "schema_valid_rate_pct": 100.0
+    },
+    "missing_evidence_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 17.1327,
+      "mean_tokens": 2482.0,
+      "mean_prompt_tokens": 1545.0,
+      "mean_completion_tokens": 937.0,
+      "mean_cost_usd": 0.000794,
+      "schema_valid_rate_pct": 100.0
+    },
+    "screening_review_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 18.5127,
+      "mean_tokens": 2384.0,
+      "mean_prompt_tokens": 1602.5,
+      "mean_completion_tokens": 781.5,
+      "mean_cost_usd": 0.00071,
+      "schema_valid_rate_pct": 100.0
+    },
+    "recruiter_summary_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 19.5136,
+      "mean_tokens": 3130.0,
+      "mean_prompt_tokens": 1585.0,
+      "mean_completion_tokens": 1545.0,
+      "mean_cost_usd": 0.001164,
+      "schema_valid_rate_pct": 100.0
+    }
+  },
+  "input_dataset_hashes": [
+    "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+    "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e"
+  ]
+}

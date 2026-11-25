@@ -142,6 +142,18 @@ def evaluate_dimension_result(
             "context_precision": ragas_result.get("context_precision"),
             "context_recall": ragas_result.get("context_recall"),
         },
+        "equivalence": (
+            {
+                "status": ragas_result.get("status"),
+                "structural_decision_score": ragas_result.get("structural_decision_score"),
+                "semantic_cosine_similarity": ragas_result.get("semantic_cosine_similarity"),
+                "llm_judge_equivalence": ragas_result.get("llm_judge_equivalence"),
+                "overall_equivalence_score": ragas_result.get("overall_equivalence_score"),
+                "decision_flip_count": ragas_result.get("decision_flip_count"),
+            }
+            if ragas_result.get("evaluation_mode") == "equivalence"
+            else None
+        ),
         "quality_acceptance": acceptance,
         "accepted": bool(acceptance.get("quality_accepted", False)),
     }

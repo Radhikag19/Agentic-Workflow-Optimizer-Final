@@ -1,0 +1,897 @@
+{
+  "experiment_id": "eq_pareto_test__phase_b_model_selection",
+  "workflow_id": "eq_demo_wf",
+  "generated_at": "2026-11-25T06:01:55.716151+00:00",
+  "comparison_nature": "historical_baseline_evidence_vs_fresh_optimized_execution",
+  "execution_backend": "local_subprocess",
+  "process_execution_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "baseline_re_executed": false,
+    "baseline_process_exit_code": null,
+    "baseline_execution_status": "HISTORICAL_FIXED",
+    "baseline_groq_api_calls": 0,
+    "baseline_api_errors": [],
+    "optimized_process_exit_code": 0,
+    "optimized_process_exit_codes": [
+      0
+    ],
+    "optimized_execution_status": "SUCCESS",
+    "optimized_process_duration_seconds": 1.7,
+    "optimized_groq_api_calls": 3,
+    "optimized_api_errors": [],
+    "execution_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "input_matching": {
+    "fixed_baseline_reference_id": "hist_586e788e111c",
+    "matched_input_count": 0,
+    "unmatched_input_count": 1,
+    "excluded_records": [
+      {
+        "trace_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces\\hist_01.json",
+        "run_id": "hist_01",
+        "extracted_identifiers": {
+          "candidate_id": "CAND-1"
+        },
+        "reason": "No dataset record matched trace identifiers {'candidate_id': 'CAND-1'}."
+      }
+    ],
+    "num_optimized_runs": 1
+  },
+  "baseline_evidence": {
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces",
+    "fixed_baseline_reference_id": "hist_586e788e111c",
+    "measurement_period": {
+      "earliest_trace_timestamp": null,
+      "latest_trace_timestamp": null
+    },
+    "available_historical_metrics": {
+      "workflow_id": "eq_demo_wf",
+      "source": "historical_runtime_traces",
+      "execution_mode": "historical_recorded_execution",
+      "execution_modes": [
+        "historical_recorded_execution"
+      ],
+      "re_executed": false,
+      "groq_api_calls": 0,
+      "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces",
+      "fixed_baseline_reference_id": "hist_586e788e111c",
+      "measurement_period": {
+        "earliest_trace_timestamp": null,
+        "latest_trace_timestamp": null
+      },
+      "total_runs": 0,
+      "successful_runs": 0,
+      "failed_runs": 0,
+      "success_rate_pct": null,
+      "mean_latency_seconds": null,
+      "median_latency_seconds": null,
+      "mean_agent_latency_seconds": null,
+      "mean_tokens": null,
+      "mean_prompt_tokens": null,
+      "mean_completion_tokens": null,
+      "mean_cost_usd_telemetry": null,
+      "mean_cost_usd_catalog_normalized": null,
+      "cost_calculation_basis": "unavailable",
+      "schema_validation_passed": null,
+      "structural_validity_pass_rate_pct": null,
+      "semantic_quality_evaluation": "unavailable",
+      "semantic_quality_status": "unavailable",
+      "semantic_quality_pass_rate_pct": null,
+      "per_agent_metrics": {},
+      "input_dataset_hashes": [],
+      "matched_input_count": 0,
+      "unmatched_input_count": 1,
+      "excluded_records": [
+        {
+          "trace_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces\\hist_01.json",
+          "run_id": "hist_01",
+          "extracted_identifiers": {
+            "candidate_id": "CAND-1"
+          },
+          "reason": "No dataset record matched trace identifiers {'candidate_id': 'CAND-1'}."
+        }
+      ],
+      "historical_mcp_reference": {
+        "total_runs": 0,
+        "mean_latency_seconds": null,
+        "mean_tokens": null
+      }
+    }
+  },
+  "optimized_execution": {
+    "source": "current_experiment",
+    "execution_mode": [
+      "live_llm_execution"
+    ],
+    "re_executed": true,
+    "groq_api_calls": 3,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\runtime_traces",
+    "num_optimized_runs": 1,
+    "per_run_metrics": [
+      {
+        "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+        "run_index": 0,
+        "matched_baseline_run_id": null,
+        "input_hash": "fefc3ecc52d2f6ea174ad14db9c457c6695fecd1741d84c2b90f1f3f8de5b054",
+        "status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "duration_seconds": 1.7,
+        "prompt_tokens": 420,
+        "completion_tokens": 420,
+        "total_tokens": 840,
+        "estimated_cost_usd": 0.00084,
+        "schema_valid": true
+      }
+    ],
+    "aggregate_metrics": {
+      "workflow_id": "eq_demo_wf",
+      "experiment_id": "eq_pareto_test__phase_b_model_selection",
+      "variant": "optimized",
+      "source": "current_experiment",
+      "re_executed": true,
+      "groq_api_calls": 3,
+      "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\runtime_traces",
+      "execution_status": "SUCCESS",
+      "execution_modes": [
+        "live_llm_execution"
+      ],
+      "usage_sources": [
+        "api_reported"
+      ],
+      "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+      "process_metadata": {
+        "execution_backend": "local_subprocess",
+        "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+        "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+        "exit_code": 0,
+        "process_exit_codes": [
+          0
+        ],
+        "timed_out": false,
+        "execution_status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "process_duration_seconds": 1.7,
+        "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+        "error_details": null
+      },
+      "total_runs": 1,
+      "successful_runs": 1,
+      "failed_runs": 0,
+      "incomplete_runs": [],
+      "success_rate_pct": 100.0,
+      "mean_latency_seconds": 1.7,
+      "median_latency_seconds": 1.7,
+      "mean_agent_latency_seconds": 0.5667,
+      "mean_tokens": 840.0,
+      "mean_prompt_tokens": 420.0,
+      "mean_completion_tokens": 420.0,
+      "mean_cost_usd_catalog_normalized": 0.00084,
+      "schema_validation_passed": true,
+      "structural_validity_pass_rate_pct": 100.0,
+      "schema_validation_failures": [],
+      "invalid_replay_samples": [],
+      "semantic_quality_evaluation": "unavailable",
+      "semantic_quality_status": "unavailable",
+      "semantic_quality_pass_rate_pct": null,
+      "api_errors": [],
+      "per_run_metrics": [
+        {
+          "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+          "run_index": 0,
+          "matched_baseline_run_id": null,
+          "input_hash": "fefc3ecc52d2f6ea174ad14db9c457c6695fecd1741d84c2b90f1f3f8de5b054",
+          "status": "SUCCESS",
+          "execution_mode": "live_llm_execution",
+          "duration_seconds": 1.7,
+          "prompt_tokens": 420,
+          "completion_tokens": 420,
+          "total_tokens": 840,
+          "estimated_cost_usd": 0.00084,
+          "schema_valid": true
+        }
+      ],
+      "per_agent_metrics": {
+        "a1": {
+          "runs_count": 1,
+          "models_observed": [
+            "openai/gpt-oss-20b"
+          ],
+          "mean_latency_seconds": 0.68,
+          "mean_tokens": 420.0,
+          "mean_prompt_tokens": 210.0,
+          "mean_completion_tokens": 210.0,
+          "mean_cost_usd": null,
+          "schema_valid_rate_pct": 100.0
+        },
+        "a2": {
+          "runs_count": 1,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 0.51,
+          "mean_tokens": 210.0,
+          "mean_prompt_tokens": 105.0,
+          "mean_completion_tokens": 105.0,
+          "mean_cost_usd": null,
+          "schema_valid_rate_pct": 100.0
+        },
+        "a3": {
+          "runs_count": 1,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 0.51,
+          "mean_tokens": 210.0,
+          "mean_prompt_tokens": 105.0,
+          "mean_completion_tokens": 105.0,
+          "mean_cost_usd": null,
+          "schema_valid_rate_pct": 100.0
+        }
+      },
+      "input_dataset_hashes": [
+        "38ae43432c75855fed9482c1939230361efb70170595be89a1b266b9b92ed923"
+      ]
+    }
+  },
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "runs_executed": 1,
+  "model_and_provider_info": {
+    "baseline_model": "openai/gpt-oss-120b",
+    "llm_provider": "Groq",
+    "assigned_groq_key_env": null,
+    "agent_model_overrides": {
+      "a1": {
+        "previous_model": "openai/gpt-oss-120b",
+        "updated_model": "openai/gpt-oss-20b",
+        "provider": "Groq",
+        "candidate_id": "M1"
+      }
+    }
+  },
+  "original_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\Agents\\eq_demo_wf",
+  "sandbox_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+  "approved_candidate_ids": [
+    "M1"
+  ],
+  "applied_candidate_ids": [
+    "M1"
+  ],
+  "failed_candidate_ids": [],
+  "conflicting_candidate_ids": [],
+  "candidates_requiring_manual_intervention": [],
+  "conflicts": [],
+  "modified_files": [
+    "a1.py",
+    "sandbox_optimization_config.json",
+    "workflow.json"
+  ],
+  "modifications": [
+    {
+      "candidate_id": "M1",
+      "dimension": "model_selection",
+      "status": "applied",
+      "target_agents": [
+        "a1"
+      ],
+      "modified_files": [
+        "a1.py",
+        "workflow.json",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Updated model configuration for ['a1'] to 'openai/gpt-oss-20b' (provider=Groq) in sandbox while preserving API key bindings.",
+      "details": {
+        "model_transitions": {
+          "a1": {
+            "previous_model": "openai/gpt-oss-120b",
+            "updated_model": "openai/gpt-oss-20b"
+          }
+        },
+        "provider": "Groq"
+      },
+      "error": null
+    }
+  ],
+  "candidate_outcomes": [
+    {
+      "candidate_id": "M1",
+      "dimension": "model_selection",
+      "target_agents": [
+        "a1"
+      ],
+      "handoff_edge": null,
+      "modification_applied": true,
+      "modification_status": "applied",
+      "modified_files": [
+        "a1.py",
+        "workflow.json",
+        "sandbox_optimization_config.json"
+      ],
+      "validation_result": "passed",
+      "execution_result": "passed",
+      "baseline_metric_observations": {},
+      "optimized_metric_observations": {
+        "a1": {
+          "runs_count": 1,
+          "models_observed": [
+            "openai/gpt-oss-20b"
+          ],
+          "mean_latency_seconds": 0.68,
+          "mean_tokens": 420.0,
+          "mean_prompt_tokens": 210.0,
+          "mean_completion_tokens": 210.0,
+          "mean_cost_usd": null,
+          "schema_valid_rate_pct": 100.0
+        }
+      },
+      "output_quality_impact": {
+        "a1": {
+          "baseline_structural": [],
+          "optimized_structural": [
+            "passed"
+          ],
+          "optimized_semantic": [
+            "unavailable"
+          ]
+        }
+      },
+      "evaluation_result": "passed",
+      "outcome": "succeeded_in_sandbox",
+      "requires_validation": false,
+      "failure_reasons": [],
+      "attribution_note": "Single candidate experiment."
+    }
+  ],
+  "validation_results": {
+    "validation_passed": true,
+    "original_workflow_integrity": {
+      "original_unchanged": true,
+      "checked_file_count": 5,
+      "changed_files": [],
+      "missing_files": [],
+      "added_files": []
+    },
+    "python_syntax_checks": {
+      "passed": true,
+      "files_checked": 4,
+      "errors": []
+    },
+    "import_checks": {
+      "passed": true,
+      "errors": []
+    },
+    "configuration_validation": {
+      "passed": true,
+      "errors": []
+    },
+    "reference_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "dependency_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "modification_verification": {
+      "passed": true,
+      "errors": []
+    },
+    "secret_hygiene": {
+      "passed": true,
+      "leaked_files": []
+    }
+  },
+  "baseline_runtime_execution_results": {
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces",
+    "fixed_baseline_reference_id": "hist_586e788e111c",
+    "matched_input_count": 0,
+    "unmatched_input_count": 1,
+    "excluded_records": [
+      {
+        "trace_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces\\hist_01.json",
+        "run_id": "hist_01",
+        "extracted_identifiers": {
+          "candidate_id": "CAND-1"
+        },
+        "reason": "No dataset record matched trace identifiers {'candidate_id': 'CAND-1'}."
+      }
+    ],
+    "execution_passed": false,
+    "execution_modes": [
+      "historical_recorded_execution"
+    ],
+    "runs_executed": 0,
+    "successful_runs": 0,
+    "failed_runs": 0,
+    "trace_files": [],
+    "schema_validation_summary": null,
+    "invalid_replay_samples": null,
+    "api_errors": [],
+    "errors": []
+  },
+  "runtime_execution_results": {
+    "execution_passed": true,
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "api_reported"
+    ],
+    "runs_executed": 1,
+    "successful_runs": 1,
+    "failed_runs": 0,
+    "incomplete_runs": [],
+    "concurrent_waves_executed": [],
+    "trace_files": [
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\runtime_traces\\opt_0.json"
+    ],
+    "schema_validation_summary": {
+      "all_schemas_valid": true,
+      "failures": []
+    },
+    "invalid_replay_samples": [],
+    "api_errors": [],
+    "fallback_events": [],
+    "errors": []
+  },
+  "quality_evaluation": {
+    "workflow_id": "eq_demo_wf",
+    "baseline_quality": {
+      "evaluated_executions": 0,
+      "dimension_summary": {
+        "structural_validity": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "correctness": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "completeness": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "consistency": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "instruction_adherence": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "semantic_quality": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        }
+      },
+      "agent_evaluations": []
+    },
+    "optimized_quality": {
+      "evaluated_executions": 3,
+      "dimension_summary": {
+        "structural_validity": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 3,
+          "failed_count": 0,
+          "evaluated_count": 3
+        },
+        "correctness": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "completeness": {
+          "status": "failed",
+          "pass_rate_pct": 66.67,
+          "passed_count": 2,
+          "failed_count": 1,
+          "evaluated_count": 3
+        },
+        "consistency": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "instruction_adherence": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 3,
+          "failed_count": 0,
+          "evaluated_count": 3
+        },
+        "semantic_quality": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        }
+      },
+      "agent_evaluations": [
+        {
+          "agent_id": "a1",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "failed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [
+            "Missing declared workflow output_fields: ['extra']"
+          ],
+          "rationale": "Semantically equivalent",
+          "evaluation_status": "completed",
+          "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+          "run_index": 0
+        },
+        {
+          "agent_id": "a2",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Semantically equivalent",
+          "evaluation_status": "completed",
+          "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+          "run_index": 0
+        },
+        {
+          "agent_id": "a3",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Semantically equivalent",
+          "evaluation_status": "completed",
+          "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+          "run_index": 0
+        }
+      ]
+    },
+    "identified_regressions": [],
+    "has_quality_regression": false
+  },
+  "baseline_metrics": {
+    "workflow_id": "eq_demo_wf",
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "execution_modes": [
+      "historical_recorded_execution"
+    ],
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces",
+    "fixed_baseline_reference_id": "hist_586e788e111c",
+    "measurement_period": {
+      "earliest_trace_timestamp": null,
+      "latest_trace_timestamp": null
+    },
+    "total_runs": 0,
+    "successful_runs": 0,
+    "failed_runs": 0,
+    "success_rate_pct": null,
+    "mean_latency_seconds": null,
+    "median_latency_seconds": null,
+    "mean_agent_latency_seconds": null,
+    "mean_tokens": null,
+    "mean_prompt_tokens": null,
+    "mean_completion_tokens": null,
+    "mean_cost_usd_telemetry": null,
+    "mean_cost_usd_catalog_normalized": null,
+    "cost_calculation_basis": "unavailable",
+    "schema_validation_passed": null,
+    "structural_validity_pass_rate_pct": null,
+    "semantic_quality_evaluation": "unavailable",
+    "semantic_quality_status": "unavailable",
+    "semantic_quality_pass_rate_pct": null,
+    "per_agent_metrics": {},
+    "input_dataset_hashes": [],
+    "matched_input_count": 0,
+    "unmatched_input_count": 1,
+    "excluded_records": [
+      {
+        "trace_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces\\hist_01.json",
+        "run_id": "hist_01",
+        "extracted_identifiers": {
+          "candidate_id": "CAND-1"
+        },
+        "reason": "No dataset record matched trace identifiers {'candidate_id': 'CAND-1'}."
+      }
+    ],
+    "historical_mcp_reference": {
+      "total_runs": 0,
+      "mean_latency_seconds": null,
+      "mean_tokens": null
+    }
+  },
+  "optimized_metrics": {
+    "workflow_id": "eq_demo_wf",
+    "experiment_id": "eq_pareto_test__phase_b_model_selection",
+    "variant": "optimized",
+    "source": "current_experiment",
+    "re_executed": true,
+    "groq_api_calls": 3,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\runtime_traces",
+    "execution_status": "SUCCESS",
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "api_reported"
+    ],
+    "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+    "process_metadata": {
+      "execution_backend": "local_subprocess",
+      "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+      "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+      "exit_code": 0,
+      "process_exit_codes": [
+        0
+      ],
+      "timed_out": false,
+      "execution_status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "process_duration_seconds": 1.7,
+      "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+      "error_details": null
+    },
+    "total_runs": 1,
+    "successful_runs": 1,
+    "failed_runs": 0,
+    "incomplete_runs": [],
+    "success_rate_pct": 100.0,
+    "mean_latency_seconds": 1.7,
+    "median_latency_seconds": 1.7,
+    "mean_agent_latency_seconds": 0.5667,
+    "mean_tokens": 840.0,
+    "mean_prompt_tokens": 420.0,
+    "mean_completion_tokens": 420.0,
+    "mean_cost_usd_catalog_normalized": 0.00084,
+    "schema_validation_passed": true,
+    "structural_validity_pass_rate_pct": 100.0,
+    "schema_validation_failures": [],
+    "invalid_replay_samples": [],
+    "semantic_quality_evaluation": "unavailable",
+    "semantic_quality_status": "unavailable",
+    "semantic_quality_pass_rate_pct": null,
+    "api_errors": [],
+    "per_run_metrics": [
+      {
+        "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+        "run_index": 0,
+        "matched_baseline_run_id": null,
+        "input_hash": "fefc3ecc52d2f6ea174ad14db9c457c6695fecd1741d84c2b90f1f3f8de5b054",
+        "status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "duration_seconds": 1.7,
+        "prompt_tokens": 420,
+        "completion_tokens": 420,
+        "total_tokens": 840,
+        "estimated_cost_usd": 0.00084,
+        "schema_valid": true
+      }
+    ],
+    "per_agent_metrics": {
+      "a1": {
+        "runs_count": 1,
+        "models_observed": [
+          "openai/gpt-oss-20b"
+        ],
+        "mean_latency_seconds": 0.68,
+        "mean_tokens": 420.0,
+        "mean_prompt_tokens": 210.0,
+        "mean_completion_tokens": 210.0,
+        "mean_cost_usd": null,
+        "schema_valid_rate_pct": 100.0
+      },
+      "a2": {
+        "runs_count": 1,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 0.51,
+        "mean_tokens": 210.0,
+        "mean_prompt_tokens": 105.0,
+        "mean_completion_tokens": 105.0,
+        "mean_cost_usd": null,
+        "schema_valid_rate_pct": 100.0
+      },
+      "a3": {
+        "runs_count": 1,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 0.51,
+        "mean_tokens": 210.0,
+        "mean_prompt_tokens": 105.0,
+        "mean_completion_tokens": 105.0,
+        "mean_cost_usd": null,
+        "schema_valid_rate_pct": 100.0
+      }
+    },
+    "input_dataset_hashes": [
+      "38ae43432c75855fed9482c1939230361efb70170595be89a1b266b9b92ed923"
+    ]
+  },
+  "before_and_after_comparison": {
+    "comparison_type": "historical_baseline_vs_live_optimized",
+    "comparability": {
+      "inputs_comparable": false,
+      "modes_compatible_for_live_claims": true,
+      "baseline_re_executed": false,
+      "baseline_measurement_period": {
+        "earliest_trace_timestamp": null,
+        "latest_trace_timestamp": null
+      },
+      "fixed_baseline_reference_id": "hist_586e788e111c",
+      "matched_input_count": 0,
+      "unmatched_input_count": 1,
+      "baseline_runs": 0,
+      "optimized_runs": 1,
+      "baseline_modes": [
+        "historical_recorded_execution"
+      ],
+      "optimized_modes": [
+        "live_llm_execution"
+      ]
+    },
+    "mean_workflow_latency": {
+      "baseline_seconds": null,
+      "optimized_seconds": 1.7,
+      "improvement_pct": null,
+      "raw_replay_delta_pct": null
+    },
+    "median_workflow_latency": {
+      "baseline_seconds": null,
+      "optimized_seconds": 1.7,
+      "improvement_pct": null,
+      "raw_replay_delta_pct": null
+    },
+    "mean_agent_latency": {
+      "baseline_seconds": null,
+      "optimized_seconds": 0.5667,
+      "improvement_pct": null,
+      "per_agent": {
+        "a1": {
+          "baseline_mean_latency_seconds": null,
+          "optimized_mean_latency_seconds": 0.68,
+          "latency_improvement_pct": null,
+          "baseline_mean_tokens": null,
+          "optimized_mean_tokens": 420.0,
+          "token_improvement_pct": null
+        },
+        "a2": {
+          "baseline_mean_latency_seconds": null,
+          "optimized_mean_latency_seconds": 0.51,
+          "latency_improvement_pct": null,
+          "baseline_mean_tokens": null,
+          "optimized_mean_tokens": 210.0,
+          "token_improvement_pct": null
+        },
+        "a3": {
+          "baseline_mean_latency_seconds": null,
+          "optimized_mean_latency_seconds": 0.51,
+          "latency_improvement_pct": null,
+          "baseline_mean_tokens": null,
+          "optimized_mean_tokens": 210.0,
+          "token_improvement_pct": null
+        }
+      }
+    },
+    "latency": {
+      "baseline_mean_seconds": null,
+      "optimized_mean_seconds": 1.7,
+      "improvement_pct": null,
+      "comparable_for_live_claim": false,
+      "note": "Measured live workflow execution latency on matched inputs."
+    },
+    "input_tokens": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": 420.0,
+      "improvement_pct": null
+    },
+    "output_tokens": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": 420.0,
+      "improvement_pct": null
+    },
+    "total_tokens": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": 840.0,
+      "improvement_pct": null
+    },
+    "token_consumption": {
+      "baseline_mean_tokens": null,
+      "optimized_mean_tokens": 840.0,
+      "improvement_pct": null
+    },
+    "execution_cost": {
+      "baseline_telemetry_usd": null,
+      "baseline_catalog_normalized_usd": null,
+      "optimized_catalog_normalized_usd": 0.00084,
+      "improvement_pct_catalog_normalized": null,
+      "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+    },
+    "execution_success_rate": {
+      "baseline_pct": null,
+      "optimized_pct": 100.0,
+      "delta_pct_points": null,
+      "improvement_pct": null
+    },
+    "output_structural_validity": {
+      "baseline_pass_rate_pct": null,
+      "optimized_pass_rate_pct": 100.0,
+      "improvement_pct": null
+    },
+    "semantic_quality": {
+      "baseline_status_or_pct": "unavailable",
+      "optimized_status_or_pct": "unavailable",
+      "improvement_pct": null,
+      "identified_regressions": []
+    },
+    "output_quality": {
+      "baseline_quality": "unavailable",
+      "optimized_schema_valid": true,
+      "semantic_quality_evaluation": "unavailable",
+      "identified_regressions": [],
+      "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+    }
+  },
+  "outcome_flags": {
+    "modification_applied": true,
+    "validation_passed": true,
+    "execution_passed": true,
+    "evaluation_passed": true
+  },
+  "final_experiment_assessment": {
+    "status": "inconclusive",
+    "reasons": [
+      "Baseline and optimized runs were not executed on matched identical input datasets.",
+      "Semantic quality evaluation is unavailable."
+    ]
+  },
+  "overall_experiment_status": "inconclusive"
+}

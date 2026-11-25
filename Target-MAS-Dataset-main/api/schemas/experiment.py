@@ -34,6 +34,14 @@ class QualityCriteriaInput(BaseModel):
     require_all_metrics_available: bool = True
 
 
+class EquivalenceCriteriaInput(BaseModel):
+    min_structural_decision_score: Optional[float] = 0.75
+    min_semantic_cosine: Optional[float] = 0.75
+    min_llm_judge_score: Optional[float] = 0.75
+    max_decision_flips: Optional[int] = 0
+    max_regression_vs_foundation: Optional[float] = 0.10
+
+
 class ExperimentStartRequest(BaseModel):
     workflow_id: str
     experiment_type: Literal[
@@ -44,7 +52,10 @@ class ExperimentStartRequest(BaseModel):
     selected_dimensions: Optional[List[str]] = None
     num_runs: int = Field(default=1, ge=1, le=20)
     approved_scope_reference: Optional[str] = None
+    evaluation_mode: Literal["equivalence", "ragas"] = "equivalence"
+    enable_equivalence_llm_judge: bool = False
     quality_criteria: Optional[QualityCriteriaInput] = None
+    equivalence_criteria: Optional[EquivalenceCriteriaInput] = None
     enable_trace_replay_fallback: bool = False
 
 
@@ -69,6 +80,7 @@ class ExperimentResultsResponse(BaseModel):
     experiment_id: str
     workflow_id: str
     experiment_type: str
+    evaluation_mode: Optional[str] = None
     status: str
     fixed_optimization_foundation: List[str] = Field(default_factory=list)
     baseline_runtime_results: Dict[str, Any] = Field(default_factory=dict)

@@ -1,0 +1,29 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "experiment_id": "eq_pareto_test__phase_a_communication_data_handoff",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {
+    "a1->a3": {
+      "candidate_id": "H1",
+      "producer_agent": "a1",
+      "consumer_agent": "a3",
+      "retained_fields": [
+        "candidate_id",
+        "skills"
+      ],
+      "excluded_fields": [
+        "extra"
+      ],
+      "consumer_required_fields": [
+        "skills"
+      ],
+      "typed_delta_projection": true
+    }
+  },
+  "applied_candidates": [
+    "H1"
+  ]
+}

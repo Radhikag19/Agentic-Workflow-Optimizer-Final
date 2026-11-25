@@ -1,0 +1,110 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "experiment_id": "eq_pareto_test__phase_b_model_selection",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 3,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\runtime_traces",
+  "execution_status": "SUCCESS",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "SUCCESS",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 1.7,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_b\\model_selection\\sandbox_workflow",
+    "error_details": null
+  },
+  "total_runs": 1,
+  "successful_runs": 1,
+  "failed_runs": 0,
+  "incomplete_runs": [],
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 1.7,
+  "median_latency_seconds": 1.7,
+  "mean_agent_latency_seconds": 0.5667,
+  "mean_tokens": 840.0,
+  "mean_prompt_tokens": 420.0,
+  "mean_completion_tokens": 420.0,
+  "mean_cost_usd_catalog_normalized": 0.00084,
+  "schema_validation_passed": true,
+  "structural_validity_pass_rate_pct": 100.0,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [],
+  "per_run_metrics": [
+    {
+      "run_id": "eq_pareto_test__phase_b_model_selection_r0",
+      "run_index": 0,
+      "matched_baseline_run_id": null,
+      "input_hash": "fefc3ecc52d2f6ea174ad14db9c457c6695fecd1741d84c2b90f1f3f8de5b054",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 1.7,
+      "prompt_tokens": 420,
+      "completion_tokens": 420,
+      "total_tokens": 840,
+      "estimated_cost_usd": 0.00084,
+      "schema_valid": true
+    }
+  ],
+  "per_agent_metrics": {
+    "a1": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-20b"
+      ],
+      "mean_latency_seconds": 0.68,
+      "mean_tokens": 420.0,
+      "mean_prompt_tokens": 210.0,
+      "mean_completion_tokens": 210.0,
+      "mean_cost_usd": null,
+      "schema_valid_rate_pct": 100.0
+    },
+    "a2": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 0.51,
+      "mean_tokens": 210.0,
+      "mean_prompt_tokens": 105.0,
+      "mean_completion_tokens": 105.0,
+      "mean_cost_usd": null,
+      "schema_valid_rate_pct": 100.0
+    },
+    "a3": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 0.51,
+      "mean_tokens": 210.0,
+      "mean_prompt_tokens": 105.0,
+      "mean_completion_tokens": 105.0,
+      "mean_cost_usd": null,
+      "schema_valid_rate_pct": 100.0
+    }
+  },
+  "input_dataset_hashes": [
+    "38ae43432c75855fed9482c1939230361efb70170595be89a1b266b9b92ed923"
+  ]
+}

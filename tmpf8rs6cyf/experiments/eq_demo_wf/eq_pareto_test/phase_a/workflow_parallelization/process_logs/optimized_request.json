@@ -1,0 +1,24 @@
+{
+  "experiment_id": "eq_pareto_test__phase_a_workflow_parallelization",
+  "workflow_id": "eq_demo_wf",
+  "variant": "optimized",
+  "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\workflow_parallelization\\sandbox_workflow",
+  "original_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\Agents\\eq_demo_wf",
+  "sandbox_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\workflow_parallelization\\sandbox_workflow",
+  "experiment_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\workflow_parallelization",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\workflow_parallelization\\runtime_traces",
+  "event_log_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\experiments\\eq_demo_wf\\eq_pareto_test\\phase_a\\workflow_parallelization\\process_logs\\optimized_events.jsonl",
+  "enable_trace_replay_fallback": false,
+  "evidence_dir": null,
+  "data_base_dir": null,
+  "sample_inputs": [
+    {
+      "workflow_id": "eq_demo_wf",
+      "run_index": 0
+    }
+  ],
+  "run_indices": [
+    0
+  ],
+  "num_runs": 1
+}

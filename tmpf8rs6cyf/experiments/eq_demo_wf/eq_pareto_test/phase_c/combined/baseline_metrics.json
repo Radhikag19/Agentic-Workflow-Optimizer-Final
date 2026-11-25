@@ -1,0 +1,53 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "source": "historical_runtime_traces",
+  "execution_mode": "historical_recorded_execution",
+  "execution_modes": [
+    "historical_recorded_execution"
+  ],
+  "re_executed": false,
+  "groq_api_calls": 0,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\traces",
+  "fixed_baseline_reference_id": "hist_c4473ab6988e",
+  "measurement_period": {
+    "earliest_trace_timestamp": null,
+    "latest_trace_timestamp": null
+  },
+  "total_runs": 0,
+  "successful_runs": 0,
+  "failed_runs": 0,
+  "success_rate_pct": null,
+  "mean_latency_seconds": null,
+  "median_latency_seconds": null,
+  "mean_agent_latency_seconds": null,
+  "mean_tokens": null,
+  "mean_prompt_tokens": null,
+  "mean_completion_tokens": null,
+  "mean_cost_usd_telemetry": null,
+  "mean_cost_usd_catalog_normalized": null,
+  "cost_calculation_basis": "unavailable",
+  "schema_validation_passed": null,
+  "structural_validity_pass_rate_pct": null,
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "per_agent_metrics": {},
+  "input_dataset_hashes": [],
+  "matched_input_count": 0,
+  "unmatched_input_count": 1,
+  "excluded_records": [
+    {
+      "trace_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpf8rs6cyf\\traces\\hist_01.json",
+      "run_id": "hist_01",
+      "extracted_identifiers": {
+        "candidate_id": "CAND-1"
+      },
+      "reason": "No dataset record matched trace identifiers {'candidate_id': 'CAND-1'}."
+    }
+  ],
+  "historical_mcp_reference": {
+    "total_runs": 0,
+    "mean_latency_seconds": null,
+    "mean_tokens": null
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "fixed_baseline_reference_id": "hist_586e788e111c",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces",
+  "total_historical_traces_found": 1,
+  "matched_input_count": 0,
+  "unmatched_input_count": 1,
+  "excluded_records": [
+    {
+      "trace_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\tmpqfex8nlj\\traces\\hist_01.json",
+      "run_id": "hist_01",
+      "extracted_identifiers": {
+        "candidate_id": "CAND-1"
+      },
+      "reason": "No dataset record matched trace identifiers {'candidate_id': 'CAND-1'}."
+    }
+  ],
+  "matched_identifiers": [],
+  "matched_run_ids": [],
+  "matched_input_hashes": []
+}

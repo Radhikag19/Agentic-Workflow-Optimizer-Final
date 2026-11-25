@@ -113,4 +113,17 @@ describe('ExperimentsPage execution modes & human gate approval', () => {
     fireEvent.click(approveBtn);
     expect(approveSpy).toHaveBeenCalledWith(['PROMPT-CLAUSE_EXTRACTION_AGENT'], []);
   });
+
+  it('defaults Quality Evaluation Engine to 3-Layer Behavioral Equivalence and toggles cleanly with RAGAS', () => {
+    render(<ExperimentsPage />);
+
+    const evalSelect = screen.getByLabelText('Quality Evaluation Engine') as HTMLSelectElement;
+    expect(evalSelect.value).toBe('equivalence');
+    expect(screen.getByText('Min Structural/Decision Match')).toBeInTheDocument();
+    expect(screen.getByText('Min Semantic Cosine')).toBeInTheDocument();
+    expect(screen.getByText('Max Decision Flips')).toBeInTheDocument();
+
+    fireEvent.change(evalSelect, { target: { value: 'ragas' } });
+    expect(screen.getByText('Max Faithfulness Drop')).toBeInTheDocument();
+  });
 });

@@ -1,0 +1,21 @@
+{
+  "workflow_id": "eq_demo_wf",
+  "experiment_id": "eq_pareto_test__phase_a_workflow_parallelization",
+  "consolidations": [],
+  "parallel_groups": [
+    {
+      "candidate_id": "P1",
+      "agents": [
+        "a1",
+        "a2"
+      ],
+      "verification_reason": "Verified mutually independent in sandbox DAG: ['a1', 'a2']"
+    }
+  ],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {},
+  "applied_candidates": [
+    "P1"
+  ]
+}

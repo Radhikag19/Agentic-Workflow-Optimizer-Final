@@ -1,0 +1,60 @@
+{
+  "workflow_name": "eq_demo_wf",
+  "baseline_model": "openai/gpt-oss-120b",
+  "execution_order": [
+    "a1",
+    "a2",
+    "a3"
+  ],
+  "agents": [
+    {
+      "agent_id": "a1",
+      "role": "Extractor",
+      "dependencies": [],
+      "input_fields": [
+        "resume"
+      ],
+      "output_fields": [
+        "skills",
+        "extra"
+      ],
+      "model": "openai/gpt-oss-20b",
+      "llm_provider": "Groq"
+    },
+    {
+      "agent_id": "a2",
+      "role": "Criteria",
+      "dependencies": [],
+      "input_fields": [
+        "job"
+      ],
+      "output_fields": [
+        "criteria"
+      ]
+    },
+    {
+      "agent_id": "a3",
+      "role": "Summary",
+      "dependencies": [
+        "a1",
+        "a2"
+      ],
+      "input_fields": [
+        "skills",
+        "criteria"
+      ],
+      "output_fields": [
+        "summary",
+        "approved"
+      ]
+    }
+  ],
+  "agent_model_overrides": {
+    "a1": {
+      "previous_model": "openai/gpt-oss-120b",
+      "updated_model": "openai/gpt-oss-20b",
+      "provider": "Groq",
+      "candidate_id": "M1"
+    }
+  }
+}
