@@ -1,0 +1,156 @@
+{
+  "comparison_type": "historical_baseline_vs_live_optimized",
+  "comparability": {
+    "inputs_comparable": true,
+    "modes_compatible_for_live_claims": true,
+    "baseline_re_executed": false,
+    "baseline_measurement_period": {
+      "earliest_trace_timestamp": "2026-11-25T20:13:03.554335+00:00",
+      "latest_trace_timestamp": "2026-11-25T20:13:23.130637+00:00"
+    },
+    "fixed_baseline_reference_id": "hist_c86f1f3af77b",
+    "matched_input_count": 10,
+    "unmatched_input_count": 0,
+    "baseline_runs": 2,
+    "optimized_runs": 2,
+    "baseline_modes": [
+      "historical_recorded_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": 11.6505,
+    "optimized_seconds": 42.2737,
+    "improvement_pct": -262.85,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": 11.6505,
+    "optimized_seconds": 42.2737,
+    "improvement_pct": -262.85,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": 1.6616,
+    "optimized_seconds": 6.0347,
+    "improvement_pct": -263.19,
+    "per_agent": {
+      "carrier_routing_agent": {
+        "baseline_mean_latency_seconds": 1.4885,
+        "optimized_mean_latency_seconds": 4.7921,
+        "latency_improvement_pct": -221.94,
+        "baseline_mean_tokens": 737.0,
+        "optimized_mean_tokens": 719.0,
+        "token_improvement_pct": 2.44
+      },
+      "fraud_screen_agent": {
+        "baseline_mean_latency_seconds": 1.2285,
+        "optimized_mean_latency_seconds": 5.2135,
+        "latency_improvement_pct": -324.38,
+        "baseline_mean_tokens": 758.5,
+        "optimized_mean_tokens": 774.5,
+        "token_improvement_pct": -2.11
+      },
+      "fulfillment_summary_agent": {
+        "baseline_mean_latency_seconds": 2.842,
+        "optimized_mean_latency_seconds": 16.352,
+        "latency_improvement_pct": -475.37,
+        "baseline_mean_tokens": 2871.5,
+        "optimized_mean_tokens": 3009.5,
+        "token_improvement_pct": -4.81
+      },
+      "inventory_check_agent": {
+        "baseline_mean_latency_seconds": 1.3965,
+        "optimized_mean_latency_seconds": 2.3549,
+        "latency_improvement_pct": -68.63,
+        "baseline_mean_tokens": 842.5,
+        "optimized_mean_tokens": 884.5,
+        "token_improvement_pct": -4.99
+      },
+      "invoice_tag_agent": {
+        "baseline_mean_latency_seconds": 1.296,
+        "optimized_mean_latency_seconds": 3.0275,
+        "latency_improvement_pct": -133.6,
+        "baseline_mean_tokens": 675.5,
+        "optimized_mean_tokens": 702.5,
+        "token_improvement_pct": -4.0
+      },
+      "order_intake_agent": {
+        "baseline_mean_latency_seconds": 2.0805,
+        "optimized_mean_latency_seconds": 3.5903,
+        "latency_improvement_pct": -72.57,
+        "baseline_mean_tokens": 980.5,
+        "optimized_mean_tokens": 1064.0,
+        "token_improvement_pct": -8.52
+      },
+      "tax_classify_agent": {
+        "baseline_mean_latency_seconds": 1.2995,
+        "optimized_mean_latency_seconds": 6.9127,
+        "latency_improvement_pct": -431.95,
+        "baseline_mean_tokens": 666.0,
+        "optimized_mean_tokens": 686.5,
+        "token_improvement_pct": -3.08
+      }
+    }
+  },
+  "latency": {
+    "baseline_mean_seconds": 11.6505,
+    "optimized_mean_seconds": 42.2737,
+    "improvement_pct": -262.85,
+    "comparable_for_live_claim": true,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": 5138.0,
+    "optimized_mean_tokens": 5136.5,
+    "improvement_pct": 0.03
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": 2393.5,
+    "optimized_mean_tokens": 5408.0,
+    "improvement_pct": -125.95
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": 7531.5,
+    "optimized_mean_tokens": 15681.0,
+    "improvement_pct": -108.21
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": 7531.5,
+    "optimized_mean_tokens": 15681.0,
+    "improvement_pct": -108.21
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": 0.002207,
+    "baseline_catalog_normalized_usd": 0.002207,
+    "optimized_catalog_normalized_usd": 0.004786,
+    "improvement_pct_catalog_normalized": -116.86,
+    "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+  },
+  "execution_success_rate": {
+    "baseline_pct": 100.0,
+    "optimized_pct": 100.0,
+    "delta_pct_points": 0.0,
+    "improvement_pct": 0.0
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": 100.0,
+    "optimized_pass_rate_pct": 100.0,
+    "improvement_pct": 0.0
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": []
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": true,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

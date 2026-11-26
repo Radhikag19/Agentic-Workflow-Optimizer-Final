@@ -1,0 +1,87 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_213208_171f02__phase_b_prompt_optimization",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {},
+  "prompt_overrides": {
+    "fulfillment_summary_agent": {
+      "candidate_id": "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+      "original_prompt_preview": "You are an executive fulfillment summarizer responsible for producing the final structured JSON dispatch brief. You must follow all instructions strictly and never invent missing order facts or fields. Return only valid parsable JSON matching FulfillmentSummaryOutput with no additional commentary. Always verify the order record identifier matches the upstream input exactly before emitting the final decision.\nSystem Prompt Overview: You are a senior enterprise fulfillment dispatch coordinator wor",
+      "original_prompt_char_length": 7543,
+      "optimized_prompt": "You are a senior enterprise fulfillment dispatch coordinator. Receive the following upstream payloads for the current run:\n- inventory_output (contains in_stock)\n- fraud_output (contains review_flag)\n- routing_output (contains carrier_name, service_level)\n- tax_output (contains tax_jurisdiction, tax_amount_usd)\n- invoice_output (contains invoice_tag)\n\n**Decision rules**\n1. If in_stock is false \u2192 final_decision = \"REJECT\".\n2. If in_stock is true AND review_flag is true \u2192 final_decision = \"HOLD_FOR_REVIEW\".\n3. If in_stock is true AND review_flag is false \u2192 final_decision = \"APPROVE\".\n\n**Output** \u2013 Return ONLY the following JSON (no markdown, no extra text):\n{\n  \"run_id\": \"{run_id}\",\n  \"record_id\": \"{record_id}\",\n  \"final_decision\": \"APPROVE\" | \"HOLD_FOR_REVIEW\" | \"REJECT\",\n  \"carrier_name\": \"{carrier_name}\",\n  \"service_level\": \"{service_level}\",\n  \"tax_jurisdiction\": \"{tax_jurisdiction}\",\n  \"tax_amount_usd\": {tax_amount_usd},\n  \"invoice_tag\": \"{invoice_tag}\",\n  \"summary\": \"Order {record_id}: {final_decision} via {carrier_name} {service_level} ({tax_jurisdiction}, {invoice_tag}).\",\n  \"human_review_required\": true | false\n}\n\n**Additional constraints**\n- Do not fabricate or invent any values; use the upstream payloads verbatim.\n- human_review_required must be true only when final_decision is \"HOLD_FOR_REVIEW\", otherwise false.\n- All keys must be present exactly as listed.\n- Preserve the exact values of run_id, record_id, carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag from the upstream inputs.",
+      "optimized_prompt_char_length": 1544
+    }
+  },
+  "handoff_projections": {
+    "order_intake_agent->inventory_check_agent": {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+      "producer_agent": "order_intake_agent",
+      "consumer_agent": "inventory_check_agent",
+      "retained_fields": [
+        "record_id",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "sku_items",
+        "legacy_erp_dump",
+        "deprecated_sku_notes"
+      ],
+      "excluded_fields": [
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_speed",
+        "raw_audit_trail",
+        "debug_headers",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "consumer_required_fields": [
+        "record_id",
+        "warehouse_region",
+        "sku_items"
+      ],
+      "typed_delta_projection": true
+    },
+    "order_intake_agent->fraud_screen_agent": {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+      "producer_agent": "order_intake_agent",
+      "consumer_agent": "fraud_screen_agent",
+      "retained_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd",
+        "deprecated_sku_notes",
+        "internal_routing_flags"
+      ],
+      "excluded_fields": [
+        "request_id",
+        "shipping_region",
+        "warehouse_region",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "formatting_metadata"
+      ],
+      "consumer_required_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd"
+      ],
+      "typed_delta_projection": true
+    }
+  },
+  "applied_candidates": [
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT"
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "fixed_baseline_reference_id": "hist_ef23650339c0",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\recruitment_screening",
+  "total_historical_traces_found": 30,
+  "matched_input_count": 30,
+  "unmatched_input_count": 0,
+  "excluded_records": [],
+  "matched_identifiers": [
+    {
+      "application_id": "APP-001",
+      "candidate_id": "CAND-001",
+      "job_id": "JOB-01"
+    },
+    {
+      "application_id": "APP-002",
+      "candidate_id": "CAND-002",
+      "job_id": "JOB-02"
+    },
+    {
+      "application_id": "APP-003",
+      "candidate_id": "CAND-003",
+      "job_id": "JOB-03"
+    },
+    {
+      "application_id": "APP-004",
+      "candidate_id": "CAND-004",
+      "job_id": "JOB-04"
+    },
+    {
+      "application_id": "APP-005",
+      "candidate_id": "CAND-005",
+      "job_id": "JOB-05"
+    },
+    {
+      "application_id": "APP-006",
+      "candidate_id": "CAND-006",
+      "job_id": "JOB-06"
+    },
+    {
+      "application_id": "APP-007",
+      "candidate_id": "CAND-007",
+      "job_id": "JOB-07"
+    },
+    {
+      "application_id": "APP-008",
+      "candidate_id": "CAND-008",
+      "job_id": "JOB-08"
+    },
+    {
+      "application_id": "APP-009",
+      "candidate_id": "CAND-009",
+      "job_id": "JOB-09"
+    },
+    {
+      "application_id": "APP-010",
+      "candidate_id": "CAND-010",
+      "job_id": "JOB-10"
+    },
+    {
+      "application_id": "APP-011",
+      "candidate_id": "CAND-011",
+      "job_id": "JOB-11"
+    },
+    {
+      "application_id": "APP-012",
+      "candidate_id": "CAND-012",
+      "job_id": "JOB-12"
+    },
+    {
+      "application_id": "APP-013",
+      "candidate_id": "CAND-013",
+      "job_id": "JOB-13"
+    },
+    {
+      "application_id": "APP-014",
+      "candidate_id": "CAND-014",
+      "job_id": "JOB-14"
+    },
+    {
+      "application_id": "APP-015",
+      "candidate_id": "CAND-015",
+      "job_id": "JOB-15"
+    },
+    {
+      "application_id": "APP-016",
+      "candidate_id": "CAND-016",
+      "job_id": "JOB-01"
+    },
+    {
+      "application_id": "APP-017",
+      "candidate_id": "CAND-017",
+      "job_id": "JOB-02"
+    },
+    {
+      "application_id": "APP-018",
+      "candidate_id": "CAND-018",
+      "job_id": "JOB-03"
+    },
+    {
+      "application_id": "APP-019",
+      "candidate_id": "CAND-019",
+      "job_id": "JOB-04"
+    },
+    {
+      "application_id": "APP-020",
+      "candidate_id": "CAND-020",
+      "job_id": "JOB-05"
+    },
+    {
+      "application_id": "APP-021",
+      "candidate_id": "CAND-021",
+      "job_id": "JOB-06"
+    },
+    {
+      "application_id": "APP-022",
+      "candidate_id": "CAND-022",
+      "job_id": "JOB-07"
+    },
+    {
+      "application_id": "APP-023",
+      "candidate_id": "CAND-023",
+      "job_id": "JOB-08"
+    },
+    {
+      "application_id": "APP-024",
+      "candidate_id": "CAND-024",
+      "job_id": "JOB-09"
+    },
+    {
+      "application_id": "APP-025",
+      "candidate_id": "CAND-025",
+      "job_id": "JOB-10"
+    },
+    {
+      "application_id": "APP-026",
+      "candidate_id": "CAND-026",
+      "job_id": "JOB-11"
+    },
+    {
+      "application_id": "APP-027",
+      "candidate_id": "CAND-027",
+      "job_id": "JOB-12"
+    },
+    {
+      "application_id": "APP-028",
+      "candidate_id": "CAND-028",
+      "job_id": "JOB-13"
+    },
+    {
+      "application_id": "APP-029",
+      "candidate_id": "CAND-029",
+      "job_id": "JOB-14"
+    },
+    {
+      "application_id": "APP-030",
+      "candidate_id": "CAND-030",
+      "job_id": "JOB-15"
+    }
+  ],
+  "matched_run_ids": [
+    "live_20261031_162602_trace01",
+    "live_20261031_162635_trace02",
+    "live_20261031_162659_trace03",
+    "live_20261031_162726_trace04",
+    "live_20261031_162753_trace05",
+    "live_20261031_162814_trace06",
+    "live_20261031_162837_trace07",
+    "live_20261031_162907_trace08",
+    "live_20261031_162940_trace09",
+    "live_20261031_163009_trace10",
+    "live_20261031_163042_trace11",
+    "live_20261031_163115_trace12",
+    "live_20261031_163143_trace13",
+    "live_20261031_163952_trace14",
+    "live_20261031_164015_trace15",
+    "live_20261031_164042_trace16",
+    "live_20261031_164119_trace17",
+    "live_20261031_164153_trace18",
+    "live_20261031_164225_trace19",
+    "live_20261031_164259_trace20",
+    "live_20261031_164332_trace21",
+    "live_20261031_164404_trace22",
+    "live_20261031_164433_trace23",
+    "live_20261031_164505_trace24",
+    "live_20261031_164537_trace25",
+    "live_20261031_164608_trace26",
+    "live_20261031_164639_trace27",
+    "live_20261031_164718_trace28",
+    "live_20261031_164746_trace29",
+    "live_20261031_164817_trace30"
+  ],
+  "matched_input_hashes": [
+    "5c8a1493187fdc5475b0b1833142a947ac8b36c35728cc4b30a06b1adfb04435",
+    "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+    "718bad26f3c976ca2f5dd448a58079da6edbf703937097cf535216028ff1764f",
+    "9a5b347cb10e75887bd1b904503a75aa77037efc2112700a3dd7e6da334bda34",
+    "d15422a36a150f6e426f923469b26f16aae1ae15ec9fc2dc2b3d758867125c5b",
+    "7e463e92456898e688492964c279b4f16175d6d2f9a5e5a8c10afb9b30714288",
+    "c6fd3e601df0cdacf1ccff8ff6c72cc1d83b89ac20cae2886bb6deba5b833d6f",
+    "db20080e030524b7fd71f171f367a17ee960e4cefc1ad6398978800f58340772",
+    "b108be423bc2be253e894476162206154c9f69dd4d40e4a6a500eaf2e7992994",
+    "09245879c6e09c335150dc63227c33697fe3e59d234e129e9e5422a20925a690",
+    "19f4f37a2cf8ccc5fa5f2b3970e7ff071ad781c5c6a2b7b58e58105614896c3e",
+    "f76d91fefdb721c543a7ec628f83c78ef7b554a334e4335640bd1c7c6664f1bc",
+    "e78a060a55a9d1cee41a9bf2e9ac780d7068269e8d298ac5501f69c3fc551b68",
+    "ce416e0231c740eb5b4842090fc5b2d92cca0947d9a4f0ea660d15a3704826a4",
+    "03840c5cb03eb2d5effc69362cb22335df1aae7ccf8d98fa4575c7c2e78fe546",
+    "92b53477701e143bcd5dd774cff8d36263e34fb9dd6a5dfff5c9ab4085183eda",
+    "073aafa69e26bfa8fdecf4918dbf1460b62710dfcdaba158456bb333ef65b8bb",
+    "677575cf0dc5c4ef08b7a7e1d859c36d619fdb21bba50429afe4ec24a384e946",
+    "693ef732504a18ce2ba046c34d020321093c3dd25556a8921cf454fbaabf2370",
+    "6420b193913c769bb4ce6a56ca1361fd3a3b8272d90fd930ae740675f2054422",
+    "7571e7f10face0bec6634cc8f84c43aa37791b6b8c49e453a48ae4146eb204d1",
+    "8b6f6b06ee0742ca015489e476cb4798a21f4333a55e46744162f12575b6ee9b",
+    "fb447aebe314feb8785978372473ecad410288f31ad1932d76ed96be8d3d12f4",
+    "da6fb018b41487a23636ec5e415819244873bdeb8ed1818fe0aea5012455c8f8",
+    "79e1e1962eb5a4e6ef224f44d1abaa03280cb446f1bf347ebb1890ae4f7cbf68",
+    "486e86b76d5a6b30b50997df7acdbf9302ff2c731683bafaa4f89d111094f4fb",
+    "013c4c1f752b7023bf70fb406326c14ba8c2cb11663168cfa04e83913461a9ca",
+    "ba3eef526027e988bc2cd6139beedb21147ac851e3c272c15441c157ad8723fe",
+    "4a6f03c1cf9af3c84285c97ef99e11986293ed8ae0cd3bf2f99d39131da10d50",
+    "243a21b6e41be2065893382e5c137902b2d572293d74e16c544caf43154c6f36"
+  ]
+}

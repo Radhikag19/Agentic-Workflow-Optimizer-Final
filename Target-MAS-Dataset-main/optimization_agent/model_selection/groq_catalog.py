@@ -110,6 +110,12 @@ MODEL_CATALOG: Dict[str, Dict[str, Any]] = {
     },
 }
 
+GENERAL_PURPOSE_GROQ_MODELS = frozenset(
+    model_id
+    for model_id, meta in MODEL_CATALOG.items()
+    if meta.get("suitable_for_general_agent_tasks") is True
+)
+
 
 def get_groq_api_key() -> str:
     """Retrieve an active Groq API key from environment."""

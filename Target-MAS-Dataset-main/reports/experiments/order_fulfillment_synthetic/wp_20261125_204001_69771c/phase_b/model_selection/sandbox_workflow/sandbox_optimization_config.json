@@ -1,0 +1,20 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_b_model_selection",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {
+    "order_intake_agent": {
+      "previous_model": "openai/gpt-oss-120b",
+      "updated_model": "openai/gpt-oss-20b",
+      "provider": "Groq",
+      "assigned_key_env": "GROQ_API_KEY_14",
+      "candidate_id": "MODEL-ORDER_INTAKE_AGENT"
+    }
+  },
+  "prompt_overrides": {},
+  "handoff_projections": {},
+  "applied_candidates": [
+    "MODEL-ORDER_INTAKE_AGENT"
+  ]
+}

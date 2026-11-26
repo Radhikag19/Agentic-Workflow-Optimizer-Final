@@ -74,6 +74,7 @@ class ExperimentStatusResponse(BaseModel):
     experiment_dir: Optional[str] = None
     json_report_path: Optional[str] = None
     markdown_report_path: Optional[str] = None
+    has_results: bool = False
 
 
 class ExperimentResultsResponse(BaseModel):

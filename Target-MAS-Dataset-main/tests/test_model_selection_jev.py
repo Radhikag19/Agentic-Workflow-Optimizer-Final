@@ -168,7 +168,7 @@ def test_test_case_2_specialized_models_never_eligible_and_rejected_in_post_vali
     )
     assert is_valid is False
     assert selected is None
-    assert "unknown or ineligible model ID" in reason.lower()
+    assert "unknown or ineligible model id" in reason.lower()
 
 
 # =============================================================================
@@ -392,4 +392,121 @@ def test_test_case_9_multi_agent_compatibility():
     assert res2["workflow_id"] == "invoice_processing"
     assert res2["selected_agent_id"] == "po_matching_agent"
     assert res2["baseline_model"] == "openai/gpt-oss-120b"
+
+
+# =============================================================================
+# Test Case 10: Unhosted Llama Models Excluded & 2-Agent JEV Integrated in Executor/Discovery
+# =============================================================================
+
+def test_test_case_10_unhosted_llama_models_rejected_and_jev_used_in_executor_and_discovery(
+    tmp_path: Path,
+):
+    """
+    Verify:
+      1. SUPPORTED_GROQ_MODELS excludes llama-3.3-70b-versatile, llama-3.1-8b-instant, and guard models.
+      2. ModelSelectionExecutor rejects unhosted Llama candidates cleanly.
+      3. ModelSelectionExecutor resolves Agent 2's JEV choice dynamically when no model is preset.
+      4. OptimizationDiscoveryEngine._analyze_dimension_d_model_selection uses 2-agent JEV LangGraph.
+    """
+    from optimization_agent.discovery import OptimizationDiscoveryEngine
+    from optimization_agent.key_manager import GroqKeyManager
+    from optimization_agent.sandbox.executors.model_selection import (
+        SUPPORTED_GROQ_MODELS,
+        ModelSelectionExecutor,
+    )
+    from optimization_agent.sandbox.manager import SandboxManager
+
+    assert SUPPORTED_GROQ_MODELS == {
+        "openai/gpt-oss-120b",
+        "openai/gpt-oss-20b",
+        "qwen/qwen3.8-27b",
+    }
+    assert "llama-3.3-70b-versatile" not in SUPPORTED_GROQ_MODELS
+    assert "llama-3.1-8b-instant" not in SUPPORTED_GROQ_MODELS
+
+    agents_dir = tmp_path / "agents"
+    exp_dir = tmp_path / "experiments"
+    wf_dir = agents_dir / "contract_review"
+    wf_dir.mkdir(parents=True, exist_ok=True)
+    (wf_dir / "workflow.json").write_text(
+        json.dumps({
+            "workflow_id": "contract_review",
+            "baseline_model": "openai/gpt-oss-120b",
+            "llm_provider": "Groq",
+            "assigned_groq_key_env": "GROQ_API_KEY_TEST",
+            "agents": [{"agent_id": "clause_mapping_agent", "model": "openai/gpt-oss-120b"}],
+        }),
+        encoding="utf-8",
+    )
+
+    mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
+
+    # 1. Explicit unhosted Llama candidate MUST be rejected cleanly
+    bad_cand = {
+        "candidate_id": "MODEL-CLAUSE_MAPPING_AGENT",
+        "dimension": "model_selection",
+        "target_agents": ["clause_mapping_agent"],
+        "selected_model": "llama-3.3-70b-versatile",
+    }
+    env_bad = mgr.prepare_sandbox(
+        {
+            "workflow_id": "contract_review",
+            "approval_status": "approved",
+            "approved_candidate_ids": ["MODEL-CLAUSE_MAPPING_AGENT"],
+            "approved_candidates": [bad_cand],
+        },
+        experiment_id="exp_reject_llama",
+    )
+    bad_res = ModelSelectionExecutor().execute(env_bad, bad_cand)
+    assert bad_res["status"] == "requires_manual_intervention"
+    assert bad_res["error"] == "unsupported_or_missing_model"
+
+    # 2. Candidate without preset model resolves via 2-agent JEV LangGraph workflow (Agent 2)
+    mock_caller = create_mock_jev_caller(agent2_choice="openai/gpt-oss-20b")
+    jev_cand = {
+        "candidate_id": "MODEL-CLAUSE_MAPPING_AGENT",
+        "dimension": "model_selection",
+        "target_agents": ["clause_mapping_agent"],
+    }
+    env_ok = mgr.prepare_sandbox(
+        {
+            "workflow_id": "contract_review",
+            "approval_status": "approved",
+            "approved_candidate_ids": ["MODEL-CLAUSE_MAPPING_AGENT"],
+            "approved_candidates": [jev_cand],
+        },
+        experiment_id="exp_jev_dynamic",
+    )
+    ok_res = ModelSelectionExecutor(
+        jev_caller=mock_caller,
+        jev_live_groq_models={m: {"id": m, "active": True} for m in MODEL_CATALOG},
+        use_cached_jev=False,
+    ).execute(env_ok, jev_cand)
+    assert ok_res["status"] == "applied"
+    assert ok_res["details"]["model_transitions"]["clause_mapping_agent"]["updated_model"] == "openai/gpt-oss-20b"
+    assert ok_res["details"]["selection_source"] == "jev_agent2_live_langgraph"
+    assert len(mock_caller.call_log) == 2
+
+    # 3. Discovery engine invokes 2-agent JEV LangGraph and never emits Llama models
+    disc_caller = create_mock_jev_caller(agent2_choice="openai/gpt-oss-20b")
+    km = GroqKeyManager(key_pool={f"GROQ_API_KEY_{i}": f"gsk_test_{i:02d}_placeholder" for i in range(1, 21)})
+    engine = OptimizationDiscoveryEngine(
+        key_manager=km,
+        jev_caller=disc_caller,
+        jev_live_groq_models={m: {"id": m, "active": True} for m in MODEL_CATALOG},
+        use_cached_jev=False,
+    )
+    cands, meta = engine._analyze_dimension_d_model_selection({
+        "workflow_id": "contract_review",
+        "discovered_agents": ["contract_intake_agent", "compliance_deviation_agent"],
+        "workflow_metadata": {"model_reconciliation": {"declared_model": "openai/gpt-oss-120b"}},
+        "latency_metrics": {"agent_latency_metrics": {"contract_intake_agent": {"mean_seconds": 2.0}}},
+        "token_metrics": {"agent_token_metrics": {"contract_intake_agent": {"mean_tokens": 1200.0}}},
+    })
+    assert meta["selection_engine"] == "jev_2agent_langgraph"
+    assert len(disc_caller.call_log) == 2
+    assert len(cands) == 1
+    assert cands[0]["selected_model"] == "openai/gpt-oss-20b"
+    assert cands[0]["supporting_evidence"]["proposed_candidate_models"] == ["openai/gpt-oss-20b"]
+    assert "llama-3" not in json.dumps(cands).lower()
 

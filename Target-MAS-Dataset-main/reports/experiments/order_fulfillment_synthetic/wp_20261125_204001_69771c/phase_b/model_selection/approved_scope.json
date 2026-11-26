@@ -1,0 +1,201 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "selected_dimensions": [
+    "agent_consolidation",
+    "workflow_parallelization",
+    "model_selection",
+    "prompt_optimization",
+    "communication_data_handoff"
+  ],
+  "approved_candidate_ids": [
+    "MODEL-ORDER_INTAKE_AGENT"
+  ],
+  "excluded_candidate_ids": [],
+  "approved_candidates": [
+    {
+      "candidate_id": "MODEL-ORDER_INTAKE_AGENT",
+      "dimension": "model_selection",
+      "title": "Route order_intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)",
+      "target_agents": [
+        "order_intake_agent"
+      ],
+      "selected_model": "openai/gpt-oss-20b",
+      "selection_source": "jev_agent2_cached_langgraph",
+      "observed_problem": "JEV 2-Agent LangGraph evaluation classified 'order_intake_agent' as Task=Low, Prompt=High, Tokens=High (mean latency 1.86s). Assigning the baseline 'openai/gpt-oss-120b' introduces unnecessary compute cost; JEV Agent 2 selected 'openai/gpt-oss-20b' among eligible Groq models.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_2_overview",
+          "stage_4_profiles",
+          "stage_7_tokens"
+        ],
+        "current_model": "openai/gpt-oss-120b",
+        "selected_model": "openai/gpt-oss-20b",
+        "jev_selected_model": "openai/gpt-oss-20b",
+        "proposed_candidate_models": [
+          "openai/gpt-oss-20b"
+        ],
+        "selection_source": "jev_agent2_cached_langgraph",
+        "jev_agent1_requirements": {
+          "agent_id": "order_intake_agent",
+          "jev_model": "jev-1.14.0",
+          "task_complexity": {
+            "class": "Low",
+            "score_position": 0.01,
+            "probabilities": {
+              "0": 0.99,
+              "1": 0.01,
+              "2": 0.0
+            },
+            "top_level_probability": 0.99
+          },
+          "prompt_complexity": {
+            "class": "High",
+            "score_position": 1.49,
+            "probabilities": {
+              "0": 0.08,
+              "1": 0.36,
+              "2": 0.56
+            },
+            "top_level_probability": 0.56
+          },
+          "token_consumption": {
+            "class": "High",
+            "score_position": 1.88,
+            "probabilities": {
+              "0": 0.04,
+              "1": 0.05,
+              "2": 0.91
+            },
+            "top_level_probability": 0.91
+          },
+          "jev_usage": {
+            "input_tokens": 2523,
+            "output_tokens": 53
+          }
+        },
+        "jev_agent2_recommendation": {
+          "selected_model": "openai/gpt-oss-20b",
+          "selected_model_metadata": {
+            "model_id": "openai/gpt-oss-20b",
+            "owned_by": "OpenAI",
+            "active": true,
+            "api_context_window": 131072,
+            "model_role": "general_purpose_reasoning",
+            "suitable_for_general_agent_tasks": true,
+            "context_window": 131072,
+            "max_input_tokens": 65536,
+            "max_output_tokens": 65536,
+            "max_input_is_derived": true,
+            "reasoning_capability": "High",
+            "instruction_following": "High",
+            "tool_calling_support": true,
+            "input_price_per_million_usd": 0.075,
+            "output_price_per_million_usd": 0.3,
+            "metadata_source": "Groq model documentation; max input derived; qualitative ratings are project heuristics"
+          },
+          "selection_validated": true,
+          "reason": "Selected from the deterministically eligible general-purpose candidates. Role=general_purpose_reasoning; reasoning=High; instruction-following=High; context-window=131072; tool-calling=True.",
+          "choice_probabilities": {
+            "no_suitable_model": 0.01,
+            "openai/gpt-oss-120b": 0.02,
+            "openai/gpt-oss-20b": 0.97,
+            "qwen/qwen3.8-27b": 0.0
+          },
+          "choice_confidence": 0.96,
+          "jev_model": "jev-1.14.0",
+          "jev_usage": {
+            "input_tokens": 1660,
+            "output_tokens": 88
+          },
+          "raw_answer": {
+            "type": "choice",
+            "choice": "openai/gpt-oss-20b",
+            "confidence": 0.96,
+            "probabilities": {
+              "no_suitable_model": 0.01,
+              "openai/gpt-oss-120b": 0.02,
+              "openai/gpt-oss-20b": 0.97,
+              "qwen/qwen3.8-27b": 0.0
+            }
+          }
+        },
+        "eligible_model_ids": [
+          "openai/gpt-oss-120b",
+          "openai/gpt-oss-20b",
+          "qwen/qwen3.8-27b"
+        ],
+        "choice_confidence": 0.96,
+        "choice_probabilities": {
+          "no_suitable_model": 0.01,
+          "openai/gpt-oss-120b": 0.02,
+          "openai/gpt-oss-20b": 0.97,
+          "qwen/qwen3.8-27b": 0.0
+        },
+        "task_complexity": "Low (JEV Agent 1; prompt=High, tokens=High)",
+        "mean_tokens_per_call": 1088.8
+      },
+      "proposed_solution": "Switch 'order_intake_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.",
+      "expected_benefit": {
+        "latency_savings_pct": 25.0,
+        "latency_savings_seconds": 0.46,
+        "cost_savings_pct": 50.0,
+        "quality_impact": "Requires shadow validation against baseline traces to confirm behavioral equivalence."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower per-call inference overhead with smaller parameter footprint.",
+        "token_cost_tradeoff": "~50.0% API pricing reduction vs. 'openai/gpt-oss-120b' based on Groq catalog rates.",
+        "output_quality_risk": "Moderate (compact model recommended by JEV Agent 2 requires empirical shadow validation against baseline traces).",
+        "implementation_complexity": "Low"
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_6 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    }
+  ],
+  "candidate_tiers": {
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT": "Tier 2",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT": "Tier 1",
+    "MODEL-ORDER_INTAKE_AGENT": "Tier 2",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT": "Tier 2",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT": "Tier 2",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT": "Tier 2",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT": "Tier 2",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT": "Tier 2"
+  },
+  "validation_required_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "risk_acknowledged_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "approval_status": "approved",
+  "approved_at": "2026-11-25T20:39:41.921568+00:00"
+}

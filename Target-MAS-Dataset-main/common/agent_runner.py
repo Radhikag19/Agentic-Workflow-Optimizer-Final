@@ -98,6 +98,14 @@ ROLE_TO_AGENT_ID: Dict[str, str] = {
     "Legal Evidence and Citation Validator": "evidence_validation_agent",
     "Senior Contract Compliance Reviewer": "contract_independent_review_agent",
     "Lead Contract Compliance Report Author": "final_compliance_report_agent",
+    # Synthetic Order Fulfillment (7 agents)
+    "Order Intake Coordinator": "order_intake_agent",
+    "Warehouse Inventory Specialist": "inventory_check_agent",
+    "Order Risk Screener": "fraud_screen_agent",
+    "Carrier Zone Router": "carrier_routing_agent",
+    "Regional Tax Classifier": "tax_classify_agent",
+    "Ledger Invoice Tagger": "invoice_tag_agent",
+    "Executive Fulfillment Summarizer": "fulfillment_summary_agent",
 }
 
 

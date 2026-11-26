@@ -1,0 +1,62 @@
+[
+  {
+    "record_id": "ORD-001",
+    "request_id": "ORD-001",
+    "customer_id": "CUST-101",
+    "customer_name": "Northstar Logistics LLC",
+    "customer_tier": "enterprise",
+    "billing_country": "US",
+    "shipping_region": "US-WEST",
+    "warehouse_region": "US-WEST",
+    "shipping_speed": "standard",
+    "order_total_usd": 420.0,
+    "sku_items": [
+      {
+        "sku": "SKU-RACK-10",
+        "qty": 2,
+        "unit_price_usd": 160.0,
+        "stock_available": 24
+      },
+      {
+        "sku": "SKU-CBL-04",
+        "qty": 5,
+        "unit_price_usd": 20.0,
+        "stock_available": 140
+      }
+    ],
+    "payment_verified": true,
+    "account_age_days": 920,
+    "_matched_baseline_run_id": "live_20261125_201252_trace01",
+    "_matched_identifiers": {
+      "record_id": "ORD-001",
+      "request_id": "ORD-001"
+    }
+  },
+  {
+    "record_id": "ORD-006",
+    "request_id": "ORD-006",
+    "customer_id": "CUST-106",
+    "customer_name": "Crestview Foods",
+    "customer_tier": "standard",
+    "billing_country": "UK",
+    "shipping_region": "UK-LON",
+    "warehouse_region": "EU-CENTRAL",
+    "shipping_speed": "standard",
+    "order_total_usd": 310.0,
+    "sku_items": [
+      {
+        "sku": "SKU-SEAL-07",
+        "qty": 10,
+        "unit_price_usd": 31.0,
+        "stock_available": 85
+      }
+    ],
+    "payment_verified": true,
+    "account_age_days": 305,
+    "_matched_baseline_run_id": "live_20261125_201311_trace06",
+    "_matched_identifiers": {
+      "record_id": "ORD-006",
+      "request_id": "ORD-006"
+    }
+  }
+]

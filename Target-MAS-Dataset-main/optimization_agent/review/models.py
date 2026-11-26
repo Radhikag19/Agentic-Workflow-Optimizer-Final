@@ -423,6 +423,13 @@ def build_candidate_card_view(
     if dim_key == "model_selection":
         view["model_selection_details"] = {
             "current_model": supp_dict.get("current_model") or "Not available",
+            "selected_model": candidate.get("selected_model")
+            or supp_dict.get("selected_model")
+            or supp_dict.get("jev_selected_model")
+            or "Not available",
+            "selection_source": candidate.get("selection_source")
+            or supp_dict.get("selection_source")
+            or "Not available",
             "proposed_models": list(supp_dict.get("proposed_candidate_models") or []),
             "task_complexity": supp_dict.get("task_complexity") or "Not available",
             "validation_requirement": val_info["validation_requirement"],

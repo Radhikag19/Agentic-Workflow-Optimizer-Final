@@ -1,0 +1,212 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_a_workflow_parallelization",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 14,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\workflow_parallelization\\runtime_traces",
+  "execution_status": "FAILED",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported",
+    "unavailable"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\workflow_parallelization\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\workflow_parallelization\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "FAILED",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 82.2314,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\workflow_parallelization\\sandbox_workflow",
+    "error_details": "Error code: 400 - {'error': {'message': \"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': ''}}"
+  },
+  "total_runs": 2,
+  "successful_runs": 1,
+  "failed_runs": 1,
+  "incomplete_runs": [
+    {
+      "run_id": "sb_20261125_204109_4897e9",
+      "run_index": 0,
+      "status": "FAILED",
+      "executed_agents": 7,
+      "expected_agents": 7,
+      "error": "Error code: 400 - {'error': {'message': \"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': ''}}"
+    }
+  ],
+  "success_rate_pct": 50.0,
+  "mean_latency_seconds": 38.1256,
+  "median_latency_seconds": 38.1256,
+  "mean_agent_latency_seconds": 5.731,
+  "mean_tokens": 14886.0,
+  "mean_prompt_tokens": 5027.0,
+  "mean_completion_tokens": 4832.0,
+  "mean_cost_usd_catalog_normalized": 0.00441,
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 92.86,
+  "schema_validation_failures": [
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261125_204204_8cee98",
+      "agent_id": "fulfillment_summary_agent",
+      "missing_required_fields": [
+        "run_id",
+        "record_id",
+        "final_decision",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "invoice_tag",
+        "summary"
+      ],
+      "error": "9 validation errors for FulfillmentSummaryOutput\nrun_id\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecord_id\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nfinal_decision\n  Field required [type=missing, inp"
+    }
+  ],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261125_204109_4897e9",
+      "agent_id": "fulfillment_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Error code: 400 - {'error': {'message': \"Failed to validate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': ''}}"
+    }
+  ],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261125_204109_4897e9",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261125_201252_trace01",
+      "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "status": "FAILED",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 43.8761,
+      "prompt_tokens": 3302,
+      "completion_tokens": 3234,
+      "total_tokens": 9838,
+      "estimated_cost_usd": 0.00293,
+      "schema_valid": false
+    },
+    {
+      "run_id": "sb_20261125_204204_8cee98",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261125_201311_trace06",
+      "input_hash": "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 38.1256,
+      "prompt_tokens": 5027,
+      "completion_tokens": 4832,
+      "total_tokens": 14886,
+      "estimated_cost_usd": 0.00441,
+      "schema_valid": false
+    }
+  ],
+  "per_agent_metrics": {
+    "order_intake_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 3.303,
+      "mean_tokens": 948.0,
+      "mean_prompt_tokens": 701.0,
+      "mean_completion_tokens": 247.0,
+      "mean_cost_usd": 0.000253,
+      "schema_valid_rate_pct": 100.0
+    },
+    "inventory_check_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 2.3924,
+      "mean_tokens": 895.0,
+      "mean_prompt_tokens": 542.0,
+      "mean_completion_tokens": 353.0,
+      "mean_cost_usd": 0.000293,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fraud_screen_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 2.0378,
+      "mean_tokens": 783.0,
+      "mean_prompt_tokens": 529.0,
+      "mean_completion_tokens": 254.0,
+      "mean_cost_usd": 0.000232,
+      "schema_valid_rate_pct": 100.0
+    },
+    "carrier_routing_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 8.139,
+      "mean_tokens": 727.0,
+      "mean_prompt_tokens": 477.0,
+      "mean_completion_tokens": 250.0,
+      "mean_cost_usd": 0.000222,
+      "schema_valid_rate_pct": 100.0
+    },
+    "tax_classify_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 2.6085,
+      "mean_tokens": 623.0,
+      "mean_prompt_tokens": 436.0,
+      "mean_completion_tokens": 187.0,
+      "mean_cost_usd": 0.000178,
+      "schema_valid_rate_pct": 100.0
+    },
+    "invoice_tag_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 4.9157,
+      "mean_tokens": 688.0,
+      "mean_prompt_tokens": 427.0,
+      "mean_completion_tokens": 261.0,
+      "mean_cost_usd": 0.000221,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fulfillment_summary_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 16.7205,
+      "mean_tokens": 2779.0,
+      "mean_prompt_tokens": 1915.0,
+      "mean_completion_tokens": 864.0,
+      "mean_cost_usd": 0.000806,
+      "schema_valid_rate_pct": 0.0
+    }
+  },
+  "input_dataset_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0"
+  ]
+}

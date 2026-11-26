@@ -1,0 +1,47 @@
+{
+  "experiment_id": "wp_20261125_204001_69771c__phase_a_communication_data_handoff",
+  "workflow_id": "order_fulfillment_synthetic",
+  "variant": "optimized",
+  "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\communication_data_handoff\\sandbox_workflow",
+  "original_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic",
+  "sandbox_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\communication_data_handoff\\sandbox_workflow",
+  "experiment_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\communication_data_handoff",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\communication_data_handoff\\runtime_traces",
+  "event_log_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_a\\communication_data_handoff\\process_logs\\optimized_run1_events.jsonl",
+  "enable_trace_replay_fallback": false,
+  "evidence_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Workflow_Evidence",
+  "data_base_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\data",
+  "sample_inputs": [
+    {
+      "record_id": "ORD-006",
+      "request_id": "ORD-006",
+      "customer_id": "CUST-106",
+      "customer_name": "Crestview Foods",
+      "customer_tier": "standard",
+      "billing_country": "UK",
+      "shipping_region": "UK-LON",
+      "warehouse_region": "EU-CENTRAL",
+      "shipping_speed": "standard",
+      "order_total_usd": 310.0,
+      "sku_items": [
+        {
+          "sku": "SKU-SEAL-07",
+          "qty": 10,
+          "unit_price_usd": 31.0,
+          "stock_available": 85
+        }
+      ],
+      "payment_verified": true,
+      "account_age_days": 305,
+      "_matched_baseline_run_id": "live_20261125_201311_trace06",
+      "_matched_identifiers": {
+        "record_id": "ORD-006",
+        "request_id": "ORD-006"
+      }
+    }
+  ],
+  "run_indices": [
+    1
+  ],
+  "num_runs": 1
+}

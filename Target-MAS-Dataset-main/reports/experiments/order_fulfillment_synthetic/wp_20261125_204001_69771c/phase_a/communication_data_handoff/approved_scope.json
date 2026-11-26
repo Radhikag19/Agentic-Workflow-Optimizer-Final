@@ -1,0 +1,2251 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "selected_dimensions": [
+    "agent_consolidation",
+    "workflow_parallelization",
+    "model_selection",
+    "prompt_optimization",
+    "communication_data_handoff"
+  ],
+  "approved_candidate_ids": [
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "excluded_candidate_ids": [],
+  "approved_candidates": [
+    {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for order_intake_agent -> inventory_check_agent",
+      "target_agents": [
+        "order_intake_agent",
+        "inventory_check_agent"
+      ],
+      "observed_problem": "Verified handoff 'order_intake_agent -> inventory_check_agent' transmits 16 field(s) (['record_id', 'request_id', 'customer_id', 'customer_tier', 'billing_country', 'shipping_region', 'warehouse_region', 'order_total_usd', 'shipping_speed', 'sku_items', 'legacy_erp_dump', 'raw_audit_trail', 'debug_headers', 'deprecated_sku_notes', 'internal_routing_flags', 'formatting_metadata']), of which 9 (['request_id', 'customer_id', 'customer_tier', 'billing_country', 'shipping_speed', 'raw_audit_trail', 'debug_headers', 'internal_routing_flags', 'formatting_metadata']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 191 tokens (579 bytes, runtime_payload_observed); compact projection reduces payload to 124 tokens (340 bytes, -67 tokens / 35.08%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "order_intake_agent",
+        "consumer_agent": "inventory_check_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "record_id",
+          "request_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "shipping_region",
+          "warehouse_region",
+          "order_total_usd",
+          "shipping_speed",
+          "sku_items",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "debug_headers",
+          "deprecated_sku_notes",
+          "internal_routing_flags",
+          "formatting_metadata"
+        ],
+        "consumer_required_fields": [
+          "record_id",
+          "warehouse_region",
+          "sku_items"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "billing_country",
+          "customer_id",
+          "customer_tier",
+          "debug_headers",
+          "formatting_metadata",
+          "internal_routing_flags",
+          "raw_audit_trail",
+          "request_id",
+          "shipping_speed"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [
+          "shipping_region",
+          "order_total_usd",
+          "deprecated_sku_notes",
+          "legacy_erp_dump"
+        ],
+        "fields_retained": [
+          "record_id",
+          "shipping_region",
+          "warehouse_region",
+          "order_total_usd",
+          "sku_items",
+          "legacy_erp_dump",
+          "deprecated_sku_notes"
+        ],
+        "fields_excluded": [
+          "request_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "shipping_speed",
+          "raw_audit_trail",
+          "debug_headers",
+          "internal_routing_flags",
+          "formatting_metadata"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "record_id": "Explicit input field placeholder in consumer prompt",
+          "request_id": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "customer_id": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "customer_tier": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "billing_country": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "shipping_region": "Conservatively retained (uncertain necessity).",
+          "warehouse_region": "Explicitly listed in consumer declared_inputs",
+          "order_total_usd": "Conservatively retained (uncertain necessity).",
+          "shipping_speed": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "sku_items": "Explicitly listed in consumer declared_inputs",
+          "legacy_erp_dump": "Conservatively retained (uncertain necessity).",
+          "raw_audit_trail": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "debug_headers": "Unreferenced metadata/debug field not required by consumer schema or prompt.",
+          "deprecated_sku_notes": "Conservatively retained (uncertain necessity).",
+          "internal_routing_flags": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "formatting_metadata": "Unreferenced metadata/debug field not required by consumer schema or prompt."
+        },
+        "original_payload_tokens": 191,
+        "proposed_payload_tokens": 124,
+        "tokens_saved": 67,
+        "savings_percentage": 35.08,
+        "original_payload_bytes": 579,
+        "proposed_payload_bytes": 340,
+        "bytes_saved": 239,
+        "byte_savings_percentage": 41.28,
+        "observation_count": 10,
+        "repeated_across_handoffs": [
+          "record_id",
+          "request_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "shipping_region",
+          "warehouse_region",
+          "order_total_usd",
+          "shipping_speed",
+          "sku_items",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "debug_headers",
+          "deprecated_sku_notes",
+          "internal_routing_flags",
+          "formatting_metadata"
+        ],
+        "tokenization_method": "tiktoken:o200k_base",
+        "is_exact_tokenizer": true,
+        "measurement_type": "exact_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "record_id": "ORD-001",
+          "request_id": "ORD-001",
+          "customer_id": "CUST-101",
+          "customer_tier": "enterprise",
+          "billing_country": "US",
+          "shipping_region": "US-WEST",
+          "warehouse_region": "US-WEST",
+          "order_total_usd": 420.0,
+          "shipping_speed": "standard",
+          "sku_items": [
+            {
+              "sku": "SKU-RACK-10",
+              "qty": 2,
+              "unit_price_usd": 160.0,
+              "stock_available": 24
+            },
+            {
+              "sku": "SKU-CBL-04",
+              "qty": 5,
+              "unit_price_usd": 20.0,
+              "stock_available": 140
+            }
+          ],
+          "legacy_erp_dump": "",
+          "raw_audit_trail": [],
+          "debug_headers": {},
+          "deprecated_sku_notes": "",
+          "internal_routing_flags": [],
+          "formatting_metadata": {}
+        },
+        "proposed_compact_payload_sample": {
+          "record_id": "ORD-001",
+          "shipping_region": "US-WEST",
+          "warehouse_region": "US-WEST",
+          "order_total_usd": 420.0,
+          "sku_items": [
+            {
+              "sku": "SKU-RACK-10",
+              "qty": 2,
+              "unit_price_usd": 160.0,
+              "stock_available": 24
+            },
+            {
+              "sku": "SKU-CBL-04",
+              "qty": 5,
+              "unit_price_usd": 20.0,
+              "stock_available": 140
+            }
+          ],
+          "legacy_erp_dump": "",
+          "deprecated_sku_notes": ""
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 191,
+            "original_payload_bytes": 579,
+            "transmitted_field_count": 16,
+            "is_large_payload": false,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "record_id",
+              "request_id",
+              "customer_id",
+              "customer_tier",
+              "billing_country",
+              "shipping_region",
+              "warehouse_region",
+              "order_total_usd",
+              "shipping_speed",
+              "sku_items",
+              "legacy_erp_dump",
+              "raw_audit_trail",
+              "debug_headers",
+              "deprecated_sku_notes",
+              "internal_routing_flags",
+              "formatting_metadata"
+            ],
+            "repeated_metadata_fields": [
+              "debug_headers",
+              "formatting_metadata"
+            ],
+            "repeated_static_fields": [
+              "sku_items"
+            ],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "record_id": {
+                "bytes": 24,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 7
+              },
+              "request_id": {
+                "bytes": 25,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "customer_id": {
+                "bytes": 27,
+                "tokens": 10,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "customer_tier": {
+                "bytes": 31,
+                "tokens": 8,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "billing_country": {
+                "bytes": 25,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "shipping_region": {
+                "bytes": 30,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "warehouse_region": {
+                "bytes": 31,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "order_total_usd": {
+                "bytes": 26,
+                "tokens": 11,
+                "type": "float",
+                "handoff_frequency": 2
+              },
+              "shipping_speed": {
+                "bytes": 30,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "sku_items": {
+                "bytes": 178,
+                "tokens": 73,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "legacy_erp_dump": {
+                "bytes": 23,
+                "tokens": 8,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "raw_audit_trail": {
+                "bytes": 23,
+                "tokens": 9,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "debug_headers": {
+                "bytes": 21,
+                "tokens": 6,
+                "type": "dict",
+                "handoff_frequency": 2
+              },
+              "deprecated_sku_notes": {
+                "bytes": 28,
+                "tokens": 8,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "internal_routing_flags": {
+                "bytes": 30,
+                "tokens": 8,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "formatting_metadata": {
+                "bytes": 27,
+                "tokens": 7,
+                "type": "dict",
+                "handoff_frequency": 2
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "order_intake_agent",
+            "consumer_agent": "inventory_check_agent",
+            "consumer_declared_inputs": [
+              "sku_items",
+              "warehouse_region"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "record_id": {
+                "field": "record_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 24,
+                "tokens": 9
+              },
+              "request_id": {
+                "field": "request_id",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 25,
+                "tokens": 9
+              },
+              "customer_id": {
+                "field": "customer_id",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 27,
+                "tokens": 10
+              },
+              "customer_tier": {
+                "field": "customer_tier",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 31,
+                "tokens": 8
+              },
+              "billing_country": {
+                "field": "billing_country",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 25,
+                "tokens": 7
+              },
+              "shipping_region": {
+                "field": "shipping_region",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['region'] with consumer instructions/goal.",
+                "bytes": 30,
+                "tokens": 9
+              },
+              "warehouse_region": {
+                "field": "warehouse_region",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 31,
+                "tokens": 9
+              },
+              "order_total_usd": {
+                "field": "order_total_usd",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['order'] with consumer instructions/goal.",
+                "bytes": 26,
+                "tokens": 11
+              },
+              "shipping_speed": {
+                "field": "shipping_speed",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 30,
+                "tokens": 7
+              },
+              "sku_items": {
+                "field": "sku_items",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 178,
+                "tokens": 73
+              },
+              "legacy_erp_dump": {
+                "field": "legacy_erp_dump",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['dump'] with consumer instructions/goal.",
+                "bytes": 23,
+                "tokens": 8
+              },
+              "raw_audit_trail": {
+                "field": "raw_audit_trail",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 23,
+                "tokens": 9
+              },
+              "debug_headers": {
+                "field": "debug_headers",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Unreferenced metadata/debug field not required by consumer schema or prompt.",
+                "bytes": 21,
+                "tokens": 6
+              },
+              "deprecated_sku_notes": {
+                "field": "deprecated_sku_notes",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['note', 'sku'] with consumer instructions/goal.",
+                "bytes": 28,
+                "tokens": 8
+              },
+              "internal_routing_flags": {
+                "field": "internal_routing_flags",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 30,
+                "tokens": 8
+              },
+              "formatting_metadata": {
+                "field": "formatting_metadata",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Unreferenced metadata/debug field not required by consumer schema or prompt.",
+                "bytes": 27,
+                "tokens": 7
+              }
+            },
+            "required_fields": [
+              "record_id",
+              "warehouse_region",
+              "sku_items"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "request_id",
+              "customer_id",
+              "customer_tier",
+              "billing_country",
+              "shipping_speed",
+              "raw_audit_trail",
+              "debug_headers",
+              "internal_routing_flags",
+              "formatting_metadata"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [
+              "shipping_region",
+              "order_total_usd",
+              "legacy_erp_dump",
+              "deprecated_sku_notes"
+            ],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": true,
+            "semantic_ambiguity_reasons": [
+              "Field 'shipping_region': semantic stem overlap ['region'] despite missing from declared_inputs.",
+              "Field 'order_total_usd': semantic stem overlap ['order'] despite missing from declared_inputs.",
+              "Field 'legacy_erp_dump': semantic stem overlap ['dump'] despite missing from declared_inputs.",
+              "Field 'deprecated_sku_notes': semantic stem overlap ['note', 'sku'] despite missing from declared_inputs."
+            ]
+          }
+        },
+        "groq_semantic_analysis": {
+          "used_groq": true,
+          "accepted": true,
+          "fallback_to_conservative_python": false,
+          "rejection_reason": null,
+          "validated_result": {
+            "producer_agent": "order_intake_agent",
+            "consumer_agent": "inventory_check_agent",
+            "field_assessments": {
+              "record_id": "required",
+              "request_id": "redundant",
+              "customer_id": "redundant",
+              "customer_tier": "redundant",
+              "billing_country": "redundant",
+              "shipping_region": "uncertain",
+              "warehouse_region": "required",
+              "order_total_usd": "uncertain",
+              "shipping_speed": "redundant",
+              "sku_items": "required",
+              "legacy_erp_dump": "uncertain",
+              "raw_audit_trail": "redundant",
+              "debug_headers": "redundant",
+              "deprecated_sku_notes": "uncertain",
+              "internal_routing_flags": "redundant",
+              "formatting_metadata": "redundant"
+            },
+            "redundant_fields": [
+              "request_id",
+              "customer_id",
+              "customer_tier",
+              "billing_country",
+              "shipping_speed",
+              "raw_audit_trail",
+              "debug_headers",
+              "internal_routing_flags",
+              "formatting_metadata"
+            ],
+            "duplicate_fields": [],
+            "required_fields": [
+              "record_id",
+              "warehouse_region",
+              "sku_items"
+            ],
+            "uncertain_fields": [
+              "shipping_region",
+              "order_total_usd",
+              "legacy_erp_dump",
+              "deprecated_sku_notes"
+            ],
+            "proposed_compact_payload_schema": {
+              "record_id": "string",
+              "warehouse_region": "string",
+              "sku_items": [
+                {
+                  "sku": "string",
+                  "qty": "integer",
+                  "stock_available": "integer"
+                }
+              ]
+            },
+            "semantic_rationale": "The inventory_check_agent only needs to know which warehouse to query (warehouse_region) and the list of SKUs with requested quantities (sku_items) to evaluate stock_available against qty. record_id is required because the downstream prompt embeds it in the response JSON. All other fields either provide customer\u2011level context, billing/shipping metadata, debugging information, or legacy dumps that are not referenced in the consumer's declared input schema or its task description. Fields marked 'uncertain' share lexical stems with consumer concepts (e.g., region, order, dump, note) but are not explicitly used; they are retained for safety pending validation. The compact schema trims extraneous attributes (unit_price_usd, notes, etc.) while preserving the minimal data needed for the stock check logic.",
+            "confidence": 0.93,
+            "requires_human_or_empirical_validation": true
+          }
+        },
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "record_id",
+          "shipping_region",
+          "warehouse_region",
+          "order_total_usd",
+          "sku_items",
+          "legacy_erp_dump",
+          "deprecated_sku_notes"
+        ],
+        "excluded_fields": [
+          "request_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "shipping_speed",
+          "raw_audit_trail",
+          "debug_headers",
+          "internal_routing_flags",
+          "formatting_metadata"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['record_id', 'shipping_region', 'warehouse_region', 'order_total_usd', 'sku_items', 'legacy_erp_dump', 'deprecated_sku_notes'] from 'order_intake_agent' to 'inventory_check_agent' (excluding ['request_id', 'customer_id', 'customer_tier', 'billing_country', 'shipping_speed', 'raw_audit_trail', 'debug_headers', 'internal_routing_flags', 'formatting_metadata'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 191,
+        "proposed_payload_tokens_per_handoff": 124,
+        "tokens_saved_per_handoff": 67,
+        "token_savings_pct": 35.08,
+        "original_payload_bytes_per_handoff": 579,
+        "proposed_payload_bytes_per_handoff": 340,
+        "bytes_saved_per_handoff": 239,
+        "byte_savings_pct": 41.28,
+        "fields_removed_count": 9,
+        "fields_retained_count": 7,
+        "observation_count": 10,
+        "estimated_repeated_transmissions_eliminated_per_run": 9,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "exact_tokenizer",
+        "is_estimate": false,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 67 fewer payload tokens per execution (35.08% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for order_intake_agent -> fraud_screen_agent",
+      "target_agents": [
+        "order_intake_agent",
+        "fraud_screen_agent"
+      ],
+      "observed_problem": "Verified handoff 'order_intake_agent -> fraud_screen_agent' transmits 16 field(s) (['record_id', 'request_id', 'customer_id', 'customer_tier', 'billing_country', 'shipping_region', 'warehouse_region', 'order_total_usd', 'shipping_speed', 'sku_items', 'legacy_erp_dump', 'raw_audit_trail', 'debug_headers', 'deprecated_sku_notes', 'internal_routing_flags', 'formatting_metadata']), of which 9 (['request_id', 'shipping_region', 'warehouse_region', 'shipping_speed', 'sku_items', 'legacy_erp_dump', 'raw_audit_trail', 'debug_headers', 'formatting_metadata']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 191 tokens (579 bytes, runtime_payload_observed); compact projection reduces payload to 59 tokens (191 bytes, -132 tokens / 69.11%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "order_intake_agent",
+        "consumer_agent": "fraud_screen_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "record_id",
+          "request_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "shipping_region",
+          "warehouse_region",
+          "order_total_usd",
+          "shipping_speed",
+          "sku_items",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "debug_headers",
+          "deprecated_sku_notes",
+          "internal_routing_flags",
+          "formatting_metadata"
+        ],
+        "consumer_required_fields": [
+          "record_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "order_total_usd"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [
+          "customer_tier",
+          "order_total_usd"
+        ],
+        "potentially_redundant_fields": [
+          "debug_headers",
+          "formatting_metadata",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "request_id",
+          "shipping_region",
+          "shipping_speed",
+          "sku_items",
+          "warehouse_region"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [
+          "deprecated_sku_notes",
+          "internal_routing_flags"
+        ],
+        "fields_retained": [
+          "record_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "order_total_usd",
+          "deprecated_sku_notes",
+          "internal_routing_flags"
+        ],
+        "fields_excluded": [
+          "request_id",
+          "shipping_region",
+          "warehouse_region",
+          "shipping_speed",
+          "sku_items",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "debug_headers",
+          "formatting_metadata"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "record_id": "Explicit input field placeholder in consumer prompt",
+          "request_id": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "customer_id": "Explicitly listed in consumer declared_inputs",
+          "customer_tier": "Explicitly listed in consumer declared_inputs",
+          "billing_country": "Explicitly listed in consumer declared_inputs",
+          "shipping_region": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "warehouse_region": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "order_total_usd": "Explicitly listed in consumer declared_inputs",
+          "shipping_speed": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "sku_items": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "legacy_erp_dump": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "raw_audit_trail": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "debug_headers": "Unreferenced metadata/debug field not required by consumer schema or prompt.",
+          "deprecated_sku_notes": "Conservatively retained (uncertain necessity).",
+          "internal_routing_flags": "Conservatively retained (uncertain necessity).",
+          "formatting_metadata": "Unreferenced metadata/debug field not required by consumer schema or prompt."
+        },
+        "original_payload_tokens": 191,
+        "proposed_payload_tokens": 59,
+        "tokens_saved": 132,
+        "savings_percentage": 69.11,
+        "original_payload_bytes": 579,
+        "proposed_payload_bytes": 191,
+        "bytes_saved": 388,
+        "byte_savings_percentage": 67.01,
+        "observation_count": 10,
+        "repeated_across_handoffs": [
+          "record_id",
+          "request_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "shipping_region",
+          "warehouse_region",
+          "order_total_usd",
+          "shipping_speed",
+          "sku_items",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "debug_headers",
+          "deprecated_sku_notes",
+          "internal_routing_flags",
+          "formatting_metadata"
+        ],
+        "tokenization_method": "tiktoken:o200k_base",
+        "is_exact_tokenizer": true,
+        "measurement_type": "exact_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "record_id": "ORD-001",
+          "request_id": "ORD-001",
+          "customer_id": "CUST-101",
+          "customer_tier": "enterprise",
+          "billing_country": "US",
+          "shipping_region": "US-WEST",
+          "warehouse_region": "US-WEST",
+          "order_total_usd": 420.0,
+          "shipping_speed": "standard",
+          "sku_items": [
+            {
+              "sku": "SKU-RACK-10",
+              "qty": 2,
+              "unit_price_usd": 160.0,
+              "stock_available": 24
+            },
+            {
+              "sku": "SKU-CBL-04",
+              "qty": 5,
+              "unit_price_usd": 20.0,
+              "stock_available": 140
+            }
+          ],
+          "legacy_erp_dump": "",
+          "raw_audit_trail": [],
+          "debug_headers": {},
+          "deprecated_sku_notes": "",
+          "internal_routing_flags": [],
+          "formatting_metadata": {}
+        },
+        "proposed_compact_payload_sample": {
+          "record_id": "ORD-001",
+          "customer_id": "CUST-101",
+          "customer_tier": "enterprise",
+          "billing_country": "US",
+          "order_total_usd": 420.0,
+          "deprecated_sku_notes": "",
+          "internal_routing_flags": []
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 191,
+            "original_payload_bytes": 579,
+            "transmitted_field_count": 16,
+            "is_large_payload": false,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "record_id",
+              "request_id",
+              "customer_id",
+              "customer_tier",
+              "billing_country",
+              "shipping_region",
+              "warehouse_region",
+              "order_total_usd",
+              "shipping_speed",
+              "sku_items",
+              "legacy_erp_dump",
+              "raw_audit_trail",
+              "debug_headers",
+              "deprecated_sku_notes",
+              "internal_routing_flags",
+              "formatting_metadata"
+            ],
+            "repeated_metadata_fields": [
+              "debug_headers",
+              "formatting_metadata"
+            ],
+            "repeated_static_fields": [
+              "sku_items"
+            ],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "record_id": {
+                "bytes": 24,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 7
+              },
+              "request_id": {
+                "bytes": 25,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "customer_id": {
+                "bytes": 27,
+                "tokens": 10,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "customer_tier": {
+                "bytes": 31,
+                "tokens": 8,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "billing_country": {
+                "bytes": 25,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "shipping_region": {
+                "bytes": 30,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "warehouse_region": {
+                "bytes": 31,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "order_total_usd": {
+                "bytes": 26,
+                "tokens": 11,
+                "type": "float",
+                "handoff_frequency": 2
+              },
+              "shipping_speed": {
+                "bytes": 30,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "sku_items": {
+                "bytes": 178,
+                "tokens": 73,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "legacy_erp_dump": {
+                "bytes": 23,
+                "tokens": 8,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "raw_audit_trail": {
+                "bytes": 23,
+                "tokens": 9,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "debug_headers": {
+                "bytes": 21,
+                "tokens": 6,
+                "type": "dict",
+                "handoff_frequency": 2
+              },
+              "deprecated_sku_notes": {
+                "bytes": 28,
+                "tokens": 8,
+                "type": "str",
+                "handoff_frequency": 2
+              },
+              "internal_routing_flags": {
+                "bytes": 30,
+                "tokens": 8,
+                "type": "list",
+                "handoff_frequency": 2
+              },
+              "formatting_metadata": {
+                "bytes": 27,
+                "tokens": 7,
+                "type": "dict",
+                "handoff_frequency": 2
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "order_intake_agent",
+            "consumer_agent": "fraud_screen_agent",
+            "consumer_declared_inputs": [
+              "customer_id",
+              "customer_tier",
+              "order_total_usd",
+              "billing_country"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "record_id": {
+                "field": "record_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 24,
+                "tokens": 9
+              },
+              "request_id": {
+                "field": "request_id",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 25,
+                "tokens": 9
+              },
+              "customer_id": {
+                "field": "customer_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 27,
+                "tokens": 10
+              },
+              "customer_tier": {
+                "field": "customer_tier",
+                "classification": "required",
+                "is_conditional": true,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 31,
+                "tokens": 8
+              },
+              "billing_country": {
+                "field": "billing_country",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 25,
+                "tokens": 7
+              },
+              "shipping_region": {
+                "field": "shipping_region",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 30,
+                "tokens": 9
+              },
+              "warehouse_region": {
+                "field": "warehouse_region",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 31,
+                "tokens": 9
+              },
+              "order_total_usd": {
+                "field": "order_total_usd",
+                "classification": "required",
+                "is_conditional": true,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 26,
+                "tokens": 11
+              },
+              "shipping_speed": {
+                "field": "shipping_speed",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 30,
+                "tokens": 7
+              },
+              "sku_items": {
+                "field": "sku_items",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 178,
+                "tokens": 73
+              },
+              "legacy_erp_dump": {
+                "field": "legacy_erp_dump",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 23,
+                "tokens": 8
+              },
+              "raw_audit_trail": {
+                "field": "raw_audit_trail",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 23,
+                "tokens": 9
+              },
+              "debug_headers": {
+                "field": "debug_headers",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Unreferenced metadata/debug field not required by consumer schema or prompt.",
+                "bytes": 21,
+                "tokens": 6
+              },
+              "deprecated_sku_notes": {
+                "field": "deprecated_sku_notes",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['note'] with consumer instructions/goal.",
+                "bytes": 28,
+                "tokens": 8
+              },
+              "internal_routing_flags": {
+                "field": "internal_routing_flags",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['flag'] with consumer instructions/goal.",
+                "bytes": 30,
+                "tokens": 8
+              },
+              "formatting_metadata": {
+                "field": "formatting_metadata",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Unreferenced metadata/debug field not required by consumer schema or prompt.",
+                "bytes": 27,
+                "tokens": 7
+              }
+            },
+            "required_fields": [
+              "record_id",
+              "customer_id",
+              "customer_tier",
+              "billing_country",
+              "order_total_usd"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "request_id",
+              "shipping_region",
+              "warehouse_region",
+              "shipping_speed",
+              "sku_items",
+              "legacy_erp_dump",
+              "raw_audit_trail",
+              "debug_headers",
+              "formatting_metadata"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [
+              "deprecated_sku_notes",
+              "internal_routing_flags"
+            ],
+            "conditional_fields_preserved": [
+              "customer_tier",
+              "order_total_usd"
+            ],
+            "needs_groq_semantic_analysis": true,
+            "semantic_ambiguity_reasons": [
+              "Field 'deprecated_sku_notes': semantic stem overlap ['note'] despite missing from declared_inputs.",
+              "Field 'internal_routing_flags': semantic stem overlap ['flag'] despite missing from declared_inputs."
+            ]
+          }
+        },
+        "groq_semantic_analysis": {
+          "used_groq": true,
+          "accepted": true,
+          "fallback_to_conservative_python": false,
+          "rejection_reason": null,
+          "validated_result": {
+            "producer_agent": "order_intake_agent",
+            "consumer_agent": "fraud_screen_agent",
+            "field_assessments": {
+              "record_id": "required",
+              "request_id": "redundant",
+              "customer_id": "required",
+              "customer_tier": "required",
+              "billing_country": "required",
+              "shipping_region": "redundant",
+              "warehouse_region": "redundant",
+              "order_total_usd": "required",
+              "shipping_speed": "redundant",
+              "sku_items": "redundant",
+              "legacy_erp_dump": "redundant",
+              "raw_audit_trail": "redundant",
+              "debug_headers": "redundant",
+              "deprecated_sku_notes": "uncertain",
+              "internal_routing_flags": "uncertain",
+              "formatting_metadata": "redundant"
+            },
+            "redundant_fields": [
+              "request_id",
+              "shipping_region",
+              "warehouse_region",
+              "shipping_speed",
+              "sku_items",
+              "legacy_erp_dump",
+              "raw_audit_trail",
+              "debug_headers",
+              "formatting_metadata"
+            ],
+            "duplicate_fields": [],
+            "required_fields": [
+              "record_id",
+              "customer_id",
+              "customer_tier",
+              "billing_country",
+              "order_total_usd"
+            ],
+            "uncertain_fields": [
+              "deprecated_sku_notes",
+              "internal_routing_flags"
+            ],
+            "proposed_compact_payload_schema": {
+              "record_id": "string",
+              "customer_id": "string",
+              "customer_tier": "string",
+              "billing_country": "string",
+              "order_total_usd": "number",
+              "metadata": {
+                "request_id": "string",
+                "deprecated_sku_notes": "string",
+                "internal_routing_flags": "array"
+              }
+            },
+            "semantic_rationale": "The fraud_screen_agent only needs the fields that appear in its declared input schema and are referenced in its risk\u2011screening prompt: customer_id, customer_tier, billing_country, order_total_usd, and the record_id used for output correlation. All other fields are not consulted by the consumer logic, so they are classified as redundant. Fields that share domain stems with the consumer\u2019s concept of \"flags\" or \"notes\" (deprecated_sku_notes, internal_routing_flags) could become relevant if future rule extensions use them; lacking explicit evidence they are marked uncertain and retained. The compact schema keeps the required fields plus an optional metadata container for the redundant but potentially useful audit fields (request_id) and the uncertain fields, reducing payload size while preserving traceability and future extensibility.",
+            "confidence": 0.93,
+            "requires_human_or_empirical_validation": true
+          }
+        },
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "record_id",
+          "customer_id",
+          "customer_tier",
+          "billing_country",
+          "order_total_usd",
+          "deprecated_sku_notes",
+          "internal_routing_flags"
+        ],
+        "excluded_fields": [
+          "request_id",
+          "shipping_region",
+          "warehouse_region",
+          "shipping_speed",
+          "sku_items",
+          "legacy_erp_dump",
+          "raw_audit_trail",
+          "debug_headers",
+          "formatting_metadata"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['record_id', 'customer_id', 'customer_tier', 'billing_country', 'order_total_usd', 'deprecated_sku_notes', 'internal_routing_flags'] from 'order_intake_agent' to 'fraud_screen_agent' (excluding ['request_id', 'shipping_region', 'warehouse_region', 'shipping_speed', 'sku_items', 'legacy_erp_dump', 'raw_audit_trail', 'debug_headers', 'formatting_metadata'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 191,
+        "proposed_payload_tokens_per_handoff": 59,
+        "tokens_saved_per_handoff": 132,
+        "token_savings_pct": 69.11,
+        "original_payload_bytes_per_handoff": 579,
+        "proposed_payload_bytes_per_handoff": 191,
+        "bytes_saved_per_handoff": 388,
+        "byte_savings_pct": 67.01,
+        "fields_removed_count": 9,
+        "fields_retained_count": 7,
+        "observation_count": 10,
+        "estimated_repeated_transmissions_eliminated_per_run": 9,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "exact_tokenizer",
+        "is_estimate": false,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 132 fewer payload tokens per execution (69.11% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for inventory_check_agent -> carrier_routing_agent",
+      "target_agents": [
+        "inventory_check_agent",
+        "carrier_routing_agent"
+      ],
+      "observed_problem": "Verified handoff 'inventory_check_agent -> carrier_routing_agent' transmits 5 field(s) (['record_id', 'in_stock', 'warehouse_code', 'backorder_skus', 'inventory_note']), of which 2 (['backorder_skus', 'inventory_note']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 50 tokens (178 bytes, runtime_payload_observed); compact projection reduces payload to 24 tokens (71 bytes, -26 tokens / 52.0%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "inventory_check_agent",
+        "consumer_agent": "carrier_routing_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "record_id",
+          "in_stock",
+          "warehouse_code",
+          "backorder_skus",
+          "inventory_note"
+        ],
+        "consumer_required_fields": [
+          "record_id",
+          "in_stock",
+          "warehouse_code"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "backorder_skus",
+          "inventory_note"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [],
+        "fields_retained": [
+          "record_id",
+          "in_stock",
+          "warehouse_code"
+        ],
+        "fields_excluded": [
+          "backorder_skus",
+          "inventory_note"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "record_id": "Explicit input field placeholder in consumer prompt",
+          "in_stock": "Explicitly listed in consumer declared_inputs",
+          "warehouse_code": "Explicitly listed in consumer declared_inputs",
+          "backorder_skus": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+          "inventory_note": "Not in consumer declared_inputs and unreferenced in consumer task/prompt."
+        },
+        "original_payload_tokens": 50,
+        "proposed_payload_tokens": 24,
+        "tokens_saved": 26,
+        "savings_percentage": 52.0,
+        "original_payload_bytes": 178,
+        "proposed_payload_bytes": 71,
+        "bytes_saved": 107,
+        "byte_savings_percentage": 60.11,
+        "observation_count": 10,
+        "repeated_across_handoffs": [
+          "record_id"
+        ],
+        "tokenization_method": "tiktoken:o200k_base",
+        "is_exact_tokenizer": true,
+        "measurement_type": "exact_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "record_id": "ORD-001",
+          "in_stock": true,
+          "warehouse_code": "US-WEST",
+          "backorder_skus": [],
+          "inventory_note": "All requested SKUs are available in stock at warehouse US-WEST."
+        },
+        "proposed_compact_payload_sample": {
+          "record_id": "ORD-001",
+          "in_stock": true,
+          "warehouse_code": "US-WEST"
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 50,
+            "original_payload_bytes": 178,
+            "transmitted_field_count": 5,
+            "is_large_payload": false,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "record_id"
+            ],
+            "repeated_metadata_fields": [],
+            "repeated_static_fields": [],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "record_id": {
+                "bytes": 24,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 7
+              },
+              "in_stock": {
+                "bytes": 18,
+                "tokens": 6,
+                "type": "bool",
+                "handoff_frequency": 1
+              },
+              "warehouse_code": {
+                "bytes": 29,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "backorder_skus": {
+                "bytes": 22,
+                "tokens": 8,
+                "type": "list",
+                "handoff_frequency": 1
+              },
+              "inventory_note": {
+                "bytes": 85,
+                "tokens": 20,
+                "type": "str",
+                "handoff_frequency": 1
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "inventory_check_agent",
+            "consumer_agent": "carrier_routing_agent",
+            "consumer_declared_inputs": [
+              "shipping_region",
+              "shipping_speed",
+              "warehouse_code",
+              "in_stock",
+              "risk_band",
+              "review_flag"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "record_id": {
+                "field": "record_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 24,
+                "tokens": 9
+              },
+              "in_stock": {
+                "field": "in_stock",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 18,
+                "tokens": 6
+              },
+              "warehouse_code": {
+                "field": "warehouse_code",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 29,
+                "tokens": 9
+              },
+              "backorder_skus": {
+                "field": "backorder_skus",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 22,
+                "tokens": 8
+              },
+              "inventory_note": {
+                "field": "inventory_note",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 85,
+                "tokens": 20
+              }
+            },
+            "required_fields": [
+              "record_id",
+              "in_stock",
+              "warehouse_code"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "backorder_skus",
+              "inventory_note"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": false,
+            "semantic_ambiguity_reasons": []
+          }
+        },
+        "groq_semantic_analysis": null,
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "record_id",
+          "in_stock",
+          "warehouse_code"
+        ],
+        "excluded_fields": [
+          "backorder_skus",
+          "inventory_note"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['record_id', 'in_stock', 'warehouse_code'] from 'inventory_check_agent' to 'carrier_routing_agent' (excluding ['backorder_skus', 'inventory_note'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 50,
+        "proposed_payload_tokens_per_handoff": 24,
+        "tokens_saved_per_handoff": 26,
+        "token_savings_pct": 52.0,
+        "original_payload_bytes_per_handoff": 178,
+        "proposed_payload_bytes_per_handoff": 71,
+        "bytes_saved_per_handoff": 107,
+        "byte_savings_pct": 60.11,
+        "fields_removed_count": 2,
+        "fields_retained_count": 3,
+        "observation_count": 10,
+        "estimated_repeated_transmissions_eliminated_per_run": 0,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "exact_tokenizer",
+        "is_estimate": false,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 26 fewer payload tokens per execution (52.0% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for fraud_screen_agent -> carrier_routing_agent",
+      "target_agents": [
+        "fraud_screen_agent",
+        "carrier_routing_agent"
+      ],
+      "observed_problem": "Verified handoff 'fraud_screen_agent -> carrier_routing_agent' transmits 4 field(s) (['record_id', 'risk_band', 'review_flag', 'screen_note']), of which 1 (['screen_note']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 40 tokens (140 bytes, runtime_payload_observed); compact projection reduces payload to 22 tokens (66 bytes, -18 tokens / 45.0%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "fraud_screen_agent",
+        "consumer_agent": "carrier_routing_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "record_id",
+          "risk_band",
+          "review_flag",
+          "screen_note"
+        ],
+        "consumer_required_fields": [
+          "record_id",
+          "risk_band",
+          "review_flag"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "screen_note"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [],
+        "fields_retained": [
+          "record_id",
+          "risk_band",
+          "review_flag"
+        ],
+        "fields_excluded": [
+          "screen_note"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "record_id": "Explicit input field placeholder in consumer prompt",
+          "risk_band": "Explicitly listed in consumer declared_inputs",
+          "review_flag": "Explicitly listed in consumer declared_inputs",
+          "screen_note": "Not in consumer declared_inputs and unreferenced in consumer task/prompt."
+        },
+        "original_payload_tokens": 40,
+        "proposed_payload_tokens": 22,
+        "tokens_saved": 18,
+        "savings_percentage": 45.0,
+        "original_payload_bytes": 140,
+        "proposed_payload_bytes": 66,
+        "bytes_saved": 74,
+        "byte_savings_percentage": 52.86,
+        "observation_count": 10,
+        "repeated_across_handoffs": [
+          "record_id"
+        ],
+        "tokenization_method": "tiktoken:o200k_base",
+        "is_exact_tokenizer": true,
+        "measurement_type": "exact_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "record_id": "ORD-001",
+          "risk_band": "low",
+          "review_flag": false,
+          "screen_note": "Enterprise US customer with $420 order total; low risk."
+        },
+        "proposed_compact_payload_sample": {
+          "record_id": "ORD-001",
+          "risk_band": "low",
+          "review_flag": false
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 40,
+            "original_payload_bytes": 140,
+            "transmitted_field_count": 4,
+            "is_large_payload": false,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "record_id"
+            ],
+            "repeated_metadata_fields": [],
+            "repeated_static_fields": [],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "record_id": {
+                "bytes": 24,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 7
+              },
+              "risk_band": {
+                "bytes": 20,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "review_flag": {
+                "bytes": 22,
+                "tokens": 6,
+                "type": "bool",
+                "handoff_frequency": 1
+              },
+              "screen_note": {
+                "bytes": 74,
+                "tokens": 18,
+                "type": "str",
+                "handoff_frequency": 1
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "fraud_screen_agent",
+            "consumer_agent": "carrier_routing_agent",
+            "consumer_declared_inputs": [
+              "shipping_region",
+              "shipping_speed",
+              "warehouse_code",
+              "in_stock",
+              "risk_band",
+              "review_flag"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "record_id": {
+                "field": "record_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 24,
+                "tokens": 9
+              },
+              "risk_band": {
+                "field": "risk_band",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 20,
+                "tokens": 7
+              },
+              "review_flag": {
+                "field": "review_flag",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 22,
+                "tokens": 6
+              },
+              "screen_note": {
+                "field": "screen_note",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 74,
+                "tokens": 18
+              }
+            },
+            "required_fields": [
+              "record_id",
+              "risk_band",
+              "review_flag"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "screen_note"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": false,
+            "semantic_ambiguity_reasons": []
+          }
+        },
+        "groq_semantic_analysis": null,
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "record_id",
+          "risk_band",
+          "review_flag"
+        ],
+        "excluded_fields": [
+          "screen_note"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['record_id', 'risk_band', 'review_flag'] from 'fraud_screen_agent' to 'carrier_routing_agent' (excluding ['screen_note'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 40,
+        "proposed_payload_tokens_per_handoff": 22,
+        "tokens_saved_per_handoff": 18,
+        "token_savings_pct": 45.0,
+        "original_payload_bytes_per_handoff": 140,
+        "proposed_payload_bytes_per_handoff": 66,
+        "bytes_saved_per_handoff": 74,
+        "byte_savings_pct": 52.86,
+        "fields_removed_count": 1,
+        "fields_retained_count": 3,
+        "observation_count": 10,
+        "estimated_repeated_transmissions_eliminated_per_run": 0,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "exact_tokenizer",
+        "is_estimate": false,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 18 fewer payload tokens per execution (45.0% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for carrier_routing_agent -> tax_classify_agent",
+      "target_agents": [
+        "carrier_routing_agent",
+        "tax_classify_agent"
+      ],
+      "observed_problem": "Verified handoff 'carrier_routing_agent -> tax_classify_agent' transmits 4 field(s) (['record_id', 'carrier_name', 'service_level', 'estimated_days']), of which 1 (['estimated_days']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 30 tokens (95 bytes, runtime_payload_observed); compact projection reduces payload to 23 tokens (74 bytes, -7 tokens / 23.33%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "carrier_routing_agent",
+        "consumer_agent": "tax_classify_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "record_id",
+          "carrier_name",
+          "service_level",
+          "estimated_days"
+        ],
+        "consumer_required_fields": [
+          "record_id",
+          "carrier_name",
+          "service_level"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "estimated_days"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [],
+        "fields_retained": [
+          "record_id",
+          "carrier_name",
+          "service_level"
+        ],
+        "fields_excluded": [
+          "estimated_days"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "record_id": "Explicit input field placeholder in consumer prompt",
+          "carrier_name": "Explicitly listed in consumer declared_inputs",
+          "service_level": "Explicitly listed in consumer declared_inputs",
+          "estimated_days": "Not in consumer declared_inputs and unreferenced in consumer task/prompt."
+        },
+        "original_payload_tokens": 30,
+        "proposed_payload_tokens": 23,
+        "tokens_saved": 7,
+        "savings_percentage": 23.33,
+        "original_payload_bytes": 95,
+        "proposed_payload_bytes": 74,
+        "bytes_saved": 21,
+        "byte_savings_percentage": 22.11,
+        "observation_count": 10,
+        "repeated_across_handoffs": [
+          "record_id"
+        ],
+        "tokenization_method": "tiktoken:o200k_base",
+        "is_exact_tokenizer": true,
+        "measurement_type": "exact_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "record_id": "ORD-001",
+          "carrier_name": "UPS",
+          "service_level": "Ground",
+          "estimated_days": 3
+        },
+        "proposed_compact_payload_sample": {
+          "record_id": "ORD-001",
+          "carrier_name": "UPS",
+          "service_level": "Ground"
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 30,
+            "original_payload_bytes": 95,
+            "transmitted_field_count": 4,
+            "is_large_payload": false,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "record_id"
+            ],
+            "repeated_metadata_fields": [],
+            "repeated_static_fields": [],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "record_id": {
+                "bytes": 24,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 7
+              },
+              "carrier_name": {
+                "bytes": 23,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "service_level": {
+                "bytes": 27,
+                "tokens": 7,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "estimated_days": {
+                "bytes": 21,
+                "tokens": 7,
+                "type": "int",
+                "handoff_frequency": 1
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "carrier_routing_agent",
+            "consumer_agent": "tax_classify_agent",
+            "consumer_declared_inputs": [
+              "billing_country",
+              "order_total_usd",
+              "carrier_name",
+              "service_level"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "record_id": {
+                "field": "record_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicit input field placeholder in consumer prompt",
+                "bytes": 24,
+                "tokens": 9
+              },
+              "carrier_name": {
+                "field": "carrier_name",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 23,
+                "tokens": 7
+              },
+              "service_level": {
+                "field": "service_level",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 27,
+                "tokens": 7
+              },
+              "estimated_days": {
+                "field": "estimated_days",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 21,
+                "tokens": 7
+              }
+            },
+            "required_fields": [
+              "record_id",
+              "carrier_name",
+              "service_level"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "estimated_days"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": false,
+            "semantic_ambiguity_reasons": []
+          }
+        },
+        "groq_semantic_analysis": null,
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "record_id",
+          "carrier_name",
+          "service_level"
+        ],
+        "excluded_fields": [
+          "estimated_days"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['record_id', 'carrier_name', 'service_level'] from 'carrier_routing_agent' to 'tax_classify_agent' (excluding ['estimated_days'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 30,
+        "proposed_payload_tokens_per_handoff": 23,
+        "tokens_saved_per_handoff": 7,
+        "token_savings_pct": 23.33,
+        "original_payload_bytes_per_handoff": 95,
+        "proposed_payload_bytes_per_handoff": 74,
+        "bytes_saved_per_handoff": 21,
+        "byte_savings_pct": 22.11,
+        "fields_removed_count": 1,
+        "fields_retained_count": 3,
+        "observation_count": 10,
+        "estimated_repeated_transmissions_eliminated_per_run": 0,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "exact_tokenizer",
+        "is_estimate": false,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 7 fewer payload tokens per execution (23.33% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT",
+      "dimension": "communication_data_handoff",
+      "title": "Compact Handoff Payload Schema for invoice_tag_agent -> fulfillment_summary_agent",
+      "target_agents": [
+        "invoice_tag_agent",
+        "fulfillment_summary_agent"
+      ],
+      "observed_problem": "Verified handoff 'invoice_tag_agent -> fulfillment_summary_agent' transmits 4 field(s) (['record_id', 'gl_account_code', 'invoice_tag', 'billing_batch']), of which 1 (['billing_batch']) are redundant or duplicate for downstream consumption. Observed single-execution payload measures 42 tokens (117 bytes, runtime_payload_observed); compact projection reduces payload to 29 tokens (80 bytes, -13 tokens / 30.95%).",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ],
+        "producer_agent": "invoice_tag_agent",
+        "consumer_agent": "fulfillment_summary_agent",
+        "verified_dependency_relationship": "declared_dependency",
+        "original_transmitted_fields": [
+          "record_id",
+          "gl_account_code",
+          "invoice_tag",
+          "billing_batch"
+        ],
+        "consumer_required_fields": [
+          "record_id",
+          "invoice_tag"
+        ],
+        "consumer_used_fields": [],
+        "conditional_fields_preserved": [],
+        "potentially_redundant_fields": [
+          "billing_batch"
+        ],
+        "duplicate_fields": [],
+        "uncertain_fields": [
+          "gl_account_code"
+        ],
+        "fields_retained": [
+          "record_id",
+          "gl_account_code",
+          "invoice_tag"
+        ],
+        "fields_excluded": [
+          "billing_batch"
+        ],
+        "fields_replaced_with_reference": [],
+        "field_change_reasons": {
+          "record_id": "Explicitly listed in consumer declared_inputs",
+          "gl_account_code": "Conservatively retained (uncertain necessity).",
+          "invoice_tag": "Explicitly listed in consumer declared_inputs",
+          "billing_batch": "Not in consumer declared_inputs and unreferenced in consumer task/prompt."
+        },
+        "original_payload_tokens": 42,
+        "proposed_payload_tokens": 29,
+        "tokens_saved": 13,
+        "savings_percentage": 30.95,
+        "original_payload_bytes": 117,
+        "proposed_payload_bytes": 80,
+        "bytes_saved": 37,
+        "byte_savings_percentage": 31.62,
+        "observation_count": 10,
+        "repeated_across_handoffs": [
+          "record_id"
+        ],
+        "tokenization_method": "tiktoken:o200k_base",
+        "is_exact_tokenizer": true,
+        "measurement_type": "exact_tokenizer",
+        "evidence_quality": "runtime_observed",
+        "evidence_basis": "runtime_payload_observed",
+        "original_payload_sample": {
+          "record_id": "ORD-001",
+          "gl_account_code": "GL-4000",
+          "invoice_tag": "ENT-INV",
+          "billing_batch": "US-WEST-BATCH-01"
+        },
+        "proposed_compact_payload_sample": {
+          "record_id": "ORD-001",
+          "gl_account_code": "GL-4000",
+          "invoice_tag": "ENT-INV"
+        },
+        "python_analysis_results": {
+          "payload_analysis": {
+            "original_payload_tokens": 42,
+            "original_payload_bytes": 117,
+            "transmitted_field_count": 4,
+            "is_large_payload": false,
+            "large_text_or_document_fields": [],
+            "large_json_objects": [],
+            "repeated_across_handoffs": [
+              "record_id"
+            ],
+            "repeated_metadata_fields": [],
+            "repeated_static_fields": [],
+            "duplicate_value_pairs": [],
+            "per_field_metrics": {
+              "record_id": {
+                "bytes": 24,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 7
+              },
+              "gl_account_code": {
+                "bytes": 30,
+                "tokens": 11,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "invoice_tag": {
+                "bytes": 26,
+                "tokens": 9,
+                "type": "str",
+                "handoff_frequency": 1
+              },
+              "billing_batch": {
+                "bytes": 37,
+                "tokens": 13,
+                "type": "str",
+                "handoff_frequency": 1
+              }
+            },
+            "size_evidence_status": "runtime_payload_measured"
+          },
+          "consumer_mapping": {
+            "producer_agent": "invoice_tag_agent",
+            "consumer_agent": "fulfillment_summary_agent",
+            "consumer_declared_inputs": [
+              "record_id",
+              "in_stock",
+              "review_flag",
+              "carrier_name",
+              "service_level",
+              "tax_jurisdiction",
+              "tax_amount_usd",
+              "invoice_tag"
+            ],
+            "consumer_prompt_source": "mcp_prompt_metrics_full",
+            "field_classifications": {
+              "record_id": {
+                "field": "record_id",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 24,
+                "tokens": 9
+              },
+              "gl_account_code": {
+                "field": "gl_account_code",
+                "classification": "uncertain",
+                "is_conditional": false,
+                "reason": "Absent from declared_inputs, but shares domain stem(s) ['code'] with consumer instructions/goal.",
+                "bytes": 30,
+                "tokens": 11
+              },
+              "invoice_tag": {
+                "field": "invoice_tag",
+                "classification": "required",
+                "is_conditional": false,
+                "reason": "Explicitly listed in consumer declared_inputs",
+                "bytes": 26,
+                "tokens": 9
+              },
+              "billing_batch": {
+                "field": "billing_batch",
+                "classification": "potentially_redundant",
+                "is_conditional": false,
+                "reason": "Not in consumer declared_inputs and unreferenced in consumer task/prompt.",
+                "bytes": 37,
+                "tokens": 13
+              }
+            },
+            "required_fields": [
+              "record_id",
+              "invoice_tag"
+            ],
+            "used_fields": [],
+            "potentially_redundant_fields": [
+              "billing_batch"
+            ],
+            "duplicate_fields": [],
+            "uncertain_fields": [
+              "gl_account_code"
+            ],
+            "conditional_fields_preserved": [],
+            "needs_groq_semantic_analysis": false,
+            "semantic_ambiguity_reasons": [
+              "Field 'gl_account_code': semantic stem overlap ['code'] despite missing from declared_inputs."
+            ]
+          }
+        },
+        "groq_semantic_analysis": null,
+        "evidence_provenance": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_10_evidence"
+        ]
+      },
+      "proposed_compact_payload_schema": {
+        "retained_fields": [
+          "record_id",
+          "gl_account_code",
+          "invoice_tag"
+        ],
+        "excluded_fields": [
+          "billing_batch"
+        ],
+        "shared_store_references": [],
+        "typed_delta_projection": true
+      },
+      "proposed_solution": "Transmit compact projected fields ['record_id', 'gl_account_code', 'invoice_tag'] from 'invoice_tag_agent' to 'fulfillment_summary_agent' (excluding ['billing_batch'] from the inter-agent wire payload while preserving all global state).",
+      "expected_benefit": {
+        "original_payload_tokens_per_handoff": 42,
+        "proposed_payload_tokens_per_handoff": 29,
+        "tokens_saved_per_handoff": 13,
+        "token_savings_pct": 30.95,
+        "original_payload_bytes_per_handoff": 117,
+        "proposed_payload_bytes_per_handoff": 80,
+        "bytes_saved_per_handoff": 37,
+        "byte_savings_pct": 31.62,
+        "fields_removed_count": 1,
+        "fields_retained_count": 3,
+        "observation_count": 10,
+        "estimated_repeated_transmissions_eliminated_per_run": 0,
+        "evidence_basis": "runtime_payload_observed",
+        "measurement_type": "exact_tokenizer",
+        "is_estimate": false,
+        "quality_impact": "Requires shadow validation to confirm consumer accuracy with compact payload."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Lower payload serialization/prompt-prefill volume; runtime delta requires validation.",
+        "token_cost_tradeoff": "Projects 13 fewer payload tokens per execution (30.95% reduction).",
+        "output_quality_risk": "Moderate (changing inter-agent handoff schemas requires regression verification).",
+        "implementation_complexity": "Low",
+        "shared_storage_reference_dependency": false
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_9 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    }
+  ],
+  "candidate_tiers": {
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT": "Tier 2",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT": "Tier 1",
+    "MODEL-ORDER_INTAKE_AGENT": "Tier 2",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT": "Tier 2",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT": "Tier 2",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT": "Tier 2",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT": "Tier 2",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT": "Tier 2"
+  },
+  "validation_required_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "risk_acknowledged_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "approval_status": "approved",
+  "approved_at": "2026-11-25T20:39:41.921568+00:00"
+}

@@ -35,6 +35,8 @@ def _extract_constraints_from_text(prompt_text: str, limit: int = 8) -> List[str
     seen: Set[str] = set()
     for raw_ln in (prompt_text or "").splitlines():
         ln = raw_ln.strip()
+        if ln.startswith(("f'", 'f"')):
+            continue
         if len(ln) < 12 or not _CONSTRAINT_LINE_PATTERN.search(ln):
             continue
         norm = re.sub(r"\s+", " ", ln.lower())

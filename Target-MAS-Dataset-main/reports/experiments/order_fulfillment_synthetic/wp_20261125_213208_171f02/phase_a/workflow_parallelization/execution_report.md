@@ -1,0 +1,89 @@
+# Sandbox Optimization Experiment Report: `order_fulfillment_synthetic`
+
+## 1. Experiment Metadata
+
+- **Workflow ID:** `order_fulfillment_synthetic`
+- **Experiment ID:** `wp_20261125_213208_171f02__phase_a_workflow_parallelization`
+- **Execution Backend:** `local_subprocess`
+- **Python Executable:** `C:\Users\radhi\AppData\Local\Programs\Python\Python312\python.exe`
+- **Execution Mode(s):** `['live_llm_execution']`
+- **Runs Executed:** `2`
+- **Baseline Model / Provider:** `openai/gpt-oss-120b` / `Groq` (key env: `GROQ_API_KEY_14`)
+- **Model Overrides Applied:** `{}`
+- **Approved Candidate IDs (1):** `PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT`
+- **Original Workflow:** `C:\Users\radhi\Desktop\Target-MAS-Dataset-main\Target-MAS-Dataset-main\Agents\order_fulfillment_synthetic`
+- **Sandbox Workflow:** `C:\Users\radhi\Desktop\Target-MAS-Dataset-main\Target-MAS-Dataset-main\reports\experiments\order_fulfillment_synthetic\wp_20261125_213208_171f02\phase_a\workflow_parallelization\sandbox_workflow`
+- **Generated At:** 2026-11-25T21:34:53.269293+00:00
+
+## 2. Applied Modifications
+
+- **Applied (1):** `PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT`
+- **Failed (0):** None
+- **Conflicts (0):** None
+- **Manual Intervention (0):** None
+- **Modified Files:** `sandbox_optimization_config.json`, `workflow.json`, `workflow.py`
+
+- **`PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT`** (`workflow_parallelization`) — Status: `applied` — Configured concurrent scatter-gather group ['inventory_check_agent', 'fraud_screen_agent'] in sandbox workflow after verifying strict DAG & I/O independence.
+
+## 3. Validation Results
+
+- **Original Workflow Unchanged (SHA-256 Verified):** `True`
+- **Python Syntax Checks Passed:** `True` (9 files)
+- **Configuration Validation Passed:** `True`
+- **Dependency & Reference Integrity Passed:** `True`
+- **Output Schema Validation Passed (Optimized):** `True`
+
+## 4. Runtime Execution & Baseline Evidence
+
+### Fixed Historical Baseline Evidence
+- **Source:** `historical_runtime_traces` | **Execution Mode:** `historical_recorded_execution` | **Re-executed:** `False` | **Groq API Calls:** `0`
+- **Fixed Baseline Reference ID:** `hist_859e698746d5` | **Trace Directory:** `C:\Users\radhi\Desktop\Target-MAS-Dataset-main\Ingestion_Traces_final\Ingestion_Traces\order_fulfillment_synthetic`
+- **Input Matching:** matched=`10`, unmatched=`0`, excluded=`0`
+
+### Fresh Optimized Subprocess Execution
+- **Source:** `current_experiment` | **Execution Mode(s):** `['live_llm_execution']` | **Re-executed:** `True` | **Groq API Calls:** `14`
+- **Trace Directory:** `C:\Users\radhi\Desktop\Target-MAS-Dataset-main\Target-MAS-Dataset-main\reports\experiments\order_fulfillment_synthetic\wp_20261125_213208_171f02\phase_a\workflow_parallelization\runtime_traces`
+- **Optimized Runs:** runs=`2`, succeeded=`2`, failed=`0`, process_exit=`0`, status=`SUCCESS`, duration=`50.3164s`
+- **Optimized API Errors Captured:** `0`
+- **Incomplete / Invalid Replay Samples Flagged:** `0`
+- **Workflow-Level vs. Agent-Level Latency (Historical Baseline vs. Fresh Optimized):** Baseline WF mean `11.5005s` (Agent mean `1.6416s`) -> Optimized WF mean `25.0626s` (Agent mean `4.0322s`)
+
+## 5. Output Quality Evaluation
+
+| Quality Dimension | Baseline Status (Pass Rate) | Optimized Status (Pass Rate) |
+| :--- | :--- | :--- |
+| `structural_validity` | `passed` (100.0%) | `passed` (100.0%) |
+| `correctness` | `unavailable` (unavailable) | `unavailable` (unavailable) |
+| `completeness` | `passed` (100.0%) | `passed` (100.0%) |
+| `consistency` | `unavailable` (unavailable) | `unavailable` (unavailable) |
+| `instruction_adherence` | `passed` (100.0%) | `passed` (100.0%) |
+| `semantic_quality` | `unavailable` (unavailable) | `unavailable` (unavailable) |
+
+- **Identified Regressions:** `0`
+
+## 6. Before-and-After Comparison
+
+| Metric | Baseline | Optimized | Improvement |
+| :--- | :--- | :--- | :--- |
+| Mean Workflow Latency | 11.5005s | 25.0626s | -117.93% |
+| Median Workflow Latency | 11.5005s | 25.0626s | -117.93% |
+| Mean Agent Latency | 1.6416s | 4.0322s | -145.63% |
+| Input Tokens | 6414.5 | 7054.5 | -9.98% |
+| Output Tokens | 2939.5 | 5628.0 | -91.46% |
+| Total Tokens | 9354.0 | 19737.0 | -111.0% |
+| Execution Cost (estimated_from_model_catalog_using_api_reported_tokens) | $0.002726 | $0.005494 | -101.54% |
+| Execution Success Rate | 100.0% | 100.0% | 0.0% |
+| Structural Validity | 100.0% | 100.0% | 0.0% |
+| Semantic Quality | `unavailable` | `unavailable` | unavailable |
+
+## 7. Final Experiment Assessment
+
+- **Final Assessment Status:** `no_significant_improvement`
+- **Stage Flags:** `modification_applied=True`, `validation_passed=True`, `execution_passed=True`, `evaluation_passed=True`
+- **Rationale:**
+  - Semantic quality evaluation is unavailable.
+  - Workflow executed reliably with acceptable quality, but no >=2% latency/token/cost gain observed.
+
+### Candidate-Level Traceability
+
+- `PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT` (`workflow_parallelization`): applied=`True`, validation=`passed`, execution=`passed`, evaluation=`passed`

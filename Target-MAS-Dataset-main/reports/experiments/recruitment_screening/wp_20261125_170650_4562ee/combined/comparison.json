@@ -1,0 +1,246 @@
+{
+  "comparison_type": "historical_baseline_vs_live_optimized",
+  "comparability": {
+    "inputs_comparable": true,
+    "modes_compatible_for_live_claims": true,
+    "baseline_re_executed": false,
+    "baseline_measurement_period": {
+      "earliest_trace_timestamp": "2026-10-31T16:26:24.677059+00:00",
+      "latest_trace_timestamp": "2026-10-31T16:26:59.186247+00:00"
+    },
+    "fixed_baseline_reference_id": "hist_ef23650339c0",
+    "matched_input_count": 30,
+    "unmatched_input_count": 0,
+    "baseline_runs": 2,
+    "optimized_runs": 2,
+    "baseline_modes": [
+      "historical_recorded_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": 22.7775,
+    "optimized_seconds": null,
+    "improvement_pct": null,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": 22.7775,
+    "optimized_seconds": null,
+    "improvement_pct": null,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": 2.8453,
+    "optimized_seconds": null,
+    "improvement_pct": null,
+    "per_agent": {
+      "evidence_mapping_agent": {
+        "baseline_mean_latency_seconds": 3.17,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 2324.5,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "experience_assessment_agent": {
+        "baseline_mean_latency_seconds": 2.7325,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 2174.5,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "job_criteria_agent": {
+        "baseline_mean_latency_seconds": 2.3145,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 1323.5,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "missing_evidence_agent": {
+        "baseline_mean_latency_seconds": 2.71,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 1775.0,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "qualification_agent": {
+        "baseline_mean_latency_seconds": 2.838,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 1680.5,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "recruiter_summary_agent": {
+        "baseline_mean_latency_seconds": 4.1565,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 4202.0,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "resume_intake_agent": {
+        "baseline_mean_latency_seconds": 2.444,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 1218.5,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      },
+      "screening_review_agent": {
+        "baseline_mean_latency_seconds": 2.397,
+        "optimized_mean_latency_seconds": null,
+        "latency_improvement_pct": null,
+        "baseline_mean_tokens": 2056.5,
+        "optimized_mean_tokens": null,
+        "token_improvement_pct": null
+      }
+    }
+  },
+  "latency": {
+    "baseline_mean_seconds": 22.7775,
+    "optimized_mean_seconds": null,
+    "improvement_pct": null,
+    "comparable_for_live_claim": true,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": 10078.0,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": 6677.0,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": 16755.0,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": 16755.0,
+    "optimized_mean_tokens": null,
+    "improvement_pct": null
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": 0.01122,
+    "baseline_catalog_normalized_usd": 0.005518,
+    "optimized_catalog_normalized_usd": null,
+    "improvement_pct_catalog_normalized": null,
+    "cost_basis": "unavailable"
+  },
+  "execution_success_rate": {
+    "baseline_pct": 100.0,
+    "optimized_pct": 0.0,
+    "delta_pct_points": -100.0,
+    "improvement_pct": -100.0
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": 83.75,
+    "optimized_pass_rate_pct": 0.0,
+    "improvement_pct": -100.0
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": [
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "structural_validity",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "correctness",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "completeness",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "instruction_adherence",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      }
+    ]
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": false,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "structural_validity",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "correctness",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "completeness",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      },
+      {
+        "agent_id": "resume_intake_agent",
+        "metric": "instruction_adherence",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Connection error.",
+          "Agent execution failed or returned empty output: Connection error."
+        ]
+      }
+    ],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

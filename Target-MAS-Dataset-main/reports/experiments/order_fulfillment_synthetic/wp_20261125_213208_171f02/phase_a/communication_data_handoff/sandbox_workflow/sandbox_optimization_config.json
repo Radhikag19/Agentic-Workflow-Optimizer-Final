@@ -1,0 +1,78 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_213208_171f02__phase_a_communication_data_handoff",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {
+    "order_intake_agent->inventory_check_agent": {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+      "producer_agent": "order_intake_agent",
+      "consumer_agent": "inventory_check_agent",
+      "retained_fields": [
+        "record_id",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "sku_items",
+        "legacy_erp_dump",
+        "deprecated_sku_notes"
+      ],
+      "excluded_fields": [
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_speed",
+        "raw_audit_trail",
+        "debug_headers",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "consumer_required_fields": [
+        "record_id",
+        "warehouse_region",
+        "sku_items"
+      ],
+      "typed_delta_projection": true
+    },
+    "order_intake_agent->fraud_screen_agent": {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+      "producer_agent": "order_intake_agent",
+      "consumer_agent": "fraud_screen_agent",
+      "retained_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd",
+        "deprecated_sku_notes",
+        "internal_routing_flags"
+      ],
+      "excluded_fields": [
+        "request_id",
+        "shipping_region",
+        "warehouse_region",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "formatting_metadata"
+      ],
+      "consumer_required_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd"
+      ],
+      "typed_delta_projection": true
+    }
+  },
+  "applied_candidates": [
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT"
+  ]
+}

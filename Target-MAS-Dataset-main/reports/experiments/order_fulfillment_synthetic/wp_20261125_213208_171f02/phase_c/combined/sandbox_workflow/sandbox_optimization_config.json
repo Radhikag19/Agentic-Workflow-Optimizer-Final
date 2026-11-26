@@ -1,0 +1,134 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_213208_171f02__phase_c_combined",
+  "consolidations": [
+    {
+      "candidate_id": "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+      "consolidated_agent_id": "consolidated_carrier_routing_tax_classify",
+      "target_agents": [
+        "carrier_routing_agent",
+        "tax_classify_agent"
+      ],
+      "role": "Deterministically assign carrier routing details and compute regional tax information while preserving inventory and fraud flags.",
+      "goal": "For each record, determine carrier_name, service_level, estimated_days, tax_jurisdiction, tax_rate_pct, and tax_amount_usd, and forward in_stock, review_flag, carrier_name, and service_level unchanged.",
+      "unified_prompt": "You are given the following inputs for each order record: shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, review_flag, billing_country, order_total_usd, and record_id.\n\nStep 1 \u2013 Carrier Routing:\n- Determine carrier_name:\n  * 'UPS' if shipping_region starts with 'US' or 'CA'.\n  * 'DHL' if shipping_region starts with 'EU' or 'UK'.\n  * Otherwise 'FedEx'.\n- Determine service_level and estimated_days based on shipping_speed:\n  * 'standard' \u2192 service_level='Standard', estimated_days=5\n  * 'expedited' \u2192 service_level='Expedited', estimated_days=2\n  * 'overnight' \u2192 service_level='Overnight', estimated_days=1\n- Forward the boolean values in_stock and review_flag unchanged.\n\nStep 2 \u2013 Tax Classification:\n- Compute tax_jurisdiction as \"{billing_country}-TAX\".\n- Look up tax_rate_pct using the table:\n  US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, all other countries=5.0.\n- Calculate tax_amount_usd = round(order_total_usd * tax_rate_pct / 100.0, 2).\n- Forward in_stock, review_flag, carrier_name, and service_level unchanged.\n\nFinal Output:\nReturn ONLY a JSON object with the exact fields:\n{\n  \"record_id\": \"<record_id>\",\n  \"carrier_name\": \"UPS|DHL|FedEx\",\n  \"service_level\": \"Standard|Expedited|Overnight\",\n  \"estimated_days\": <1|2|5>,\n  \"in_stock\": <true|false>,\n  \"review_flag\": <true|false>,\n  \"tax_jurisdiction\": \"<billing_country>-TAX\",\n  \"tax_rate_pct\": <numeric>,\n  \"tax_amount_usd\": <numeric>\n}\nAll numeric values must be represented as numbers (no quotes). Ensure the JSON is syntactically valid and contains no additional fields.",
+      "input_fields": [
+        "shipping_region",
+        "shipping_speed",
+        "warehouse_code",
+        "in_stock",
+        "risk_band",
+        "review_flag",
+        "billing_country",
+        "order_total_usd",
+        "carrier_name",
+        "service_level"
+      ],
+      "output_fields": [
+        "tax_jurisdiction",
+        "tax_rate_pct",
+        "tax_amount_usd",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level"
+      ],
+      "dependencies": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ]
+    }
+  ],
+  "parallel_groups": [],
+  "model_overrides": {
+    "order_intake_agent": {
+      "previous_model": "openai/gpt-oss-120b",
+      "updated_model": "openai/gpt-oss-20b",
+      "provider": "Groq",
+      "assigned_key_env": "GROQ_API_KEY_14",
+      "candidate_id": "MODEL-ORDER_INTAKE_AGENT"
+    }
+  },
+  "prompt_overrides": {
+    "fulfillment_summary_agent": {
+      "candidate_id": "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+      "original_prompt_preview": "You are an executive fulfillment summarizer responsible for producing the final structured JSON dispatch brief. You must follow all instructions strictly and never invent missing order facts or fields. Return only valid parsable JSON matching FulfillmentSummaryOutput with no additional commentary. Always verify the order record identifier matches the upstream input exactly before emitting the final decision.\nSystem Prompt Overview: You are a senior enterprise fulfillment dispatch coordinator wor",
+      "original_prompt_char_length": 7543,
+      "optimized_prompt": "You are a senior enterprise fulfillment dispatch coordinator. Receive the following upstream payloads for the current run:\n- inventory_output (contains in_stock)\n- fraud_output (contains review_flag)\n- routing_output (contains carrier_name, service_level)\n- tax_output (contains tax_jurisdiction, tax_amount_usd)\n- invoice_output (contains invoice_tag)\n\n**Decision rules**\n1. If in_stock is false \u2192 final_decision = \"REJECT\".\n2. If in_stock is true AND review_flag is true \u2192 final_decision = \"HOLD_FOR_REVIEW\".\n3. If in_stock is true AND review_flag is false \u2192 final_decision = \"APPROVE\".\n\n**Output** \u2013 Return ONLY the following JSON (no markdown, no extra text):\n{\n  \"run_id\": \"{run_id}\",\n  \"record_id\": \"{record_id}\",\n  \"final_decision\": \"APPROVE\" | \"HOLD_FOR_REVIEW\" | \"REJECT\",\n  \"carrier_name\": \"{carrier_name}\",\n  \"service_level\": \"{service_level}\",\n  \"tax_jurisdiction\": \"{tax_jurisdiction}\",\n  \"tax_amount_usd\": {tax_amount_usd},\n  \"invoice_tag\": \"{invoice_tag}\",\n  \"summary\": \"Order {record_id}: {final_decision} via {carrier_name} {service_level} ({tax_jurisdiction}, {invoice_tag}).\",\n  \"human_review_required\": true | false\n}\n\n**Additional constraints**\n- Do not fabricate or invent any values; use the upstream payloads verbatim.\n- human_review_required must be true only when final_decision is \"HOLD_FOR_REVIEW\", otherwise false.\n- All keys must be present exactly as listed.\n- Preserve the exact values of run_id, record_id, carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag from the upstream inputs.",
+      "optimized_prompt_char_length": 1544
+    }
+  },
+  "handoff_projections": {
+    "order_intake_agent->inventory_check_agent": {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+      "producer_agent": "order_intake_agent",
+      "consumer_agent": "inventory_check_agent",
+      "retained_fields": [
+        "record_id",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "sku_items",
+        "legacy_erp_dump",
+        "deprecated_sku_notes"
+      ],
+      "excluded_fields": [
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_speed",
+        "raw_audit_trail",
+        "debug_headers",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "consumer_required_fields": [
+        "record_id",
+        "warehouse_region",
+        "sku_items"
+      ],
+      "typed_delta_projection": true
+    },
+    "order_intake_agent->fraud_screen_agent": {
+      "candidate_id": "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+      "producer_agent": "order_intake_agent",
+      "consumer_agent": "fraud_screen_agent",
+      "retained_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd",
+        "deprecated_sku_notes",
+        "internal_routing_flags"
+      ],
+      "excluded_fields": [
+        "request_id",
+        "shipping_region",
+        "warehouse_region",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "formatting_metadata"
+      ],
+      "consumer_required_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd"
+      ],
+      "typed_delta_projection": true
+    }
+  },
+  "applied_candidates": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT"
+  ]
+}

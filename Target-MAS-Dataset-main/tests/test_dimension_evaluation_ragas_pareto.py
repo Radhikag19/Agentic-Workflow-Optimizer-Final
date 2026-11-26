@@ -174,7 +174,7 @@ def _build_full_5dim_fixture(tmp_path: Path):
             "candidate_id": "MODEL-INTAKE",
             "dimension": "model_selection",
             "target_agents": ["resume_intake_agent"],
-            "selected_model": "llama-3.1-8b-instant",
+            "selected_model": "openai/gpt-oss-20b",
         },
     ]
     scope = {

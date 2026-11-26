@@ -1,0 +1,186 @@
+{
+  "run_id": "live_20261125_210453_trace04",
+  "workflow_name": "order_fulfillment_synthetic",
+  "model": "openai/gpt-oss-120b",
+  "status": "SUCCESS",
+  "duration_seconds": 11.867,
+  "agent_execution_count": 7,
+  "agent_executions": [
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_1 (gsk_...BPdW)",
+      "duration_seconds": 2.48,
+      "tokens": 1568,
+      "prompt_tokens": 839,
+      "completion_tokens": 729,
+      "output": {
+        "record_id": "ORD-004",
+        "request_id": "ORD-004",
+        "customer_id": "CUST-104",
+        "customer_tier": "gold",
+        "billing_country": "CA",
+        "shipping_region": "CA-ONT",
+        "warehouse_region": "US-EAST",
+        "order_total_usd": 640.0,
+        "shipping_speed": "standard",
+        "sku_items": [
+          {
+            "sku": "SKU-VALVE-12",
+            "qty": 8,
+            "unit_price_usd": 80.0,
+            "stock_available": 0
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-004",
+        "raw_audit_trail": [
+          "INGESTED_ORD-004"
+        ],
+        "debug_headers": {
+          "x-trace-source": "synthetic-intake",
+          "x-legacy-bus": "erp-v1-compat"
+        },
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-004",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ],
+        "formatting_metadata": {
+          "format_version": "1.0",
+          "encoding": "utf-8"
+        }
+      },
+      "notes": null,
+      "order": 1,
+      "agent_id": "order_intake_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_2 (gsk_...f1VS)",
+      "duration_seconds": 1.679,
+      "tokens": 1096,
+      "prompt_tokens": 711,
+      "completion_tokens": 385,
+      "output": {
+        "record_id": "ORD-004",
+        "in_stock": false,
+        "warehouse_code": "WH-US-EAST",
+        "backorder_skus": [
+          "SKU-VALVE-12"
+        ],
+        "inventory_note": "Backorder required for SKU-VALVE-12"
+      },
+      "notes": null,
+      "order": 2,
+      "agent_id": "inventory_check_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_3 (gsk_...maHn)",
+      "duration_seconds": 1.081,
+      "tokens": 933,
+      "prompt_tokens": 706,
+      "completion_tokens": 227,
+      "output": {
+        "record_id": "ORD-004",
+        "risk_band": "low",
+        "review_flag": false,
+        "screen_note": "Risk band low for gold tier ($640.0)."
+      },
+      "notes": null,
+      "order": 3,
+      "agent_id": "fraud_screen_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_4 (gsk_...Bm5c)",
+      "duration_seconds": 1.322,
+      "tokens": 878,
+      "prompt_tokens": 627,
+      "completion_tokens": 251,
+      "output": {
+        "record_id": "ORD-004",
+        "carrier_name": "UPS",
+        "service_level": "Standard",
+        "estimated_days": 5,
+        "in_stock": false,
+        "review_flag": false
+      },
+      "notes": null,
+      "order": 4,
+      "agent_id": "carrier_routing_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (gsk_...sK3t)",
+      "duration_seconds": 1.535,
+      "tokens": 1021,
+      "prompt_tokens": 662,
+      "completion_tokens": 359,
+      "output": {
+        "record_id": "ORD-004",
+        "tax_jurisdiction": "CA-TAX",
+        "tax_rate_pct": 13.0,
+        "tax_amount_usd": 83.2,
+        "in_stock": false,
+        "review_flag": false,
+        "carrier_name": "UPS",
+        "service_level": "Standard"
+      },
+      "notes": null,
+      "order": 5,
+      "agent_id": "tax_classify_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_6 (gsk_...qtlA)",
+      "duration_seconds": 1.62,
+      "tokens": 1070,
+      "prompt_tokens": 695,
+      "completion_tokens": 375,
+      "output": {
+        "record_id": "ORD-004",
+        "gl_account_code": "GL-4010",
+        "invoice_tag": "INV-ORD-004",
+        "billing_batch": "BATCH-GOLD",
+        "in_stock": false,
+        "review_flag": false,
+        "carrier_name": "UPS",
+        "service_level": "Standard",
+        "tax_jurisdiction": "CA-TAX",
+        "tax_amount_usd": 83.2
+      },
+      "notes": null,
+      "order": 6,
+      "agent_id": "invoice_tag_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_7 (gsk_...ERhy)",
+      "duration_seconds": 2.13,
+      "tokens": 2674,
+      "prompt_tokens": 2057,
+      "completion_tokens": 617,
+      "output": {
+        "run_id": "",
+        "record_id": "ORD-004",
+        "final_decision": "REJECT",
+        "carrier_name": "UPS",
+        "service_level": "Standard",
+        "tax_jurisdiction": "CA-TAX",
+        "tax_amount_usd": 83.2,
+        "invoice_tag": "INV-ORD-004",
+        "summary": "Order ORD-004: REJECT via UPS Standard (CA-TAX, INV-ORD-004).",
+        "human_review_required": false
+      },
+      "notes": null,
+      "order": 7,
+      "agent_id": "fulfillment_summary_agent"
+    }
+  ],
+  "total_tokens": 9240,
+  "prompt_tokens": 6297,
+  "completion_tokens": 2943,
+  "estimated_cost_usd": 0.00271,
+  "error_message": null,
+  "final_output": "{\n  \"run_id\": \"\",\n  \"record_id\": \"ORD-004\",\n  \"final_decision\": \"REJECT\",\n  \"carrier_name\": \"UPS\",\n  \"service_level\": \"Standard\",\n  \"tax_jurisdiction\": \"CA-TAX\",\n  \"tax_amount_usd\": 83.2,\n  \"invoice_tag\": \"INV-ORD-004\",\n  \"summary\": \"Order ORD-004: REJECT via UPS Standard (CA-TAX, INV-ORD-004).\",\n  \"human_review_required\": false\n}",
+  "timestamp": "2026-11-25T21:05:39.691412+00:00"
+}

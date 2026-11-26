@@ -1,6 +1,7 @@
 import React from 'react';
 import { Radio, Activity } from 'lucide-react';
 import type { OfficeEvent } from '../types/workplace';
+import { formatExperimentModeLabel } from '../pages/ExperimentsPage';
 
 interface ActivityFeedProps {
   events: OfficeEvent[];
@@ -67,7 +68,9 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({
                   ev.payload?.summary ||
                     ev.payload?.error ||
                     ev.payload?.model ||
-                    ev.payload?.experiment_type ||
+                    (ev.payload?.experiment_type
+                      ? formatExperimentModeLabel(String(ev.payload.experiment_type))
+                      : undefined) ||
                     JSON.stringify(ev.payload).slice(0, 90)
                 )}
               </div>

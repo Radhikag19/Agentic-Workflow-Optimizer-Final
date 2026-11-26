@@ -51,6 +51,7 @@ VALID_WORKFLOWS = [
     "procurement_supplier_selection",
     "recruitment_screening",
     "sales_lead_qualification",
+    "order_fulfillment_synthetic",
 ]
 
 

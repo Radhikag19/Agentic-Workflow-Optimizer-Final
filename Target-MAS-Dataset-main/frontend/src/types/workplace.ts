@@ -162,8 +162,10 @@ export interface ExperimentStatusResponse {
   current_phase?: string | null;
   progress_pct?: number | null;
   error?: string | null;
-  report_paths: Record<string, string>;
-  has_results: boolean;
+  report_paths?: Record<string, string>;
+  has_results?: boolean;
+  json_report_path?: string | null;
+  markdown_report_path?: string | null;
 }
 
 export interface ExperimentResultsResponse {

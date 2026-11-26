@@ -1,0 +1,85 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "selected_dimensions": [
+    "agent_consolidation",
+    "workflow_parallelization",
+    "model_selection",
+    "prompt_optimization",
+    "communication_data_handoff"
+  ],
+  "approved_candidate_ids": [
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT"
+  ],
+  "excluded_candidate_ids": [
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "approved_candidates": [
+    {
+      "candidate_id": "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT",
+      "dimension": "workflow_parallelization",
+      "title": "Parallel Execution of inventory_check_agent and fraud_screen_agent",
+      "target_agents": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ],
+      "observed_problem": "Agents 'inventory_check_agent' (1.49s) and 'fraud_screen_agent' (1.61s) are currently executed sequentially (total: 3.10s), despite having completely independent processing scopes and no mutual data dependencies.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_6_latency",
+          "stage_10_evidence"
+        ],
+        "dependency_verification": "Verified independent: No direct/transitive edge between inventory_check_agent and fraud_screen_agent, and no shared I/O coupling.",
+        "is_dependency_independent": true,
+        "current_sequential_latency_seconds": 3.1,
+        "projected_parallel_latency_seconds": 1.61,
+        "critical_path_latency_reduction_seconds": 1.49
+      },
+      "proposed_solution": "Execute 'inventory_check_agent' and 'fraud_screen_agent' concurrently using an asynchronous scatter-gather branch. Join their outputs prior to downstream synthesis.",
+      "expected_benefit": {
+        "latency_savings_pct": 48.0,
+        "latency_savings_seconds": 1.49,
+        "critical_path_impact": "Cuts 1.49s directly from sequential critical path.",
+        "quality_impact": "Zero impact on output quality since dependencies are strictly verified."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Immediate latency win with concurrency.",
+        "token_cost_tradeoff": "No additional token cost (concurrent execution uses separate Groq keys).",
+        "output_quality_risk": "None (data dependencies rigorously verified).",
+        "implementation_complexity": "Medium (requires async orchestrator branch)."
+      },
+      "tier": "Tier 1",
+      "requires_validation": false,
+      "dependency_verified": true,
+      "allocated_key": "GROQ_API_KEY_5 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 1: High potential, low trade-off"
+    }
+  ],
+  "candidate_tiers": {
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT": "Tier 2",
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT": "Tier 1",
+    "MODEL-ORDER_INTAKE_AGENT": "Tier 2",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT": "Tier 2"
+  },
+  "validation_required_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT"
+  ],
+  "risk_acknowledged_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT"
+  ],
+  "approval_status": "approved",
+  "approved_at": "2026-11-25T21:18:37.822044+00:00"
+}

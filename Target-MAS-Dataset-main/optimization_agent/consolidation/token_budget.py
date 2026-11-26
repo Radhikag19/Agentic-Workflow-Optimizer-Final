@@ -25,12 +25,6 @@ MODEL_CONTEXT_WINDOWS: Dict[str, int] = {
     for model_id, meta in MODEL_CATALOG.items()
     if isinstance(meta.get("context_window"), (int, float)) and meta["context_window"] > 0
 }
-MODEL_CONTEXT_WINDOWS.update({
-    "llama-3.3-70b-versatile": 131072,
-    "llama-3.1-8b-instant": 131072,
-    "mixtral-8x7b-32768": 32768,
-    "gemma2-9b-it": 8192,
-})
 
 
 def resolve_model_context_window(

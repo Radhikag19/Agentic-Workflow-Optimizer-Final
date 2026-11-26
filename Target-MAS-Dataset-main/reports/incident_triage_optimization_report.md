@@ -61,10 +61,10 @@ No candidates identified for this dimension based on available trace evidence.
 No candidates identified for this dimension based on available trace evidence.
 
 ### Model Selection Recommendations (Requires Validation) (1 candidates)
-#### [Tier 2] Route intake_agent to Smaller/Faster Model (requires validation)
+#### [Tier 2] Route intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)
 - **Target Agents:** `intake_agent`
 - **Observed Problem:** Agent 'intake_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (1.50s) and compute overhead for straightforward parsing tasks.
-- **Proposed Solution:** Switch 'intake_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.
+- **Proposed Solution:** Switch 'intake_agent' to `openai/gpt-oss-20b` per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.
 - **Expected Benefit:** Latency: 40.0% reduction | Tokens: 0% savings | High accuracy on standard schema parsing; edge case validation required.
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
@@ -143,7 +143,7 @@ No candidates identified for this dimension based on available trace evidence.
 - **Deterministic Tool Result Caching for **: High expected benefit with low implementation complexity and zero functional risk.
 
 ### Tier 2: Validated Enhancements (3 items)
-- **Route intake_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
+- **Route intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Streamline Intermediate Handoff Payloads to Field-Specific Deltas**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Fast-Path Early Exit for Standard/Compliant Artifacts**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 

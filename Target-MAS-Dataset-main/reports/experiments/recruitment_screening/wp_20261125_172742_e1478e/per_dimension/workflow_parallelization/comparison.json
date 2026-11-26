@@ -1,0 +1,226 @@
+{
+  "comparison_type": "historical_baseline_vs_live_optimized",
+  "comparability": {
+    "inputs_comparable": true,
+    "modes_compatible_for_live_claims": true,
+    "baseline_re_executed": false,
+    "baseline_measurement_period": {
+      "earliest_trace_timestamp": "2026-10-31T16:26:24.677059+00:00",
+      "latest_trace_timestamp": "2026-10-31T16:26:59.186247+00:00"
+    },
+    "fixed_baseline_reference_id": "hist_ef23650339c0",
+    "matched_input_count": 30,
+    "unmatched_input_count": 0,
+    "baseline_runs": 2,
+    "optimized_runs": 2,
+    "baseline_modes": [
+      "historical_recorded_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": 22.7775,
+    "optimized_seconds": 107.5203,
+    "improvement_pct": -372.05,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": 22.7775,
+    "optimized_seconds": 107.5203,
+    "improvement_pct": -372.05,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": 2.8453,
+    "optimized_seconds": 13.9503,
+    "improvement_pct": -390.29,
+    "per_agent": {
+      "evidence_mapping_agent": {
+        "baseline_mean_latency_seconds": 3.17,
+        "optimized_mean_latency_seconds": 15.6843,
+        "latency_improvement_pct": -394.77,
+        "baseline_mean_tokens": 2324.5,
+        "optimized_mean_tokens": 2668.5,
+        "token_improvement_pct": -14.8
+      },
+      "experience_assessment_agent": {
+        "baseline_mean_latency_seconds": 2.7325,
+        "optimized_mean_latency_seconds": 18.9962,
+        "latency_improvement_pct": -595.19,
+        "baseline_mean_tokens": 2174.5,
+        "optimized_mean_tokens": 2283.0,
+        "token_improvement_pct": -4.99
+      },
+      "job_criteria_agent": {
+        "baseline_mean_latency_seconds": 2.3145,
+        "optimized_mean_latency_seconds": 4.4298,
+        "latency_improvement_pct": -91.39,
+        "baseline_mean_tokens": 1323.5,
+        "optimized_mean_tokens": 1870.0,
+        "token_improvement_pct": -41.29
+      },
+      "missing_evidence_agent": {
+        "baseline_mean_latency_seconds": 2.71,
+        "optimized_mean_latency_seconds": 17.1723,
+        "latency_improvement_pct": -533.66,
+        "baseline_mean_tokens": 1775.0,
+        "optimized_mean_tokens": 2663.5,
+        "token_improvement_pct": -50.06
+      },
+      "qualification_agent": {
+        "baseline_mean_latency_seconds": 2.838,
+        "optimized_mean_latency_seconds": 21.0738,
+        "latency_improvement_pct": -642.56,
+        "baseline_mean_tokens": 1680.5,
+        "optimized_mean_tokens": 2102.5,
+        "token_improvement_pct": -25.11
+      },
+      "recruiter_summary_agent": {
+        "baseline_mean_latency_seconds": 4.1565,
+        "optimized_mean_latency_seconds": 13.7599,
+        "latency_improvement_pct": -231.05,
+        "baseline_mean_tokens": 4202.0,
+        "optimized_mean_tokens": 3272.0,
+        "token_improvement_pct": 22.13
+      },
+      "resume_intake_agent": {
+        "baseline_mean_latency_seconds": 2.444,
+        "optimized_mean_latency_seconds": 4.5619,
+        "latency_improvement_pct": -86.66,
+        "baseline_mean_tokens": 1218.5,
+        "optimized_mean_tokens": 1522.5,
+        "token_improvement_pct": -24.95
+      },
+      "screening_review_agent": {
+        "baseline_mean_latency_seconds": 2.397,
+        "optimized_mean_latency_seconds": 15.9243,
+        "latency_improvement_pct": -564.34,
+        "baseline_mean_tokens": 2056.5,
+        "optimized_mean_tokens": 2372.5,
+        "token_improvement_pct": -15.37
+      }
+    }
+  },
+  "latency": {
+    "baseline_mean_seconds": 22.7775,
+    "optimized_mean_seconds": 107.5203,
+    "improvement_pct": -372.05,
+    "comparable_for_live_claim": true,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": 10078.0,
+    "optimized_mean_tokens": 11268.0,
+    "improvement_pct": -11.81
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": 6677.0,
+    "optimized_mean_tokens": 14973.0,
+    "improvement_pct": -124.25
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": 16755.0,
+    "optimized_mean_tokens": 37509.0,
+    "improvement_pct": -123.87
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": 16755.0,
+    "optimized_mean_tokens": 37509.0,
+    "improvement_pct": -123.87
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": 0.01122,
+    "baseline_catalog_normalized_usd": 0.005518,
+    "optimized_catalog_normalized_usd": 0.012364,
+    "improvement_pct_catalog_normalized": -124.07,
+    "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+  },
+  "execution_success_rate": {
+    "baseline_pct": 100.0,
+    "optimized_pct": 100.0,
+    "delta_pct_points": 0.0,
+    "improvement_pct": 0.0
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": 83.75,
+    "optimized_pass_rate_pct": 93.75,
+    "improvement_pct": 11.94
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": [
+      {
+        "agent_id": "evidence_mapping_agent",
+        "metric": "structural_validity",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Schema validation failed: 2 validation errors for EvidenceMappingOutput\nmappings.1\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\nmappings.3\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For furthe",
+          "evidence_mapping_agent count mismatch: sum=3, len(mappings)=5."
+        ]
+      },
+      {
+        "agent_id": "evidence_mapping_agent",
+        "metric": "consistency",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Schema validation failed: 2 validation errors for EvidenceMappingOutput\nmappings.1\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\nmappings.3\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For furthe",
+          "evidence_mapping_agent count mismatch: sum=3, len(mappings)=5."
+        ]
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "metric": "consistency",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=23.3.",
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=17.5."
+        ]
+      }
+    ]
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": false,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [
+      {
+        "agent_id": "evidence_mapping_agent",
+        "metric": "structural_validity",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Schema validation failed: 2 validation errors for EvidenceMappingOutput\nmappings.1\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\nmappings.3\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For furthe",
+          "evidence_mapping_agent count mismatch: sum=3, len(mappings)=5."
+        ]
+      },
+      {
+        "agent_id": "evidence_mapping_agent",
+        "metric": "consistency",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Schema validation failed: 2 validation errors for EvidenceMappingOutput\nmappings.1\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.14/v/model_type\nmappings.3\n  Input should be a valid dictionary or instance of CriterionMapping [type=model_type, input_value='', input_type=str]\n    For furthe",
+          "evidence_mapping_agent count mismatch: sum=3, len(mappings)=5."
+        ]
+      },
+      {
+        "agent_id": "recruiter_summary_agent",
+        "metric": "consistency",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 0.0,
+        "issues": [
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=23.3.",
+          "deterministic_match_score=100.0 disagrees with criteria_matrix formula=17.5."
+        ]
+      }
+    ],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

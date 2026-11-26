@@ -24,6 +24,9 @@ PROMPT_OPTIMIZATION_SYSTEM_PROMPT = (
     "Do not remove information simply to achieve a lower token count. Do not introduce new capabilities, assumptions, "
     "or behavior. Do not weaken validation requirements. Maintain the original logical order and intended behavior.\n\n"
     "If the prompt has no meaningful redundancy, return it substantially unchanged.\n\n"
+    "Strict schema preservation rules:\n"
+    "- In `preserved_input_schema` and `preserved_output_schema`, return JSON arrays containing EVERY exact field name from `required_input_schema` and `required_output_schema` verbatim (never omit or rename fields).\n"
+    "- Inside `optimized_prompt`, retain verbatim every exact snake_case field identifier from `required_input_schema` and `required_output_schema` that appeared in `original_prompt_text` (do not paraphrase field names into prose).\n\n"
     "Return structured JSON containing:\n\n"
     "- agent_id\n"
     "- original_prompt_summary\n"
@@ -101,18 +104,32 @@ def _extract_constraint_text(preserved_constraints: Any) -> str:
     return ""
 
 
+def _strip_list_prefix(text: str) -> str:
+    """Remove leading Markdown/checklist numbering (e.g. '4.', '[Checklist 1]') before extracting numeric thresholds."""
+    return re.sub(
+        r"^\s*(?:[-*]\s*)?(?:\[?(?:checklist|step|rule|item)\s+)?\d+[.):\]]\s*",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+
+
 def _constraint_keywords(rule: str) -> List[str]:
     """Extract critical numeric values and domain terms from a constraint string."""
-    numbers = re.findall(r"\b\d+(?:\.\d+)?%?\b", rule.lower())
+    cleaned_rule = _strip_list_prefix(rule.lower())
+    numbers = re.findall(r"\b\d+(?:\.\d+)?%?\b", cleaned_rule)
     stopwords = {
         "the", "and", "for", "with", "must", "only", "that", "this", "from",
         "into", "not", "are", "when", "all", "any", "shall", "should", "within",
+        "guidelines", "instructions", "overview", "responsibility", "confirm",
+        "ensure", "reminder", "section", "please", "your", "also", "make",
+        "sure", "copy",
     }
     words = [
         w for w in re.findall(r"[a-zA-Z_][a-zA-Z0-9_]{3,}", rule.lower())
         if w not in stopwords
     ]
-    return numbers + words[:4]
+    return numbers + words[:8]
 
 
 def validate_optimized_prompt_output(
@@ -201,9 +218,9 @@ def validate_optimized_prompt_output(
                 continue
             markers = _constraint_keywords(rule)
             if markers:
-                hits = sum(1 for m in markers if m in opt_low)
-                # Ensure prompt itself retains at least half of critical markers (and numbers verbatim)
-                nums = re.findall(r"\b\d+(?:\.\d+)?%?\b", rule_low)
+                hits = sum(1 for m in markers if m in combined_const_check)
+                # Ensure prompt itself retains critical numbers verbatim and preserved constraints retain domain terms
+                nums = re.findall(r"\b\d+(?:\.\d+)?%?\b", _strip_list_prefix(rule_low))
                 if any(n not in opt_low for n in nums) or hits == 0:
                     return False, None, f"dropped_critical_constraint:{rule[:80]}"
             elif rule_low not in combined_const_check:

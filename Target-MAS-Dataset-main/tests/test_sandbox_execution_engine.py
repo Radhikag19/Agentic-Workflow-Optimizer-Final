@@ -204,7 +204,7 @@ def test_01_sandbox_isolation_preserves_original_hashes(tmp_path: Path):
                 "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
                 "dimension": "model_selection",
                 "target_agents": ["resume_intake_agent"],
-                "selected_model": "llama-3.1-8b-instant",
+                "selected_model": "openai/gpt-oss-20b",
             }
         ],
     )
@@ -240,7 +240,7 @@ def test_02_approved_candidate_filtering(tmp_path: Path):
                 "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
                 "dimension": "model_selection",
                 "target_agents": ["resume_intake_agent"],
-                "selected_model": "llama-3.1-8b-instant",
+                "selected_model": "openai/gpt-oss-20b",
             },
             {
                 "candidate_id": "PROMPT-UNAPPROVED",
@@ -377,7 +377,7 @@ def test_06_model_selection_executor(tmp_path: Path):
         "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(_make_approved_scope("sample_wf", [cand]), experiment_id="exp_model")
@@ -385,10 +385,10 @@ def test_06_model_selection_executor(tmp_path: Path):
 
     assert res["status"] == "applied"
     assert res["details"]["model_transitions"]["resume_intake_agent"]["previous_model"] == "openai/gpt-oss-120b"
-    assert res["details"]["model_transitions"]["resume_intake_agent"]["updated_model"] == "llama-3.1-8b-instant"
+    assert res["details"]["model_transitions"]["resume_intake_agent"]["updated_model"] == "openai/gpt-oss-20b"
 
     intake_py = (env.sandbox_workflow_dir / "intake_agent.py").read_text(encoding="utf-8")
-    assert "MODEL_OVERRIDE = 'llama-3.1-8b-instant'" in intake_py or 'MODEL_OVERRIDE = "llama-3.1-8b-instant"' in intake_py
+    assert "MODEL_OVERRIDE = 'openai/gpt-oss-20b'" in intake_py or 'MODEL_OVERRIDE = "openai/gpt-oss-20b"' in intake_py
 
     # Other agents must remain on baseline model and provider/key_env preserved
     wf = json.loads((env.sandbox_workflow_dir / "workflow.json").read_text(encoding="utf-8"))
@@ -487,7 +487,7 @@ def test_09_multiple_approved_candidates_across_dimensions(tmp_path: Path):
             "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
             "dimension": "model_selection",
             "target_agents": ["resume_intake_agent"],
-            "selected_model": "llama-3.1-8b-instant",
+            "selected_model": "openai/gpt-oss-20b",
         },
         {
             "candidate_id": "PROMPT-EXPERIENCE_ASSESSMENT_AGENT",
@@ -535,13 +535,13 @@ def test_10_conflicting_modifications_detected(tmp_path: Path):
             "candidate_id": "MODEL-INTAKE-FAST",
             "dimension": "model_selection",
             "target_agents": ["resume_intake_agent"],
-            "selected_model": "llama-3.1-8b-instant",
+            "selected_model": "openai/gpt-oss-20b",
         },
         {
             "candidate_id": "MODEL-INTAKE-MID",
             "dimension": "model_selection",
             "target_agents": ["resume_intake_agent"],
-            "selected_model": "qwen/qwen3-32b",
+            "selected_model": "qwen/qwen3.8-27b",
         },
     ]
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
@@ -567,7 +567,7 @@ def test_11_validation_failures_detected(tmp_path: Path):
         "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(_make_approved_scope("sample_wf", [cand]), experiment_id="exp_bad_val")
@@ -596,7 +596,7 @@ def test_12_runtime_execution_writes_traces(tmp_path: Path):
         "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(_make_approved_scope("sample_wf", [cand]), experiment_id="exp_rt")
@@ -623,7 +623,7 @@ def test_13_before_and_after_evaluation_honesty(tmp_path: Path):
         "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(_make_approved_scope("sample_wf", [cand]), experiment_id="exp_eval")

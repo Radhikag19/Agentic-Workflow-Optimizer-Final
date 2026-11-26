@@ -417,3 +417,88 @@ class ContractFinalReportOutput(BaseModel):
         "and is NOT a substitute for qualified legal or compliance counsel. "
         "No detected issues does NOT imply complete legal validity."
     )
+
+
+# =====================================================================
+# Synthetic Workflow: Order Fulfillment (7-Agent 5-Dim Benchmark)
+# =====================================================================
+
+class OrderIntakeOutput(BaseModel):
+    record_id: str
+    request_id: str
+    customer_id: str
+    customer_tier: str
+    billing_country: str
+    shipping_region: str
+    warehouse_region: str
+    order_total_usd: float
+    shipping_speed: str
+    sku_items: List[Dict[str, Any]] = Field(default_factory=list)
+    # Deliberately bloated unused fields for Data Handoff optimization testing:
+    legacy_erp_dump: str = ""
+    raw_audit_trail: List[str] = Field(default_factory=list)
+    debug_headers: Dict[str, str] = Field(default_factory=dict)
+    deprecated_sku_notes: str = ""
+    internal_routing_flags: List[str] = Field(default_factory=list)
+    formatting_metadata: Dict[str, Any] = Field(default_factory=dict)
+
+
+class InventoryCheckOutput(BaseModel):
+    record_id: str
+    in_stock: bool
+    warehouse_code: str
+    backorder_skus: List[str] = Field(default_factory=list)
+    inventory_note: str
+
+
+class FraudScreenOutput(BaseModel):
+    record_id: str
+    risk_band: str  # low, medium, high
+    review_flag: bool
+    screen_note: str
+
+
+class CarrierRoutingOutput(BaseModel):
+    record_id: str
+    carrier_name: str
+    service_level: str
+    estimated_days: int
+    in_stock: bool = True
+    review_flag: bool = False
+
+
+class TaxClassifyOutput(BaseModel):
+    record_id: str
+    tax_jurisdiction: str
+    tax_rate_pct: float
+    tax_amount_usd: float
+    in_stock: bool = True
+    review_flag: bool = False
+    carrier_name: str = "UPS"
+    service_level: str = "Standard"
+
+
+class InvoiceTagOutput(BaseModel):
+    record_id: str
+    gl_account_code: str
+    invoice_tag: str
+    billing_batch: str
+    in_stock: bool = True
+    review_flag: bool = False
+    carrier_name: str = "UPS"
+    service_level: str = "Standard"
+    tax_jurisdiction: str = "US-TAX"
+    tax_amount_usd: float = 0.0
+
+
+class FulfillmentSummaryOutput(BaseModel):
+    run_id: str
+    record_id: str
+    final_decision: str  # APPROVE, HOLD_FOR_REVIEW, REJECT
+    carrier_name: str
+    service_level: str
+    tax_jurisdiction: str
+    tax_amount_usd: float
+    invoice_tag: str
+    summary: str
+    human_review_required: bool = False

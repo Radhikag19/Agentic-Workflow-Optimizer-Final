@@ -263,7 +263,7 @@ def test_check_02_incomplete_replay_flagged_and_never_treated_as_valid_quality(t
         "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.3-70b-versatile",
+        "selected_model": "openai/gpt-oss-20b",
     }
     runner = SandboxExperimentRunner(
         experiments_base_dir=exp_dir,
@@ -300,7 +300,7 @@ def test_check_03_live_failure_does_not_fallback_silently(tmp_path: Path):
         "candidate_id": "MODEL-INTAKE",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     runner = SandboxExperimentRunner(
         agents_base_dir=agents_dir,
@@ -347,8 +347,8 @@ def test_check_04_and_05_mocked_groq_live_execution_usage_and_traces(tmp_path: P
                     or (a == "recruiter_summary_agent" and "Recruiter Summary" in sys_msg)
                 )
                 seen_calls.append({"agent_id": aid, "model": model, "user_msg": user_msg})
-                pt = 210 if model == "llama-3.1-8b-instant" else 420
-                ct = 95 if model == "llama-3.1-8b-instant" else 180
+                pt = 210 if model == "openai/gpt-oss-20b" else 420
+                ct = 95 if model == "openai/gpt-oss-20b" else 180
                 return SimpleNamespace(
                     choices=[SimpleNamespace(message=SimpleNamespace(content=json.dumps(payloads[aid])))],
                     usage=SimpleNamespace(prompt_tokens=pt, completion_tokens=ct, total_tokens=pt + ct),
@@ -360,7 +360,7 @@ def test_check_04_and_05_mocked_groq_live_execution_usage_and_traces(tmp_path: P
         "candidate_id": "MODEL-INTAKE",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     runner = SandboxExperimentRunner(
         agents_base_dir=agents_dir,
@@ -380,7 +380,7 @@ def test_check_04_and_05_mocked_groq_live_execution_usage_and_traces(tmp_path: P
     # Verify model override ran llama-3.1-8b-instant only on optimized resume_intake_agent
     opt_trace = out["runtime_results"]["traces"][0]
     intake_exec = next(e for e in opt_trace["agent_executions"] if e["agent_id"] == "resume_intake_agent")
-    assert intake_exec["model"] == "llama-3.1-8b-instant"
+    assert intake_exec["model"] == "openai/gpt-oss-20b"
     assert intake_exec["prompt_tokens"] == 210
     assert intake_exec["completion_tokens"] == 95
     assert intake_exec["tokens"] == 305
@@ -446,7 +446,7 @@ def test_check_06_and_07_identical_inputs_and_multi_run(tmp_path: Path):
     out = runner.run(
         _scope(
             "sample_live_wf",
-            [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"}],
+            [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}],
         ),
         experiment_id="exp_multirun",
         num_runs=3,
@@ -516,7 +516,7 @@ def test_check_10_to_13_metrics_traceability_integrity_and_all_6_outcomes(tmp_pa
 
     def _fast_opt_llm(aid, model_id, sys_p, usr_p, ctx):
         # Simulate lower tokens on optimized model & compressed handoff
-        pt = 100 if model_id == "llama-3.1-8b-instant" else 200
+        pt = 100 if model_id == "openai/gpt-oss-20b" else 200
         return {
             "output": payloads[aid],
             "prompt_tokens": pt,
@@ -539,7 +539,7 @@ def test_check_10_to_13_metrics_traceability_integrity_and_all_6_outcomes(tmp_pa
 
     candidates = [
         {"candidate_id": "P1", "dimension": "workflow_parallelization", "target_agents": ["qualification_agent", "job_criteria_agent"]},
-        {"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"},
+        {"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"},
     ]
     runner = SandboxExperimentRunner(
         agents_base_dir=agents_dir,

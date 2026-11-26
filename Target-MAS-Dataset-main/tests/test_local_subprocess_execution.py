@@ -217,7 +217,7 @@ def test_01_to_04_baseline_and_optimized_subprocess_paths_cwd_and_executable(tmp
         "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
         "dimension": "model_selection",
         "target_agents": ["resume_intake_agent"],
-        "selected_model": "llama-3.1-8b-instant",
+        "selected_model": "openai/gpt-oss-20b",
     }
     runner = SandboxExperimentRunner(
         agents_base_dir=agents_dir,
@@ -284,7 +284,7 @@ def test_05_groq_credentials_passed_via_env_only_never_in_cli_or_request_json(tm
     out = runner.run(
         _scope(
             "recruitment_screening",
-            [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"}],
+            [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}],
         ),
         experiment_id="exp_sec",
         num_runs=1,
@@ -306,7 +306,7 @@ def test_06_optimized_subprocess_resolves_imports_from_sandbox_copy(tmp_path: Pa
     env = mgr.prepare_sandbox(
         _scope(
             "recruitment_like",
-            [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"}],
+            [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}],
         ),
         experiment_id="exp_iso_imp",
     )
@@ -345,7 +345,7 @@ def test_07_and_12_real_os_subprocess_worker_replay_and_structured_json(tmp_path
     env = mgr.prepare_sandbox(
         _scope(
             "recruitment_screening",
-            [{"candidate_id": "MODEL-RESUME_INTAKE_AGENT", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.3-70b-versatile"}],
+            [{"candidate_id": "MODEL-RESUME_INTAKE_AGENT", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}],
         ),
         experiment_id="exp_real_worker",
     )
@@ -375,7 +375,7 @@ def test_08_nonzero_process_exit_code_fails_loudly(tmp_path: Path):
     _make_wf(agents_dir, "recruitment_like")
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(
-        _scope("recruitment_like", [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"}]),
+        _scope("recruitment_like", [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}]),
         experiment_id="exp_exit_err",
     )
 
@@ -400,7 +400,7 @@ def test_09_subprocess_timeout_handled_cleanly(tmp_path: Path):
     _make_wf(agents_dir, "recruitment_like")
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(
-        _scope("recruitment_like", [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"}]),
+        _scope("recruitment_like", [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}]),
         experiment_id="exp_timeout",
     )
 
@@ -434,7 +434,7 @@ def test_10_real_os_subprocess_live_api_error_never_falls_back(tmp_path: Path):
     out = runner.run(
         _scope(
             "recruitment_screening",
-            [{"candidate_id": "MODEL-RESUME_INTAKE_AGENT", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.3-70b-versatile"}],
+            [{"candidate_id": "MODEL-RESUME_INTAKE_AGENT", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}],
         ),
         experiment_id="exp_live_os_err",
         num_runs=1,
@@ -501,7 +501,7 @@ def test_11_13_14_15_full_subprocess_experiment_pipeline_with_mocked_live_and_re
             "candidate_id": "MODEL-INTAKE",
             "dimension": "model_selection",
             "target_agents": ["resume_intake_agent"],
-            "selected_model": "llama-3.1-8b-instant",
+            "selected_model": "openai/gpt-oss-20b",
         },
         {
             "candidate_id": "PROMPT-UNAPPROVED",

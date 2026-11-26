@@ -1,0 +1,193 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_b_prompt_optimization",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 14,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\prompt_optimization\\runtime_traces",
+  "execution_status": "FAILED",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported",
+    "unavailable"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\prompt_optimization\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\prompt_optimization\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "FAILED",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 95.8602,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\prompt_optimization\\sandbox_workflow",
+    "error_details": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+  },
+  "total_runs": 2,
+  "successful_runs": 1,
+  "failed_runs": 1,
+  "incomplete_runs": [
+    {
+      "run_id": "sb_20261125_204358_defdfb",
+      "run_index": 1,
+      "status": "FAILED",
+      "executed_agents": 7,
+      "expected_agents": 7,
+      "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+    }
+  ],
+  "success_rate_pct": 50.0,
+  "mean_latency_seconds": 47.1371,
+  "median_latency_seconds": 47.1371,
+  "mean_agent_latency_seconds": 6.7276,
+  "mean_tokens": 17622.0,
+  "mean_prompt_tokens": 5468.0,
+  "mean_completion_tokens": 6686.0,
+  "mean_cost_usd_catalog_normalized": 0.00565,
+  "schema_validation_passed": true,
+  "structural_validity_pass_rate_pct": 92.86,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261125_204358_defdfb",
+      "agent_id": "fulfillment_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+    }
+  ],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261125_204300_030cc1",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261125_201252_trace01",
+      "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 47.1371,
+      "prompt_tokens": 5468,
+      "completion_tokens": 6686,
+      "total_tokens": 17622,
+      "estimated_cost_usd": 0.00565,
+      "schema_valid": true
+    },
+    {
+      "run_id": "sb_20261125_204358_defdfb",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261125_201311_trace06",
+      "input_hash": "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0",
+      "status": "FAILED",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 48.4213,
+      "prompt_tokens": 4315,
+      "completion_tokens": 4580,
+      "total_tokens": 13210,
+      "estimated_cost_usd": 0.004042,
+      "schema_valid": false
+    }
+  ],
+  "per_agent_metrics": {
+    "order_intake_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 2.9245,
+      "mean_tokens": 1019.0,
+      "mean_prompt_tokens": 726.0,
+      "mean_completion_tokens": 293.0,
+      "mean_cost_usd": 0.000285,
+      "schema_valid_rate_pct": 100.0
+    },
+    "inventory_check_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.8693,
+      "mean_tokens": 913.0,
+      "mean_prompt_tokens": 592.0,
+      "mean_completion_tokens": 321.0,
+      "mean_cost_usd": 0.000281,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fraud_screen_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 3.0345,
+      "mean_tokens": 799.0,
+      "mean_prompt_tokens": 579.0,
+      "mean_completion_tokens": 220.0,
+      "mean_cost_usd": 0.000219,
+      "schema_valid_rate_pct": 100.0
+    },
+    "carrier_routing_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 8.4494,
+      "mean_tokens": 1606.0,
+      "mean_prompt_tokens": 878.0,
+      "mean_completion_tokens": 728.0,
+      "mean_cost_usd": 0.000568,
+      "schema_valid_rate_pct": 100.0
+    },
+    "tax_classify_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 7.692,
+      "mean_tokens": 1316.0,
+      "mean_prompt_tokens": 895.0,
+      "mean_completion_tokens": 421.0,
+      "mean_cost_usd": 0.000387,
+      "schema_valid_rate_pct": 100.0
+    },
+    "invoice_tag_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 15.0315,
+      "mean_tokens": 1470.0,
+      "mean_prompt_tokens": 877.0,
+      "mean_completion_tokens": 593.0,
+      "mean_cost_usd": 0.000487,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fulfillment_summary_agent": {
+      "runs_count": 1,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 8.092,
+      "mean_tokens": 1688.0,
+      "mean_prompt_tokens": 921.0,
+      "mean_completion_tokens": 767.0,
+      "mean_cost_usd": 0.000598,
+      "schema_valid_rate_pct": 100.0
+    }
+  },
+  "input_dataset_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0"
+  ]
+}

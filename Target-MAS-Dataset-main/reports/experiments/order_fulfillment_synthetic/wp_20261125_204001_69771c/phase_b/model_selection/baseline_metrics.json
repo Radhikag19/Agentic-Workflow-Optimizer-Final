@@ -1,0 +1,111 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "source": "historical_runtime_traces",
+  "execution_mode": "historical_recorded_execution",
+  "execution_modes": [
+    "historical_recorded_execution"
+  ],
+  "re_executed": false,
+  "groq_api_calls": 0,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic",
+  "fixed_baseline_reference_id": "hist_c86f1f3af77b",
+  "measurement_period": {
+    "earliest_trace_timestamp": "2026-11-25T20:13:03.554335+00:00",
+    "latest_trace_timestamp": "2026-11-25T20:13:23.130637+00:00"
+  },
+  "total_runs": 2,
+  "successful_runs": 2,
+  "failed_runs": 0,
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 11.6505,
+  "median_latency_seconds": 11.6505,
+  "mean_agent_latency_seconds": 1.6616,
+  "mean_tokens": 7531.5,
+  "mean_prompt_tokens": 5138.0,
+  "mean_completion_tokens": 2393.5,
+  "mean_cost_usd_telemetry": 0.002207,
+  "mean_cost_usd_catalog_normalized": 0.002207,
+  "cost_calculation_basis": "historical_trace_catalog_normalized_from_recorded_tokens",
+  "schema_validation_passed": true,
+  "structural_validity_pass_rate_pct": 100.0,
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "per_agent_metrics": {
+    "order_intake_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 2.0805,
+      "mean_tokens": 980.5,
+      "mean_prompt_tokens": 713.5,
+      "mean_completion_tokens": 267.0,
+      "mean_cost_usd": null
+    },
+    "inventory_check_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 1.3965,
+      "mean_tokens": 842.5,
+      "mean_prompt_tokens": 567.0,
+      "mean_completion_tokens": 275.5,
+      "mean_cost_usd": null
+    },
+    "fraud_screen_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 1.2285,
+      "mean_tokens": 758.5,
+      "mean_prompt_tokens": 554.0,
+      "mean_completion_tokens": 204.5,
+      "mean_cost_usd": null
+    },
+    "carrier_routing_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 1.4885,
+      "mean_tokens": 737.0,
+      "mean_prompt_tokens": 483.5,
+      "mean_completion_tokens": 253.5,
+      "mean_cost_usd": null
+    },
+    "tax_classify_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 1.2995,
+      "mean_tokens": 666.0,
+      "mean_prompt_tokens": 448.5,
+      "mean_completion_tokens": 217.5,
+      "mean_cost_usd": null
+    },
+    "invoice_tag_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 1.296,
+      "mean_tokens": 675.5,
+      "mean_prompt_tokens": 440.0,
+      "mean_completion_tokens": 235.5,
+      "mean_cost_usd": null
+    },
+    "fulfillment_summary_agent": {
+      "runs_count": 2,
+      "models_observed": [],
+      "mean_latency_seconds": 2.842,
+      "mean_tokens": 2871.5,
+      "mean_prompt_tokens": 1931.5,
+      "mean_completion_tokens": 940.0,
+      "mean_cost_usd": null
+    }
+  },
+  "input_dataset_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0"
+  ],
+  "matched_input_count": 10,
+  "unmatched_input_count": 0,
+  "excluded_records": [],
+  "historical_mcp_reference": {
+    "total_runs": 10,
+    "mean_latency_seconds": 13.0462,
+    "mean_tokens": 8148.7
+  }
+}

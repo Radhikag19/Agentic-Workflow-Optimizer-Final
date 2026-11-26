@@ -1,0 +1,106 @@
+{
+  "experiment_id": "wp_20261125_172742_e1478e__dim_workflow_parallelization",
+  "workflow_id": "recruitment_screening",
+  "variant": "optimized",
+  "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization\\sandbox_workflow",
+  "original_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\recruitment_screening",
+  "sandbox_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization\\sandbox_workflow",
+  "experiment_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization\\runtime_traces",
+  "event_log_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization\\process_logs\\optimized_run1_events.jsonl",
+  "enable_trace_replay_fallback": false,
+  "evidence_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Workflow_Evidence",
+  "data_base_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\data",
+  "sample_inputs": [
+    {
+      "resume": {
+        "application_id": "APP-002",
+        "candidate_id": "CAND-002",
+        "candidate_name": "Jordan Martinez",
+        "target_job_id": "JOB-02",
+        "target_job_title": "Senior Data Engineer",
+        "edge_case_type": "inconsistent_dates",
+        "sections": {
+          "contact_information": {
+            "name": "Jordan Martinez",
+            "email": "jordan.martinez2@example.org",
+            "phone": "+1-555-674-4257",
+            "location": "Hybrid - New York"
+          },
+          "education": {
+            "evidence_id": "EVD-002-EDU",
+            "degree": "B.S. in Computer Science",
+            "institution": "State University",
+            "graduation_year": 2024
+          },
+          "experience": [
+            {
+              "evidence_id": "EVD-002-EXP1",
+              "title": "Software Engineer",
+              "company": "Apex Dynamics Corp",
+              "start_date": "2025-01",
+              "end_date": "2021-12",
+              "description": "Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%."
+            }
+          ],
+          "skills": {
+            "evidence_id": "EVD-002-SKL",
+            "technical_skills": [
+              "Go",
+              "Python",
+              "GraphQL",
+              "Kubernetes",
+              "Airflow",
+              "Kafka",
+              "React"
+            ]
+          }
+        },
+        "source_evidence_ids": [
+          "EVD-002-EDU",
+          "EVD-002-EXP1",
+          "EVD-002-SKL"
+        ]
+      },
+      "job": {
+        "job_id": "JOB-02",
+        "title": "Senior Data Engineer",
+        "department": "Data",
+        "location": "Hybrid - New York",
+        "summary": "We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.",
+        "mandatory_criteria": [
+          {
+            "criterion_id": "JOB-02-CRIT-M1",
+            "category": "technical_skill",
+            "description": "Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka",
+            "requirement_type": "mandatory"
+          },
+          {
+            "criterion_id": "JOB-02-CRIT-M2",
+            "category": "technical_skill",
+            "description": "Strong proficiency in SQL, data modeling, and distributed query engines",
+            "requirement_type": "mandatory"
+          }
+        ],
+        "preferred_criteria": [
+          {
+            "criterion_id": "JOB-02-CRIT-P1",
+            "category": "technical_skill",
+            "description": "Experience with Snowflake or Databricks lakehouse architectures",
+            "requirement_type": "preferred"
+          }
+        ]
+      },
+      "_matched_baseline_run_id": "live_20261031_162635_trace02",
+      "_matched_identifiers": {
+        "application_id": "APP-002",
+        "candidate_id": "CAND-002",
+        "job_id": "JOB-02"
+      }
+    }
+  ],
+  "run_indices": [
+    1
+  ],
+  "num_runs": 1
+}

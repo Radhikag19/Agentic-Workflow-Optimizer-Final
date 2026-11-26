@@ -1,0 +1,212 @@
+{
+  "comparison_type": "historical_baseline_vs_live_optimized",
+  "comparability": {
+    "inputs_comparable": true,
+    "modes_compatible_for_live_claims": true,
+    "baseline_re_executed": false,
+    "baseline_measurement_period": {
+      "earliest_trace_timestamp": "2026-11-25T20:13:03.554335+00:00",
+      "latest_trace_timestamp": "2026-11-25T20:13:23.130637+00:00"
+    },
+    "fixed_baseline_reference_id": "hist_c86f1f3af77b",
+    "matched_input_count": 10,
+    "unmatched_input_count": 0,
+    "baseline_runs": 2,
+    "optimized_runs": 2,
+    "baseline_modes": [
+      "historical_recorded_execution"
+    ],
+    "optimized_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "mean_workflow_latency": {
+    "baseline_seconds": 11.6505,
+    "optimized_seconds": 47.1371,
+    "improvement_pct": -304.59,
+    "raw_replay_delta_pct": null
+  },
+  "median_workflow_latency": {
+    "baseline_seconds": 11.6505,
+    "optimized_seconds": 47.1371,
+    "improvement_pct": -304.59,
+    "raw_replay_delta_pct": null
+  },
+  "mean_agent_latency": {
+    "baseline_seconds": 1.6616,
+    "optimized_seconds": 6.7276,
+    "improvement_pct": -304.89,
+    "per_agent": {
+      "carrier_routing_agent": {
+        "baseline_mean_latency_seconds": 1.4885,
+        "optimized_mean_latency_seconds": 8.4494,
+        "latency_improvement_pct": -467.65,
+        "baseline_mean_tokens": 737.0,
+        "optimized_mean_tokens": 1606.0,
+        "token_improvement_pct": -117.91
+      },
+      "fraud_screen_agent": {
+        "baseline_mean_latency_seconds": 1.2285,
+        "optimized_mean_latency_seconds": 3.0345,
+        "latency_improvement_pct": -147.01,
+        "baseline_mean_tokens": 758.5,
+        "optimized_mean_tokens": 799.0,
+        "token_improvement_pct": -5.34
+      },
+      "fulfillment_summary_agent": {
+        "baseline_mean_latency_seconds": 2.842,
+        "optimized_mean_latency_seconds": 8.092,
+        "latency_improvement_pct": -184.73,
+        "baseline_mean_tokens": 2871.5,
+        "optimized_mean_tokens": 1688.0,
+        "token_improvement_pct": 41.22
+      },
+      "inventory_check_agent": {
+        "baseline_mean_latency_seconds": 1.3965,
+        "optimized_mean_latency_seconds": 1.8693,
+        "latency_improvement_pct": -33.86,
+        "baseline_mean_tokens": 842.5,
+        "optimized_mean_tokens": 913.0,
+        "token_improvement_pct": -8.37
+      },
+      "invoice_tag_agent": {
+        "baseline_mean_latency_seconds": 1.296,
+        "optimized_mean_latency_seconds": 15.0315,
+        "latency_improvement_pct": -1059.84,
+        "baseline_mean_tokens": 675.5,
+        "optimized_mean_tokens": 1470.0,
+        "token_improvement_pct": -117.62
+      },
+      "order_intake_agent": {
+        "baseline_mean_latency_seconds": 2.0805,
+        "optimized_mean_latency_seconds": 2.9245,
+        "latency_improvement_pct": -40.57,
+        "baseline_mean_tokens": 980.5,
+        "optimized_mean_tokens": 1019.0,
+        "token_improvement_pct": -3.93
+      },
+      "tax_classify_agent": {
+        "baseline_mean_latency_seconds": 1.2995,
+        "optimized_mean_latency_seconds": 7.692,
+        "latency_improvement_pct": -491.92,
+        "baseline_mean_tokens": 666.0,
+        "optimized_mean_tokens": 1316.0,
+        "token_improvement_pct": -97.6
+      }
+    }
+  },
+  "latency": {
+    "baseline_mean_seconds": 11.6505,
+    "optimized_mean_seconds": 47.1371,
+    "improvement_pct": -304.59,
+    "comparable_for_live_claim": true,
+    "note": "Measured live workflow execution latency on matched inputs."
+  },
+  "input_tokens": {
+    "baseline_mean_tokens": 5138.0,
+    "optimized_mean_tokens": 5468.0,
+    "improvement_pct": -6.42
+  },
+  "output_tokens": {
+    "baseline_mean_tokens": 2393.5,
+    "optimized_mean_tokens": 6686.0,
+    "improvement_pct": -179.34
+  },
+  "total_tokens": {
+    "baseline_mean_tokens": 7531.5,
+    "optimized_mean_tokens": 17622.0,
+    "improvement_pct": -133.98
+  },
+  "token_consumption": {
+    "baseline_mean_tokens": 7531.5,
+    "optimized_mean_tokens": 17622.0,
+    "improvement_pct": -133.98
+  },
+  "execution_cost": {
+    "baseline_telemetry_usd": 0.002207,
+    "baseline_catalog_normalized_usd": 0.002207,
+    "optimized_catalog_normalized_usd": 0.00565,
+    "improvement_pct_catalog_normalized": -156.0,
+    "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+  },
+  "execution_success_rate": {
+    "baseline_pct": 100.0,
+    "optimized_pct": 50.0,
+    "delta_pct_points": -50.0,
+    "improvement_pct": -50.0
+  },
+  "output_structural_validity": {
+    "baseline_pass_rate_pct": 100.0,
+    "optimized_pass_rate_pct": 92.86,
+    "improvement_pct": -7.14
+  },
+  "semantic_quality": {
+    "baseline_status_or_pct": "unavailable",
+    "optimized_status_or_pct": "unavailable",
+    "improvement_pct": null,
+    "identified_regressions": [
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "metric": "structural_validity",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+        ]
+      },
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "metric": "completeness",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+        ]
+      },
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "metric": "instruction_adherence",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+        ]
+      }
+    ]
+  },
+  "output_quality": {
+    "baseline_quality": "unavailable",
+    "optimized_schema_valid": true,
+    "semantic_quality_evaluation": "unavailable",
+    "identified_regressions": [
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "metric": "structural_validity",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+        ]
+      },
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "metric": "completeness",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+        ]
+      },
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "metric": "instruction_adherence",
+        "baseline_pass_rate_pct": 100.0,
+        "optimized_pass_rate_pct": 50.0,
+        "issues": [
+          "Agent execution failed or returned empty output: Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m missing the required upstream values to complete the fulfillment summary. Could you provide the following fields for this order?\\n\\n- in_stock (bool)  \\n- review_flag (bool)  \\n- carrier_name (string)  \\n- service_level (string)  \\n- tax_jurisdiction (string)  \\n- tax_amount_usd (number)  \\n- invoice_tag (string)  \\n\\nOnce I have those, I can generate the final decision JSON.'}}"
+        ]
+      }
+    ],
+    "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "workflow_name": "order_fulfillment_synthetic",
+  "version": "1.0.0",
+  "description": "Synthetic 7-agent CrewAI order fulfillment workflow engineered to exercise all 5 optimization dimensions (Data Handoff, Consolidation, Model Selection, Parallelization, Prompt Optimization).",
+  "framework": "crewai",
+  "fixed_model": "openai/gpt-oss-120b",
+  "baseline_model": "openai/gpt-oss-120b",
+  "assigned_groq_key_env": "GROQ_API_KEY_14",
+  "llm_provider": "Groq",
+  "total_agents": 7,
+  "agent_count": 7,
+  "execution_pattern": "dag_parallel",
+  "execution_order": [
+    "order_intake_agent",
+    "inventory_check_agent",
+    "fraud_screen_agent",
+    "carrier_routing_agent",
+    "tax_classify_agent",
+    "invoice_tag_agent",
+    "fulfillment_summary_agent"
+  ],
+  "agents": [
+    {
+      "agent_id": "order_intake_agent",
+      "agent_name": "Order Intake Agent",
+      "role": "Order Intake Coordinator",
+      "responsibilities": "Extract and normalize incoming synthetic order payloads into structured customer, SKU, shipping, and legacy metadata fields.",
+      "input_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_region",
+        "warehouse_region",
+        "shipping_speed",
+        "order_total_usd",
+        "sku_items"
+      ],
+      "output_fields": [
+        "record_id",
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "deprecated_sku_notes",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "dependencies": []
+    },
+    {
+      "agent_id": "inventory_check_agent",
+      "agent_name": "Inventory Check Agent",
+      "role": "Warehouse Inventory Specialist",
+      "responsibilities": "Check SKU stock availability and warehouse code from intake order quantities.",
+      "input_fields": [
+        "sku_items",
+        "warehouse_region"
+      ],
+      "output_fields": [
+        "in_stock",
+        "warehouse_code",
+        "backorder_skus",
+        "inventory_note"
+      ],
+      "dependencies": [
+        "order_intake_agent"
+      ]
+    },
+    {
+      "agent_id": "fraud_screen_agent",
+      "agent_name": "Fraud Screen Agent",
+      "role": "Order Risk Screener",
+      "responsibilities": "Screen customer tier, country, and order total for risk band and review flag.",
+      "input_fields": [
+        "customer_id",
+        "customer_tier",
+        "order_total_usd",
+        "billing_country"
+      ],
+      "output_fields": [
+        "risk_band",
+        "review_flag",
+        "screen_note"
+      ],
+      "dependencies": [
+        "order_intake_agent"
+      ]
+    },
+    {
+      "agent_id": "carrier_routing_agent",
+      "agent_name": "Carrier Routing Agent",
+      "role": "Carrier Zone Router",
+      "responsibilities": "Map shipping_region and shipping_speed to carrier_name, service_level, and estimated_days while forwarding in_stock and review_flag.",
+      "input_fields": [
+        "shipping_region",
+        "shipping_speed",
+        "warehouse_code",
+        "in_stock",
+        "risk_band",
+        "review_flag"
+      ],
+      "output_fields": [
+        "carrier_name",
+        "service_level",
+        "estimated_days",
+        "in_stock",
+        "review_flag"
+      ],
+      "dependencies": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ]
+    },
+    {
+      "agent_id": "tax_classify_agent",
+      "agent_name": "Tax Classify Agent",
+      "role": "Regional Tax Classifier",
+      "responsibilities": "Compute tax_jurisdiction, tax_rate_pct, and tax_amount_usd from billing_country and order_total_usd while forwarding carrier and flag fields.",
+      "input_fields": [
+        "billing_country",
+        "order_total_usd",
+        "carrier_name",
+        "service_level",
+        "in_stock",
+        "review_flag"
+      ],
+      "output_fields": [
+        "tax_jurisdiction",
+        "tax_rate_pct",
+        "tax_amount_usd",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level"
+      ],
+      "dependencies": [
+        "carrier_routing_agent"
+      ]
+    },
+    {
+      "agent_id": "invoice_tag_agent",
+      "agent_name": "Invoice Tag Agent",
+      "role": "Ledger Invoice Tagger",
+      "responsibilities": "Compute gl_account_code, invoice_tag, and billing_batch while forwarding in_stock, review_flag, carrier, and tax fields.",
+      "input_fields": [
+        "customer_tier",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level"
+      ],
+      "output_fields": [
+        "gl_account_code",
+        "invoice_tag",
+        "billing_batch",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd"
+      ],
+      "dependencies": [
+        "tax_classify_agent"
+      ]
+    },
+    {
+      "agent_id": "fulfillment_summary_agent",
+      "agent_name": "Fulfillment Summary Agent",
+      "role": "Executive Fulfillment Summarizer",
+      "responsibilities": "Synthesize final order decision (APPROVE, HOLD_FOR_REVIEW, or REJECT) and fulfillment dispatch brief.",
+      "input_fields": [
+        "record_id",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "invoice_tag"
+      ],
+      "output_fields": [
+        "run_id",
+        "record_id",
+        "final_decision",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "invoice_tag",
+        "summary",
+        "human_review_required"
+      ],
+      "dependencies": [
+        "invoice_tag_agent"
+      ]
+    }
+  ],
+  "baseline_execution_order": [
+    "order_intake_agent",
+    "inventory_check_agent",
+    "fraud_screen_agent",
+    "carrier_routing_agent",
+    "tax_classify_agent",
+    "invoice_tag_agent",
+    "fulfillment_summary_agent"
+  ],
+  "optimizer_annotations": {
+    "potential_parallel_branches": [
+      [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ]
+    ],
+    "consolidation_candidates": [
+      [
+        "carrier_routing_agent",
+        "tax_classify_agent",
+        "invoice_tag_agent"
+      ]
+    ]
+  },
+  "parallel_groups": [
+    [
+      "inventory_check_agent",
+      "fraud_screen_agent"
+    ]
+  ]
+}

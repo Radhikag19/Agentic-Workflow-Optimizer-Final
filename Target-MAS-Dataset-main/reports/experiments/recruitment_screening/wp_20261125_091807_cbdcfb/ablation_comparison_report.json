@@ -1,0 +1,103 @@
+{
+  "suite_id": "wp_20261125_091807_cbdcfb",
+  "workflow_id": "recruitment_screening",
+  "generated_at": "2026-11-25T09:18:45.411894+00:00",
+  "suite_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_091807_cbdcfb",
+  "selected_dimensions": [
+    "model_selection",
+    "agent_consolidation",
+    "prompt_optimization"
+  ],
+  "executed_dimensions": [
+    "model_selection"
+  ],
+  "skipped_dimensions": [
+    {
+      "dimension": "agent_consolidation",
+      "reason": "no_approved_candidates"
+    },
+    {
+      "dimension": "prompt_optimization",
+      "reason": "no_approved_candidates"
+    }
+  ],
+  "include_combined": true,
+  "num_runs": 2,
+  "baseline_evidence": {
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "fixed_baseline_reference_id": "hist_ef23650339c0",
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\recruitment_screening",
+    "matched_input_count": 30,
+    "unmatched_input_count": 0
+  },
+  "comparison_rows": [
+    {
+      "label": "fixed_historical_baseline",
+      "scope_kind": "historical_baseline",
+      "applied_candidate_ids": [],
+      "runs_executed": 2,
+      "successful_runs": 2,
+      "mean_latency_seconds": 22.7775,
+      "latency_improvement_pct": 0.0,
+      "mean_tokens": 16755.0,
+      "token_improvement_pct": 0.0,
+      "mean_cost_usd_catalog_normalized": 0.005518,
+      "cost_improvement_pct": 0.0,
+      "groq_api_calls": 0,
+      "structural_validity_pass_rate_pct": 83.75,
+      "assessment_status": "HISTORICAL_FIXED",
+      "json_report_path": null,
+      "markdown_report_path": null
+    },
+    {
+      "label": "model_selection",
+      "scope_kind": "isolated_dimension",
+      "applied_candidate_ids": [
+        "MODEL-RESUME_INTAKE_AGENT"
+      ],
+      "runs_executed": 2,
+      "successful_runs": 0,
+      "mean_latency_seconds": null,
+      "latency_improvement_pct": null,
+      "mean_tokens": null,
+      "token_improvement_pct": null,
+      "mean_cost_usd_catalog_normalized": null,
+      "cost_improvement_pct": null,
+      "groq_api_calls": 2,
+      "structural_validity_pass_rate_pct": 0.0,
+      "assessment_status": "failed",
+      "json_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_091807_cbdcfb\\per_dimension\\model_selection\\execution_report.json",
+      "markdown_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_091807_cbdcfb\\per_dimension\\model_selection\\execution_report.md"
+    },
+    {
+      "label": "combined_all_selected_dimensions",
+      "scope_kind": "combined_single_workflow",
+      "applied_candidate_ids": [
+        "MODEL-RESUME_INTAKE_AGENT"
+      ],
+      "runs_executed": 2,
+      "successful_runs": 0,
+      "mean_latency_seconds": null,
+      "latency_improvement_pct": null,
+      "mean_tokens": null,
+      "token_improvement_pct": null,
+      "mean_cost_usd_catalog_normalized": null,
+      "cost_improvement_pct": null,
+      "groq_api_calls": 2,
+      "structural_validity_pass_rate_pct": 0.0,
+      "assessment_status": "failed",
+      "json_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_091807_cbdcfb\\combined\\execution_report.json",
+      "markdown_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_091807_cbdcfb\\combined\\execution_report.md"
+    }
+  ],
+  "original_integrity_after": {
+    "original_unchanged": true,
+    "checked_file_count": 12,
+    "changed_files": [],
+    "missing_files": [],
+    "added_files": []
+  }
+}

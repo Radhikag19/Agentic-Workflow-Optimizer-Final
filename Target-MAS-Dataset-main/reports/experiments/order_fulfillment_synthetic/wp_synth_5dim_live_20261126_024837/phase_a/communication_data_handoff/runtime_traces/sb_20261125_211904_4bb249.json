@@ -1,0 +1,730 @@
+{
+  "run_id": "sb_20261125_211904_4bb249",
+  "run_index": 1,
+  "variant": "optimized",
+  "workflow_name": "order_fulfillment_synthetic",
+  "experiment_id": "wp_synth_5dim_live_20261126_024837__phase_a_communication_data_handoff",
+  "model": "openai/gpt-oss-120b",
+  "status": "SUCCESS",
+  "execution_mode": "live_llm_execution",
+  "usage_sources": [
+    "api_reported"
+  ],
+  "input_hash": "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+  "input_snapshot": {
+    "run_index": 1,
+    "input_hash": "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+    "matched_baseline_run_id": "live_20261125_210453_trace02",
+    "matched_identifiers": {
+      "record_id": "ORD-002",
+      "request_id": "ORD-002"
+    }
+  },
+  "duration_seconds": 57.8891,
+  "agent_execution_count": 7,
+  "agent_execution_order": [
+    "order_intake_agent",
+    "inventory_check_agent",
+    "fraud_screen_agent",
+    "carrier_routing_agent",
+    "tax_classify_agent",
+    "invoice_tag_agent",
+    "fulfillment_summary_agent"
+  ],
+  "concurrent_waves": [],
+  "agent_executions": [
+    {
+      "order": 1,
+      "agent_id": "order_intake_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 2.8536,
+      "status": "SUCCESS",
+      "tokens": 1382,
+      "prompt_tokens": 842,
+      "completion_tokens": 540,
+      "estimated_cost_usd": 0.00045,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410"
+      ],
+      "agent_task_input": "Agent order_intake_agent (Order Intake Coordinator): Extract incoming synthetic order JSON fields accurately with zero hallucination.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 2243
+      },
+      "output": {
+        "record_id": "ORD-002",
+        "request_id": "ORD-002",
+        "customer_id": "CUST-102",
+        "customer_tier": "standard",
+        "billing_country": "US",
+        "shipping_region": "US-EAST",
+        "warehouse_region": "US-EAST",
+        "order_total_usd": 1850.0,
+        "shipping_speed": "expedited",
+        "sku_items": [
+          {
+            "sku": "SKU-SRV-88",
+            "qty": 1,
+            "unit_price_usd": 1850.0,
+            "stock_available": 6
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-002",
+        "raw_audit_trail": [
+          "INGESTED_ORD-002"
+        ],
+        "debug_headers": {
+          "x-trace-source": "synthetic-intake",
+          "x-legacy-bus": "erp-v1-compat"
+        },
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-002",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ],
+        "formatting_metadata": {
+          "format_version": "1.0",
+          "encoding": "utf-8"
+        }
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 2,
+      "agent_id": "inventory_check_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 7.8344,
+      "status": "SUCCESS",
+      "tokens": 838,
+      "prompt_tokens": 614,
+      "completion_tokens": 224,
+      "estimated_cost_usd": 0.000226,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410",
+        "[upstream.order_intake_agent] {\"record_id\": \"ORD-002\", \"shipping_region\": \"US-EAST\", \"warehouse_region\": \"US-EAST\", \"order_total_usd\": 1850.0, \"sku_items\": [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}], \"legacy_erp_dump\": \"LEGACY_ERP_V1_ORD-002\", \"deprecated_sku_notes\": \"Deprecated ERP alias log for ORD-002\"}"
+      ],
+      "agent_task_input": "Agent inventory_check_agent (Warehouse Inventory Specialist): Determine warehouse stock availability deterministically from SKU quantities and warehouse region.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1191
+      },
+      "output": {
+        "record_id": "ORD-002",
+        "in_stock": true,
+        "warehouse_code": "WH-US-EAST",
+        "backorder_skus": [],
+        "inventory_note": "Stock available at WH-US-EAST"
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 3,
+      "agent_id": "fraud_screen_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 5.4327,
+      "status": "SUCCESS",
+      "tokens": 847,
+      "prompt_tokens": 578,
+      "completion_tokens": 269,
+      "estimated_cost_usd": 0.000248,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410",
+        "[upstream.order_intake_agent] {\"record_id\": \"ORD-002\", \"customer_id\": \"CUST-102\", \"customer_tier\": \"standard\", \"billing_country\": \"US\", \"order_total_usd\": 1850.0, \"deprecated_sku_notes\": \"Deprecated ERP alias log for ORD-002\", \"internal_routing_flags\": [\"FLAG_COMPAT_V1\"]}"
+      ],
+      "agent_task_input": "Agent fraud_screen_agent (Order Risk Screener): Classify transaction risk band deterministically from customer_tier, billing_country, and order_total_usd.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1026
+      },
+      "output": {
+        "record_id": "ORD-002",
+        "risk_band": "low",
+        "review_flag": false,
+        "screen_note": "Risk band low for standard tier ($1850.0)."
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 4,
+      "agent_id": "carrier_routing_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 6.1962,
+      "status": "SUCCESS",
+      "tokens": 834,
+      "prompt_tokens": 621,
+      "completion_tokens": 213,
+      "estimated_cost_usd": 0.000221,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410",
+        "[upstream.inventory_check_agent] {\"record_id\": \"ORD-002\", \"in_stock\": true, \"warehouse_code\": \"WH-US-EAST\", \"backorder_skus\": [], \"inventory_note\": \"Stock available at WH-US-EAST\"}",
+        "[upstream.fraud_screen_agent] {\"record_id\": \"ORD-002\", \"risk_band\": \"low\", \"review_flag\": false, \"screen_note\": \"Risk band low for standard tier ($1850.0).\"}"
+      ],
+      "agent_task_input": "Agent carrier_routing_agent (Carrier Zone Router): Deterministically assign carrier_name, service_level, and estimated_days while forwarding in_stock and review_flag.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1211
+      },
+      "output": {
+        "record_id": "ORD-002",
+        "carrier_name": "UPS",
+        "service_level": "Expedited",
+        "estimated_days": 2,
+        "in_stock": true,
+        "review_flag": false
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 5,
+      "agent_id": "tax_classify_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 7.5197,
+      "status": "SUCCESS",
+      "tokens": 954,
+      "prompt_tokens": 666,
+      "completion_tokens": 288,
+      "estimated_cost_usd": 0.000273,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410",
+        "[upstream.carrier_routing_agent] {\"record_id\": \"ORD-002\", \"carrier_name\": \"UPS\", \"service_level\": \"Expedited\", \"estimated_days\": 2, \"in_stock\": true, \"review_flag\": false}"
+      ],
+      "agent_task_input": "Agent tax_classify_agent (Regional Tax Classifier): Deterministically compute tax_jurisdiction, tax_rate_pct, and tax_amount_usd while forwarding carrier and flag fields.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1353
+      },
+      "output": {
+        "record_id": "ORD-002",
+        "tax_jurisdiction": "US-TAX",
+        "tax_rate_pct": 8.0,
+        "tax_amount_usd": 148.0,
+        "in_stock": true,
+        "review_flag": false,
+        "carrier_name": "UPS",
+        "service_level": "Expedited"
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 6,
+      "agent_id": "invoice_tag_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 8.4386,
+      "status": "SUCCESS",
+      "tokens": 1132,
+      "prompt_tokens": 699,
+      "completion_tokens": 433,
+      "estimated_cost_usd": 0.000365,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410",
+        "[upstream.tax_classify_agent] {\"record_id\": \"ORD-002\", \"tax_jurisdiction\": \"US-TAX\", \"tax_rate_pct\": 8.0, \"tax_amount_usd\": 148.0, \"in_stock\": true, \"review_flag\": false, \"carrier_name\": \"UPS\", \"service_level\": \"Expedited\"}"
+      ],
+      "agent_task_input": "Agent invoice_tag_agent (Ledger Invoice Tagger): Deterministically assign gl_account_code, invoice_tag, and billing_batch while forwarding carrier, tax, and flag fields.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1464
+      },
+      "output": {
+        "record_id": "ORD-002",
+        "gl_account_code": "GL-4010",
+        "invoice_tag": "INV-ORD-002",
+        "billing_batch": "BATCH-STANDARD",
+        "in_stock": true,
+        "review_flag": false,
+        "carrier_name": "UPS",
+        "service_level": "Expedited",
+        "tax_jurisdiction": "US-TAX",
+        "tax_amount_usd": 148.0
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 7,
+      "agent_id": "fulfillment_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (masked: gsk_...l7b1)",
+      "duration_seconds": 19.5912,
+      "status": "SUCCESS",
+      "tokens": 2781,
+      "prompt_tokens": 2061,
+      "completion_tokens": 720,
+      "estimated_cost_usd": 0.000741,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.record_id] \"ORD-002\"",
+        "[workflow_input.request_id] \"ORD-002\"",
+        "[workflow_input.customer_id] \"CUST-102\"",
+        "[workflow_input.customer_name] \"Kestrel Retail Inc.\"",
+        "[workflow_input.customer_tier] \"standard\"",
+        "[workflow_input.billing_country] \"US\"",
+        "[workflow_input.shipping_region] \"US-EAST\"",
+        "[workflow_input.warehouse_region] \"US-EAST\"",
+        "[workflow_input.shipping_speed] \"expedited\"",
+        "[workflow_input.order_total_usd] 1850.0",
+        "[workflow_input.sku_items] [{\"sku\": \"SKU-SRV-88\", \"qty\": 1, \"unit_price_usd\": 1850.0, \"stock_available\": 6}]",
+        "[workflow_input.payment_verified] true",
+        "[workflow_input.account_age_days] 410",
+        "[upstream.invoice_tag_agent] {\"record_id\": \"ORD-002\", \"gl_account_code\": \"GL-4010\", \"invoice_tag\": \"INV-ORD-002\", \"billing_batch\": \"BATCH-STANDARD\", \"in_stock\": true, \"review_flag\": false, \"carrier_name\": \"UPS\", \"service_level\": \"Expedited\", \"tax_jurisdiction\": \"US-TAX\", \"tax_amount_usd\": 148.0}"
+      ],
+      "agent_task_input": "Agent fulfillment_summary_agent (Executive Fulfillment Summarizer): You are an executive fulfillment summarizer responsible for producing the final structured JSON dispatch brief. You must follow all instructions strictly and never invent missing order facts or fields. Return only valid parsable JSON matching FulfillmentSummaryOutput with no additional commentary. A",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 8516
+      },
+      "output": {
+        "run_id": "",
+        "record_id": "ORD-002",
+        "final_decision": "APPROVE",
+        "carrier_name": "UPS",
+        "service_level": "Expedited",
+        "tax_jurisdiction": "US-TAX",
+        "tax_amount_usd": 148.0,
+        "invoice_tag": "INV-ORD-002",
+        "summary": "Order ORD-002: APPROVE via UPS Expedited (US-TAX, INV-ORD-002).",
+        "human_review_required": false
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    }
+  ],
+  "handoff_audits": [
+    {
+      "edge": "order_intake_agent->inventory_check_agent",
+      "projected": true,
+      "original_fields": [
+        "record_id",
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "deprecated_sku_notes",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "retained_fields": [
+        "record_id",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "sku_items",
+        "legacy_erp_dump",
+        "deprecated_sku_notes"
+      ],
+      "removed_fields": [
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_speed",
+        "raw_audit_trail",
+        "debug_headers",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "original_payload": {
+        "record_id": "ORD-002",
+        "request_id": "ORD-002",
+        "customer_id": "CUST-102",
+        "customer_tier": "standard",
+        "billing_country": "US",
+        "shipping_region": "US-EAST",
+        "warehouse_region": "US-EAST",
+        "order_total_usd": 1850.0,
+        "shipping_speed": "expedited",
+        "sku_items": [
+          {
+            "sku": "SKU-SRV-88",
+            "qty": 1,
+            "unit_price_usd": 1850.0,
+            "stock_available": 6
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-002",
+        "raw_audit_trail": [
+          "INGESTED_ORD-002"
+        ],
+        "debug_headers": {
+          "x-trace-source": "synthetic-intake",
+          "x-legacy-bus": "erp-v1-compat"
+        },
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-002",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ],
+        "formatting_metadata": {
+          "format_version": "1.0",
+          "encoding": "utf-8"
+        }
+      },
+      "projected_payload": {
+        "record_id": "ORD-002",
+        "shipping_region": "US-EAST",
+        "warehouse_region": "US-EAST",
+        "order_total_usd": 1850.0,
+        "sku_items": [
+          {
+            "sku": "SKU-SRV-88",
+            "qty": 1,
+            "unit_price_usd": 1850.0,
+            "stock_available": 6
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-002",
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-002"
+      }
+    },
+    {
+      "edge": "order_intake_agent->fraud_screen_agent",
+      "projected": true,
+      "original_fields": [
+        "record_id",
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "deprecated_sku_notes",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "retained_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "order_total_usd",
+        "deprecated_sku_notes",
+        "internal_routing_flags"
+      ],
+      "removed_fields": [
+        "request_id",
+        "shipping_region",
+        "warehouse_region",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "formatting_metadata"
+      ],
+      "original_payload": {
+        "record_id": "ORD-002",
+        "request_id": "ORD-002",
+        "customer_id": "CUST-102",
+        "customer_tier": "standard",
+        "billing_country": "US",
+        "shipping_region": "US-EAST",
+        "warehouse_region": "US-EAST",
+        "order_total_usd": 1850.0,
+        "shipping_speed": "expedited",
+        "sku_items": [
+          {
+            "sku": "SKU-SRV-88",
+            "qty": 1,
+            "unit_price_usd": 1850.0,
+            "stock_available": 6
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-002",
+        "raw_audit_trail": [
+          "INGESTED_ORD-002"
+        ],
+        "debug_headers": {
+          "x-trace-source": "synthetic-intake",
+          "x-legacy-bus": "erp-v1-compat"
+        },
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-002",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ],
+        "formatting_metadata": {
+          "format_version": "1.0",
+          "encoding": "utf-8"
+        }
+      },
+      "projected_payload": {
+        "record_id": "ORD-002",
+        "customer_id": "CUST-102",
+        "customer_tier": "standard",
+        "billing_country": "US",
+        "order_total_usd": 1850.0,
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-002",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ]
+      }
+    },
+    {
+      "edge": "inventory_check_agent->carrier_routing_agent",
+      "projected": false,
+      "original_fields": [
+        "record_id",
+        "in_stock",
+        "warehouse_code",
+        "backorder_skus",
+        "inventory_note"
+      ],
+      "retained_fields": [
+        "record_id",
+        "in_stock",
+        "warehouse_code",
+        "backorder_skus",
+        "inventory_note"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "fraud_screen_agent->carrier_routing_agent",
+      "projected": false,
+      "original_fields": [
+        "record_id",
+        "risk_band",
+        "review_flag",
+        "screen_note"
+      ],
+      "retained_fields": [
+        "record_id",
+        "risk_band",
+        "review_flag",
+        "screen_note"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "carrier_routing_agent->tax_classify_agent",
+      "projected": false,
+      "original_fields": [
+        "record_id",
+        "carrier_name",
+        "service_level",
+        "estimated_days",
+        "in_stock",
+        "review_flag"
+      ],
+      "retained_fields": [
+        "record_id",
+        "carrier_name",
+        "service_level",
+        "estimated_days",
+        "in_stock",
+        "review_flag"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "tax_classify_agent->invoice_tag_agent",
+      "projected": false,
+      "original_fields": [
+        "record_id",
+        "tax_jurisdiction",
+        "tax_rate_pct",
+        "tax_amount_usd",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level"
+      ],
+      "retained_fields": [
+        "record_id",
+        "tax_jurisdiction",
+        "tax_rate_pct",
+        "tax_amount_usd",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "invoice_tag_agent->fulfillment_summary_agent",
+      "projected": false,
+      "original_fields": [
+        "record_id",
+        "gl_account_code",
+        "invoice_tag",
+        "billing_batch",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd"
+      ],
+      "retained_fields": [
+        "record_id",
+        "gl_account_code",
+        "invoice_tag",
+        "billing_batch",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd"
+      ],
+      "removed_fields": []
+    }
+  ],
+  "total_tokens": 17536,
+  "prompt_tokens": 6081,
+  "completion_tokens": 5374,
+  "estimated_cost_usd": 0.005048,
+  "api_errors": [],
+  "fallback_events": [],
+  "schema_failures": [],
+  "invalid_replay_samples": [],
+  "final_output": {
+    "run_id": "",
+    "record_id": "ORD-002",
+    "final_decision": "APPROVE",
+    "carrier_name": "UPS",
+    "service_level": "Expedited",
+    "tax_jurisdiction": "US-TAX",
+    "tax_amount_usd": 148.0,
+    "invoice_tag": "INV-ORD-002",
+    "summary": "Order ORD-002: APPROVE via UPS Expedited (US-TAX, INV-ORD-002).",
+    "human_review_required": false
+  },
+  "error": null,
+  "timestamp": "2026-11-25T21:20:01.920971+00:00"
+}

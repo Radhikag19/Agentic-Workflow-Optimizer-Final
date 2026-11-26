@@ -1,7 +1,7 @@
 # Autonomous Optimization Discovery Report: `recruitment_screening`
 
 > **TraceProfiler Autonomous Optimization Discovery Agent**  
-> **Generated:** 2026-11-24T20:12:49.236447+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
+> **Generated:** 2026-11-25T10:41:10.359284+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
 > **Key Allocation:** `GROQ_API_KEY_13 (masked: gsk_...Ujsn)`
 
 ---
@@ -68,11 +68,11 @@ No candidates identified for this dimension based on available trace evidence.
 - **Expected Benefit:** Latency: 45.3% reduction | Tokens: 0% savings | Zero impact on output quality since dependencies are strictly verified.
 
 ### Model Selection Recommendations (Requires Validation) (1 candidates)
-#### [Tier 2] Route resume_intake_agent to Smaller/Faster Model (requires validation)
+#### [Tier 2] Route resume_intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)
 - **Target Agents:** `resume_intake_agent`
-- **Observed Problem:** Agent 'resume_intake_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (2.52s) and compute overhead for straightforward parsing tasks.
-- **Proposed Solution:** Switch 'resume_intake_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.
-- **Expected Benefit:** Latency: 40.0% reduction | Tokens: 0% savings | High accuracy on standard schema parsing; edge case validation required.
+- **Observed Problem:** JEV 2-Agent LangGraph evaluation classified 'resume_intake_agent' as Task=Low, Prompt=Medium, Tokens=Low (mean latency 2.52s). Assigning the baseline 'openai/gpt-oss-120b' introduces unnecessary compute cost; JEV Agent 2 selected 'openai/gpt-oss-20b' among eligible Groq models.
+- **Proposed Solution:** Switch 'resume_intake_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.
+- **Expected Benefit:** Latency: 25.0% reduction | Tokens: 0% savings | Requires shadow validation against baseline traces to confirm behavioral equivalence.
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
 ### Prompt Optimization Opportunities (0 candidates)
@@ -311,7 +311,7 @@ No candidates identified for this dimension based on available trace evidence.
 - **Parallel Execution of qualification_agent and job_criteria_agent**: High expected benefit with low implementation complexity and zero functional risk.
 
 ### Tier 2: Validated Enhancements (11 items)
-- **Route resume_intake_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
+- **Route resume_intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for resume_intake_agent -> qualification_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for qualification_agent -> evidence_mapping_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for qualification_agent -> experience_assessment_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.

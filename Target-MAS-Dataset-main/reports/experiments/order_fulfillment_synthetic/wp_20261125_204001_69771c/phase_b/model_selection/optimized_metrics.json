@@ -1,0 +1,193 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_b_model_selection",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 14,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\model_selection\\runtime_traces",
+  "execution_status": "SUCCESS",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\model_selection\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\model_selection\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "SUCCESS",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 54.8169,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\model_selection\\sandbox_workflow",
+    "error_details": null
+  },
+  "total_runs": 2,
+  "successful_runs": 2,
+  "failed_runs": 0,
+  "incomplete_runs": [],
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 27.315,
+  "median_latency_seconds": 27.315,
+  "mean_agent_latency_seconds": 3.8988,
+  "mean_tokens": 15361.0,
+  "mean_prompt_tokens": 5390.5,
+  "mean_completion_tokens": 4580.0,
+  "mean_cost_usd_catalog_normalized": 0.004045,
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 100.0,
+  "schema_validation_failures": [
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261125_204740_6bd94d",
+      "agent_id": "fulfillment_summary_agent",
+      "missing_required_fields": [
+        "run_id",
+        "record_id",
+        "final_decision",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "invoice_tag",
+        "summary"
+      ],
+      "error": "9 validation errors for FulfillmentSummaryOutput\nrun_id\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nrecord_id\n  Field required [type=missing, input_value={}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.14/v/missing\nfinal_decision\n  Field required [type=missing, inp"
+    }
+  ],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261125_204703_a0d5e4",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261125_201252_trace01",
+      "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 29.3304,
+      "prompt_tokens": 5247,
+      "completion_tokens": 4542,
+      "total_tokens": 15036,
+      "estimated_cost_usd": 0.004036,
+      "schema_valid": true
+    },
+    {
+      "run_id": "sb_20261125_204740_6bd94d",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261125_201311_trace06",
+      "input_hash": "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 25.2997,
+      "prompt_tokens": 5534,
+      "completion_tokens": 4618,
+      "total_tokens": 15686,
+      "estimated_cost_usd": 0.004054,
+      "schema_valid": false
+    }
+  ],
+  "per_agent_metrics": {
+    "order_intake_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-20b"
+      ],
+      "mean_latency_seconds": 3.1597,
+      "mean_tokens": 1069.0,
+      "mean_prompt_tokens": 713.5,
+      "mean_completion_tokens": 355.5,
+      "mean_cost_usd": 0.00016,
+      "schema_valid_rate_pct": 100.0
+    },
+    "inventory_check_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.8747,
+      "mean_tokens": 862.5,
+      "mean_prompt_tokens": 567.0,
+      "mean_completion_tokens": 295.5,
+      "mean_cost_usd": 0.000263,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fraud_screen_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.7411,
+      "mean_tokens": 1036.5,
+      "mean_prompt_tokens": 810.0,
+      "mean_completion_tokens": 226.5,
+      "mean_cost_usd": 0.000258,
+      "schema_valid_rate_pct": 100.0
+    },
+    "carrier_routing_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.7443,
+      "mean_tokens": 706.0,
+      "mean_prompt_tokens": 480.0,
+      "mean_completion_tokens": 226.0,
+      "mean_cost_usd": 0.000208,
+      "schema_valid_rate_pct": 100.0
+    },
+    "tax_classify_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.6248,
+      "mean_tokens": 663.0,
+      "mean_prompt_tokens": 448.5,
+      "mean_completion_tokens": 214.5,
+      "mean_cost_usd": 0.000196,
+      "schema_valid_rate_pct": 100.0
+    },
+    "invoice_tag_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 1.8693,
+      "mean_tokens": 672.0,
+      "mean_prompt_tokens": 440.0,
+      "mean_completion_tokens": 232.0,
+      "mean_cost_usd": 0.000205,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fulfillment_summary_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 15.2782,
+      "mean_tokens": 2671.5,
+      "mean_prompt_tokens": 1931.5,
+      "mean_completion_tokens": 740.0,
+      "mean_cost_usd": 0.000734,
+      "schema_valid_rate_pct": 50.0
+    }
+  },
+  "input_dataset_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0"
+  ]
+}

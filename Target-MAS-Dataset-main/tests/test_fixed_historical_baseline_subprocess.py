@@ -355,7 +355,7 @@ def test_01_fixed_historical_baseline_no_baseline_subprocess_and_matching(tmp_pa
                 "candidate_id": "MODEL-INTAKE",
                 "dimension": "model_selection",
                 "target_agents": ["resume_intake_agent"],
-                "selected_model": "llama-3.1-8b-instant",
+                "selected_model": "openai/gpt-oss-20b",
             },
             {
                 "candidate_id": "PROMPT-QUAL",
@@ -424,7 +424,7 @@ def test_02_baseline_subprocess_and_worker_explicitly_rejected(tmp_path: Path):
     wf_id, agents_dir, exp_dir, data_dir, _ = _setup_fixture_env(tmp_path)
     mgr = SandboxManager(agents_base_dir=agents_dir, experiments_base_dir=exp_dir)
     env = mgr.prepare_sandbox(
-        {"workflow_id": wf_id, "approval_status": "approved", "approved_candidate_ids": ["M1"], "approved_candidates": [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "llama-3.1-8b-instant"}]},
+        {"workflow_id": wf_id, "approval_status": "approved", "approved_candidate_ids": ["M1"], "approved_candidates": [{"candidate_id": "M1", "dimension": "model_selection", "target_agents": ["resume_intake_agent"], "selected_model": "openai/gpt-oss-20b"}]},
         experiment_id="exp_reject_base",
     )
     proc_mgr = LocalSubprocessExecutionManager()

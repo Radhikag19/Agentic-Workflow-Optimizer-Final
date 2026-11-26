@@ -1,0 +1,220 @@
+{
+  "workflow_name": "order_fulfillment_synthetic",
+  "version": "1.0.0",
+  "description": "Synthetic 7-agent CrewAI order fulfillment workflow engineered to exercise all 5 optimization dimensions (Data Handoff, Consolidation, Model Selection, Parallelization, Prompt Optimization).",
+  "framework": "crewai",
+  "fixed_model": "openai/gpt-oss-120b",
+  "baseline_model": "openai/gpt-oss-120b",
+  "assigned_groq_key_env": "GROQ_API_KEY_14",
+  "llm_provider": "Groq",
+  "total_agents": 7,
+  "agent_count": 7,
+  "execution_pattern": "sequential",
+  "execution_order": [
+    "order_intake_agent",
+    "inventory_check_agent",
+    "fraud_screen_agent",
+    "carrier_routing_agent",
+    "tax_classify_agent",
+    "invoice_tag_agent",
+    "fulfillment_summary_agent"
+  ],
+  "agents": [
+    {
+      "agent_id": "order_intake_agent",
+      "agent_name": "Order Intake Agent",
+      "role": "Order Intake Coordinator",
+      "responsibilities": "Extract and normalize incoming synthetic order payloads into structured customer, SKU, shipping, and legacy metadata fields.",
+      "input_fields": [
+        "record_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_region",
+        "warehouse_region",
+        "shipping_speed",
+        "order_total_usd",
+        "sku_items"
+      ],
+      "output_fields": [
+        "record_id",
+        "request_id",
+        "customer_id",
+        "customer_tier",
+        "billing_country",
+        "shipping_region",
+        "warehouse_region",
+        "order_total_usd",
+        "shipping_speed",
+        "sku_items",
+        "legacy_erp_dump",
+        "raw_audit_trail",
+        "debug_headers",
+        "deprecated_sku_notes",
+        "internal_routing_flags",
+        "formatting_metadata"
+      ],
+      "dependencies": []
+    },
+    {
+      "agent_id": "inventory_check_agent",
+      "agent_name": "Inventory Check Agent",
+      "role": "Warehouse Inventory Specialist",
+      "responsibilities": "Check SKU stock availability and warehouse code from intake order quantities.",
+      "input_fields": [
+        "sku_items",
+        "warehouse_region"
+      ],
+      "output_fields": [
+        "in_stock",
+        "warehouse_code",
+        "backorder_skus",
+        "inventory_note"
+      ],
+      "dependencies": [
+        "order_intake_agent"
+      ]
+    },
+    {
+      "agent_id": "fraud_screen_agent",
+      "agent_name": "Fraud Screen Agent",
+      "role": "Order Risk Screener",
+      "responsibilities": "Screen customer tier, country, and order total for risk band and review flag.",
+      "input_fields": [
+        "customer_id",
+        "customer_tier",
+        "order_total_usd",
+        "billing_country"
+      ],
+      "output_fields": [
+        "risk_band",
+        "review_flag",
+        "screen_note"
+      ],
+      "dependencies": [
+        "order_intake_agent"
+      ]
+    },
+    {
+      "agent_id": "carrier_routing_agent",
+      "agent_name": "Carrier Routing Agent",
+      "role": "Carrier Zone Router",
+      "responsibilities": "Map shipping region and requested speed to carrier name, service level, and transit days.",
+      "input_fields": [
+        "shipping_region",
+        "shipping_speed",
+        "warehouse_code",
+        "in_stock",
+        "risk_band",
+        "review_flag"
+      ],
+      "output_fields": [
+        "carrier_name",
+        "service_level",
+        "estimated_days"
+      ],
+      "dependencies": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ],
+      "optimized_prompt": "You are a unified agent that processes shipment records sequentially.\n\n**Inputs (per record)**: rec_id, shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, review_flag, billing_country, order_total_usd, customer_tier.\n\n**Step 1 \u2013 Carrier Routing**: Based on shipping_region, shipping_speed, in_stock, risk_band, and review_flag select:\n- carrier_name: \"UPS\", \"DHL\" or \"FedEx\" (region & speed dependent)\n- service_level: \"Standard\", \"Expedited\" or \"Overnight\" (matches speed)\n- estimated_days: 1 for Overnight, 2 for Expedited, 5 for Standard\nOutput JSON fields: record_id (use rec_id), carrier_name, service_level, estimated_days.\n\n**Step 2 \u2013 Tax Classification**: Using carrier_name, service_level, billing_country, and order_total_usd compute:\n- tax_jurisdiction = \"{billing_country}-TAX\"\n- tax_rate_pct per table: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0\n- tax_amount_usd = order_total_usd * tax_rate_pct / 100\nOutput JSON fields: record_id, tax_jurisdiction, tax_rate_pct, tax_amount_usd.\n\n**Step 3 \u2013 Invoice Tagging**: Using customer_tier, tax_jurisdiction, and tax_amount_usd set:\n- gl_account_code = \"GL-4010\"\n- invoice_tag = \"INV-{record_id}\"\n- billing_batch = \"BATCH-{customer_tier.upper()}\"\nOutput JSON fields: record_id, gl_account_code, invoice_tag, billing_batch.\n\n**Final Output**: Merge the three JSON objects into one JSON per record containing all fields: record_id, carrier_name, service_level, estimated_days, tax_jurisdiction, tax_rate_pct, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Return only this JSON, no additional text."
+    },
+    {
+      "agent_id": "tax_classify_agent",
+      "agent_name": "Tax Classify Agent",
+      "role": "Regional Tax Classifier",
+      "responsibilities": "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD.",
+      "input_fields": [
+        "billing_country",
+        "order_total_usd",
+        "carrier_name",
+        "service_level"
+      ],
+      "output_fields": [
+        "tax_jurisdiction",
+        "tax_rate_pct",
+        "tax_amount_usd"
+      ],
+      "dependencies": [
+        "carrier_routing_agent"
+      ],
+      "optimized_prompt": "You are a unified agent that processes shipment records sequentially.\n\n**Inputs (per record)**: rec_id, shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, review_flag, billing_country, order_total_usd, customer_tier.\n\n**Step 1 \u2013 Carrier Routing**: Based on shipping_region, shipping_speed, in_stock, risk_band, and review_flag select:\n- carrier_name: \"UPS\", \"DHL\" or \"FedEx\" (region & speed dependent)\n- service_level: \"Standard\", \"Expedited\" or \"Overnight\" (matches speed)\n- estimated_days: 1 for Overnight, 2 for Expedited, 5 for Standard\nOutput JSON fields: record_id (use rec_id), carrier_name, service_level, estimated_days.\n\n**Step 2 \u2013 Tax Classification**: Using carrier_name, service_level, billing_country, and order_total_usd compute:\n- tax_jurisdiction = \"{billing_country}-TAX\"\n- tax_rate_pct per table: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0\n- tax_amount_usd = order_total_usd * tax_rate_pct / 100\nOutput JSON fields: record_id, tax_jurisdiction, tax_rate_pct, tax_amount_usd.\n\n**Step 3 \u2013 Invoice Tagging**: Using customer_tier, tax_jurisdiction, and tax_amount_usd set:\n- gl_account_code = \"GL-4010\"\n- invoice_tag = \"INV-{record_id}\"\n- billing_batch = \"BATCH-{customer_tier.upper()}\"\nOutput JSON fields: record_id, gl_account_code, invoice_tag, billing_batch.\n\n**Final Output**: Merge the three JSON objects into one JSON per record containing all fields: record_id, carrier_name, service_level, estimated_days, tax_jurisdiction, tax_rate_pct, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Return only this JSON, no additional text."
+    },
+    {
+      "agent_id": "invoice_tag_agent",
+      "agent_name": "Invoice Tag Agent",
+      "role": "Ledger Invoice Tagger",
+      "responsibilities": "Attach general ledger account code, invoice tag, and billing batch identifier.",
+      "input_fields": [
+        "customer_tier",
+        "tax_jurisdiction",
+        "tax_amount_usd"
+      ],
+      "output_fields": [
+        "gl_account_code",
+        "invoice_tag",
+        "billing_batch"
+      ],
+      "dependencies": [
+        "tax_classify_agent"
+      ],
+      "optimized_prompt": "You are a unified agent that processes shipment records sequentially.\n\n**Inputs (per record)**: rec_id, shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, review_flag, billing_country, order_total_usd, customer_tier.\n\n**Step 1 \u2013 Carrier Routing**: Based on shipping_region, shipping_speed, in_stock, risk_band, and review_flag select:\n- carrier_name: \"UPS\", \"DHL\" or \"FedEx\" (region & speed dependent)\n- service_level: \"Standard\", \"Expedited\" or \"Overnight\" (matches speed)\n- estimated_days: 1 for Overnight, 2 for Expedited, 5 for Standard\nOutput JSON fields: record_id (use rec_id), carrier_name, service_level, estimated_days.\n\n**Step 2 \u2013 Tax Classification**: Using carrier_name, service_level, billing_country, and order_total_usd compute:\n- tax_jurisdiction = \"{billing_country}-TAX\"\n- tax_rate_pct per table: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0\n- tax_amount_usd = order_total_usd * tax_rate_pct / 100\nOutput JSON fields: record_id, tax_jurisdiction, tax_rate_pct, tax_amount_usd.\n\n**Step 3 \u2013 Invoice Tagging**: Using customer_tier, tax_jurisdiction, and tax_amount_usd set:\n- gl_account_code = \"GL-4010\"\n- invoice_tag = \"INV-{record_id}\"\n- billing_batch = \"BATCH-{customer_tier.upper()}\"\nOutput JSON fields: record_id, gl_account_code, invoice_tag, billing_batch.\n\n**Final Output**: Merge the three JSON objects into one JSON per record containing all fields: record_id, carrier_name, service_level, estimated_days, tax_jurisdiction, tax_rate_pct, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Return only this JSON, no additional text."
+    },
+    {
+      "agent_id": "fulfillment_summary_agent",
+      "agent_name": "Fulfillment Summary Agent",
+      "role": "Executive Fulfillment Summarizer",
+      "responsibilities": "Synthesize final order decision (APPROVE, HOLD_FOR_REVIEW, or REJECT) and fulfillment dispatch brief.",
+      "input_fields": [
+        "record_id",
+        "in_stock",
+        "review_flag",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "invoice_tag"
+      ],
+      "output_fields": [
+        "run_id",
+        "record_id",
+        "final_decision",
+        "carrier_name",
+        "service_level",
+        "tax_jurisdiction",
+        "tax_amount_usd",
+        "invoice_tag",
+        "summary",
+        "human_review_required"
+      ],
+      "dependencies": [
+        "invoice_tag_agent"
+      ],
+      "optimized_prompt": "You are a senior fulfillment dispatch coordinator. You receive the following upstream values for each order:\n- run_id, record_id\n- in_stock (bool)\n- review_flag (bool) \u2013 fraud review flag\n- carrier_name, service_level\n- tax_jurisdiction, tax_amount_usd\n- invoice_tag\n\nDecision rules:\n1. If in_stock is false \u2192 final_decision = \"REJECT\".\n2. Else if review_flag is true \u2192 final_decision = \"HOLD_FOR_REVIEW\".\n3. Else \u2192 final_decision = \"APPROVE\".\nSet human_review_required to true only when final_decision is \"HOLD_FOR_REVIEW\", otherwise false.\nDo not fabricate any values; use carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag exactly as received.\nCreate a concise 1\u20112 sentence summary that references inventory status, risk flag, carrier, and tax.\n\nReturn ONLY the following JSON (no extra text, no markdown):\n{\n  \"run_id\": \"{run_id}\",\n  \"record_id\": \"{record_id}\",\n  \"final_decision\": \"APPROVE\" | \"HOLD_FOR_REVIEW\" | \"REJECT\",\n  \"carrier_name\": \"{carrier_name}\",\n  \"service_level\": \"{service_level}\",\n  \"tax_jurisdiction\": \"{tax_jurisdiction}\",\n  \"tax_amount_usd\": {tax_amount_usd},\n  \"invoice_tag\": \"{invoice_tag}\",\n  \"summary\": \"<concise 1\u20112 sentence summary>\",\n  \"human_review_required\": true | false\n}"
+    }
+  ],
+  "baseline_execution_order": [
+    "order_intake_agent",
+    "inventory_check_agent",
+    "fraud_screen_agent",
+    "carrier_routing_agent",
+    "tax_classify_agent",
+    "invoice_tag_agent",
+    "fulfillment_summary_agent"
+  ],
+  "optimizer_annotations": {
+    "potential_parallel_branches": [
+      [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ]
+    ],
+    "consolidation_candidates": [
+      [
+        "carrier_routing_agent",
+        "tax_classify_agent",
+        "invoice_tag_agent"
+      ]
+    ]
+  }
+}

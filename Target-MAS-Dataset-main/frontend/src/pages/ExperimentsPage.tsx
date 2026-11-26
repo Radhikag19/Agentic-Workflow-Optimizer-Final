@@ -20,6 +20,16 @@ const ALL_DIMENSIONS: { id: OptimizationDimension; label: string }[] = [
 
 type ExperimentMode = 'two_phase_study' | 'dimension_ablation_suite';
 
+const EXPERIMENT_MODE_LABELS: Record<string, string> = {
+  two_phase_study: 'Pareto Beam Search',
+  dimension_ablation_suite: 'Customized Optimizations',
+  combined_single_workflow: 'Combined Single Workflow',
+};
+
+export function formatExperimentModeLabel(experimentType: string): string {
+  return EXPERIMENT_MODE_LABELS[experimentType] ?? experimentType.replace(/_/g, ' ');
+}
+
 export const ExperimentsPage: React.FC = () => {
   const {
     overview,
@@ -395,10 +405,10 @@ export const ExperimentsPage: React.FC = () => {
                     <div>
                       <div style={{ fontWeight: 700 }}>{exp.experiment_id}</div>
                       <div className="mono" style={{ fontSize: 11 }}>
-                        {exp.experiment_type} • {exp.status}
+                        {formatExperimentModeLabel(exp.experiment_type)} • {exp.status}
                       </div>
                     </div>
-                    {exp.has_results && <CheckCircle2 size={15} />}
+                    {(exp.has_results || exp.status === 'completed') && <CheckCircle2 size={15} />}
                   </button>
                 );
               })}

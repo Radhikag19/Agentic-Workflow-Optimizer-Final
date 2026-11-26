@@ -1,0 +1,39 @@
+{
+  "experiment_id": "wp_20261125_204001_69771c__phase_b_agent_consolidation",
+  "workflow_id": "order_fulfillment_synthetic",
+  "original_workflow_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic",
+  "sandbox_workflow_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow",
+  "runtime_traces_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\runtime_traces",
+  "approved_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT"
+  ],
+  "original_to_sandbox_map": {
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\__init__.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\__init__.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\carrier_routing_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\carrier_routing_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\fraud_screen_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\fraud_screen_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\fulfillment_summary_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\fulfillment_summary_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\inventory_check_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\inventory_check_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\invoice_tag_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\invoice_tag_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\order_intake_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\order_intake_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\tax_classify_agent.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\tax_classify_agent.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\workflow.json": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\workflow.json",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\workflow.py": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\workflow.py",
+    "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\workflow_context.json": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_b\\agent_consolidation\\sandbox_workflow\\workflow_context.json"
+  },
+  "original_file_hashes": {
+    "__init__.py": "22274f150c19f72d6ee167831ecee51f20265d011f1aa0da4b67b67584a2a14c",
+    "carrier_routing_agent.py": "0a7188065bc9201385678668659494fb7c61735f506be44191af0321d7ed86ed",
+    "fraud_screen_agent.py": "27ddb4c7cade61e3566b49c4618a2370d96c410117609ff2325a28b091b397be",
+    "fulfillment_summary_agent.py": "edb4ad02a08b51220fa1fa14096dd52b922062ad4052105ec9d62eed09ca4f31",
+    "inventory_check_agent.py": "79291b861ea275603e0946b311aec00551fed8de37c5073217209de952e38472",
+    "invoice_tag_agent.py": "2fee13fed36744b9db34b5f0eb27b8252d2a20f0f8d633141a8a45d4c6d03655",
+    "order_intake_agent.py": "63b93984cd3c9b4b132d8c4fdd9501fd787c8cb2344f64f2789586fb680e7186",
+    "tax_classify_agent.py": "423d15b4ff9833c8ab563cd56af67c69c219774401e19845b895255db6d8dd5a",
+    "workflow.json": "f1276d4c89ebe5beb0839784690f355a0a0c3d6dd960afc8a1e851e4cdc0a300",
+    "workflow.py": "3850570e77803205631cb218458f7f43742d436a1f46959ad5e3af4b12e73574",
+    "workflow_context.json": "27561333687d21407098e73fcfea4c062190427364677439078d6814cddcbfc4"
+  },
+  "created_at": "2026-11-25T20:44:54.661420+00:00"
+}

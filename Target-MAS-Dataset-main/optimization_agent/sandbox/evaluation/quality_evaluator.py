@@ -264,7 +264,7 @@ def _run_llm_judge(
             "allowed_verdicts": ["passed", "failed", "unavailable"],
         }
         resp = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="openai/gpt-oss-20b",
             messages=[
                 {
                     "role": "system",

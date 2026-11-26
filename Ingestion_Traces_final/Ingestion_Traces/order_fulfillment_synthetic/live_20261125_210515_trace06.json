@@ -1,0 +1,184 @@
+{
+  "run_id": "live_20261125_210515_trace06",
+  "workflow_name": "order_fulfillment_synthetic",
+  "model": "openai/gpt-oss-120b",
+  "status": "SUCCESS",
+  "duration_seconds": 11.648,
+  "agent_execution_count": 7,
+  "agent_executions": [
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_8 (gsk_...AwPO)",
+      "duration_seconds": 2.366,
+      "tokens": 1524,
+      "prompt_tokens": 839,
+      "completion_tokens": 685,
+      "output": {
+        "record_id": "ORD-006",
+        "request_id": "ORD-006",
+        "customer_id": "CUST-106",
+        "customer_tier": "standard",
+        "billing_country": "UK",
+        "shipping_region": "UK-LON",
+        "warehouse_region": "EU-CENTRAL",
+        "order_total_usd": 310.0,
+        "shipping_speed": "standard",
+        "sku_items": [
+          {
+            "sku": "SKU-SEAL-07",
+            "qty": 10,
+            "unit_price_usd": 31.0,
+            "stock_available": 85
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-006",
+        "raw_audit_trail": [
+          "INGESTED_ORD-006"
+        ],
+        "debug_headers": {
+          "x-trace-source": "synthetic-intake",
+          "x-legacy-bus": "erp-v1-compat"
+        },
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-006",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ],
+        "formatting_metadata": {
+          "format_version": "1.0",
+          "encoding": "utf-8"
+        }
+      },
+      "notes": null,
+      "order": 1,
+      "agent_id": "order_intake_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_9 (gsk_...k7Gf)",
+      "duration_seconds": 1.519,
+      "tokens": 1023,
+      "prompt_tokens": 711,
+      "completion_tokens": 312,
+      "output": {
+        "record_id": "ORD-006",
+        "in_stock": true,
+        "warehouse_code": "WH-EU-CENTRAL",
+        "backorder_skus": [],
+        "inventory_note": "Stock available at WH-EU-CENTRAL"
+      },
+      "notes": null,
+      "order": 2,
+      "agent_id": "inventory_check_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_10 (gsk_...DBpq)",
+      "duration_seconds": 1.122,
+      "tokens": 946,
+      "prompt_tokens": 706,
+      "completion_tokens": 240,
+      "output": {
+        "record_id": "ORD-006",
+        "risk_band": "low",
+        "review_flag": false,
+        "screen_note": "Risk band low for standard tier ($310.0)."
+      },
+      "notes": null,
+      "order": 3,
+      "agent_id": "fraud_screen_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_11 (gsk_...C3BP)",
+      "duration_seconds": 1.328,
+      "tokens": 851,
+      "prompt_tokens": 621,
+      "completion_tokens": 230,
+      "output": {
+        "record_id": "ORD-006",
+        "carrier_name": "DHL",
+        "service_level": "Standard",
+        "estimated_days": 5,
+        "in_stock": true,
+        "review_flag": false
+      },
+      "notes": null,
+      "order": 4,
+      "agent_id": "carrier_routing_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_12 (gsk_...OStT)",
+      "duration_seconds": 1.386,
+      "tokens": 998,
+      "prompt_tokens": 663,
+      "completion_tokens": 335,
+      "output": {
+        "record_id": "ORD-006",
+        "tax_jurisdiction": "UK-TAX",
+        "tax_rate_pct": 20.0,
+        "tax_amount_usd": 62.0,
+        "in_stock": true,
+        "review_flag": false,
+        "carrier_name": "DHL",
+        "service_level": "Standard"
+      },
+      "notes": null,
+      "order": 5,
+      "agent_id": "tax_classify_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_13 (gsk_...Ujsn)",
+      "duration_seconds": 1.363,
+      "tokens": 974,
+      "prompt_tokens": 696,
+      "completion_tokens": 278,
+      "output": {
+        "record_id": "ORD-006",
+        "gl_account_code": "GL-4010",
+        "invoice_tag": "INV-ORD-006",
+        "billing_batch": "BATCH-STANDARD",
+        "in_stock": true,
+        "review_flag": false,
+        "carrier_name": "DHL",
+        "service_level": "Standard",
+        "tax_jurisdiction": "UK-TAX",
+        "tax_amount_usd": 62.0
+      },
+      "notes": null,
+      "order": 6,
+      "agent_id": "invoice_tag_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_14 (gsk_...l7b1)",
+      "duration_seconds": 2.55,
+      "tokens": 2933,
+      "prompt_tokens": 2058,
+      "completion_tokens": 875,
+      "output": {
+        "run_id": "ORD-006",
+        "record_id": "ORD-006",
+        "final_decision": "APPROVE",
+        "carrier_name": "DHL",
+        "service_level": "Standard",
+        "tax_jurisdiction": "UK-TAX",
+        "tax_amount_usd": 62.0,
+        "invoice_tag": "INV-ORD-006",
+        "summary": "Order ORD-006: APPROVE via DHL Standard (UK-TAX, INV-ORD-006).",
+        "human_review_required": false
+      },
+      "notes": null,
+      "order": 7,
+      "agent_id": "fulfillment_summary_agent"
+    }
+  ],
+  "total_tokens": 9249,
+  "prompt_tokens": 6294,
+  "completion_tokens": 2955,
+  "estimated_cost_usd": 0.002717,
+  "error_message": null,
+  "final_output": "{\n  \"run_id\": \"ORD-006\",\n  \"record_id\": \"ORD-006\",\n  \"final_decision\": \"APPROVE\",\n  \"carrier_name\": \"DHL\",\n  \"service_level\": \"Standard\",\n  \"tax_jurisdiction\": \"UK-TAX\",\n  \"tax_amount_usd\": 62.0,\n  \"invoice_tag\": \"INV-ORD-006\",\n  \"summary\": \"Order ORD-006: APPROVE via DHL Standard (UK-TAX, INV-ORD-006).\",\n  \"human_review_required\": false\n}",
+  "timestamp": "2026-11-25T21:05:27.028147+00:00"
+}

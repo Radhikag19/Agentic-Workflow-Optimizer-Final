@@ -48,8 +48,8 @@ ENV_PATH = PROJECT_ROOT / ".env"
 raw_env = dotenv_values(ENV_PATH) if ENV_PATH.exists() else {}
 load_dotenv(dotenv_path=ENV_PATH)
 
-# Supported key pool: Keys 1 through 14
-ALLOWED_KEY_NAMES = [f"GROQ_API_KEY_{i}" for i in range(1, 15)]
+# Supported key pool: Keys 1 through 20
+ALLOWED_KEY_NAMES = [f"GROQ_API_KEY_{i}" for i in range(1, 21)]
 
 GROQ_KEYS_POOL: Dict[str, str] = {}
 for key_name in ALLOWED_KEY_NAMES:
@@ -159,6 +159,15 @@ AGENT_KEY_ASSIGNMENTS: Dict[str, str] = {
     "comparison_agent": "GROQ_API_KEY_14",
     "synthesis_agent": "GROQ_API_KEY_8",
     "fact_check_agent": "GROQ_API_KEY_9",
+
+    # Synthetic 5-Dimension Validation Workflow: order_fulfillment_synthetic (7 agents -> dedicated keys 14..20)
+    "order_intake_agent": "GROQ_API_KEY_14",
+    "inventory_check_agent": "GROQ_API_KEY_15",
+    "fraud_screen_agent": "GROQ_API_KEY_16",
+    "carrier_routing_agent": "GROQ_API_KEY_17",
+    "tax_classify_agent": "GROQ_API_KEY_18",
+    "invoice_tag_agent": "GROQ_API_KEY_19",
+    "fulfillment_summary_agent": "GROQ_API_KEY_20",
 }
 
 

@@ -41,6 +41,13 @@ _AGENT_OUTPUT_MODELS = {
     "missing_evidence_agent": "MissingEvidenceOutput",
     "screening_review_agent": "ScreeningReviewOutput",
     "recruiter_summary_agent": "RecruiterSummaryOutput",
+    "order_intake_agent": "OrderIntakeOutput",
+    "inventory_check_agent": "InventoryCheckOutput",
+    "fraud_screen_agent": "FraudScreenOutput",
+    "carrier_routing_agent": "CarrierRoutingOutput",
+    "tax_classify_agent": "TaxClassifyOutput",
+    "invoice_tag_agent": "InvoiceTagOutput",
+    "fulfillment_summary_agent": "FulfillmentSummaryOutput",
 }
 
 

@@ -252,7 +252,8 @@ def test_09_different_candidate_types_and_missing_fields(recruitment_report: Dic
     assert model_card["evidence_and_validation"]["confidence"] == "Not available"
     msd = model_card["model_selection_details"]
     assert msd["current_model"] == "openai/gpt-oss-120b"
-    assert "llama-3.3-70b-versatile" in msd["proposed_models"]
+    assert "openai/gpt-oss-20b" in msd["proposed_models"]
+    assert "llama-3.3-70b-versatile" not in msd["proposed_models"]
 
     # 2. Multi-agent (Parallelization pair)
     multi_card = session.get_candidate_card("PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT")

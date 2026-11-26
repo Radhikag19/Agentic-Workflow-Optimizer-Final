@@ -1,0 +1,21 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_a_workflow_parallelization",
+  "consolidations": [],
+  "parallel_groups": [
+    {
+      "candidate_id": "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT",
+      "agents": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ],
+      "verification_reason": "Verified mutually independent in sandbox DAG: ['inventory_check_agent', 'fraud_screen_agent']"
+    }
+  ],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {},
+  "applied_candidates": [
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT"
+  ]
+}

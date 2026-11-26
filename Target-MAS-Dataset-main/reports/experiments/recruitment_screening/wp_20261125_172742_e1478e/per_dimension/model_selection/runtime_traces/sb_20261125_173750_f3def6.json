@@ -1,0 +1,994 @@
+{
+  "run_id": "sb_20261125_173750_f3def6",
+  "run_index": 1,
+  "variant": "optimized",
+  "workflow_name": "recruitment_screening",
+  "experiment_id": "wp_20261125_172742_e1478e__dim_model_selection",
+  "model": "openai/gpt-oss-120b",
+  "status": "SUCCESS",
+  "execution_mode": "live_llm_execution",
+  "usage_sources": [
+    "api_reported"
+  ],
+  "input_hash": "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+  "input_snapshot": {
+    "run_index": 1,
+    "input_hash": "4ac7b06bcdbe6faee344710b3543173cca477e04faab965010799788b7f1387e",
+    "matched_baseline_run_id": "live_20261031_162635_trace02",
+    "matched_identifiers": {
+      "application_id": "APP-002",
+      "candidate_id": "CAND-002",
+      "job_id": "JOB-02"
+    },
+    "candidate_id": "CAND-002",
+    "application_id": "APP-002",
+    "candidate_name": "Jordan Martinez",
+    "job_id": "JOB-02",
+    "job_title": null
+  },
+  "duration_seconds": 108.3305,
+  "agent_execution_count": 8,
+  "agent_execution_order": [
+    "resume_intake_agent",
+    "qualification_agent",
+    "job_criteria_agent",
+    "evidence_mapping_agent",
+    "experience_assessment_agent",
+    "missing_evidence_agent",
+    "screening_review_agent",
+    "recruiter_summary_agent"
+  ],
+  "concurrent_waves": [],
+  "agent_executions": [
+    {
+      "order": 1,
+      "agent_id": "resume_intake_agent",
+      "model": "openai/gpt-oss-20b",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (masked: gsk_...sK3t)",
+      "duration_seconds": 7.3321,
+      "status": "SUCCESS",
+      "tokens": 1633,
+      "prompt_tokens": 870,
+      "completion_tokens": 763,
+      "estimated_cost_usd": 0.000294,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}"
+      ],
+      "agent_task_input": "Agent resume_intake_agent (Resume Intake Specialist): Accurately normalize raw resume text, identify present and missing sections, and catalog candidate metadata without ever inventing qualifications.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1405
+      },
+      "output": {
+        "application_id": "APP-002",
+        "candidate_id": "CAND-002",
+        "candidate_name": "Jordan Martinez",
+        "contact_info_present": true,
+        "sections_identified": [
+          "contact_information",
+          "education",
+          "experience",
+          "skills"
+        ],
+        "missing_sections": [
+          "summary",
+          "certifications",
+          "projects",
+          "awards",
+          "publications",
+          "languages",
+          "interests"
+        ],
+        "raw_sections": {
+          "contact_information": {
+            "name": "Jordan Martinez",
+            "email": "jordan.martinez2@example.org",
+            "phone": "+1-555-674-4257",
+            "location": "Hybrid - New York"
+          },
+          "education": {
+            "evidence_id": "EVD-002-EDU",
+            "degree": "B.S. in Computer Science",
+            "institution": "State University",
+            "graduation_year": 2024
+          },
+          "experience": [
+            {
+              "evidence_id": "EVD-002-EXP1",
+              "title": "Software Engineer",
+              "company": "Apex Dynamics Corp",
+              "start_date": "2025-01",
+              "end_date": "2021-12",
+              "description": "Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%."
+            }
+          ],
+          "skills": {
+            "evidence_id": "EVD-002-SKL",
+            "technical_skills": [
+              "Go",
+              "Python",
+              "GraphQL",
+              "Kubernetes",
+              "Airflow",
+              "Kafka",
+              "React"
+            ]
+          }
+        },
+        "source_evidence_ids": [
+          "EVD-002-EDU",
+          "EVD-002-EXP1",
+          "EVD-002-SKL"
+        ],
+        "intake_notes": [
+          "Experience section contains inconsistent dates: start_date 2025-01 precedes end_date 2021-12.",
+          "Candidate has only 3 years of experience listed, which may not meet mandatory criterion of minimum 4 years building scalable data pipelines."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 2,
+      "agent_id": "qualification_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 10.8841,
+      "status": "SUCCESS",
+      "tokens": 2332,
+      "prompt_tokens": 1296,
+      "completion_tokens": 1036,
+      "estimated_cost_usd": 0.000816,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.resume_intake_agent] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"contact_info_present\": true, \"sections_identified\": [\"contact_information\", \"education\", \"experience\", \"skills\"], \"missing_sections\": [\"summary\", \"certifications\", \"projects\", \"awards\", \"publications\", \"languages\", \"interests\"], \"raw_sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"], \"intake_notes\": [\"Experience section contains inconsistent dates: start_date 2025-01 precedes end_date 2021-12.\", \"Candidate has only 3 years of experience listed, which may not meet mandatory criterion of minimum 4 years building scalable data pipelines.\"]}"
+      ],
+      "agent_task_input": "Agent qualification_agent (Candidate Qualification Extractor): Extract factual technical skills, degrees, certifications, and work experience from the normalized resume sections, linking each item to exact excerpts and evidence IDs.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1806
+      },
+      "output": {
+        "candidate_id": "CAND-002",
+        "technical_skills": [
+          {
+            "category": "technical_skill",
+            "item_name": "Go",
+            "supporting_excerpt": "Go",
+            "evidence_id": "EVD-002-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "Python",
+            "supporting_excerpt": "Python",
+            "evidence_id": "EVD-002-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "GraphQL",
+            "supporting_excerpt": "GraphQL",
+            "evidence_id": "EVD-002-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "Kubernetes",
+            "supporting_excerpt": "Kubernetes",
+            "evidence_id": "EVD-002-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "Airflow",
+            "supporting_excerpt": "Airflow",
+            "evidence_id": "EVD-002-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "Kafka",
+            "supporting_excerpt": "Kafka",
+            "evidence_id": "EVD-002-SKL"
+          },
+          {
+            "category": "technical_skill",
+            "item_name": "React",
+            "supporting_excerpt": "React",
+            "evidence_id": "EVD-002-SKL"
+          }
+        ],
+        "education": [
+          {
+            "category": "education",
+            "item_name": "B.S. in Computer Science",
+            "proficiency_or_duration": "2024",
+            "supporting_excerpt": "B.S. in Computer Science, State University, 2024",
+            "evidence_id": "EVD-002-EDU"
+          }
+        ],
+        "certifications": [],
+        "experience_records": [
+          {
+            "category": "experience",
+            "item_name": "Software Engineer at Apex Dynamics Corp",
+            "proficiency_or_duration": "2025-01 to 2021-12",
+            "supporting_excerpt": "Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.",
+            "evidence_id": "EVD-002-EXP1"
+          }
+        ],
+        "projects": [],
+        "extraction_warnings": [
+          "Experience section contains inconsistent dates: start_date 2025-01 precedes end_date 2021-12.",
+          "Candidate has only 3 years of experience listed, which may not meet mandatory criterion of minimum 4 years building scalable data pipelines."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 3,
+      "agent_id": "job_criteria_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 8.8846,
+      "status": "SUCCESS",
+      "tokens": 1638,
+      "prompt_tokens": 947,
+      "completion_tokens": 691,
+      "estimated_cost_usd": 0.000557,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}"
+      ],
+      "agent_task_input": "Agent job_criteria_agent (Job Criteria Analyst): Parse the job description into discrete mandatory and preferred evaluation criteria, assigning stable criterion IDs and flagging any ambiguous requirements.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1674
+      },
+      "output": {
+        "job_id": "JOB-02",
+        "job_title": "Senior Data Engineer",
+        "mandatory_criteria": [
+          {
+            "criterion_id": "JOB-02-CRIT-M1",
+            "category": "technical_skill",
+            "requirement_type": "mandatory",
+            "description": "Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          },
+          {
+            "criterion_id": "JOB-02-CRIT-M2",
+            "category": "technical_skill",
+            "requirement_type": "mandatory",
+            "description": "Strong proficiency in SQL, data modeling, and distributed query engines",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          }
+        ],
+        "preferred_criteria": [
+          {
+            "criterion_id": "JOB-02-CRIT-P1",
+            "category": "technical_skill",
+            "requirement_type": "preferred",
+            "description": "Experience with Snowflake or Databricks lakehouse architectures",
+            "is_ambiguous": false,
+            "ambiguity_notes": null
+          }
+        ],
+        "total_criteria_count": 3,
+        "parsing_notes": [
+          "All criteria parsed without ambiguity."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 4,
+      "agent_id": "evidence_mapping_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 7.0514,
+      "status": "SUCCESS",
+      "tokens": 2527,
+      "prompt_tokens": 1619,
+      "completion_tokens": 908,
+      "estimated_cost_usd": 0.000788,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.qualification_agent] {\"candidate_id\": \"CAND-002\", \"technical_skills\": [{\"category\": \"technical_skill\", \"item_name\": \"Go\", \"supporting_excerpt\": \"Go\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Python\", \"supporting_excerpt\": \"Python\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"GraphQL\", \"supporting_excerpt\": \"GraphQL\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Kubernetes\", \"supporting_excerpt\": \"Kubernetes\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Airflow\", \"supporting_excerpt\": \"Airflow\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Kafka\", \"supporting_excerpt\": \"Kafka\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"React\", \"supporting_excerpt\": \"React\", \"evidence_id\": \"EVD-002-SKL\"}], \"education\": [{\"category\": \"education\", \"item_name\": \"B.S. in Computer Science\", \"proficiency_or_duration\": \"2024\", \"supporting_excerpt\": \"B.S. in Computer Science, State University, 2024\", \"evidence_id\": \"EVD-002-EDU\"}], \"certifications\": [], \"experience_records\": [{\"category\": \"experience\", \"item_name\": \"Software Engineer at Apex Dynamics Corp\", \"proficiency_or_duration\": \"2025-01 to 2021-12\", \"supporting_excerpt\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\", \"evidence_id\": \"EVD-002-EXP1\"}], \"projects\": [], \"extraction_warnings\": [\"Experience section contains inconsistent dates: start_date 2025-01 precedes end_date 2021-12.\", \"Candidate has only 3 years of experience listed, which may not meet mandatory criterion of minimum 4 years building scalable data pipelines.\"]}",
+        "[upstream.job_criteria_agent] {\"job_id\": \"JOB-02\", \"job_title\": \"Senior Data Engineer\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"requirement_type\": \"mandatory\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"is_ambiguous\": false, \"ambiguity_notes\": null}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"requirement_type\": \"mandatory\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"is_ambiguous\": false, \"ambiguity_notes\": null}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"requirement_type\": \"preferred\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"is_ambiguous\": false, \"ambiguity_notes\": null}], \"total_criteria_count\": 3, \"parsing_notes\": [\"All criteria parsed without ambiguity.\"]}"
+      ],
+      "agent_task_input": "Agent evidence_mapping_agent (Candidate Evidence Mapping Specialist): Cross-reference every job criterion against extracted candidate qualifications, classifying fulfillment status and linking evidence IDs while clearly distinguishing a confirmed missing qualification from mere missing documentation.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 2028
+      },
+      "output": {
+        "candidate_id": "CAND-002",
+        "job_id": "JOB-02",
+        "mappings": [
+          {
+            "criterion_id": "JOB-02-CRIT-M1",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [
+              "EVD-002-SKL"
+            ],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "Candidate lists Airflow and Kafka skills but provides no evidence of building scalable data pipelines nor the required 4 years of experience; dates are inconsistent and indicate less than 4 years."
+          },
+          {
+            "criterion_id": "JOB-02-CRIT-M2",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No SQL, data modeling, or distributed query engine skills or experience are documented."
+          },
+          {
+            "criterion_id": "JOB-02-CRIT-P1",
+            "requirement_type": "preferred",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No evidence of Snowflake or Databricks lakehouse experience."
+          }
+        ],
+        "supported_count": 0,
+        "unsupported_count": 3,
+        "partially_supported_count": 0,
+        "unclear_count": 0
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 5,
+      "agent_id": "experience_assessment_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 35.2211,
+      "status": "SUCCESS",
+      "tokens": 2087,
+      "prompt_tokens": 1482,
+      "completion_tokens": 605,
+      "estimated_cost_usd": 0.000585,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.qualification_agent] {\"candidate_id\": \"CAND-002\", \"technical_skills\": [{\"category\": \"technical_skill\", \"item_name\": \"Go\", \"supporting_excerpt\": \"Go\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Python\", \"supporting_excerpt\": \"Python\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"GraphQL\", \"supporting_excerpt\": \"GraphQL\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Kubernetes\", \"supporting_excerpt\": \"Kubernetes\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Airflow\", \"supporting_excerpt\": \"Airflow\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"Kafka\", \"supporting_excerpt\": \"Kafka\", \"evidence_id\": \"EVD-002-SKL\"}, {\"category\": \"technical_skill\", \"item_name\": \"React\", \"supporting_excerpt\": \"React\", \"evidence_id\": \"EVD-002-SKL\"}], \"education\": [{\"category\": \"education\", \"item_name\": \"B.S. in Computer Science\", \"proficiency_or_duration\": \"2024\", \"supporting_excerpt\": \"B.S. in Computer Science, State University, 2024\", \"evidence_id\": \"EVD-002-EDU\"}], \"certifications\": [], \"experience_records\": [{\"category\": \"experience\", \"item_name\": \"Software Engineer at Apex Dynamics Corp\", \"proficiency_or_duration\": \"2025-01 to 2021-12\", \"supporting_excerpt\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\", \"evidence_id\": \"EVD-002-EXP1\"}], \"projects\": [], \"extraction_warnings\": [\"Experience section contains inconsistent dates: start_date 2025-01 precedes end_date 2021-12.\", \"Candidate has only 3 years of experience listed, which may not meet mandatory criterion of minimum 4 years building scalable data pipelines.\"]}",
+        "[upstream.evidence_mapping_agent] {\"candidate_id\": \"CAND-002\", \"job_id\": \"JOB-02\", \"mappings\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [\"EVD-002-SKL\"], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"Candidate lists Airflow and Kafka skills but provides no evidence of building scalable data pipelines nor the required 4 years of experience; dates are inconsistent and indicate less than 4 years.\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No SQL, data modeling, or distributed query engine skills or experience are documented.\"}, {\"criterion_id\": \"JOB-02-CRIT-P1\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No evidence of Snowflake or Databricks lakehouse experience.\"}], \"supported_count\": 0, \"unsupported_count\": 3, \"partially_supported_count\": 0, \"unclear_count\": 0}"
+      ],
+      "agent_task_input": "Agent experience_assessment_agent (Experience Assessment Evaluator): Evaluate candidate career trajectory, domain depth, and transferable skills relative to the target position, documenting strengths and concrete gaps without bias.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1203
+      },
+      "output": {
+        "candidate_id": "CAND-002",
+        "relevance_summary": "The candidate holds a B.S. in Computer Science and has a single Software Engineer role where they designed and deployed scalable services using Go, Python, GraphQL, Airflow, and Kafka. While they demonstrate strong general software engineering and performance\u2011optimization abilities, the resume lacks clear evidence of data\u2011engineering specific work such as building data pipelines, SQL/data modeling, or experience with Spark, Snowflake, or Databricks. Additionally, the employment dates are inconsistent and suggest less than the four years of experience required for the Senior Data Engineer role.",
+        "strengths": [
+          "Proficient in Go and Python programming",
+          "Experience with workflow orchestration (Airflow) and streaming platforms (Kafka)",
+          "Demonstrated ability to design and deploy scalable services",
+          "Performance optimization (35% query latency reduction)",
+          "Familiarity with container orchestration (Kubernetes) and API design (GraphQL)",
+          "Solid academic foundation with a B.S. in Computer Science"
+        ],
+        "experience_gaps": [
+          "Inconsistent employment dates indicating possible insufficient tenure (<4 years)",
+          "No documented experience building data pipelines with Spark, Airflow, or Kafka at scale",
+          "Missing SQL, data modeling, and distributed query engine expertise",
+          "No exposure to Snowflake, Databricks, or lakehouse architectures",
+          "Absence of explicit data\u2011engineering project descriptions"
+        ],
+        "transferable_skills": [
+          "Software engineering best practices",
+          "Scalable service architecture design",
+          "Performance tuning and latency reduction",
+          "Containerization and orchestration (Kubernetes)",
+          "Workflow management (Airflow)",
+          "Streaming data handling (Kafka)",
+          "API development (GraphQL)"
+        ],
+        "evidence_references": [
+          "EVD-002-EDU",
+          "EVD-002-EXP1",
+          "EVD-002-SKL"
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 6,
+      "agent_id": "missing_evidence_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 14.2611,
+      "status": "SUCCESS",
+      "tokens": 2708,
+      "prompt_tokens": 1523,
+      "completion_tokens": 1185,
+      "estimated_cost_usd": 0.000939,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.resume_intake_agent] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"contact_info_present\": true, \"sections_identified\": [\"contact_information\", \"education\", \"experience\", \"skills\"], \"missing_sections\": [\"summary\", \"certifications\", \"projects\", \"awards\", \"publications\", \"languages\", \"interests\"], \"raw_sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"], \"intake_notes\": [\"Experience section contains inconsistent dates: start_date 2025-01 precedes end_date 2021-12.\", \"Candidate has only 3 years of experience listed, which may not meet mandatory criterion of minimum 4 years building scalable data pipelines.\"]}",
+        "[upstream.evidence_mapping_agent] {\"candidate_id\": \"CAND-002\", \"job_id\": \"JOB-02\", \"mappings\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [\"EVD-002-SKL\"], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"Candidate lists Airflow and Kafka skills but provides no evidence of building scalable data pipelines nor the required 4 years of experience; dates are inconsistent and indicate less than 4 years.\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No SQL, data modeling, or distributed query engine skills or experience are documented.\"}, {\"criterion_id\": \"JOB-02-CRIT-P1\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No evidence of Snowflake or Databricks lakehouse experience.\"}], \"supported_count\": 0, \"unsupported_count\": 3, \"partially_supported_count\": 0, \"unclear_count\": 0}"
+      ],
+      "agent_task_input": "Agent missing_evidence_agent (Recruitment Consistency and Verification Auditor): Audit the resume and qualification records for chronological anomalies, unsupported buzzword claims, missing mandatory evidence, and ambiguous statements.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1642
+      },
+      "output": {
+        "candidate_id": "CAND-002",
+        "missing_evidence_items": [
+          "JOB-02-CRIT-M1",
+          "JOB-02-CRIT-M2",
+          "JOB-02-CRIT-P1"
+        ],
+        "unreliable_requirements": [
+          "JOB-02-CRIT-M1",
+          "JOB-02-CRIT-M2"
+        ],
+        "inconsistencies": [
+          {
+            "issue_type": "date_inconsistency",
+            "description": "Experience entry 'Software Engineer' at Apex Dynamics Corp has start_date 2025-01 later than end_date 2021-12.",
+            "is_confirmed_inconsistency": true,
+            "requires_recruiter_clarification": true,
+            "evidence_ids": [
+              "EVD-002-EXP1"
+            ]
+          },
+          {
+            "issue_type": "insufficient_experience",
+            "description": "Candidate's listed experience does not meet the minimum 4 years required for building scalable data pipelines (criterion JOB-02-CRIT-M1).",
+            "is_confirmed_inconsistency": false,
+            "requires_recruiter_clarification": true,
+            "evidence_ids": [
+              "EVD-002-EXP1"
+            ]
+          },
+          {
+            "issue_type": "missing_evidence",
+            "description": "No evidence provided for SQL, data modeling, or distributed query engine skills required by criterion JOB-02-CRIT-M2.",
+            "is_confirmed_inconsistency": false,
+            "requires_recruiter_clarification": true,
+            "evidence_ids": []
+          },
+          {
+            "issue_type": "missing_evidence",
+            "description": "No evidence of Snowflake or Databricks experience for preferred criterion JOB-02-CRIT-P1.",
+            "is_confirmed_inconsistency": false,
+            "requires_recruiter_clarification": false,
+            "evidence_ids": []
+          }
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 7,
+      "agent_id": "screening_review_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 6.4992,
+      "status": "SUCCESS",
+      "tokens": 2406,
+      "prompt_tokens": 1818,
+      "completion_tokens": 588,
+      "estimated_cost_usd": 0.000625,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.evidence_mapping_agent] {\"candidate_id\": \"CAND-002\", \"job_id\": \"JOB-02\", \"mappings\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [\"EVD-002-SKL\"], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"Candidate lists Airflow and Kafka skills but provides no evidence of building scalable data pipelines nor the required 4 years of experience; dates are inconsistent and indicate less than 4 years.\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"requirement_type\": \"mandatory\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No SQL, data modeling, or distributed query engine skills or experience are documented.\"}, {\"criterion_id\": \"JOB-02-CRIT-P1\", \"requirement_type\": \"preferred\", \"status\": \"unsupported\", \"candidate_evidence\": null, \"evidence_ids\": [], \"is_missing_qualification\": true, \"is_missing_evidence_only\": false, \"notes\": \"No evidence of Snowflake or Databricks lakehouse experience.\"}], \"supported_count\": 0, \"unsupported_count\": 3, \"partially_supported_count\": 0, \"unclear_count\": 0}",
+        "[upstream.experience_assessment_agent] {\"candidate_id\": \"CAND-002\", \"relevance_summary\": \"The candidate holds a B.S. in Computer Science and has a single Software Engineer role where they designed and deployed scalable services using Go, Python, GraphQL, Airflow, and Kafka. While they demonstrate strong general software engineering and performance\\u2011optimization abilities, the resume lacks clear evidence of data\\u2011engineering specific work such as building data pipelines, SQL/data modeling, or experience with Spark, Snowflake, or Databricks. Additionally, the employment dates are inconsistent and suggest less than the four years of experience required for the Senior Data Engineer role.\", \"strengths\": [\"Proficient in Go and Python programming\", \"Experience with workflow orchestration (Airflow) and streaming platforms (Kafka)\", \"Demonstrated ability to design and deploy scalable services\", \"Performance optimization (35% query latency reduction)\", \"Familiarity with container orchestration (Kubernetes) and API design (GraphQL)\", \"Solid academic foundation with a B.S. in Computer Science\"], \"experience_gaps\": [\"Inconsistent employment dates indicating possible insufficient tenure (<4 years)\", \"No documented experience building data pipelines with Spark, Airflow, or Kafka at scale\", \"Missing SQL, data modeling, and distributed query engine expertise\", \"No exposure to Snowflake, Databricks, or lakehouse architectures\", \"Absence of explicit data\\u2011engineering project descriptions\"], \"transferable_skills\": [\"Software engineering best practices\", \"Scalable service architecture design\", \"Performance tuning and latency reduction\", \"Containerization and orchestration (Kubernetes)\", \"Workflow management (Airflow)\", \"Streaming data handling (Kafka)\", \"API development (GraphQL)\"], \"evidence_references\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[upstream.missing_evidence_agent] {\"candidate_id\": \"CAND-002\", \"missing_evidence_items\": [\"JOB-02-CRIT-M1\", \"JOB-02-CRIT-M2\", \"JOB-02-CRIT-P1\"], \"unreliable_requirements\": [\"JOB-02-CRIT-M1\", \"JOB-02-CRIT-M2\"], \"inconsistencies\": [{\"issue_type\": \"date_inconsistency\", \"description\": \"Experience entry 'Software Engineer' at Apex Dynamics Corp has start_date 2025-01 later than end_date 2021-12.\", \"is_confirmed_inconsistency\": true, \"requires_recruiter_clarification\": true, \"evidence_ids\": [\"EVD-002-EXP1\"]}, {\"issue_type\": \"insufficient_experience\", \"description\": \"Candidate's listed experience does not meet the minimum 4 years required for building scalable data pipelines (criterion JOB-02-CRIT-M1).\", \"is_confirmed_inconsistency\": false, \"requires_recruiter_clarification\": true, \"evidence_ids\": [\"EVD-002-EXP1\"]}, {\"issue_type\": \"missing_evidence\", \"description\": \"No evidence provided for SQL, data modeling, or distributed query engine skills required by criterion JOB-02-CRIT-M2.\", \"is_confirmed_inconsistency\": false, \"requires_recruiter_clarification\": true, \"evidence_ids\": []}, {\"issue_type\": \"missing_evidence\", \"description\": \"No evidence of Snowflake or Databricks experience for preferred criterion JOB-02-CRIT-P1.\", \"is_confirmed_inconsistency\": false, \"requires_recruiter_clarification\": false, \"evidence_ids\": []}]}"
+      ],
+      "agent_task_input": "Agent screening_review_agent (Screening Quality and Integrity Reviewer): Conduct an independent quality check across prior agent findings, ensuring evidence traceability, non-contradiction, and distinct treatment of mandatory vs preferred criteria.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 1263
+      },
+      "output": {
+        "candidate_id": "CAND-002",
+        "review_passed": false,
+        "contradictions_detected": [],
+        "traceability_verified": true,
+        "mandatory_criteria_met": false,
+        "issues_requiring_human_review": [
+          "Date inconsistency in experience entry (start_date after end_date) requires recruiter clarification.",
+          "Insufficient experience duration (<4 years) for building scalable data pipelines (criterion JOB-02-CRIT-M1) requires recruiter clarification.",
+          "Missing evidence for SQL, data modeling, and distributed query engine skills (criterion JOB-02-CRIT-M2) requires recruiter clarification."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    },
+    {
+      "order": 8,
+      "agent_id": "recruiter_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "assigned_key_identifier": "GROQ_API_KEY_15 (masked: gsk_...vKIi)",
+      "duration_seconds": 17.8604,
+      "status": "SUCCESS",
+      "tokens": 3114,
+      "prompt_tokens": 1577,
+      "completion_tokens": 1537,
+      "estimated_cost_usd": 0.001159,
+      "usage_source": "api_reported",
+      "schema_valid": true,
+      "missing_required_fields": [],
+      "replay_sample_validity": null,
+      "consolidated_from": [],
+      "supplied_contexts": [
+        "[workflow_input.resume] {\"application_id\": \"APP-002\", \"candidate_id\": \"CAND-002\", \"candidate_name\": \"Jordan Martinez\", \"target_job_id\": \"JOB-02\", \"target_job_title\": \"Senior Data Engineer\", \"edge_case_type\": \"inconsistent_dates\", \"sections\": {\"contact_information\": {\"name\": \"Jordan Martinez\", \"email\": \"jordan.martinez2@example.org\", \"phone\": \"+1-555-674-4257\", \"location\": \"Hybrid - New York\"}, \"education\": {\"evidence_id\": \"EVD-002-EDU\", \"degree\": \"B.S. in Computer Science\", \"institution\": \"State University\", \"graduation_year\": 2024}, \"experience\": [{\"evidence_id\": \"EVD-002-EXP1\", \"title\": \"Software Engineer\", \"company\": \"Apex Dynamics Corp\", \"start_date\": \"2025-01\", \"end_date\": \"2021-12\", \"description\": \"Designed and deployed scalable services using Go, Python, GraphQL. Improved query latency by 35%.\"}], \"skills\": {\"evidence_id\": \"EVD-002-SKL\", \"technical_skills\": [\"Go\", \"Python\", \"GraphQL\", \"Kubernetes\", \"Airflow\", \"Kafka\", \"React\"]}}, \"source_evidence_ids\": [\"EVD-002-EDU\", \"EVD-002-EXP1\", \"EVD-002-SKL\"]}",
+        "[workflow_input.job] {\"job_id\": \"JOB-02\", \"title\": \"Senior Data Engineer\", \"department\": \"Data\", \"location\": \"Hybrid - New York\", \"summary\": \"We are seeking an experienced Senior Data Engineer to build resilient, mission-critical systems.\", \"mandatory_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-M1\", \"category\": \"technical_skill\", \"description\": \"Minimum 4 years building scalable data pipelines using Spark, Airflow, or Kafka\", \"requirement_type\": \"mandatory\"}, {\"criterion_id\": \"JOB-02-CRIT-M2\", \"category\": \"technical_skill\", \"description\": \"Strong proficiency in SQL, data modeling, and distributed query engines\", \"requirement_type\": \"mandatory\"}], \"preferred_criteria\": [{\"criterion_id\": \"JOB-02-CRIT-P1\", \"category\": \"technical_skill\", \"description\": \"Experience with Snowflake or Databricks lakehouse architectures\", \"requirement_type\": \"preferred\"}]}",
+        "[upstream.screening_review_agent] {\"candidate_id\": \"CAND-002\", \"review_passed\": false, \"contradictions_detected\": [], \"traceability_verified\": true, \"mandatory_criteria_met\": false, \"issues_requiring_human_review\": [\"Date inconsistency in experience entry (start_date after end_date) requires recruiter clarification.\", \"Insufficient experience duration (<4 years) for building scalable data pipelines (criterion JOB-02-CRIT-M1) requires recruiter clarification.\", \"Missing evidence for SQL, data modeling, and distributed query engine skills (criterion JOB-02-CRIT-M2) requires recruiter clarification.\"]}"
+      ],
+      "agent_task_input": "Agent recruiter_summary_agent (Executive Recruiter Summary Synthesizer): Synthesize all screening findings into a structured, transparent recruiter report, providing actionable follow-up interview questions and deterministic scoring while explicitly preserving final decision authority for human hiring teams.",
+      "prompt_metadata": {
+        "using_optimized_prompt": false,
+        "using_unified_prompt": false,
+        "prompt_char_length": 3364
+      },
+      "output": {
+        "run_id": "sb_20261125_173750_f3def6",
+        "application_id": "APP-002",
+        "candidate_id": "CAND-002",
+        "candidate_name": "Jordan Martinez",
+        "job_id": "JOB-02",
+        "job_title": "Senior Data Engineer",
+        "executive_candidate_overview": "Jordan Martinez is a recent Computer Science graduate (2024) with experience as a Software Engineer at Apex Dynamics Corp. The resume lists work on scalable services using Go, Python, GraphQL, Airflow, and Kafka. However, the experience dates are inconsistent (start date after end date) and the total duration does not meet the 4\u2011year pipeline\u2011building requirement. Additionally, there is no evidence of SQL, data modeling, or Snowflake/Databricks expertise required for the Senior Data Engineer role.",
+        "criteria_matrix": [
+          {
+            "criterion_id": "JOB-02-CRIT-M1",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "Experience entry dates inconsistent; cannot verify 4+ years building scalable data pipelines."
+          },
+          {
+            "criterion_id": "JOB-02-CRIT-M2",
+            "requirement_type": "mandatory",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": true,
+            "is_missing_evidence_only": false,
+            "notes": "No evidence of SQL, data modeling, or distributed query engine skills."
+          },
+          {
+            "criterion_id": "JOB-02-CRIT-P1",
+            "requirement_type": "preferred",
+            "status": "unsupported",
+            "candidate_evidence": null,
+            "evidence_ids": [],
+            "is_missing_qualification": false,
+            "is_missing_evidence_only": true,
+            "notes": "No mention of Snowflake or Databricks experience."
+          }
+        ],
+        "key_strengths": [
+          "Proficient in Go and Python",
+          "Experience with Airflow and Kafka",
+          "Full\u2011stack development using React",
+          "Designed and deployed scalable services"
+        ],
+        "evidence_gaps": [
+          "Missing evidence of SQL and data modeling expertise",
+          "No documented experience with Spark, Snowflake, or Databricks",
+          "Insufficient verified duration of data\u2011pipeline work"
+        ],
+        "identified_inconsistencies": [
+          "Date inconsistency in experience entry (start_date after end_date)",
+          "Experience duration does not satisfy 4\u2011year mandatory pipeline requirement"
+        ],
+        "recommended_follow_up_questions": [
+          "Can you clarify the correct start and end dates for your role at Apex Dynamics Corp?",
+          "Do you have experience building data pipelines with Spark, Airflow, or Kafka? If so, please describe the projects and duration.",
+          "What is your proficiency with SQL, data modeling, and distributed query engines such as Presto or Trino?",
+          "Have you worked with Snowflake or Databricks lakehouse architectures? Please provide details."
+        ],
+        "deterministic_match_score": 100.0,
+        "score_calculation_method": "Deterministic weighted ratio: Mandatory criteria (70%), Preferred criteria (30%). Supported=1.0, Partially Supported=0.5, Unclear=0.25, Unsupported=0.0.",
+        "score_limitations": "Numerical score reflects documented resume keyword and experience overlap only. It does not measure soft skills, motivation, or unlisted capabilities.",
+        "human_review_required": true,
+        "non_autonomous_decision_statement": "This is an automated screening assistant summary. It does NOT make autonomous hiring decisions.",
+        "validation_warnings": [
+          "Edge case detected: inconsistent dates in experience section."
+        ]
+      },
+      "mode": "live_llm_execution",
+      "notes": ""
+    }
+  ],
+  "handoff_audits": [
+    {
+      "edge": "resume_intake_agent->qualification_agent",
+      "projected": false,
+      "original_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "retained_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "qualification_agent->evidence_mapping_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "job_criteria_agent->evidence_mapping_agent",
+      "projected": false,
+      "original_fields": [
+        "job_id",
+        "job_title",
+        "mandatory_criteria",
+        "preferred_criteria",
+        "total_criteria_count",
+        "parsing_notes"
+      ],
+      "retained_fields": [
+        "job_id",
+        "job_title",
+        "mandatory_criteria",
+        "preferred_criteria",
+        "total_criteria_count",
+        "parsing_notes"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "qualification_agent->experience_assessment_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "technical_skills",
+        "education",
+        "certifications",
+        "experience_records",
+        "projects",
+        "extraction_warnings"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "evidence_mapping_agent->experience_assessment_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "resume_intake_agent->missing_evidence_agent",
+      "projected": false,
+      "original_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "retained_fields": [
+        "application_id",
+        "candidate_id",
+        "candidate_name",
+        "contact_info_present",
+        "sections_identified",
+        "missing_sections",
+        "raw_sections",
+        "source_evidence_ids",
+        "intake_notes"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "evidence_mapping_agent->missing_evidence_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "evidence_mapping_agent->screening_review_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "job_id",
+        "mappings",
+        "supported_count",
+        "unsupported_count",
+        "partially_supported_count",
+        "unclear_count"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "experience_assessment_agent->screening_review_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "relevance_summary",
+        "strengths",
+        "experience_gaps",
+        "transferable_skills",
+        "evidence_references"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "relevance_summary",
+        "strengths",
+        "experience_gaps",
+        "transferable_skills",
+        "evidence_references"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "missing_evidence_agent->screening_review_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "missing_evidence_items",
+        "unreliable_requirements",
+        "inconsistencies"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "missing_evidence_items",
+        "unreliable_requirements",
+        "inconsistencies"
+      ],
+      "removed_fields": []
+    },
+    {
+      "edge": "screening_review_agent->recruiter_summary_agent",
+      "projected": false,
+      "original_fields": [
+        "candidate_id",
+        "review_passed",
+        "contradictions_detected",
+        "traceability_verified",
+        "mandatory_criteria_met",
+        "issues_requiring_human_review"
+      ],
+      "retained_fields": [
+        "candidate_id",
+        "review_passed",
+        "contradictions_detected",
+        "traceability_verified",
+        "mandatory_criteria_met",
+        "issues_requiring_human_review"
+      ],
+      "removed_fields": []
+    }
+  ],
+  "total_tokens": 36890,
+  "prompt_tokens": 11132,
+  "completion_tokens": 14626,
+  "estimated_cost_usd": 0.011526,
+  "api_errors": [],
+  "fallback_events": [],
+  "schema_failures": [],
+  "invalid_replay_samples": [],
+  "final_output": {
+    "run_id": "sb_20261125_173750_f3def6",
+    "application_id": "APP-002",
+    "candidate_id": "CAND-002",
+    "candidate_name": "Jordan Martinez",
+    "job_id": "JOB-02",
+    "job_title": "Senior Data Engineer",
+    "executive_candidate_overview": "Jordan Martinez is a recent Computer Science graduate (2024) with experience as a Software Engineer at Apex Dynamics Corp. The resume lists work on scalable services using Go, Python, GraphQL, Airflow, and Kafka. However, the experience dates are inconsistent (start date after end date) and the total duration does not meet the 4\u2011year pipeline\u2011building requirement. Additionally, there is no evidence of SQL, data modeling, or Snowflake/Databricks expertise required for the Senior Data Engineer role.",
+    "criteria_matrix": [
+      {
+        "criterion_id": "JOB-02-CRIT-M1",
+        "requirement_type": "mandatory",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": true,
+        "is_missing_evidence_only": false,
+        "notes": "Experience entry dates inconsistent; cannot verify 4+ years building scalable data pipelines."
+      },
+      {
+        "criterion_id": "JOB-02-CRIT-M2",
+        "requirement_type": "mandatory",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": true,
+        "is_missing_evidence_only": false,
+        "notes": "No evidence of SQL, data modeling, or distributed query engine skills."
+      },
+      {
+        "criterion_id": "JOB-02-CRIT-P1",
+        "requirement_type": "preferred",
+        "status": "unsupported",
+        "candidate_evidence": null,
+        "evidence_ids": [],
+        "is_missing_qualification": false,
+        "is_missing_evidence_only": true,
+        "notes": "No mention of Snowflake or Databricks experience."
+      }
+    ],
+    "key_strengths": [
+      "Proficient in Go and Python",
+      "Experience with Airflow and Kafka",
+      "Full\u2011stack development using React",
+      "Designed and deployed scalable services"
+    ],
+    "evidence_gaps": [
+      "Missing evidence of SQL and data modeling expertise",
+      "No documented experience with Spark, Snowflake, or Databricks",
+      "Insufficient verified duration of data\u2011pipeline work"
+    ],
+    "identified_inconsistencies": [
+      "Date inconsistency in experience entry (start_date after end_date)",
+      "Experience duration does not satisfy 4\u2011year mandatory pipeline requirement"
+    ],
+    "recommended_follow_up_questions": [
+      "Can you clarify the correct start and end dates for your role at Apex Dynamics Corp?",
+      "Do you have experience building data pipelines with Spark, Airflow, or Kafka? If so, please describe the projects and duration.",
+      "What is your proficiency with SQL, data modeling, and distributed query engines such as Presto or Trino?",
+      "Have you worked with Snowflake or Databricks lakehouse architectures? Please provide details."
+    ],
+    "deterministic_match_score": 100.0,
+    "score_calculation_method": "Deterministic weighted ratio: Mandatory criteria (70%), Preferred criteria (30%). Supported=1.0, Partially Supported=0.5, Unclear=0.25, Unsupported=0.0.",
+    "score_limitations": "Numerical score reflects documented resume keyword and experience overlap only. It does not measure soft skills, motivation, or unlisted capabilities.",
+    "human_review_required": true,
+    "non_autonomous_decision_statement": "This is an automated screening assistant summary. It does NOT make autonomous hiring decisions.",
+    "validation_warnings": [
+      "Edge case detected: inconsistent dates in experience section."
+    ]
+  },
+  "error": null,
+  "timestamp": "2026-11-25T17:39:38.864176+00:00"
+}

@@ -1,0 +1,2383 @@
+{
+  "experiment_id": "wp_synth_5dim_live_20261126_024837__phase_a_workflow_parallelization",
+  "workflow_id": "order_fulfillment_synthetic",
+  "generated_at": "2026-11-25T21:22:08.357823+00:00",
+  "comparison_nature": "historical_baseline_evidence_vs_fresh_optimized_execution",
+  "execution_backend": "local_subprocess",
+  "process_execution_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "baseline_re_executed": false,
+    "baseline_process_exit_code": null,
+    "baseline_execution_status": "HISTORICAL_FIXED",
+    "baseline_groq_api_calls": 0,
+    "baseline_api_errors": [],
+    "optimized_process_exit_code": 0,
+    "optimized_process_exit_codes": [
+      0,
+      0
+    ],
+    "optimized_execution_status": "SUCCESS",
+    "optimized_process_duration_seconds": 117.0359,
+    "optimized_groq_api_calls": 14,
+    "optimized_api_errors": [],
+    "execution_modes": [
+      "live_llm_execution"
+    ]
+  },
+  "input_matching": {
+    "fixed_baseline_reference_id": "hist_859e698746d5",
+    "matched_input_count": 10,
+    "unmatched_input_count": 0,
+    "excluded_records": [],
+    "num_optimized_runs": 2
+  },
+  "baseline_evidence": {
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic",
+    "fixed_baseline_reference_id": "hist_859e698746d5",
+    "measurement_period": {
+      "earliest_trace_timestamp": "2026-11-25T21:05:04.533367+00:00",
+      "latest_trace_timestamp": "2026-11-25T21:05:16.237297+00:00"
+    },
+    "available_historical_metrics": {
+      "workflow_id": "order_fulfillment_synthetic",
+      "source": "historical_runtime_traces",
+      "execution_mode": "historical_recorded_execution",
+      "execution_modes": [
+        "historical_recorded_execution"
+      ],
+      "re_executed": false,
+      "groq_api_calls": 0,
+      "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic",
+      "fixed_baseline_reference_id": "hist_859e698746d5",
+      "measurement_period": {
+        "earliest_trace_timestamp": "2026-11-25T21:05:04.533367+00:00",
+        "latest_trace_timestamp": "2026-11-25T21:05:16.237297+00:00"
+      },
+      "total_runs": 2,
+      "successful_runs": 2,
+      "failed_runs": 0,
+      "success_rate_pct": 100.0,
+      "mean_latency_seconds": 11.5005,
+      "median_latency_seconds": 11.5005,
+      "mean_agent_latency_seconds": 1.6416,
+      "mean_tokens": 9354.0,
+      "mean_prompt_tokens": 6414.5,
+      "mean_completion_tokens": 2939.5,
+      "mean_cost_usd_telemetry": 0.002726,
+      "mean_cost_usd_catalog_normalized": 0.002726,
+      "cost_calculation_basis": "historical_trace_catalog_normalized_from_recorded_tokens",
+      "schema_validation_passed": true,
+      "structural_validity_pass_rate_pct": 100.0,
+      "semantic_quality_evaluation": "unavailable",
+      "semantic_quality_status": "unavailable",
+      "semantic_quality_pass_rate_pct": null,
+      "per_agent_metrics": {
+        "order_intake_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 2.546,
+          "mean_tokens": 1651.0,
+          "mean_prompt_tokens": 853.0,
+          "mean_completion_tokens": 798.0,
+          "mean_cost_usd": null
+        },
+        "inventory_check_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.3415,
+          "mean_tokens": 1108.0,
+          "mean_prompt_tokens": 738.5,
+          "mean_completion_tokens": 369.5,
+          "mean_cost_usd": null
+        },
+        "fraud_screen_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.345,
+          "mean_tokens": 980.0,
+          "mean_prompt_tokens": 733.5,
+          "mean_completion_tokens": 246.5,
+          "mean_cost_usd": null
+        },
+        "carrier_routing_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.0815,
+          "mean_tokens": 841.0,
+          "mean_prompt_tokens": 631.5,
+          "mean_completion_tokens": 209.5,
+          "mean_cost_usd": null
+        },
+        "tax_classify_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.4445,
+          "mean_tokens": 977.0,
+          "mean_prompt_tokens": 676.5,
+          "mean_completion_tokens": 300.5,
+          "mean_cost_usd": null
+        },
+        "invoice_tag_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.371,
+          "mean_tokens": 1036.5,
+          "mean_prompt_tokens": 709.5,
+          "mean_completion_tokens": 327.0,
+          "mean_cost_usd": null
+        },
+        "fulfillment_summary_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 2.362,
+          "mean_tokens": 2760.5,
+          "mean_prompt_tokens": 2072.0,
+          "mean_completion_tokens": 688.5,
+          "mean_cost_usd": null
+        }
+      },
+      "input_dataset_hashes": [
+        "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+        "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf"
+      ],
+      "matched_input_count": 10,
+      "unmatched_input_count": 0,
+      "excluded_records": [],
+      "historical_mcp_reference": {
+        "total_runs": 10,
+        "mean_latency_seconds": 12.1497,
+        "mean_tokens": 9203.4
+      }
+    }
+  },
+  "optimized_execution": {
+    "source": "current_experiment",
+    "execution_mode": [
+      "live_llm_execution"
+    ],
+    "re_executed": true,
+    "groq_api_calls": 14,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\runtime_traces",
+    "num_optimized_runs": 2,
+    "per_run_metrics": [
+      {
+        "run_id": "sb_20261125_212007_e445d9",
+        "run_index": 0,
+        "matched_baseline_run_id": "live_20261125_210453_trace01",
+        "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+        "status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "duration_seconds": 63.1568,
+        "prompt_tokens": 6513,
+        "completion_tokens": 5958,
+        "total_tokens": 18984,
+        "estimated_cost_usd": 0.005526,
+        "schema_valid": true
+      },
+      {
+        "run_id": "sb_20261125_212114_9369be",
+        "run_index": 1,
+        "matched_baseline_run_id": "live_20261125_210453_trace02",
+        "input_hash": "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+        "status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "duration_seconds": 53.7939,
+        "prompt_tokens": 6316,
+        "completion_tokens": 5746,
+        "total_tokens": 18378,
+        "estimated_cost_usd": 0.00534,
+        "schema_valid": true
+      }
+    ],
+    "aggregate_metrics": {
+      "workflow_id": "order_fulfillment_synthetic",
+      "experiment_id": "wp_synth_5dim_live_20261126_024837__phase_a_workflow_parallelization",
+      "variant": "optimized",
+      "source": "current_experiment",
+      "re_executed": true,
+      "groq_api_calls": 14,
+      "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\runtime_traces",
+      "execution_status": "SUCCESS",
+      "execution_modes": [
+        "live_llm_execution"
+      ],
+      "usage_sources": [
+        "api_reported"
+      ],
+      "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+      "process_metadata": {
+        "execution_backend": "local_subprocess",
+        "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+        "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+        "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+        "exit_code": 0,
+        "process_exit_codes": [
+          0,
+          0
+        ],
+        "timed_out": false,
+        "execution_status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "process_duration_seconds": 117.0359,
+        "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+        "error_details": null
+      },
+      "total_runs": 2,
+      "successful_runs": 2,
+      "failed_runs": 0,
+      "incomplete_runs": [],
+      "success_rate_pct": 100.0,
+      "mean_latency_seconds": 58.4753,
+      "median_latency_seconds": 58.4753,
+      "mean_agent_latency_seconds": 9.3272,
+      "mean_tokens": 18681.0,
+      "mean_prompt_tokens": 6414.5,
+      "mean_completion_tokens": 5852.0,
+      "mean_cost_usd_catalog_normalized": 0.005433,
+      "schema_validation_passed": true,
+      "structural_validity_pass_rate_pct": 100.0,
+      "schema_validation_failures": [],
+      "invalid_replay_samples": [],
+      "semantic_quality_evaluation": "unavailable",
+      "semantic_quality_status": "unavailable",
+      "semantic_quality_pass_rate_pct": null,
+      "api_errors": [],
+      "per_run_metrics": [
+        {
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0,
+          "matched_baseline_run_id": "live_20261125_210453_trace01",
+          "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+          "status": "SUCCESS",
+          "execution_mode": "live_llm_execution",
+          "duration_seconds": 63.1568,
+          "prompt_tokens": 6513,
+          "completion_tokens": 5958,
+          "total_tokens": 18984,
+          "estimated_cost_usd": 0.005526,
+          "schema_valid": true
+        },
+        {
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1,
+          "matched_baseline_run_id": "live_20261125_210453_trace02",
+          "input_hash": "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+          "status": "SUCCESS",
+          "execution_mode": "live_llm_execution",
+          "duration_seconds": 53.7939,
+          "prompt_tokens": 6316,
+          "completion_tokens": 5746,
+          "total_tokens": 18378,
+          "estimated_cost_usd": 0.00534,
+          "schema_valid": true
+        }
+      ],
+      "per_agent_metrics": {
+        "order_intake_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 4.325,
+          "mean_tokens": 1560.5,
+          "mean_prompt_tokens": 853.0,
+          "mean_completion_tokens": 707.5,
+          "mean_cost_usd": 0.000553,
+          "schema_valid_rate_pct": 100.0
+        },
+        "inventory_check_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 12.6664,
+          "mean_tokens": 1062.0,
+          "mean_prompt_tokens": 738.5,
+          "mean_completion_tokens": 323.5,
+          "mean_cost_usd": 0.000304,
+          "schema_valid_rate_pct": 100.0
+        },
+        "fraud_screen_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 11.2413,
+          "mean_tokens": 989.5,
+          "mean_prompt_tokens": 733.5,
+          "mean_completion_tokens": 256.0,
+          "mean_cost_usd": 0.000264,
+          "schema_valid_rate_pct": 100.0
+        },
+        "carrier_routing_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 3.1246,
+          "mean_tokens": 843.0,
+          "mean_prompt_tokens": 631.5,
+          "mean_completion_tokens": 211.5,
+          "mean_cost_usd": 0.000222,
+          "schema_valid_rate_pct": 100.0
+        },
+        "tax_classify_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 5.5583,
+          "mean_tokens": 1028.0,
+          "mean_prompt_tokens": 676.5,
+          "mean_completion_tokens": 351.5,
+          "mean_cost_usd": 0.000312,
+          "schema_valid_rate_pct": 100.0
+        },
+        "invoice_tag_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 8.3764,
+          "mean_tokens": 995.5,
+          "mean_prompt_tokens": 709.5,
+          "mean_completion_tokens": 286.0,
+          "mean_cost_usd": 0.000278,
+          "schema_valid_rate_pct": 100.0
+        },
+        "fulfillment_summary_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 19.9984,
+          "mean_tokens": 2862.0,
+          "mean_prompt_tokens": 2072.0,
+          "mean_completion_tokens": 790.0,
+          "mean_cost_usd": 0.000785,
+          "schema_valid_rate_pct": 100.0
+        }
+      },
+      "input_dataset_hashes": [
+        "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+        "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf"
+      ]
+    }
+  },
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "runs_executed": 2,
+  "model_and_provider_info": {
+    "baseline_model": "openai/gpt-oss-120b",
+    "llm_provider": "Groq",
+    "assigned_groq_key_env": "GROQ_API_KEY_14",
+    "agent_model_overrides": {}
+  },
+  "original_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic",
+  "sandbox_workflow_location": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+  "approved_candidate_ids": [
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT"
+  ],
+  "applied_candidate_ids": [
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT"
+  ],
+  "failed_candidate_ids": [],
+  "conflicting_candidate_ids": [],
+  "candidates_requiring_manual_intervention": [],
+  "conflicts": [],
+  "modified_files": [
+    "sandbox_optimization_config.json",
+    "workflow.json",
+    "workflow.py"
+  ],
+  "modifications": [
+    {
+      "candidate_id": "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT",
+      "dimension": "workflow_parallelization",
+      "status": "applied",
+      "target_agents": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ],
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "description": "Configured concurrent scatter-gather group ['inventory_check_agent', 'fraud_screen_agent'] in sandbox workflow after verifying strict DAG & I/O independence.",
+      "details": {
+        "parallel_group": [
+          "inventory_check_agent",
+          "fraud_screen_agent"
+        ],
+        "dependency_verification": "Verified mutually independent in sandbox DAG: ['inventory_check_agent', 'fraud_screen_agent']"
+      },
+      "error": null
+    }
+  ],
+  "candidate_outcomes": [
+    {
+      "candidate_id": "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT",
+      "dimension": "workflow_parallelization",
+      "target_agents": [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ],
+      "handoff_edge": null,
+      "modification_applied": true,
+      "modification_status": "applied",
+      "modified_files": [
+        "workflow.json",
+        "workflow.py",
+        "sandbox_optimization_config.json"
+      ],
+      "validation_result": "passed",
+      "execution_result": "passed",
+      "baseline_metric_observations": {
+        "inventory_check_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.3415,
+          "mean_tokens": 1108.0,
+          "mean_prompt_tokens": 738.5,
+          "mean_completion_tokens": 369.5,
+          "mean_cost_usd": null
+        },
+        "fraud_screen_agent": {
+          "runs_count": 2,
+          "models_observed": [],
+          "mean_latency_seconds": 1.345,
+          "mean_tokens": 980.0,
+          "mean_prompt_tokens": 733.5,
+          "mean_completion_tokens": 246.5,
+          "mean_cost_usd": null
+        }
+      },
+      "optimized_metric_observations": {
+        "inventory_check_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 12.6664,
+          "mean_tokens": 1062.0,
+          "mean_prompt_tokens": 738.5,
+          "mean_completion_tokens": 323.5,
+          "mean_cost_usd": 0.000304,
+          "schema_valid_rate_pct": 100.0
+        },
+        "fraud_screen_agent": {
+          "runs_count": 2,
+          "models_observed": [
+            "openai/gpt-oss-120b"
+          ],
+          "mean_latency_seconds": 11.2413,
+          "mean_tokens": 989.5,
+          "mean_prompt_tokens": 733.5,
+          "mean_completion_tokens": 256.0,
+          "mean_cost_usd": 0.000264,
+          "schema_valid_rate_pct": 100.0
+        }
+      },
+      "output_quality_impact": {
+        "inventory_check_agent": {
+          "baseline_structural": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "optimized_structural": [
+            "passed",
+            "passed"
+          ],
+          "optimized_semantic": [
+            "unavailable",
+            "unavailable"
+          ]
+        },
+        "fraud_screen_agent": {
+          "baseline_structural": [
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed",
+            "passed"
+          ],
+          "optimized_structural": [
+            "passed",
+            "passed"
+          ],
+          "optimized_semantic": [
+            "unavailable",
+            "unavailable"
+          ]
+        }
+      },
+      "evaluation_result": "passed",
+      "outcome": "succeeded_in_sandbox",
+      "requires_validation": false,
+      "failure_reasons": [],
+      "attribution_note": "Single candidate experiment."
+    }
+  ],
+  "validation_results": {
+    "validation_passed": true,
+    "original_workflow_integrity": {
+      "original_unchanged": true,
+      "checked_file_count": 11,
+      "changed_files": [],
+      "missing_files": [],
+      "added_files": []
+    },
+    "python_syntax_checks": {
+      "passed": true,
+      "files_checked": 9,
+      "errors": []
+    },
+    "import_checks": {
+      "passed": true,
+      "errors": []
+    },
+    "configuration_validation": {
+      "passed": true,
+      "errors": []
+    },
+    "reference_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "dependency_integrity": {
+      "passed": true,
+      "errors": []
+    },
+    "modification_verification": {
+      "passed": true,
+      "errors": []
+    },
+    "secret_hygiene": {
+      "passed": true,
+      "leaked_files": []
+    }
+  },
+  "baseline_runtime_execution_results": {
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic",
+    "fixed_baseline_reference_id": "hist_859e698746d5",
+    "matched_input_count": 10,
+    "unmatched_input_count": 0,
+    "excluded_records": [],
+    "execution_passed": true,
+    "execution_modes": [
+      "historical_recorded_execution"
+    ],
+    "runs_executed": 10,
+    "successful_runs": 10,
+    "failed_runs": 0,
+    "trace_files": [
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210453_trace01.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210453_trace02.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210453_trace03.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210453_trace04.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210453_trace05.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210515_trace06.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210515_trace07.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210515_trace08.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210515_trace09.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic\\live_20261125_210515_trace10.json"
+    ],
+    "schema_validation_summary": null,
+    "invalid_replay_samples": null,
+    "api_errors": [],
+    "errors": []
+  },
+  "runtime_execution_results": {
+    "execution_passed": true,
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "api_reported"
+    ],
+    "runs_executed": 2,
+    "successful_runs": 2,
+    "failed_runs": 0,
+    "incomplete_runs": [],
+    "concurrent_waves_executed": [
+      [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ],
+      [
+        "inventory_check_agent",
+        "fraud_screen_agent"
+      ]
+    ],
+    "trace_files": [
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\runtime_traces\\sb_20261125_212007_e445d9.json",
+      "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\runtime_traces\\sb_20261125_212114_9369be.json"
+    ],
+    "schema_validation_summary": {
+      "all_schemas_valid": true,
+      "failures": []
+    },
+    "invalid_replay_samples": [],
+    "api_errors": [],
+    "fallback_events": [],
+    "errors": []
+  },
+  "quality_evaluation": {
+    "workflow_id": "order_fulfillment_synthetic",
+    "baseline_quality": {
+      "evaluated_executions": 70,
+      "dimension_summary": {
+        "structural_validity": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 70,
+          "failed_count": 0,
+          "evaluated_count": 70
+        },
+        "correctness": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "completeness": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 70,
+          "failed_count": 0,
+          "evaluated_count": 70
+        },
+        "consistency": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "instruction_adherence": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 70,
+          "failed_count": 0,
+          "evaluated_count": 70
+        },
+        "semantic_quality": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        }
+      },
+      "agent_evaluations": [
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace01",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace02",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace03",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace04",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210453_trace05",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace06",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace07",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace08",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace09",
+          "run_index": null
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "live_20261125_210515_trace10",
+          "run_index": null
+        }
+      ]
+    },
+    "optimized_quality": {
+      "evaluated_executions": 14,
+      "dimension_summary": {
+        "structural_validity": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 14,
+          "failed_count": 0,
+          "evaluated_count": 14
+        },
+        "correctness": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "completeness": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 14,
+          "failed_count": 0,
+          "evaluated_count": 14
+        },
+        "consistency": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        },
+        "instruction_adherence": {
+          "status": "passed",
+          "pass_rate_pct": 100.0,
+          "passed_count": 14,
+          "failed_count": 0,
+          "evaluated_count": 14
+        },
+        "semantic_quality": {
+          "status": "unavailable",
+          "pass_rate_pct": null,
+          "passed_count": 0,
+          "failed_count": 0,
+          "evaluated_count": 0
+        }
+      },
+      "agent_evaluations": [
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212007_e445d9",
+          "run_index": 0
+        },
+        {
+          "agent_id": "order_intake_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        },
+        {
+          "agent_id": "inventory_check_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        },
+        {
+          "agent_id": "fraud_screen_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        },
+        {
+          "agent_id": "carrier_routing_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        },
+        {
+          "agent_id": "tax_classify_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        },
+        {
+          "agent_id": "invoice_tag_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        },
+        {
+          "agent_id": "fulfillment_summary_agent",
+          "structural_validity": "passed",
+          "correctness": "unavailable",
+          "completeness": "passed",
+          "consistency": "unavailable",
+          "instruction_adherence": "passed",
+          "semantic_quality": "unavailable",
+          "identified_issues": [],
+          "rationale": "Deterministic structural, completeness, and domain invariant checks completed. Semantic LLM-judge did not run; semantic_quality remains 'unavailable'.",
+          "evaluation_status": "completed",
+          "run_id": "sb_20261125_212114_9369be",
+          "run_index": 1
+        }
+      ]
+    },
+    "identified_regressions": [],
+    "has_quality_regression": false
+  },
+  "baseline_metrics": {
+    "workflow_id": "order_fulfillment_synthetic",
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "execution_modes": [
+      "historical_recorded_execution"
+    ],
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic",
+    "fixed_baseline_reference_id": "hist_859e698746d5",
+    "measurement_period": {
+      "earliest_trace_timestamp": "2026-11-25T21:05:04.533367+00:00",
+      "latest_trace_timestamp": "2026-11-25T21:05:16.237297+00:00"
+    },
+    "total_runs": 2,
+    "successful_runs": 2,
+    "failed_runs": 0,
+    "success_rate_pct": 100.0,
+    "mean_latency_seconds": 11.5005,
+    "median_latency_seconds": 11.5005,
+    "mean_agent_latency_seconds": 1.6416,
+    "mean_tokens": 9354.0,
+    "mean_prompt_tokens": 6414.5,
+    "mean_completion_tokens": 2939.5,
+    "mean_cost_usd_telemetry": 0.002726,
+    "mean_cost_usd_catalog_normalized": 0.002726,
+    "cost_calculation_basis": "historical_trace_catalog_normalized_from_recorded_tokens",
+    "schema_validation_passed": true,
+    "structural_validity_pass_rate_pct": 100.0,
+    "semantic_quality_evaluation": "unavailable",
+    "semantic_quality_status": "unavailable",
+    "semantic_quality_pass_rate_pct": null,
+    "per_agent_metrics": {
+      "order_intake_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 2.546,
+        "mean_tokens": 1651.0,
+        "mean_prompt_tokens": 853.0,
+        "mean_completion_tokens": 798.0,
+        "mean_cost_usd": null
+      },
+      "inventory_check_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 1.3415,
+        "mean_tokens": 1108.0,
+        "mean_prompt_tokens": 738.5,
+        "mean_completion_tokens": 369.5,
+        "mean_cost_usd": null
+      },
+      "fraud_screen_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 1.345,
+        "mean_tokens": 980.0,
+        "mean_prompt_tokens": 733.5,
+        "mean_completion_tokens": 246.5,
+        "mean_cost_usd": null
+      },
+      "carrier_routing_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 1.0815,
+        "mean_tokens": 841.0,
+        "mean_prompt_tokens": 631.5,
+        "mean_completion_tokens": 209.5,
+        "mean_cost_usd": null
+      },
+      "tax_classify_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 1.4445,
+        "mean_tokens": 977.0,
+        "mean_prompt_tokens": 676.5,
+        "mean_completion_tokens": 300.5,
+        "mean_cost_usd": null
+      },
+      "invoice_tag_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 1.371,
+        "mean_tokens": 1036.5,
+        "mean_prompt_tokens": 709.5,
+        "mean_completion_tokens": 327.0,
+        "mean_cost_usd": null
+      },
+      "fulfillment_summary_agent": {
+        "runs_count": 2,
+        "models_observed": [],
+        "mean_latency_seconds": 2.362,
+        "mean_tokens": 2760.5,
+        "mean_prompt_tokens": 2072.0,
+        "mean_completion_tokens": 688.5,
+        "mean_cost_usd": null
+      }
+    },
+    "input_dataset_hashes": [
+      "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf"
+    ],
+    "matched_input_count": 10,
+    "unmatched_input_count": 0,
+    "excluded_records": [],
+    "historical_mcp_reference": {
+      "total_runs": 10,
+      "mean_latency_seconds": 12.1497,
+      "mean_tokens": 9203.4
+    }
+  },
+  "optimized_metrics": {
+    "workflow_id": "order_fulfillment_synthetic",
+    "experiment_id": "wp_synth_5dim_live_20261126_024837__phase_a_workflow_parallelization",
+    "variant": "optimized",
+    "source": "current_experiment",
+    "re_executed": true,
+    "groq_api_calls": 14,
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\runtime_traces",
+    "execution_status": "SUCCESS",
+    "execution_modes": [
+      "live_llm_execution"
+    ],
+    "usage_sources": [
+      "api_reported"
+    ],
+    "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+    "process_metadata": {
+      "execution_backend": "local_subprocess",
+      "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+      "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+      "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+      "exit_code": 0,
+      "process_exit_codes": [
+        0,
+        0
+      ],
+      "timed_out": false,
+      "execution_status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "process_duration_seconds": 117.0359,
+      "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+      "error_details": null
+    },
+    "total_runs": 2,
+    "successful_runs": 2,
+    "failed_runs": 0,
+    "incomplete_runs": [],
+    "success_rate_pct": 100.0,
+    "mean_latency_seconds": 58.4753,
+    "median_latency_seconds": 58.4753,
+    "mean_agent_latency_seconds": 9.3272,
+    "mean_tokens": 18681.0,
+    "mean_prompt_tokens": 6414.5,
+    "mean_completion_tokens": 5852.0,
+    "mean_cost_usd_catalog_normalized": 0.005433,
+    "schema_validation_passed": true,
+    "structural_validity_pass_rate_pct": 100.0,
+    "schema_validation_failures": [],
+    "invalid_replay_samples": [],
+    "semantic_quality_evaluation": "unavailable",
+    "semantic_quality_status": "unavailable",
+    "semantic_quality_pass_rate_pct": null,
+    "api_errors": [],
+    "per_run_metrics": [
+      {
+        "run_id": "sb_20261125_212007_e445d9",
+        "run_index": 0,
+        "matched_baseline_run_id": "live_20261125_210453_trace01",
+        "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+        "status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "duration_seconds": 63.1568,
+        "prompt_tokens": 6513,
+        "completion_tokens": 5958,
+        "total_tokens": 18984,
+        "estimated_cost_usd": 0.005526,
+        "schema_valid": true
+      },
+      {
+        "run_id": "sb_20261125_212114_9369be",
+        "run_index": 1,
+        "matched_baseline_run_id": "live_20261125_210453_trace02",
+        "input_hash": "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+        "status": "SUCCESS",
+        "execution_mode": "live_llm_execution",
+        "duration_seconds": 53.7939,
+        "prompt_tokens": 6316,
+        "completion_tokens": 5746,
+        "total_tokens": 18378,
+        "estimated_cost_usd": 0.00534,
+        "schema_valid": true
+      }
+    ],
+    "per_agent_metrics": {
+      "order_intake_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 4.325,
+        "mean_tokens": 1560.5,
+        "mean_prompt_tokens": 853.0,
+        "mean_completion_tokens": 707.5,
+        "mean_cost_usd": 0.000553,
+        "schema_valid_rate_pct": 100.0
+      },
+      "inventory_check_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 12.6664,
+        "mean_tokens": 1062.0,
+        "mean_prompt_tokens": 738.5,
+        "mean_completion_tokens": 323.5,
+        "mean_cost_usd": 0.000304,
+        "schema_valid_rate_pct": 100.0
+      },
+      "fraud_screen_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 11.2413,
+        "mean_tokens": 989.5,
+        "mean_prompt_tokens": 733.5,
+        "mean_completion_tokens": 256.0,
+        "mean_cost_usd": 0.000264,
+        "schema_valid_rate_pct": 100.0
+      },
+      "carrier_routing_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 3.1246,
+        "mean_tokens": 843.0,
+        "mean_prompt_tokens": 631.5,
+        "mean_completion_tokens": 211.5,
+        "mean_cost_usd": 0.000222,
+        "schema_valid_rate_pct": 100.0
+      },
+      "tax_classify_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 5.5583,
+        "mean_tokens": 1028.0,
+        "mean_prompt_tokens": 676.5,
+        "mean_completion_tokens": 351.5,
+        "mean_cost_usd": 0.000312,
+        "schema_valid_rate_pct": 100.0
+      },
+      "invoice_tag_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 8.3764,
+        "mean_tokens": 995.5,
+        "mean_prompt_tokens": 709.5,
+        "mean_completion_tokens": 286.0,
+        "mean_cost_usd": 0.000278,
+        "schema_valid_rate_pct": 100.0
+      },
+      "fulfillment_summary_agent": {
+        "runs_count": 2,
+        "models_observed": [
+          "openai/gpt-oss-120b"
+        ],
+        "mean_latency_seconds": 19.9984,
+        "mean_tokens": 2862.0,
+        "mean_prompt_tokens": 2072.0,
+        "mean_completion_tokens": 790.0,
+        "mean_cost_usd": 0.000785,
+        "schema_valid_rate_pct": 100.0
+      }
+    },
+    "input_dataset_hashes": [
+      "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf"
+    ]
+  },
+  "before_and_after_comparison": {
+    "comparison_type": "historical_baseline_vs_live_optimized",
+    "comparability": {
+      "inputs_comparable": true,
+      "modes_compatible_for_live_claims": true,
+      "baseline_re_executed": false,
+      "baseline_measurement_period": {
+        "earliest_trace_timestamp": "2026-11-25T21:05:04.533367+00:00",
+        "latest_trace_timestamp": "2026-11-25T21:05:16.237297+00:00"
+      },
+      "fixed_baseline_reference_id": "hist_859e698746d5",
+      "matched_input_count": 10,
+      "unmatched_input_count": 0,
+      "baseline_runs": 2,
+      "optimized_runs": 2,
+      "baseline_modes": [
+        "historical_recorded_execution"
+      ],
+      "optimized_modes": [
+        "live_llm_execution"
+      ]
+    },
+    "mean_workflow_latency": {
+      "baseline_seconds": 11.5005,
+      "optimized_seconds": 58.4753,
+      "improvement_pct": -408.46,
+      "raw_replay_delta_pct": null
+    },
+    "median_workflow_latency": {
+      "baseline_seconds": 11.5005,
+      "optimized_seconds": 58.4753,
+      "improvement_pct": -408.46,
+      "raw_replay_delta_pct": null
+    },
+    "mean_agent_latency": {
+      "baseline_seconds": 1.6416,
+      "optimized_seconds": 9.3272,
+      "improvement_pct": -468.18,
+      "per_agent": {
+        "carrier_routing_agent": {
+          "baseline_mean_latency_seconds": 1.0815,
+          "optimized_mean_latency_seconds": 3.1246,
+          "latency_improvement_pct": -188.91,
+          "baseline_mean_tokens": 841.0,
+          "optimized_mean_tokens": 843.0,
+          "token_improvement_pct": -0.24
+        },
+        "fraud_screen_agent": {
+          "baseline_mean_latency_seconds": 1.345,
+          "optimized_mean_latency_seconds": 11.2413,
+          "latency_improvement_pct": -735.78,
+          "baseline_mean_tokens": 980.0,
+          "optimized_mean_tokens": 989.5,
+          "token_improvement_pct": -0.97
+        },
+        "fulfillment_summary_agent": {
+          "baseline_mean_latency_seconds": 2.362,
+          "optimized_mean_latency_seconds": 19.9984,
+          "latency_improvement_pct": -746.67,
+          "baseline_mean_tokens": 2760.5,
+          "optimized_mean_tokens": 2862.0,
+          "token_improvement_pct": -3.68
+        },
+        "inventory_check_agent": {
+          "baseline_mean_latency_seconds": 1.3415,
+          "optimized_mean_latency_seconds": 12.6664,
+          "latency_improvement_pct": -844.2,
+          "baseline_mean_tokens": 1108.0,
+          "optimized_mean_tokens": 1062.0,
+          "token_improvement_pct": 4.15
+        },
+        "invoice_tag_agent": {
+          "baseline_mean_latency_seconds": 1.371,
+          "optimized_mean_latency_seconds": 8.3764,
+          "latency_improvement_pct": -510.97,
+          "baseline_mean_tokens": 1036.5,
+          "optimized_mean_tokens": 995.5,
+          "token_improvement_pct": 3.96
+        },
+        "order_intake_agent": {
+          "baseline_mean_latency_seconds": 2.546,
+          "optimized_mean_latency_seconds": 4.325,
+          "latency_improvement_pct": -69.87,
+          "baseline_mean_tokens": 1651.0,
+          "optimized_mean_tokens": 1560.5,
+          "token_improvement_pct": 5.48
+        },
+        "tax_classify_agent": {
+          "baseline_mean_latency_seconds": 1.4445,
+          "optimized_mean_latency_seconds": 5.5583,
+          "latency_improvement_pct": -284.79,
+          "baseline_mean_tokens": 977.0,
+          "optimized_mean_tokens": 1028.0,
+          "token_improvement_pct": -5.22
+        }
+      }
+    },
+    "latency": {
+      "baseline_mean_seconds": 11.5005,
+      "optimized_mean_seconds": 58.4753,
+      "improvement_pct": -408.46,
+      "comparable_for_live_claim": true,
+      "note": "Measured live workflow execution latency on matched inputs."
+    },
+    "input_tokens": {
+      "baseline_mean_tokens": 6414.5,
+      "optimized_mean_tokens": 6414.5,
+      "improvement_pct": 0.0
+    },
+    "output_tokens": {
+      "baseline_mean_tokens": 2939.5,
+      "optimized_mean_tokens": 5852.0,
+      "improvement_pct": -99.08
+    },
+    "total_tokens": {
+      "baseline_mean_tokens": 9354.0,
+      "optimized_mean_tokens": 18681.0,
+      "improvement_pct": -99.71
+    },
+    "token_consumption": {
+      "baseline_mean_tokens": 9354.0,
+      "optimized_mean_tokens": 18681.0,
+      "improvement_pct": -99.71
+    },
+    "execution_cost": {
+      "baseline_telemetry_usd": 0.002726,
+      "baseline_catalog_normalized_usd": 0.002726,
+      "optimized_catalog_normalized_usd": 0.005433,
+      "improvement_pct_catalog_normalized": -99.3,
+      "cost_basis": "estimated_from_model_catalog_using_api_reported_tokens"
+    },
+    "execution_success_rate": {
+      "baseline_pct": 100.0,
+      "optimized_pct": 100.0,
+      "delta_pct_points": 0.0,
+      "improvement_pct": 0.0
+    },
+    "output_structural_validity": {
+      "baseline_pass_rate_pct": 100.0,
+      "optimized_pass_rate_pct": 100.0,
+      "improvement_pct": 0.0
+    },
+    "semantic_quality": {
+      "baseline_status_or_pct": "unavailable",
+      "optimized_status_or_pct": "unavailable",
+      "improvement_pct": null,
+      "identified_regressions": []
+    },
+    "output_quality": {
+      "baseline_quality": "unavailable",
+      "optimized_schema_valid": true,
+      "semantic_quality_evaluation": "unavailable",
+      "identified_regressions": [],
+      "note": "Structural Pydantic validity, deterministic quality checks, and semantic quality are evaluated separately; unavailable semantic quality is never fabricated."
+    }
+  },
+  "outcome_flags": {
+    "modification_applied": true,
+    "validation_passed": true,
+    "execution_passed": true,
+    "evaluation_passed": true
+  },
+  "final_experiment_assessment": {
+    "status": "no_significant_improvement",
+    "reasons": [
+      "Semantic quality evaluation is unavailable.",
+      "Workflow executed reliably with acceptable quality, but no >=2% latency/token/cost gain observed."
+    ]
+  },
+  "overall_experiment_status": "no_significant_improvement"
+}

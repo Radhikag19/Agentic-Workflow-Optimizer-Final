@@ -1,0 +1,184 @@
+{
+  "run_id": "live_20261125_210453_trace03",
+  "workflow_name": "order_fulfillment_synthetic",
+  "model": "openai/gpt-oss-120b",
+  "status": "SUCCESS",
+  "duration_seconds": 11.579,
+  "agent_execution_count": 7,
+  "agent_executions": [
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_1 (gsk_...BPdW)",
+      "duration_seconds": 2.282,
+      "tokens": 1423,
+      "prompt_tokens": 844,
+      "completion_tokens": 579,
+      "output": {
+        "record_id": "ORD-003",
+        "request_id": "ORD-003",
+        "customer_id": "CUST-103",
+        "customer_tier": "new",
+        "billing_country": "NG",
+        "shipping_region": "EU-CENTRAL",
+        "warehouse_region": "EU-CENTRAL",
+        "order_total_usd": 9400.0,
+        "shipping_speed": "overnight",
+        "sku_items": [
+          {
+            "sku": "SKU-GPU-99",
+            "qty": 4,
+            "unit_price_usd": 2350.0,
+            "stock_available": 12
+          }
+        ],
+        "legacy_erp_dump": "LEGACY_ERP_V1_ORD-003",
+        "raw_audit_trail": [
+          "INGESTED_ORD-003"
+        ],
+        "debug_headers": {
+          "x-trace-source": "synthetic-intake",
+          "x-legacy-bus": "erp-v1-compat"
+        },
+        "deprecated_sku_notes": "Deprecated ERP alias log for ORD-003",
+        "internal_routing_flags": [
+          "FLAG_COMPAT_V1"
+        ],
+        "formatting_metadata": {
+          "format_version": "1.0",
+          "encoding": "utf-8"
+        }
+      },
+      "notes": null,
+      "order": 1,
+      "agent_id": "order_intake_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_2 (gsk_...f1VS)",
+      "duration_seconds": 1.199,
+      "tokens": 1029,
+      "prompt_tokens": 720,
+      "completion_tokens": 309,
+      "output": {
+        "record_id": "ORD-003",
+        "in_stock": true,
+        "warehouse_code": "WH-EU-CENTRAL",
+        "backorder_skus": [],
+        "inventory_note": "Stock available at WH-EU-CENTRAL"
+      },
+      "notes": null,
+      "order": 2,
+      "agent_id": "inventory_check_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_3 (gsk_...maHn)",
+      "duration_seconds": 1.044,
+      "tokens": 924,
+      "prompt_tokens": 715,
+      "completion_tokens": 209,
+      "output": {
+        "record_id": "ORD-003",
+        "risk_band": "high",
+        "review_flag": true,
+        "screen_note": "Risk band high for new tier ($9400.0)."
+      },
+      "notes": null,
+      "order": 3,
+      "agent_id": "fraud_screen_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_4 (gsk_...Bm5c)",
+      "duration_seconds": 1.468,
+      "tokens": 875,
+      "prompt_tokens": 627,
+      "completion_tokens": 248,
+      "output": {
+        "record_id": "ORD-003",
+        "carrier_name": "DHL",
+        "service_level": "Overnight",
+        "estimated_days": 1,
+        "in_stock": true,
+        "review_flag": true
+      },
+      "notes": null,
+      "order": 4,
+      "agent_id": "carrier_routing_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_5 (gsk_...sK3t)",
+      "duration_seconds": 1.532,
+      "tokens": 1065,
+      "prompt_tokens": 669,
+      "completion_tokens": 396,
+      "output": {
+        "record_id": "ORD-003",
+        "tax_jurisdiction": "NG-TAX",
+        "tax_rate_pct": 5.0,
+        "tax_amount_usd": 470.0,
+        "in_stock": true,
+        "review_flag": true,
+        "carrier_name": "DHL",
+        "service_level": "Overnight"
+      },
+      "notes": null,
+      "order": 5,
+      "agent_id": "tax_classify_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_6 (gsk_...qtlA)",
+      "duration_seconds": 1.518,
+      "tokens": 1098,
+      "prompt_tokens": 702,
+      "completion_tokens": 396,
+      "output": {
+        "record_id": "ORD-003",
+        "gl_account_code": "GL-4010",
+        "invoice_tag": "INV-ORD-003",
+        "billing_batch": "BATCH-NEW",
+        "in_stock": true,
+        "review_flag": true,
+        "carrier_name": "DHL",
+        "service_level": "Overnight",
+        "tax_jurisdiction": "NG-TAX",
+        "tax_amount_usd": 470.0
+      },
+      "notes": null,
+      "order": 6,
+      "agent_id": "invoice_tag_agent"
+    },
+    {
+      "status": "SUCCESS",
+      "assigned_key_identifier": "GROQ_API_KEY_7 (gsk_...ERhy)",
+      "duration_seconds": 2.53,
+      "tokens": 2929,
+      "prompt_tokens": 2064,
+      "completion_tokens": 865,
+      "output": {
+        "run_id": "",
+        "record_id": "ORD-003",
+        "final_decision": "HOLD_FOR_REVIEW",
+        "carrier_name": "DHL",
+        "service_level": "Overnight",
+        "tax_jurisdiction": "NG-TAX",
+        "tax_amount_usd": 470.0,
+        "invoice_tag": "INV-ORD-003",
+        "summary": "Order ORD-003: HOLD_FOR_REVIEW via DHL Overnight (NG-TAX, INV-ORD-003).",
+        "human_review_required": true
+      },
+      "notes": null,
+      "order": 7,
+      "agent_id": "fulfillment_summary_agent"
+    }
+  ],
+  "total_tokens": 9343,
+  "prompt_tokens": 6341,
+  "completion_tokens": 3002,
+  "estimated_cost_usd": 0.002752,
+  "error_message": null,
+  "final_output": "{\n  \"run_id\": \"\",\n  \"record_id\": \"ORD-003\",\n  \"final_decision\": \"HOLD_FOR_REVIEW\",\n  \"carrier_name\": \"DHL\",\n  \"service_level\": \"Overnight\",\n  \"tax_jurisdiction\": \"NG-TAX\",\n  \"tax_amount_usd\": 470.0,\n  \"invoice_tag\": \"INV-ORD-003\",\n  \"summary\": \"Order ORD-003: HOLD_FOR_REVIEW via DHL Overnight (NG-TAX, INV-ORD-003).\",\n  \"human_review_required\": true\n}",
+  "timestamp": "2026-11-25T21:05:27.819059+00:00"
+}

@@ -59,17 +59,17 @@ Autonomous optimization analysis for workflow 'expense_reimbursement' across 8 m
 No candidates identified for this dimension based on available trace evidence.
 
 ### Model Selection Recommendations (Requires Validation) (2 candidates)
-#### [Tier 2] Route normalize_agent to Smaller/Faster Model (requires validation)
+#### [Tier 2] Route normalize_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)
 - **Target Agents:** `normalize_agent`
 - **Observed Problem:** Agent 'normalize_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (1.60s) and compute overhead for straightforward parsing tasks.
-- **Proposed Solution:** Switch 'normalize_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.
+- **Proposed Solution:** Switch 'normalize_agent' to `openai/gpt-oss-20b` per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.
 - **Expected Benefit:** Latency: 40.0% reduction | Tokens: 0% savings | High accuracy on standard schema parsing; edge case validation required.
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
-#### [Tier 2] Route receipt_agent to Smaller/Faster Model (requires validation)
+#### [Tier 2] Route receipt_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)
 - **Target Agents:** `receipt_agent`
 - **Observed Problem:** Agent 'receipt_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (4.06s) and compute overhead for straightforward parsing tasks.
-- **Proposed Solution:** Switch 'receipt_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.
+- **Proposed Solution:** Switch 'receipt_agent' to `openai/gpt-oss-20b` per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.
 - **Expected Benefit:** Latency: 40.0% reduction | Tokens: 0% savings | High accuracy on standard schema parsing; edge case validation required.
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
@@ -141,8 +141,8 @@ No candidates identified for this dimension based on available trace evidence.
 
 ### Tier 2: Validated Enhancements (5 items)
 - **Consolidate receipt_agent and normalize_agent into Unified Agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
-- **Route normalize_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
-- **Route receipt_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
+- **Route normalize_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
+- **Route receipt_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Streamline Intermediate Handoff Payloads to Field-Specific Deltas**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Fast-Path Early Exit for Standard/Compliant Artifacts**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 

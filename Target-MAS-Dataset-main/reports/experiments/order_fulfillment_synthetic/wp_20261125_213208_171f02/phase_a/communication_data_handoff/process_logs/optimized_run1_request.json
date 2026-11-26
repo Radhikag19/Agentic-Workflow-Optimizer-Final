@@ -1,0 +1,47 @@
+{
+  "experiment_id": "wp_20261125_213208_171f02__phase_a_communication_data_handoff",
+  "workflow_id": "order_fulfillment_synthetic",
+  "variant": "optimized",
+  "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_213208_171f02\\phase_a\\communication_data_handoff\\sandbox_workflow",
+  "original_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic",
+  "sandbox_workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_213208_171f02\\phase_a\\communication_data_handoff\\sandbox_workflow",
+  "experiment_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_213208_171f02\\phase_a\\communication_data_handoff",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_213208_171f02\\phase_a\\communication_data_handoff\\runtime_traces",
+  "event_log_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_213208_171f02\\phase_a\\communication_data_handoff\\process_logs\\optimized_run1_events.jsonl",
+  "enable_trace_replay_fallback": false,
+  "evidence_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Workflow_Evidence",
+  "data_base_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\data",
+  "sample_inputs": [
+    {
+      "record_id": "ORD-002",
+      "request_id": "ORD-002",
+      "customer_id": "CUST-102",
+      "customer_name": "Kestrel Retail Inc.",
+      "customer_tier": "standard",
+      "billing_country": "US",
+      "shipping_region": "US-EAST",
+      "warehouse_region": "US-EAST",
+      "shipping_speed": "expedited",
+      "order_total_usd": 1850.0,
+      "sku_items": [
+        {
+          "sku": "SKU-SRV-88",
+          "qty": 1,
+          "unit_price_usd": 1850.0,
+          "stock_available": 6
+        }
+      ],
+      "payment_verified": true,
+      "account_age_days": 410,
+      "_matched_baseline_run_id": "live_20261125_210453_trace02",
+      "_matched_identifiers": {
+        "record_id": "ORD-002",
+        "request_id": "ORD-002"
+      }
+    }
+  ],
+  "run_indices": [
+    1
+  ],
+  "num_runs": 1
+}

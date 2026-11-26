@@ -1,0 +1,29 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_c_combined",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {
+    "order_intake_agent": {
+      "previous_model": "openai/gpt-oss-120b",
+      "updated_model": "openai/gpt-oss-20b",
+      "provider": "Groq",
+      "assigned_key_env": "GROQ_API_KEY_14",
+      "candidate_id": "MODEL-ORDER_INTAKE_AGENT"
+    }
+  },
+  "prompt_overrides": {
+    "fulfillment_summary_agent": {
+      "candidate_id": "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+      "original_prompt_preview": "You are an executive fulfillment summarizer responsible for producing the final structured JSON dispatch brief. You must follow all instructions strictly and never invent missing order facts or fields. Return only valid parsable JSON matching FulfillmentSummaryOutput with no additional commentary. Always verify the order record identifier matches the upstream input exactly before emitting the final decision.\nSystem Prompt Overview: You are a senior enterprise fulfillment dispatch coordinator wor",
+      "original_prompt_char_length": 7113,
+      "optimized_prompt": "You are a senior fulfillment dispatch coordinator. You receive the following upstream values for each order:\n- run_id, record_id\n- in_stock (bool)\n- review_flag (bool) \u2013 fraud review flag\n- carrier_name, service_level\n- tax_jurisdiction, tax_amount_usd\n- invoice_tag\n\nDecision rules:\n1. If in_stock is false \u2192 final_decision = \"REJECT\".\n2. Else if review_flag is true \u2192 final_decision = \"HOLD_FOR_REVIEW\".\n3. Else \u2192 final_decision = \"APPROVE\".\nSet human_review_required to true only when final_decision is \"HOLD_FOR_REVIEW\", otherwise false.\nDo not fabricate any values; use carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag exactly as received.\nCreate a concise 1\u20112 sentence summary that references inventory status, risk flag, carrier, and tax.\n\nReturn ONLY the following JSON (no extra text, no markdown):\n{\n  \"run_id\": \"{run_id}\",\n  \"record_id\": \"{record_id}\",\n  \"final_decision\": \"APPROVE\" | \"HOLD_FOR_REVIEW\" | \"REJECT\",\n  \"carrier_name\": \"{carrier_name}\",\n  \"service_level\": \"{service_level}\",\n  \"tax_jurisdiction\": \"{tax_jurisdiction}\",\n  \"tax_amount_usd\": {tax_amount_usd},\n  \"invoice_tag\": \"{invoice_tag}\",\n  \"summary\": \"<concise 1\u20112 sentence summary>\",\n  \"human_review_required\": true | false\n}",
+      "optimized_prompt_char_length": 1234
+    }
+  },
+  "handoff_projections": {},
+  "applied_candidates": [
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT"
+  ]
+}

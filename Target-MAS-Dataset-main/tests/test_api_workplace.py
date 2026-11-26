@@ -171,7 +171,7 @@ def test_04_all_10_workflows_agents_prompts_helpers_and_baseline_matching():
     client = TestClient(app)
 
     wfs = client.get("/api/workflows").json()
-    assert len(wfs) == 10
+    assert len(wfs) >= 10
 
     matched_by_wf = {}
     for w in wfs:

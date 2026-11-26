@@ -1,0 +1,49 @@
+"""Agent 4: Carrier Routing Agent (Consolidation Chain Step 1 — compact prompt/output)."""
+
+from typing import Any, Dict, Optional
+from crewai import Agent
+from common.agent_runner import create_crew_agent, run_agent_task
+from common.validation import CarrierRoutingOutput
+from common.metrics import MetricsTracker
+
+AGENT_ID = "carrier_routing_agent"
+ROLE = "Carrier Zone Router"
+GOAL = "Deterministically assign carrier_name, service_level, and estimated_days while forwarding in_stock and review_flag."
+BACKSTORY = (
+    "Rules: read shipping_region, shipping_speed, record_id from workflow_input, in_stock from inventory_check_agent, review_flag from fraud_screen_agent. "
+    "carrier_name: 'UPS' if shipping_region starts with 'US' or 'CA'; 'DHL' if 'EU' or 'UK'; else 'FedEx'. "
+    "service_level & estimated_days by shipping_speed: standard->('Standard',5), expedited->('Expedited',2), overnight->('Overnight',1). "
+    "Forward in_stock and review_flag booleans verbatim."
+)
+
+
+def create_agent(llm: Optional[Any] = None) -> Agent:
+    return create_crew_agent(role=ROLE, goal=GOAL, backstory=BACKSTORY, agent_id=AGENT_ID, llm=llm)
+
+
+def run_carrier_routing(
+    intake_output: Dict[str, Any],
+    inventory_output: Dict[str, Any],
+    fraud_output: Dict[str, Any],
+    agent: Optional[Agent] = None,
+    tracker: Optional[MetricsTracker] = None,
+) -> Dict[str, Any]:
+    active_agent = agent or create_agent()
+    rec_id = intake_output.get("record_id", "ORD-000")
+    region = intake_output.get("shipping_region", "US-EAST")
+    speed = intake_output.get("shipping_speed", "standard")
+    in_stock = inventory_output.get("in_stock", True)
+    review_flag = fraud_output.get("review_flag", False)
+    task_desc = (
+        f"Assign carrier for {rec_id}: region={region}, speed={speed}, in_stock={in_stock}, review_flag={review_flag}. "
+        f'Return ONLY JSON: {{"record_id": "{rec_id}", "carrier_name": "UPS|DHL|FedEx", "service_level": "Standard|Expedited|Overnight", "estimated_days": 1|2|5}}'
+    )
+    return run_agent_task(
+        agent=active_agent,
+        agent_id=AGENT_ID,
+        task_description=task_desc,
+        expected_output_desc="Valid JSON matching CarrierRoutingOutput.",
+        output_model=CarrierRoutingOutput,
+        tracker=tracker,
+        agent_name=ROLE,
+    )

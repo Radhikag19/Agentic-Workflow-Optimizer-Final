@@ -1,0 +1,1812 @@
+{
+  "schema_version": "1.0",
+  "workflow_metadata": {
+    "workflow_id": "order_fulfillment_synthetic",
+    "workflow_name": "Order Fulfillment Synthetic",
+    "source_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic",
+    "workflow_entrypoint": "workflow.py",
+    "analysis_status": "completed"
+  },
+  "source_inventory": {
+    "total_python_files": 8,
+    "agent_candidate_files": 7,
+    "parsed_files": 8,
+    "failed_files": 0,
+    "files": [
+      {
+        "path": "carrier_routing_agent.py",
+        "sha256": "0a7188065bc9201385678668659494fb7c61735f506be44191af0321d7ed86ed",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "fraud_screen_agent.py",
+        "sha256": "27ddb4c7cade61e3566b49c4618a2370d96c410117609ff2325a28b091b397be",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "fulfillment_summary_agent.py",
+        "sha256": "edb4ad02a08b51220fa1fa14096dd52b922062ad4052105ec9d62eed09ca4f31",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "inventory_check_agent.py",
+        "sha256": "79291b861ea275603e0946b311aec00551fed8de37c5073217209de952e38472",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "invoice_tag_agent.py",
+        "sha256": "2fee13fed36744b9db34b5f0eb27b8252d2a20f0f8d633141a8a45d4c6d03655",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "order_intake_agent.py",
+        "sha256": "63b93984cd3c9b4b132d8c4fdd9501fd787c8cb2344f64f2789586fb680e7186",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "tax_classify_agent.py",
+        "sha256": "423d15b4ff9833c8ab563cd56af67c69c219774401e19845b895255db6d8dd5a",
+        "parse_status": "parsed"
+      },
+      {
+        "path": "workflow.py",
+        "sha256": "3850570e77803205631cb218458f7f43742d436a1f46959ad5e3af4b12e73574",
+        "parse_status": "parsed"
+      }
+    ]
+  },
+  "agent_inventory": {
+    "discovered_agent_files": 7,
+    "identified_agent_definitions": 7,
+    "workflow_invoked_agents": 7,
+    "uninvoked_agent_definitions": 0,
+    "agents": [
+      {
+        "agent_id": "carrier_routing_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\carrier_routing_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_002"
+        ]
+      },
+      {
+        "agent_id": "fraud_screen_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\fraud_screen_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_004"
+        ]
+      },
+      {
+        "agent_id": "fulfillment_summary_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\fulfillment_summary_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_006"
+        ]
+      },
+      {
+        "agent_id": "inventory_check_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\inventory_check_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_008"
+        ]
+      },
+      {
+        "agent_id": "invoice_tag_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\invoice_tag_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_010"
+        ]
+      },
+      {
+        "agent_id": "order_intake_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\order_intake_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_012"
+        ]
+      },
+      {
+        "agent_id": "tax_classify_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\tax_classify_agent.py",
+        "definition_status": "static",
+        "invocation_status": "invoked",
+        "evidence_refs": [
+          "ev_agent_014"
+        ]
+      }
+    ]
+  },
+  "agent_details": [
+    {
+      "agent_id": "carrier_routing_agent",
+      "definition": {
+        "type": "function",
+        "name": "carrier_routing_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\carrier_routing_agent.py",
+        "start_line": 15,
+        "end_line": 16
+      },
+      "role": "Carrier Zone Router",
+      "goal": "Assign carrier name, service level, and transit days.",
+      "backstory": "You route shipments cleanly.",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_carrier_routing_agent_1",
+          "agent_id": "carrier_routing_agent",
+          "description": "f'Assign carrier for {rec_id}: region={region}, speed={speed}, in_stock={in_stock}, review_flag={review_flag}. Return ONLY JSON: {{\"record_id\": \"{rec_id}\", \"carrier_name\": \"UPS|DHL|FedEx\", \"service_level\": \"Standard|Expedited|Overnight\", \"estimated_days\": 1|2|5}}'",
+          "expected_output": "Valid JSON matching CarrierRoutingOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_016"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_002"
+      ]
+    },
+    {
+      "agent_id": "fraud_screen_agent",
+      "definition": {
+        "type": "function",
+        "name": "fraud_screen_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\fraud_screen_agent.py",
+        "start_line": 15,
+        "end_line": 16
+      },
+      "role": "Order Risk Screener",
+      "goal": "Classify transaction risk band from customer tier, billing country, and order total.",
+      "backstory": "You classify transaction risk levels concisely from order metadata.",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_fraud_screen_agent_1",
+          "agent_id": "fraud_screen_agent",
+          "description": "f'\\nScreen risk for order {rec_id}:\\n- Customer ID: {cust_id}\\n- Customer Tier: {tier}\\n- Order Total USD: {total}\\n- Billing Country: {country}\\n\\nRule: If customer_tier is \"new\" and order_total_usd >= 5000, risk_band=\"high\" and review_flag=true. Else if order_total_usd >= 2000, risk_band=\"medium\" and review_flag=false. Otherwise risk_band=\"low\" and review_flag=false.\\nReturn ONLY valid JSON:\\n{{\\n  \"record_id\": \"{rec_id}\",\\n  \"risk_band\": \"low|medium|high\",\\n  \"review_flag\": true or false,\\n  \"screen_note\": \"Brief risk summary\"\\n}}\\n'",
+          "expected_output": "Valid JSON matching FraudScreenOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_017"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_004"
+      ]
+    },
+    {
+      "agent_id": "fulfillment_summary_agent",
+      "definition": {
+        "type": "function",
+        "name": "fulfillment_summary_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\fulfillment_summary_agent.py",
+        "start_line": 69,
+        "end_line": 70
+      },
+      "role": "Executive Fulfillment Summarizer",
+      "goal": "You are an executive fulfillment summarizer responsible for producing the final structured JSON dispatch brief. You must follow all instructions strictly and never invent missing order facts or fields. Return only valid parsable JSON matching FulfillmentSummaryOutput with no additional commentary. Always verify the order record identifier matches the upstream input exactly before emitting the final decision.",
+      "backstory": "System Prompt Overview: You are a senior enterprise fulfillment dispatch coordinator working inside an automated multi-agent pipeline.\nInstructions: You receive intermediate handoff payloads from previous stages covering stock status, risk screening, carrier routing, tax classification, and ledger invoice tagging.\nGuidelines: Your responsibility is to synthesize the final decision strictly from supplied evidence without ever fabricating numbers, SKUs, tax jurisdictions, or carrier details.\nPass this structured JSON output cleanly to the downstream reporting consumer and retain exact field names.\nInstructions: Do not fabricate facts. Do not invent unsupported numbers. Return strictly valid JSON with no additional commentary outside the JSON object.\nOverview: Every enterprise order must be classified strictly as APPROVE, HOLD_FOR_REVIEW, or REJECT based on clear operational criteria documented below.\nTask: Pass structured JSON cleanly with exact keys and preserve all identifiers faithfully across the intermediate handoff boundary.\nSystem Prompt Guidelines: Always maintain strict JSON validity, avoid markdown fences when unnecessary, never add unrequested fields, and verify every required key is present.\n\nSECTION 1 \u2014 MANDATORY ENTERPRISE DECISION POLICY AND STANDARD OPERATING GUIDELINES:\n1. You must classify final_decision strictly into one of exactly three allowed values: APPROVE, HOLD_FOR_REVIEW, or REJECT.\n2. You must always classify final_decision as REJECT whenever inventory in_stock is false or backorder stockout prevents immediate fulfillment.\n3. You must always classify final_decision as HOLD_FOR_REVIEW whenever in_stock is true AND fraud review_flag is true or transaction risk_band is high.\n4. You must always classify final_decision as APPROVE whenever in_stock is true AND fraud review_flag is false.\n5. Never invent facts, carrier codes, tax rates, invoice tags, or warehouse allocations not explicitly grounded in upstream agent payloads.\n6. Return only valid JSON. Do not include conversational preambles. No additional commentary outside the JSON payload.\n\nSECTION 2 \u2014 REPEATED COMPLIANCE AND OUTPUT FORMATTING PREAMBLE (REDUNDANT POLICY REMINDERS):\n- Instructions: You must classify final_decision strictly into one of exactly three allowed values: APPROVE, HOLD_FOR_REVIEW, or REJECT.\n- Guidelines: You must always classify final_decision as REJECT whenever inventory in_stock is false or backorder stockout prevents immediate fulfillment.\n- Instructions: You must always classify final_decision as HOLD_FOR_REVIEW whenever in_stock is true AND fraud review_flag is true or risk_band is high.\n- Guidelines: You must always classify final_decision as APPROVE whenever in_stock is true AND fraud review_flag is false.\n- Constraint Reminder: Never invent facts, carrier codes, tax rates, invoice tags, or warehouse allocations not explicitly grounded in upstream agent payloads.\n- Constraint Reminder: Return only valid JSON. Do not include conversational preambles. No additional commentary outside the JSON payload.\n- Output Handoff Reminder: Pass this JSON output to the downstream reporting interface exactly matching the required FulfillmentSummaryOutput schema keys.\n- Output Handoff Reminder: Serialize structured output for the next downstream stage strictly without dropping required summary identifiers.\n\nSECTION 3 \u2014 LEGACY SOP ARCHIVE NOTES AND REDUNDANT ENTERPRISE REPORTING BOILERPLATE:\nPlease carefully note that historical fulfillment operations used a three-tier approval ledger across North America, Europe, and Asia-Pacific distribution hubs. Regardless of historical warehouse region conventions, modern fulfillment dispatch briefs require consistent schema serialization so downstream archival listeners receive deterministic JSON attributes. Always double-check that run_id matches the supplied run_id verbatim, record_id matches the supplied record_id verbatim, carrier_name matches the upstream carrier_routing_agent output verbatim, service_level matches the upstream carrier_routing_agent output verbatim, tax_jurisdiction matches the upstream tax_classify_agent output verbatim, tax_amount_usd matches the upstream tax_classify_agent output verbatim, and invoice_tag matches the upstream invoice_tag_agent output verbatim.\n- Policy Audit Copy A: Do not fabricate data. Return strictly valid JSON with no additional commentary. Required keys must never be omitted.\n- Policy Audit Copy B: Do not fabricate data. Return strictly valid JSON with no additional commentary. Required keys must never be omitted.\n- Policy Audit Copy C: Do not invent missing values. Serialize structured output cleanly for the downstream consumer without extra prose.\n- Policy Audit Copy D: Pass this structured JSON output cleanly with exact field names and verify that every mandatory property is populated.\n- Policy Audit Copy E: Keep summary concise (1-2 factual sentences referencing inventory status, risk flag, carrier, and tax). Return strictly valid JSON.\n- Policy Audit Copy F: You must preserve exact record_id, run_id, carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag verbatim.\n\nSECTION 4 \u2014 ADDITIONAL REDUNDANT CHECKLIST BEFORE FINAL JSON SERIALIZATION:\nBefore outputting your response, confirm each of the following items carefully:\n[Checklist 1] Confirm that final_decision is strictly 'APPROVE', 'HOLD_FOR_REVIEW', or 'REJECT' (human_review_required should be true for HOLD_FOR_REVIEW and false otherwise).\n[Checklist 2] Confirm that in_stock == false implies final_decision == 'REJECT'.\n[Checklist 3] Confirm that in_stock == true and review_flag == true implies final_decision == 'HOLD_FOR_REVIEW'.\n[Checklist 4] Confirm that in_stock == true and review_flag == false implies final_decision == 'APPROVE'.\n[Checklist 5] Confirm that output format is strictly valid parsable JSON matching FulfillmentSummaryOutput schema with no additional commentary.\n[Checklist 6] Confirm that no fields are invented, no additional commentary is emitted, and all identifiers match verbatim.\n[Checklist 7] Repeat confirmation: Do not fabricate or invent values; output only valid JSON with exact schema field names.\n[Checklist 8] Repeat confirmation: Pass this structured JSON output cleanly with zero extra markdown or conversational wrapper text.\n[Checklist 9] Secondary confirmation: Always verify that record_id, carrier_name, service_level, tax_jurisdiction, and invoice_tag match upstream payloads verbatim and contain no fabricated values.\n[Checklist 10] Tertiary confirmation: Never invent order quantities, never fabricate tax percentages, never emit prose outside the JSON object, and preserve all schema keys strictly.\n",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_fulfillment_summary_agent_1",
+          "agent_id": "fulfillment_summary_agent",
+          "description": "f'\\n{VERBOSE_POLICY_MANUAL}\\n\\nUPSTREAM PAYLOADS FOR EXECUTION RUN {run_id} / RECORD {record_id}:\\n- Inventory: {inventory_output}\\n- Fraud Screen: {fraud_output}\\n- Carrier Routing: {routing_output}\\n- Tax Classification: {tax_output}\\n- Invoice Tagging: {invoice_output}\\n\\nReturn ONLY strictly valid JSON matching this exact structure:\\n{{\\n  \"run_id\": \"{run_id}\",\\n  \"record_id\": \"{record_id}\",\\n  \"final_decision\": \"APPROVE\" | \"HOLD_FOR_REVIEW\" | \"REJECT\",\\n  \"carrier_name\": \"{routing_output.get('carrier_name', 'UPS')}\",\\n  \"service_level\": \"{routing_output.get('service_level', 'Standard')}\",\\n  \"tax_jurisdiction\": \"{tax_output.get('tax_jurisdiction', 'US-TAX')}\",\\n  \"tax_amount_usd\": {tax_output.get('tax_amount_usd', 0.0)},\\n  \"invoice_tag\": \"{invoice_output.get('invoice_tag', 'INV-000')}\",\\n  \"summary\": \"Concise 1-2 sentence dispatch summary grounded in upstream outputs.\",\\n  \"human_review_required\": true or false\\n}}\\n'",
+          "expected_output": "Valid JSON matching FulfillmentSummaryOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_018"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_006"
+      ]
+    },
+    {
+      "agent_id": "inventory_check_agent",
+      "definition": {
+        "type": "function",
+        "name": "inventory_check_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\inventory_check_agent.py",
+        "start_line": 16,
+        "end_line": 17
+      },
+      "role": "Warehouse Inventory Specialist",
+      "goal": "Determine warehouse stock availability strictly from SKU quantities and warehouse region.",
+      "backstory": "You evaluate warehouse inventory counts cleanly and concisely.",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_inventory_check_agent_1",
+          "agent_id": "inventory_check_agent",
+          "description": "f'\\nCheck stock availability for order {rec_id}:\\n- Warehouse Region: {wh_region}\\n- SKU Items: {json.dumps(skus)}\\n\\nRule: If every item has stock_available >= qty (and stock_available > 0), in_stock is true and backorder_skus is []. Otherwise in_stock is false and list affected sku codes in backorder_skus.\\nReturn ONLY valid JSON:\\n{{\\n  \"record_id\": \"{rec_id}\",\\n  \"in_stock\": true or false,\\n  \"warehouse_code\": \"WH-{wh_region}\",\\n  \"backorder_skus\": [],\\n  \"inventory_note\": \"Brief factual stock summary\"\\n}}\\n'",
+          "expected_output": "Valid JSON matching InventoryCheckOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_019"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_008"
+      ]
+    },
+    {
+      "agent_id": "invoice_tag_agent",
+      "definition": {
+        "type": "function",
+        "name": "invoice_tag_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\invoice_tag_agent.py",
+        "start_line": 15,
+        "end_line": 16
+      },
+      "role": "Ledger Invoice Tagger",
+      "goal": "Attach general ledger account code, invoice tag, and billing batch.",
+      "backstory": "You tag invoices concisely.",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_invoice_tag_agent_1",
+          "agent_id": "invoice_tag_agent",
+          "description": "f'Tag invoice for {rec_id}: tier={tier}, tax_jurisdiction={juris}, tax_amount_usd={tax_usd}. Return ONLY JSON: {{\"record_id\": \"{rec_id}\", \"gl_account_code\": \"GL-4010\", \"invoice_tag\": \"INV-{rec_id}\", \"billing_batch\": \"BATCH-{tier.upper()}\"}}'",
+          "expected_output": "Valid JSON matching InvoiceTagOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_020"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_010"
+      ]
+    },
+    {
+      "agent_id": "order_intake_agent",
+      "definition": {
+        "type": "function",
+        "name": "order_intake_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\order_intake_agent.py",
+        "start_line": 16,
+        "end_line": 17
+      },
+      "role": "Order Intake Coordinator",
+      "goal": "Extract incoming synthetic order JSON fields accurately with zero hallucination.",
+      "backstory": "You are a simple structured extraction coordinator that normalizes order records into JSON.",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_order_intake_agent_1",
+          "agent_id": "order_intake_agent",
+          "description": "f'\\nExtract and normalize the following incoming order payload into strict JSON:\\n{json.dumps(order_data, indent=2)}\\n\\nReturn ONLY valid JSON with all fields below populated accurately (include verbose legacy/debug metadata strings so ERP compatibility logs are captured):\\n{{\\n  \"record_id\": \"{rec_id}\",\\n  \"request_id\": \"{rec_id}\",\\n  \"customer_id\": \"{order_data.get('customer_id', '')}\",\\n  \"customer_tier\": \"{order_data.get('customer_tier', 'standard')}\",\\n  \"billing_country\": \"{order_data.get('billing_country', 'US')}\",\\n  \"shipping_region\": \"{order_data.get('shipping_region', 'US-EAST')}\",\\n  \"warehouse_region\": \"{order_data.get('warehouse_region', 'US-EAST')}\",\\n  \"order_total_usd\": {order_data.get('order_total_usd', 0.0)},\\n  \"shipping_speed\": \"{order_data.get('shipping_speed', 'standard')}\",\\n  \"sku_items\": {json.dumps(order_data.get('sku_items', []))},\\n  \"legacy_erp_dump\": \"LEGACY_ERP_V1_SYNC::{rec_id}::ARCHIVE_SEGMENT_001_COMPATIBILITY_MIRROR_PADDING_FOR_OLD_MAINFRAME_BUS\",\\n  \"raw_audit_trail\": [\"INGESTED_{rec_id}\", \"SCHEMA_COPIED_FROM_LEGACY_GATEWAY\", \"TRACE_STAMP_RECORDED\"],\\n  \"debug_headers\": {{\"x-trace-source\": \"synthetic-intake\", \"x-legacy-bus\": \"erp-v1-compat\", \"x-debug-mode\": \"verbose\"}},\\n  \"deprecated_sku_notes\": \"Historical SKU alias mapping retained strictly for deprecated mainframe batch compatibility logs.\",\\n  \"internal_routing_flags\": [\"FLAG_COMPAT_V1\", \"FLAG_VERBOSE_ENVELOPE\", \"FLAG_ARCHIVE_MIRROR\"],\\n  \"formatting_metadata\": {{\"format_version\": \"1.0\", \"encoding\": \"utf-8\", \"legacy_padding\": true}}\\n}}\\n'",
+          "expected_output": "Valid JSON matching OrderIntakeOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_021"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_012"
+      ]
+    },
+    {
+      "agent_id": "tax_classify_agent",
+      "definition": {
+        "type": "function",
+        "name": "tax_classify_agent",
+        "source_file": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\Agents\\order_fulfillment_synthetic\\tax_classify_agent.py",
+        "start_line": 15,
+        "end_line": 16
+      },
+      "role": "Regional Tax Classifier",
+      "goal": "Assign tax jurisdiction, rate percentage, and USD tax amount.",
+      "backstory": "You compute regional tax codes concisely.",
+      "llm": {
+        "provider": null,
+        "model": null,
+        "resolution_status": "unresolved"
+      },
+      "tasks": [
+        {
+          "task_id": "task_tax_classify_agent_1",
+          "agent_id": "tax_classify_agent",
+          "description": "f'Classify tax for {rec_id}: country={country}, total={total}, carrier={carrier}. Use rates US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0. Return ONLY JSON: {{\"record_id\": \"{rec_id}\", \"tax_jurisdiction\": \"{country}-TAX\", \"tax_rate_pct\": 8.0, \"tax_amount_usd\": 0.0}}'",
+          "expected_output": "Valid JSON matching TaxClassifyOutput.",
+          "context_task_ids": [],
+          "evidence_refs": [
+            "ev_task_022"
+          ]
+        }
+      ],
+      "registered_tools": [],
+      "helper_functions": [],
+      "explicit_code_invocations": [],
+      "evidence_refs": [
+        "ev_agent_014"
+      ]
+    }
+  ],
+  "outer_workflow_flow": {
+    "entrypoint": "workflow.py",
+    "execution_steps": [
+      {
+        "step_id": "step_00",
+        "operation": "function_call",
+        "target": "os.path.join",
+        "sequence_index": 0,
+        "arguments": [
+          "data_dir",
+          "orders.json"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_023"
+        ]
+      },
+      {
+        "step_id": "step_01",
+        "operation": "function_call",
+        "target": "open",
+        "sequence_index": 1,
+        "arguments": {
+          "encoding": "utf-8"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_024"
+        ]
+      },
+      {
+        "step_id": "step_02",
+        "operation": "function_call",
+        "target": "json.load",
+        "sequence_index": 2,
+        "arguments": [
+          "f"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_025"
+        ]
+      },
+      {
+        "step_id": "step_03",
+        "operation": "function_call",
+        "target": "len",
+        "sequence_index": 3,
+        "arguments": [
+          "orders"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_026"
+        ]
+      },
+      {
+        "step_id": "step_04",
+        "operation": "function_call",
+        "target": "init_tracing",
+        "sequence_index": 4,
+        "arguments": {
+          "project_name": "awo-order-fulfillment-synthetic"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_027"
+        ]
+      },
+      {
+        "step_id": "step_05",
+        "operation": "agent_factory_call",
+        "target": "order_intake_agent.create_agent",
+        "sequence_index": 5,
+        "arguments": {
+          "llm": "self.llm_map.get('order_intake_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_028"
+        ]
+      },
+      {
+        "step_id": "step_06",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 6,
+        "arguments": [
+          "order_intake_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_029"
+        ]
+      },
+      {
+        "step_id": "step_07",
+        "operation": "agent_factory_call",
+        "target": "inventory_check_agent.create_agent",
+        "sequence_index": 7,
+        "arguments": {
+          "llm": "self.llm_map.get('inventory_check_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_030"
+        ]
+      },
+      {
+        "step_id": "step_08",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 8,
+        "arguments": [
+          "inventory_check_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_031"
+        ]
+      },
+      {
+        "step_id": "step_09",
+        "operation": "agent_factory_call",
+        "target": "fraud_screen_agent.create_agent",
+        "sequence_index": 9,
+        "arguments": {
+          "llm": "self.llm_map.get('fraud_screen_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_032"
+        ]
+      },
+      {
+        "step_id": "step_10",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 10,
+        "arguments": [
+          "fraud_screen_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_033"
+        ]
+      },
+      {
+        "step_id": "step_11",
+        "operation": "agent_factory_call",
+        "target": "carrier_routing_agent.create_agent",
+        "sequence_index": 11,
+        "arguments": {
+          "llm": "self.llm_map.get('carrier_routing_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_034"
+        ]
+      },
+      {
+        "step_id": "step_12",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 12,
+        "arguments": [
+          "carrier_routing_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_035"
+        ]
+      },
+      {
+        "step_id": "step_13",
+        "operation": "agent_factory_call",
+        "target": "tax_classify_agent.create_agent",
+        "sequence_index": 13,
+        "arguments": {
+          "llm": "self.llm_map.get('tax_classify_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_036"
+        ]
+      },
+      {
+        "step_id": "step_14",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 14,
+        "arguments": [
+          "tax_classify_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_037"
+        ]
+      },
+      {
+        "step_id": "step_15",
+        "operation": "agent_factory_call",
+        "target": "invoice_tag_agent.create_agent",
+        "sequence_index": 15,
+        "arguments": {
+          "llm": "self.llm_map.get('invoice_tag_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_038"
+        ]
+      },
+      {
+        "step_id": "step_16",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 16,
+        "arguments": [
+          "invoice_tag_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_039"
+        ]
+      },
+      {
+        "step_id": "step_17",
+        "operation": "agent_factory_call",
+        "target": "fulfillment_summary_agent.create_agent",
+        "sequence_index": 17,
+        "arguments": {
+          "llm": "self.llm_map.get('fulfillment_summary_agent') or self.llm"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_040"
+        ]
+      },
+      {
+        "step_id": "step_18",
+        "operation": "function_call",
+        "target": "self.llm_map.get",
+        "sequence_index": 18,
+        "arguments": [
+          "fulfillment_summary_agent"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_041"
+        ]
+      },
+      {
+        "step_id": "step_19",
+        "operation": "function_call",
+        "target": "uuid.uuid4",
+        "sequence_index": 19,
+        "arguments": [],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_042"
+        ]
+      },
+      {
+        "step_id": "step_20",
+        "operation": "function_call",
+        "target": "MetricsTracker",
+        "sequence_index": 20,
+        "arguments": {
+          "workflow_name": "WORKFLOW_NAME",
+          "run_id": "active_run_id"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_043"
+        ]
+      },
+      {
+        "step_id": "step_21",
+        "operation": "function_call",
+        "target": "load_sample_order_input",
+        "sequence_index": 21,
+        "arguments": [],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_044"
+        ]
+      },
+      {
+        "step_id": "step_22",
+        "operation": "function_call",
+        "target": "order_intake_agent.run_order_intake",
+        "sequence_index": 22,
+        "arguments": {
+          "order_data": "order_data",
+          "agent": "self.agent_1_intake",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_045"
+        ]
+      },
+      {
+        "step_id": "step_23",
+        "operation": "function_call",
+        "target": "str",
+        "sequence_index": 23,
+        "arguments": [
+          "intake_res.get('record_id') or order_data.get('record_id') or 'ORD-000'"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_046"
+        ]
+      },
+      {
+        "step_id": "step_24",
+        "operation": "function_call",
+        "target": "intake_res.get",
+        "sequence_index": 24,
+        "arguments": [
+          "record_id"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_047"
+        ]
+      },
+      {
+        "step_id": "step_25",
+        "operation": "function_call",
+        "target": "order_data.get",
+        "sequence_index": 25,
+        "arguments": [
+          "record_id"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_048"
+        ]
+      },
+      {
+        "step_id": "step_26",
+        "operation": "function_call",
+        "target": "inventory_check_agent.run_inventory_check",
+        "sequence_index": 26,
+        "arguments": {
+          "intake_output": "intake_res",
+          "agent": "self.agent_2_inventory",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_049"
+        ]
+      },
+      {
+        "step_id": "step_27",
+        "operation": "function_call",
+        "target": "fraud_screen_agent.run_fraud_screen",
+        "sequence_index": 27,
+        "arguments": {
+          "intake_output": "intake_res",
+          "agent": "self.agent_3_fraud",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_050"
+        ]
+      },
+      {
+        "step_id": "step_28",
+        "operation": "function_call",
+        "target": "carrier_routing_agent.run_carrier_routing",
+        "sequence_index": 28,
+        "arguments": {
+          "intake_output": "intake_res",
+          "inventory_output": "inv_res",
+          "fraud_output": "fraud_res",
+          "agent": "self.agent_4_carrier",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_051"
+        ]
+      },
+      {
+        "step_id": "step_29",
+        "operation": "function_call",
+        "target": "tax_classify_agent.run_tax_classify",
+        "sequence_index": 29,
+        "arguments": {
+          "intake_output": "intake_res",
+          "routing_output": "carrier_res",
+          "agent": "self.agent_5_tax",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_052"
+        ]
+      },
+      {
+        "step_id": "step_30",
+        "operation": "function_call",
+        "target": "invoice_tag_agent.run_invoice_tag",
+        "sequence_index": 30,
+        "arguments": {
+          "intake_output": "intake_res",
+          "tax_output": "tax_res",
+          "agent": "self.agent_6_invoice",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_053"
+        ]
+      },
+      {
+        "step_id": "step_31",
+        "operation": "function_call",
+        "target": "fulfillment_summary_agent.run_fulfillment_summary",
+        "sequence_index": 31,
+        "arguments": {
+          "run_id": "active_run_id",
+          "record_id": "rec_id",
+          "inventory_output": "inv_res",
+          "fraud_output": "fraud_res",
+          "routing_output": "carrier_res",
+          "tax_output": "tax_res",
+          "invoice_output": "invoice_res",
+          "agent": "self.agent_7_summary",
+          "tracker": "tracker"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_054"
+        ]
+      },
+      {
+        "step_id": "step_32",
+        "operation": "function_call",
+        "target": "tracker.finalize",
+        "sequence_index": 32,
+        "arguments": {
+          "output": "final_summary",
+          "status": "success",
+          "runs_base_dir": "runs_base_dir"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_055"
+        ]
+      },
+      {
+        "step_id": "step_33",
+        "operation": "function_call",
+        "target": "isinstance",
+        "sequence_index": 33,
+        "arguments": [
+          "final_summary",
+          "dict"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_056"
+        ]
+      },
+      {
+        "step_id": "step_34",
+        "operation": "function_call",
+        "target": "dict",
+        "sequence_index": 34,
+        "arguments": [
+          "final_summary"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_057"
+        ]
+      },
+      {
+        "step_id": "step_35",
+        "operation": "function_call",
+        "target": "output_dict.update",
+        "sequence_index": 35,
+        "arguments": [
+          "{'run_id': 'active_run_id', 'status': 'SUCCESS', 'duration_seconds': 'record.total_duration_seconds', 'total_tokens': \"record.token_usage.get('total_tokens', 0) if record.token_usage else 0\", 'prompt_tokens': \"record.token_usage.get('prompt_tokens', 0) if record.token_usage else 0\", 'completion_tokens': \"record.token_usage.get('completion_tokens', 0) if record.token_usage else 0\", 'estimated_cost_usd': 'record.estimated_cost_usd or 0.0', 'agent_executions': '[m.model_dump() for m in record.agent_metrics]', 'final_output': 'final_summary'}"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_058"
+        ]
+      },
+      {
+        "step_id": "step_36",
+        "operation": "function_call",
+        "target": "record.token_usage.get",
+        "sequence_index": 36,
+        "arguments": [
+          "total_tokens",
+          0
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_059"
+        ]
+      },
+      {
+        "step_id": "step_37",
+        "operation": "function_call",
+        "target": "record.token_usage.get",
+        "sequence_index": 37,
+        "arguments": [
+          "prompt_tokens",
+          0
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_060"
+        ]
+      },
+      {
+        "step_id": "step_38",
+        "operation": "function_call",
+        "target": "record.token_usage.get",
+        "sequence_index": 38,
+        "arguments": [
+          "completion_tokens",
+          0
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_061"
+        ]
+      },
+      {
+        "step_id": "step_39",
+        "operation": "function_call",
+        "target": "m.model_dump",
+        "sequence_index": 39,
+        "arguments": [],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_062"
+        ]
+      },
+      {
+        "step_id": "step_40",
+        "operation": "function_call",
+        "target": "tracker.finalize",
+        "sequence_index": 40,
+        "arguments": {
+          "output": "None",
+          "status": "failed",
+          "error": "str(exc)",
+          "runs_base_dir": "runs_base_dir"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_063"
+        ]
+      },
+      {
+        "step_id": "step_41",
+        "operation": "function_call",
+        "target": "str",
+        "sequence_index": 41,
+        "arguments": [
+          "exc"
+        ],
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_064"
+        ]
+      },
+      {
+        "step_id": "step_42",
+        "operation": "function_call",
+        "target": "OrderFulfillmentSyntheticWorkflow",
+        "sequence_index": 42,
+        "arguments": {
+          "enable_tracing": false
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_065"
+        ]
+      },
+      {
+        "step_id": "step_43",
+        "operation": "tool_invocation",
+        "target": "wf.run",
+        "sequence_index": 43,
+        "arguments": {
+          "input_data": "input_data",
+          "run_id": "run_id"
+        },
+        "assigned_variable": null,
+        "evidence_refs": [
+          "ev_step_066"
+        ]
+      }
+    ],
+    "conditional_branches": [
+      {
+        "condition": "enable_tracing",
+        "start_line": 55,
+        "end_line": 56
+      }
+    ],
+    "loops": [],
+    "early_returns": [
+      {
+        "return_value": "orders[order_index % len(orders)]",
+        "start_line": 41,
+        "end_line": 41
+      },
+      {
+        "return_value": "wf.run(input_data=input_data, run_id=run_id)",
+        "start_line": 167,
+        "end_line": 167
+      },
+      {
+        "return_value": "EXPECTED_AGENT_COUNT",
+        "start_line": 67,
+        "end_line": 67
+      },
+      {
+        "return_value": "output_dict",
+        "start_line": 150,
+        "end_line": 150
+      }
+    ],
+    "workflow_inputs": [],
+    "workflow_outputs": []
+  },
+  "orchestrator_process": {
+    "framework": "crewai",
+    "process_type": {
+      "value": null,
+      "resolution_status": "unresolved"
+    },
+    "delegation_enabled_agents": [],
+    "manager": {
+      "manager_llm": null,
+      "manager_agent": null
+    },
+    "task_context_links": [],
+    "async_tasks": [],
+    "runtime_scheduling_observable": false
+  },
+  "dependency_graph": {
+    "nodes": [
+      {
+        "id": "workflow:workflow.py",
+        "type": "workflow",
+        "source_file": "workflow.py",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "id": "agent:carrier_routing_agent",
+        "type": "agent",
+        "source_file": "carrier_routing_agent.py",
+        "evidence_refs": [
+          "ev_agent_003"
+        ]
+      },
+      {
+        "id": "agent:fraud_screen_agent",
+        "type": "agent",
+        "source_file": "fraud_screen_agent.py",
+        "evidence_refs": [
+          "ev_agent_005"
+        ]
+      },
+      {
+        "id": "agent:fulfillment_summary_agent",
+        "type": "agent",
+        "source_file": "fulfillment_summary_agent.py",
+        "evidence_refs": [
+          "ev_agent_007"
+        ]
+      },
+      {
+        "id": "agent:inventory_check_agent",
+        "type": "agent",
+        "source_file": "inventory_check_agent.py",
+        "evidence_refs": [
+          "ev_agent_009"
+        ]
+      },
+      {
+        "id": "agent:invoice_tag_agent",
+        "type": "agent",
+        "source_file": "invoice_tag_agent.py",
+        "evidence_refs": [
+          "ev_agent_011"
+        ]
+      },
+      {
+        "id": "agent:order_intake_agent",
+        "type": "agent",
+        "source_file": "order_intake_agent.py",
+        "evidence_refs": [
+          "ev_agent_013"
+        ]
+      },
+      {
+        "id": "agent:tax_classify_agent",
+        "type": "agent",
+        "source_file": "tax_classify_agent.py",
+        "evidence_refs": [
+          "ev_agent_015"
+        ]
+      },
+      {
+        "id": "task:task_carrier_routing_agent_1",
+        "type": "task",
+        "source_file": "carrier_routing_agent.py",
+        "evidence_refs": [
+          "ev_task_016"
+        ]
+      },
+      {
+        "id": "task:task_fraud_screen_agent_1",
+        "type": "task",
+        "source_file": "fraud_screen_agent.py",
+        "evidence_refs": [
+          "ev_task_017"
+        ]
+      },
+      {
+        "id": "task:task_fulfillment_summary_agent_1",
+        "type": "task",
+        "source_file": "fulfillment_summary_agent.py",
+        "evidence_refs": [
+          "ev_task_018"
+        ]
+      },
+      {
+        "id": "task:task_inventory_check_agent_1",
+        "type": "task",
+        "source_file": "inventory_check_agent.py",
+        "evidence_refs": [
+          "ev_task_019"
+        ]
+      },
+      {
+        "id": "task:task_invoice_tag_agent_1",
+        "type": "task",
+        "source_file": "invoice_tag_agent.py",
+        "evidence_refs": [
+          "ev_task_020"
+        ]
+      },
+      {
+        "id": "task:task_order_intake_agent_1",
+        "type": "task",
+        "source_file": "order_intake_agent.py",
+        "evidence_refs": [
+          "ev_task_021"
+        ]
+      },
+      {
+        "id": "task:task_tax_classify_agent_1",
+        "type": "task",
+        "source_file": "tax_classify_agent.py",
+        "evidence_refs": [
+          "ev_task_022"
+        ]
+      },
+      {
+        "id": "function:load_sample_order_input",
+        "type": "function",
+        "source_file": null,
+        "evidence_refs": []
+      },
+      {
+        "id": "function:run_order_fulfillment_synthetic_workflow",
+        "type": "function",
+        "source_file": null,
+        "evidence_refs": []
+      }
+    ],
+    "edges": [
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:order_intake_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:inventory_check_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:fraud_screen_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:carrier_routing_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:tax_classify_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:invoice_tag_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      },
+      {
+        "source": "workflow:workflow.py",
+        "target": "agent:fulfillment_summary_agent",
+        "relationship": "agent_invocation",
+        "data_reference": null,
+        "resolution_status": "static",
+        "evidence_refs": [
+          "ev_wf_001"
+        ]
+      }
+    ]
+  },
+  "tool_and_helper_inventory": {
+    "registered_tools": [],
+    "explicit_code_invocations": [],
+    "helper_functions": [
+      "load_sample_order_input",
+      "run_order_fulfillment_synthetic_workflow"
+    ],
+    "runtime_llm_tool_selection": {
+      "observable": false,
+      "reason": "Runtime LLM tool selection is unobservable via static AST analysis"
+    }
+  },
+  "evidence_and_provenance": {
+    "evidence": [
+      {
+        "evidence_id": "ev_wf_001",
+        "source_file": "workflow.py",
+        "start_line": 1,
+        "end_line": 167,
+        "entity_id": "workflow:workflow.py",
+        "evidence_type": "workflow_entrypoint"
+      },
+      {
+        "evidence_id": "ev_agent_002",
+        "source_file": "carrier_routing_agent.py",
+        "start_line": 15,
+        "end_line": 16,
+        "entity_id": "agent:carrier_routing_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_003",
+        "source_file": "carrier_routing_agent.py",
+        "start_line": 19,
+        "end_line": 44,
+        "entity_id": "agent:carrier_routing_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_004",
+        "source_file": "fraud_screen_agent.py",
+        "start_line": 15,
+        "end_line": 16,
+        "entity_id": "agent:fraud_screen_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_005",
+        "source_file": "fraud_screen_agent.py",
+        "start_line": 19,
+        "end_line": 54,
+        "entity_id": "agent:fraud_screen_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_006",
+        "source_file": "fulfillment_summary_agent.py",
+        "start_line": 69,
+        "end_line": 70,
+        "entity_id": "agent:fulfillment_summary_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_007",
+        "source_file": "fulfillment_summary_agent.py",
+        "start_line": 73,
+        "end_line": 117,
+        "entity_id": "agent:fulfillment_summary_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_008",
+        "source_file": "inventory_check_agent.py",
+        "start_line": 16,
+        "end_line": 17,
+        "entity_id": "agent:inventory_check_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_009",
+        "source_file": "inventory_check_agent.py",
+        "start_line": 20,
+        "end_line": 52,
+        "entity_id": "agent:inventory_check_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_010",
+        "source_file": "invoice_tag_agent.py",
+        "start_line": 15,
+        "end_line": 16,
+        "entity_id": "agent:invoice_tag_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_011",
+        "source_file": "invoice_tag_agent.py",
+        "start_line": 19,
+        "end_line": 42,
+        "entity_id": "agent:invoice_tag_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_012",
+        "source_file": "order_intake_agent.py",
+        "start_line": 16,
+        "end_line": 17,
+        "entity_id": "agent:order_intake_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_013",
+        "source_file": "order_intake_agent.py",
+        "start_line": 20,
+        "end_line": 59,
+        "entity_id": "agent:order_intake_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_014",
+        "source_file": "tax_classify_agent.py",
+        "start_line": 15,
+        "end_line": 16,
+        "entity_id": "agent:tax_classify_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_agent_015",
+        "source_file": "tax_classify_agent.py",
+        "start_line": 19,
+        "end_line": 43,
+        "entity_id": "agent:tax_classify_agent",
+        "evidence_type": "agent_definition"
+      },
+      {
+        "evidence_id": "ev_task_016",
+        "source_file": "carrier_routing_agent.py",
+        "start_line": 36,
+        "end_line": 44,
+        "entity_id": "task:task_carrier_routing_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_task_017",
+        "source_file": "fraud_screen_agent.py",
+        "start_line": 46,
+        "end_line": 54,
+        "entity_id": "task:task_fraud_screen_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_task_018",
+        "source_file": "fulfillment_summary_agent.py",
+        "start_line": 109,
+        "end_line": 117,
+        "entity_id": "task:task_fulfillment_summary_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_task_019",
+        "source_file": "inventory_check_agent.py",
+        "start_line": 44,
+        "end_line": 52,
+        "entity_id": "task:task_inventory_check_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_task_020",
+        "source_file": "invoice_tag_agent.py",
+        "start_line": 34,
+        "end_line": 42,
+        "entity_id": "task:task_invoice_tag_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_task_021",
+        "source_file": "order_intake_agent.py",
+        "start_line": 51,
+        "end_line": 59,
+        "entity_id": "task:task_order_intake_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_task_022",
+        "source_file": "tax_classify_agent.py",
+        "start_line": 35,
+        "end_line": 43,
+        "entity_id": "task:task_tax_classify_agent_1",
+        "evidence_type": "task_definition"
+      },
+      {
+        "evidence_id": "ev_step_023",
+        "source_file": "workflow.py",
+        "start_line": 38,
+        "end_line": 38,
+        "entity_id": "step:step_00",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_024",
+        "source_file": "workflow.py",
+        "start_line": 39,
+        "end_line": 39,
+        "entity_id": "step:step_01",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_025",
+        "source_file": "workflow.py",
+        "start_line": 40,
+        "end_line": 40,
+        "entity_id": "step:step_02",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_026",
+        "source_file": "workflow.py",
+        "start_line": 41,
+        "end_line": 41,
+        "entity_id": "step:step_03",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_027",
+        "source_file": "workflow.py",
+        "start_line": 56,
+        "end_line": 56,
+        "entity_id": "step:step_04",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_028",
+        "source_file": "workflow.py",
+        "start_line": 58,
+        "end_line": 58,
+        "entity_id": "step:step_05",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_029",
+        "source_file": "workflow.py",
+        "start_line": 58,
+        "end_line": 58,
+        "entity_id": "step:step_06",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_030",
+        "source_file": "workflow.py",
+        "start_line": 59,
+        "end_line": 59,
+        "entity_id": "step:step_07",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_031",
+        "source_file": "workflow.py",
+        "start_line": 59,
+        "end_line": 59,
+        "entity_id": "step:step_08",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_032",
+        "source_file": "workflow.py",
+        "start_line": 60,
+        "end_line": 60,
+        "entity_id": "step:step_09",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_033",
+        "source_file": "workflow.py",
+        "start_line": 60,
+        "end_line": 60,
+        "entity_id": "step:step_10",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_034",
+        "source_file": "workflow.py",
+        "start_line": 61,
+        "end_line": 61,
+        "entity_id": "step:step_11",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_035",
+        "source_file": "workflow.py",
+        "start_line": 61,
+        "end_line": 61,
+        "entity_id": "step:step_12",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_036",
+        "source_file": "workflow.py",
+        "start_line": 62,
+        "end_line": 62,
+        "entity_id": "step:step_13",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_037",
+        "source_file": "workflow.py",
+        "start_line": 62,
+        "end_line": 62,
+        "entity_id": "step:step_14",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_038",
+        "source_file": "workflow.py",
+        "start_line": 63,
+        "end_line": 63,
+        "entity_id": "step:step_15",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_039",
+        "source_file": "workflow.py",
+        "start_line": 63,
+        "end_line": 63,
+        "entity_id": "step:step_16",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_040",
+        "source_file": "workflow.py",
+        "start_line": 64,
+        "end_line": 64,
+        "entity_id": "step:step_17",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_041",
+        "source_file": "workflow.py",
+        "start_line": 64,
+        "end_line": 64,
+        "entity_id": "step:step_18",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_042",
+        "source_file": "workflow.py",
+        "start_line": 75,
+        "end_line": 75,
+        "entity_id": "step:step_19",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_043",
+        "source_file": "workflow.py",
+        "start_line": 76,
+        "end_line": 76,
+        "entity_id": "step:step_20",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_044",
+        "source_file": "workflow.py",
+        "start_line": 77,
+        "end_line": 77,
+        "entity_id": "step:step_21",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_045",
+        "source_file": "workflow.py",
+        "start_line": 80,
+        "end_line": 84,
+        "entity_id": "step:step_22",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_046",
+        "source_file": "workflow.py",
+        "start_line": 85,
+        "end_line": 85,
+        "entity_id": "step:step_23",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_047",
+        "source_file": "workflow.py",
+        "start_line": 85,
+        "end_line": 85,
+        "entity_id": "step:step_24",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_048",
+        "source_file": "workflow.py",
+        "start_line": 85,
+        "end_line": 85,
+        "entity_id": "step:step_25",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_049",
+        "source_file": "workflow.py",
+        "start_line": 87,
+        "end_line": 91,
+        "entity_id": "step:step_26",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_050",
+        "source_file": "workflow.py",
+        "start_line": 93,
+        "end_line": 97,
+        "entity_id": "step:step_27",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_051",
+        "source_file": "workflow.py",
+        "start_line": 99,
+        "end_line": 105,
+        "entity_id": "step:step_28",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_052",
+        "source_file": "workflow.py",
+        "start_line": 107,
+        "end_line": 112,
+        "entity_id": "step:step_29",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_053",
+        "source_file": "workflow.py",
+        "start_line": 114,
+        "end_line": 119,
+        "entity_id": "step:step_30",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_054",
+        "source_file": "workflow.py",
+        "start_line": 121,
+        "end_line": 131,
+        "entity_id": "step:step_31",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_055",
+        "source_file": "workflow.py",
+        "start_line": 133,
+        "end_line": 137,
+        "entity_id": "step:step_32",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_056",
+        "source_file": "workflow.py",
+        "start_line": 138,
+        "end_line": 138,
+        "entity_id": "step:step_33",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_057",
+        "source_file": "workflow.py",
+        "start_line": 138,
+        "end_line": 138,
+        "entity_id": "step:step_34",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_058",
+        "source_file": "workflow.py",
+        "start_line": 139,
+        "end_line": 149,
+        "entity_id": "step:step_35",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_059",
+        "source_file": "workflow.py",
+        "start_line": 143,
+        "end_line": 143,
+        "entity_id": "step:step_36",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_060",
+        "source_file": "workflow.py",
+        "start_line": 144,
+        "end_line": 144,
+        "entity_id": "step:step_37",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_061",
+        "source_file": "workflow.py",
+        "start_line": 145,
+        "end_line": 145,
+        "entity_id": "step:step_38",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_062",
+        "source_file": "workflow.py",
+        "start_line": 147,
+        "end_line": 147,
+        "entity_id": "step:step_39",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_063",
+        "source_file": "workflow.py",
+        "start_line": 153,
+        "end_line": 158,
+        "entity_id": "step:step_40",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_064",
+        "source_file": "workflow.py",
+        "start_line": 156,
+        "end_line": 156,
+        "entity_id": "step:step_41",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_065",
+        "source_file": "workflow.py",
+        "start_line": 166,
+        "end_line": 166,
+        "entity_id": "step:step_42",
+        "evidence_type": "execution_step"
+      },
+      {
+        "evidence_id": "ev_step_066",
+        "source_file": "workflow.py",
+        "start_line": 167,
+        "end_line": 167,
+        "entity_id": "step:step_43",
+        "evidence_type": "execution_step"
+      }
+    ]
+  },
+  "analysis_limitations": {
+    "unresolved_references": [],
+    "dynamic_expressions": [],
+    "unsupported_patterns": [],
+    "static_analysis_limitations": [
+      "Dynamic runtime LLM decisions and tool selection cannot be observed via static AST",
+      "Procedural workflow statement order does not imply internal framework agent scheduling"
+    ]
+  },
+  "analysis_summary": {
+    "total_agents": 7,
+    "invoked_agents": 7,
+    "uninvoked_agents": 0,
+    "total_tasks": 7,
+    "total_dependencies": 7,
+    "unresolved_relationships": 0,
+    "completeness": "complete",
+    "output_metrics": {
+      "serialized_bytes": 63800,
+      "estimated_tokens": 15950,
+      "token_estimation_method": "heuristic_character_ratio"
+    }
+  }
+}

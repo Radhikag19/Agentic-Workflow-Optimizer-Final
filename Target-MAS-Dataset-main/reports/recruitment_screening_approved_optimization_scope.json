@@ -65,11 +65,11 @@
     {
       "candidate_id": "MODEL-RESUME_INTAKE_AGENT",
       "dimension": "model_selection",
-      "title": "Route resume_intake_agent to Smaller/Faster Model (requires validation)",
+      "title": "Route resume_intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)",
       "target_agents": [
         "resume_intake_agent"
       ],
-      "observed_problem": "Agent 'resume_intake_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (2.52s) and compute overhead for straightforward parsing tasks.",
+      "observed_problem": "JEV 2-Agent LangGraph evaluation classified 'resume_intake_agent' as Task=Low, Prompt=Medium, Tokens=Low. Assigning the baseline 'openai/gpt-oss-120b' introduces unnecessary compute cost; JEV Agent 2 selected 'openai/gpt-oss-20b' among eligible Groq models.",
       "supporting_evidence": {
         "mcp_stage_source": [
           "stage_2_overview",
@@ -78,29 +78,129 @@
         ],
         "current_model": "openai/gpt-oss-120b",
         "proposed_candidate_models": [
-          "llama-3.3-70b-versatile",
-          "llama-3.1-8b-instant"
+          "openai/gpt-oss-20b"
         ],
-        "task_complexity": "Low-to-Moderate (Structured entity extraction, JSON mapping)",
-        "mean_tokens_per_call": 1186.8
+        "task_complexity": "Low (JEV Agent 1; prompt=Medium, tokens=Low)",
+        "mean_tokens_per_call": 1186.8,
+        "selected_model": "openai/gpt-oss-20b",
+        "jev_selected_model": "openai/gpt-oss-20b",
+        "selection_source": "jev_agent2_cached_langgraph",
+        "jev_agent1_requirements": {
+          "agent_id": "resume_intake_agent",
+          "jev_model": "jev-1.14.0",
+          "task_complexity": {
+            "class": "Low",
+            "score_position": 0.15,
+            "probabilities": {
+              "0": 0.85,
+              "1": 0.15,
+              "2": 0.0
+            },
+            "top_level_probability": 0.85
+          },
+          "prompt_complexity": {
+            "class": "Medium",
+            "score_position": 1.14,
+            "probabilities": {
+              "0": 0.02,
+              "1": 0.82,
+              "2": 0.16
+            },
+            "top_level_probability": 0.82
+          },
+          "token_consumption": {
+            "class": "Low",
+            "score_position": 0.0,
+            "probabilities": {
+              "0": 1.0,
+              "1": 0.0,
+              "2": 0.0
+            },
+            "top_level_probability": 1.0
+          },
+          "jev_usage": {
+            "input_tokens": 2080,
+            "output_tokens": 53
+          }
+        },
+        "jev_agent2_recommendation": {
+          "selected_model": "openai/gpt-oss-20b",
+          "selected_model_metadata": {
+            "model_id": "openai/gpt-oss-20b",
+            "owned_by": "OpenAI",
+            "active": true,
+            "api_context_window": 131072,
+            "model_role": "general_purpose_reasoning",
+            "suitable_for_general_agent_tasks": true,
+            "context_window": 131072,
+            "max_input_tokens": 65536,
+            "max_output_tokens": 65536,
+            "max_input_is_derived": true,
+            "reasoning_capability": "High",
+            "instruction_following": "High",
+            "tool_calling_support": true,
+            "input_price_per_million_usd": 0.075,
+            "output_price_per_million_usd": 0.3,
+            "metadata_source": "Groq model documentation; max input derived; qualitative ratings are project heuristics"
+          },
+          "selection_validated": true,
+          "reason": "Selected from the deterministically eligible general-purpose candidates. Role=general_purpose_reasoning; reasoning=High; instruction-following=High; context-window=131072; tool-calling=True.",
+          "choice_probabilities": {
+            "no_suitable_model": 0.01,
+            "openai/gpt-oss-120b": 0.02,
+            "openai/gpt-oss-20b": 0.97,
+            "qwen/qwen3.8-27b": 0.0
+          },
+          "choice_confidence": 0.96,
+          "jev_model": "jev-1.14.0",
+          "jev_usage": {
+            "input_tokens": 1651,
+            "output_tokens": 88
+          },
+          "raw_answer": {
+            "type": "choice",
+            "choice": "openai/gpt-oss-20b",
+            "confidence": 0.96,
+            "probabilities": {
+              "no_suitable_model": 0.01,
+              "openai/gpt-oss-120b": 0.02,
+              "openai/gpt-oss-20b": 0.97,
+              "qwen/qwen3.8-27b": 0.0
+            }
+          }
+        },
+        "eligible_model_ids": [
+          "openai/gpt-oss-120b",
+          "openai/gpt-oss-20b",
+          "qwen/qwen3.8-27b"
+        ],
+        "choice_confidence": 0.96,
+        "choice_probabilities": {
+          "no_suitable_model": 0.01,
+          "openai/gpt-oss-120b": 0.02,
+          "openai/gpt-oss-20b": 0.97,
+          "qwen/qwen3.8-27b": 0.0
+        }
       },
-      "proposed_solution": "Switch 'resume_intake_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.",
+      "proposed_solution": "Switch 'resume_intake_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.",
       "expected_benefit": {
-        "latency_savings_pct": 40.0,
+        "latency_savings_pct": 25.0,
         "latency_savings_seconds": 1.01,
-        "cost_savings_pct": 65.0,
-        "quality_impact": "High accuracy on standard schema parsing; edge case validation required."
+        "cost_savings_pct": 50.0,
+        "quality_impact": "Requires shadow validation against baseline traces to confirm behavioral equivalence."
       },
       "tradeoffs_and_risks": {
         "latency_tradeoff": "Substantial speedup on first-stage document intake.",
-        "token_cost_tradeoff": "Over 60% compute cost reduction for this node.",
-        "output_quality_risk": "Moderate (smaller models may miss subtle domain-specific abbreviations).",
+        "token_cost_tradeoff": "~50.0% API pricing reduction vs. 'openai/gpt-oss-120b' based on Groq catalog rates.",
+        "output_quality_risk": "Moderate (compact model recommended by JEV Agent 2 requires empirical shadow validation against baseline traces).",
         "implementation_complexity": "Low"
       },
       "tier": "Tier 2",
       "requires_validation": true,
       "allocated_key": "GROQ_API_KEY_6 (masked: gsk_...qtlA)",
-      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off",
+      "selected_model": "openai/gpt-oss-20b",
+      "selection_source": "jev_agent2_cached_langgraph"
     },
     {
       "candidate_id": "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",

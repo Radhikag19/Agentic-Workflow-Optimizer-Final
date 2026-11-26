@@ -134,7 +134,7 @@
     {
       "candidate_id": "MODEL-NORMALIZE_AGENT",
       "dimension": "model_selection",
-      "title": "Route normalize_agent to Smaller/Faster Model (requires validation)",
+      "title": "Route normalize_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)",
       "target_agents": [
         "normalize_agent"
       ],
@@ -147,33 +147,37 @@
         ],
         "current_model": "openai/gpt-oss-120b",
         "proposed_candidate_models": [
-          "llama-3.3-70b-versatile",
-          "llama-3.1-8b-instant"
+          "openai/gpt-oss-20b"
         ],
         "task_complexity": "Low-to-Moderate (Structured entity extraction, JSON mapping)",
-        "mean_tokens_per_call": 934.0
+        "mean_tokens_per_call": 934.0,
+        "selected_model": "openai/gpt-oss-20b",
+        "jev_selected_model": "openai/gpt-oss-20b",
+        "selection_source": "jev_agent2_langgraph"
       },
-      "proposed_solution": "Switch 'normalize_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.",
+      "proposed_solution": "Switch 'normalize_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.",
       "expected_benefit": {
-        "latency_savings_pct": 40.0,
+        "latency_savings_pct": 25.0,
         "latency_savings_seconds": 0.64,
-        "cost_savings_pct": 65.0,
-        "quality_impact": "High accuracy on standard schema parsing; edge case validation required."
+        "cost_savings_pct": 50.0,
+        "quality_impact": "Requires shadow validation against baseline traces to confirm behavioral equivalence."
       },
       "tradeoffs_and_risks": {
         "latency_tradeoff": "Substantial speedup on first-stage document intake.",
-        "token_cost_tradeoff": "Over 60% compute cost reduction for this node.",
-        "output_quality_risk": "Moderate (smaller models may miss subtle domain-specific abbreviations).",
+        "token_cost_tradeoff": "~50.0% API pricing reduction vs. 'openai/gpt-oss-120b' based on Groq catalog rates.",
+        "output_quality_risk": "Moderate (compact model recommended by JEV Agent 2 requires empirical shadow validation against baseline traces).",
         "implementation_complexity": "Low"
       },
       "tier": "Tier 2",
       "requires_validation": true,
-      "allocated_key": "GROQ_API_KEY_6 (masked: gsk_...qtlA)"
+      "allocated_key": "GROQ_API_KEY_6 (masked: gsk_...qtlA)",
+      "selected_model": "openai/gpt-oss-20b",
+      "selection_source": "jev_agent2_langgraph"
     },
     {
       "candidate_id": "MODEL-RECEIPT_AGENT",
       "dimension": "model_selection",
-      "title": "Route receipt_agent to Smaller/Faster Model (requires validation)",
+      "title": "Route receipt_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)",
       "target_agents": [
         "receipt_agent"
       ],
@@ -186,28 +190,32 @@
         ],
         "current_model": "openai/gpt-oss-120b",
         "proposed_candidate_models": [
-          "llama-3.3-70b-versatile",
-          "llama-3.1-8b-instant"
+          "openai/gpt-oss-20b"
         ],
         "task_complexity": "Low-to-Moderate (Structured entity extraction, JSON mapping)",
-        "mean_tokens_per_call": 710.0
+        "mean_tokens_per_call": 710.0,
+        "selected_model": "openai/gpt-oss-20b",
+        "jev_selected_model": "openai/gpt-oss-20b",
+        "selection_source": "jev_agent2_langgraph"
       },
-      "proposed_solution": "Switch 'receipt_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.",
+      "proposed_solution": "Switch 'receipt_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.",
       "expected_benefit": {
-        "latency_savings_pct": 40.0,
+        "latency_savings_pct": 25.0,
         "latency_savings_seconds": 1.62,
-        "cost_savings_pct": 65.0,
-        "quality_impact": "High accuracy on standard schema parsing; edge case validation required."
+        "cost_savings_pct": 50.0,
+        "quality_impact": "Requires shadow validation against baseline traces to confirm behavioral equivalence."
       },
       "tradeoffs_and_risks": {
         "latency_tradeoff": "Substantial speedup on first-stage document intake.",
-        "token_cost_tradeoff": "Over 60% compute cost reduction for this node.",
-        "output_quality_risk": "Moderate (smaller models may miss subtle domain-specific abbreviations).",
+        "token_cost_tradeoff": "~50.0% API pricing reduction vs. 'openai/gpt-oss-120b' based on Groq catalog rates.",
+        "output_quality_risk": "Moderate (compact model recommended by JEV Agent 2 requires empirical shadow validation against baseline traces).",
         "implementation_complexity": "Low"
       },
       "tier": "Tier 2",
       "requires_validation": true,
-      "allocated_key": "GROQ_API_KEY_6 (masked: gsk_...qtlA)"
+      "allocated_key": "GROQ_API_KEY_6 (masked: gsk_...qtlA)",
+      "selected_model": "openai/gpt-oss-20b",
+      "selection_source": "jev_agent2_langgraph"
     }
   ],
   "prompt_optimization_opportunities": [
@@ -632,29 +640,29 @@
       },
       {
         "candidate_id": "MODEL-NORMALIZE_AGENT",
-        "title": "Route normalize_agent to Smaller/Faster Model (requires validation)",
+        "title": "Route normalize_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)",
         "target_agents": [
           "normalize_agent"
         ],
         "expected_benefit": {
-          "latency_savings_pct": 40.0,
+          "latency_savings_pct": 25.0,
           "latency_savings_seconds": 0.64,
-          "cost_savings_pct": 65.0,
-          "quality_impact": "High accuracy on standard schema parsing; edge case validation required."
+          "cost_savings_pct": 50.0,
+          "quality_impact": "Requires shadow validation against baseline traces to confirm behavioral equivalence."
         },
         "validation_requirements": "Requires shadow execution testing against baseline traces to ensure full accuracy."
       },
       {
         "candidate_id": "MODEL-RECEIPT_AGENT",
-        "title": "Route receipt_agent to Smaller/Faster Model (requires validation)",
+        "title": "Route receipt_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)",
         "target_agents": [
           "receipt_agent"
         ],
         "expected_benefit": {
-          "latency_savings_pct": 40.0,
+          "latency_savings_pct": 25.0,
           "latency_savings_seconds": 1.62,
-          "cost_savings_pct": 65.0,
-          "quality_impact": "High accuracy on standard schema parsing; edge case validation required."
+          "cost_savings_pct": 50.0,
+          "quality_impact": "Requires shadow validation against baseline traces to confirm behavioral equivalence."
         },
         "validation_requirements": "Requires shadow execution testing against baseline traces to ensure full accuracy."
       },

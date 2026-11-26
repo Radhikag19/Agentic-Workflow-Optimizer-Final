@@ -1,7 +1,7 @@
 # Autonomous Optimization Discovery Report: `contract_review`
 
 > **TraceProfiler Autonomous Optimization Discovery Agent**  
-> **Generated:** 2026-11-24T20:12:54.482680+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
+> **Generated:** 2026-11-25T10:39:52.599525+00:00 | **Orchestrator:** LangGraph StateGraph | **Model:** `openai/gpt-oss-120b`  
 > **Key Allocation:** `GROQ_API_KEY_14 (masked: gsk_...l7b1)`
 
 ---
@@ -68,18 +68,18 @@ No candidates identified for this dimension based on available trace evidence.
 - **Expected Benefit:** Latency: 37.8% reduction | Tokens: 0% savings | Zero impact on output quality since dependencies are strictly verified.
 
 ### Model Selection Recommendations (Requires Validation) (2 candidates)
-#### [Tier 2] Route clause_extraction_agent to Smaller/Faster Model (requires validation)
+#### [Tier 2] Route clause_extraction_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)
 - **Target Agents:** `clause_extraction_agent`
-- **Observed Problem:** Agent 'clause_extraction_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (1.96s) and compute overhead for straightforward parsing tasks.
-- **Proposed Solution:** Switch 'clause_extraction_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.
-- **Expected Benefit:** Latency: 40.0% reduction | Tokens: 0% savings | High accuracy on standard schema parsing; edge case validation required.
+- **Observed Problem:** JEV 2-Agent LangGraph evaluation classified 'clause_extraction_agent' as Task=Medium, Prompt=Medium, Tokens=Low (mean latency 1.96s). Assigning the baseline 'openai/gpt-oss-120b' introduces unnecessary compute cost; JEV Agent 2 selected 'openai/gpt-oss-20b' among eligible Groq models.
+- **Proposed Solution:** Switch 'clause_extraction_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.
+- **Expected Benefit:** Latency: 25.0% reduction | Tokens: 0% savings | Requires shadow validation against baseline traces to confirm behavioral equivalence.
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
-#### [Tier 2] Route contract_intake_agent to Smaller/Faster Model (requires validation)
+#### [Tier 2] Route contract_intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)
 - **Target Agents:** `contract_intake_agent`
-- **Observed Problem:** Agent 'contract_intake_agent' performs structured syntactic extraction and text normalization. Assigning the high-parameter 120B model ('openai/gpt-oss-120b') introduces unnecessary latency (1.81s) and compute overhead for straightforward parsing tasks.
-- **Proposed Solution:** Switch 'contract_intake_agent' to a compact specialized model (e.g., Llama-3.3-70B or Llama-3.1-8B) with structured schema output validation.
-- **Expected Benefit:** Latency: 40.0% reduction | Tokens: 0% savings | High accuracy on standard schema parsing; edge case validation required.
+- **Observed Problem:** JEV 2-Agent LangGraph evaluation classified 'contract_intake_agent' as Task=Low, Prompt=Medium, Tokens=Low (mean latency 1.81s). Assigning the baseline 'openai/gpt-oss-120b' introduces unnecessary compute cost; JEV Agent 2 selected 'openai/gpt-oss-20b' among eligible Groq models.
+- **Proposed Solution:** Switch 'contract_intake_agent' from 'openai/gpt-oss-120b' to 'openai/gpt-oss-20b' per the 2-agent JEV LangGraph workflow (Agent 2 recommendation) with structured schema output validation.
+- **Expected Benefit:** Latency: 25.0% reduction | Tokens: 0% savings | Requires shadow validation against baseline traces to confirm behavioral equivalence.
 - **Validation Status:** `REQUIRES VALIDATION` (Pre-deployment shadow testing mandatory)
 
 ### Prompt Optimization Opportunities (0 candidates)
@@ -242,8 +242,8 @@ No candidates identified for this dimension based on available trace evidence.
 - **Parallel Execution of compliance_deviation_agent and risk_ambiguity_agent**: High expected benefit with low implementation complexity and zero functional risk.
 
 ### Tier 2: Validated Enhancements (8 items)
-- **Route clause_extraction_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
-- **Route contract_intake_agent to Smaller/Faster Model (requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
+- **Route clause_extraction_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
+- **Route contract_intake_agent to openai/gpt-oss-20b (JEV Agent 2 Recommendation; requires validation)**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for contract_intake_agent -> clause_extraction_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for contract_intake_agent -> policy_interpretation_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.
 - **Compact Handoff Payload Schema for clause_mapping_agent -> compliance_deviation_agent**: Requires shadow execution testing against baseline traces to ensure full accuracy.

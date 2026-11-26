@@ -1,0 +1,151 @@
+{
+  "suite_id": "wp_20261125_172742_e1478e",
+  "workflow_id": "recruitment_screening",
+  "generated_at": "2026-11-25T17:44:20.246270+00:00",
+  "suite_dir": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e",
+  "selected_dimensions": [
+    "communication_data_handoff",
+    "workflow_parallelization",
+    "model_selection",
+    "agent_consolidation",
+    "prompt_optimization"
+  ],
+  "executed_dimensions": [
+    "communication_data_handoff",
+    "workflow_parallelization",
+    "model_selection"
+  ],
+  "skipped_dimensions": [
+    {
+      "dimension": "agent_consolidation",
+      "reason": "no_approved_candidates"
+    },
+    {
+      "dimension": "prompt_optimization",
+      "reason": "no_approved_candidates"
+    }
+  ],
+  "include_combined": true,
+  "num_runs": 2,
+  "baseline_evidence": {
+    "source": "historical_runtime_traces",
+    "execution_mode": "historical_recorded_execution",
+    "re_executed": false,
+    "groq_api_calls": 0,
+    "fixed_baseline_reference_id": "hist_ef23650339c0",
+    "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\recruitment_screening",
+    "matched_input_count": 30,
+    "unmatched_input_count": 0
+  },
+  "comparison_rows": [
+    {
+      "label": "fixed_historical_baseline",
+      "scope_kind": "historical_baseline",
+      "applied_candidate_ids": [],
+      "runs_executed": 2,
+      "successful_runs": 2,
+      "mean_latency_seconds": 22.7775,
+      "latency_improvement_pct": 0.0,
+      "mean_tokens": 16755.0,
+      "token_improvement_pct": 0.0,
+      "mean_cost_usd_catalog_normalized": 0.005518,
+      "cost_improvement_pct": 0.0,
+      "groq_api_calls": 0,
+      "structural_validity_pass_rate_pct": 83.75,
+      "assessment_status": "HISTORICAL_FIXED",
+      "json_report_path": null,
+      "markdown_report_path": null
+    },
+    {
+      "label": "communication_data_handoff",
+      "scope_kind": "isolated_dimension",
+      "applied_candidate_ids": [
+        "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+        "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+      ],
+      "runs_executed": 2,
+      "successful_runs": 2,
+      "mean_latency_seconds": 101.885,
+      "latency_improvement_pct": -347.31,
+      "mean_tokens": 35030.0,
+      "token_improvement_pct": -109.07,
+      "mean_cost_usd_catalog_normalized": 0.011281,
+      "cost_improvement_pct": -104.44,
+      "groq_api_calls": 16,
+      "structural_validity_pass_rate_pct": 100.0,
+      "assessment_status": "quality_regression",
+      "json_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\communication_data_handoff\\execution_report.json",
+      "markdown_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\communication_data_handoff\\execution_report.md"
+    },
+    {
+      "label": "workflow_parallelization",
+      "scope_kind": "isolated_dimension",
+      "applied_candidate_ids": [
+        "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT"
+      ],
+      "runs_executed": 2,
+      "successful_runs": 2,
+      "mean_latency_seconds": 107.5203,
+      "latency_improvement_pct": -372.05,
+      "mean_tokens": 37509.0,
+      "token_improvement_pct": -123.87,
+      "mean_cost_usd_catalog_normalized": 0.012364,
+      "cost_improvement_pct": -124.07,
+      "groq_api_calls": 16,
+      "structural_validity_pass_rate_pct": 93.75,
+      "assessment_status": "quality_regression",
+      "json_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization\\execution_report.json",
+      "markdown_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\workflow_parallelization\\execution_report.md"
+    },
+    {
+      "label": "model_selection",
+      "scope_kind": "isolated_dimension",
+      "applied_candidate_ids": [
+        "MODEL-RESUME_INTAKE_AGENT"
+      ],
+      "runs_executed": 2,
+      "successful_runs": 2,
+      "mean_latency_seconds": 99.1027,
+      "latency_improvement_pct": -335.09,
+      "mean_tokens": 37369.0,
+      "token_improvement_pct": -123.03,
+      "mean_cost_usd_catalog_normalized": 0.011595,
+      "cost_improvement_pct": -110.13,
+      "groq_api_calls": 16,
+      "structural_validity_pass_rate_pct": 100.0,
+      "assessment_status": "quality_regression",
+      "json_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\model_selection\\execution_report.json",
+      "markdown_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\per_dimension\\model_selection\\execution_report.md"
+    },
+    {
+      "label": "combined_all_selected_dimensions",
+      "scope_kind": "combined_single_workflow",
+      "applied_candidate_ids": [
+        "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+        "MODEL-RESUME_INTAKE_AGENT",
+        "HANDOFF-QUALIFICATION_AGENT-TO-EXPERIENCE_ASSESSMENT_AGENT",
+        "HANDOFF-EXPERIENCE_ASSESSMENT_AGENT-TO-SCREENING_REVIEW_AGENT"
+      ],
+      "runs_executed": 2,
+      "successful_runs": 2,
+      "mean_latency_seconds": 100.6971,
+      "latency_improvement_pct": -342.09,
+      "mean_tokens": 37984.0,
+      "token_improvement_pct": -126.7,
+      "mean_cost_usd_catalog_normalized": 0.011954,
+      "cost_improvement_pct": -116.64,
+      "groq_api_calls": 16,
+      "structural_validity_pass_rate_pct": 100.0,
+      "assessment_status": "quality_regression",
+      "json_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\combined\\execution_report.json",
+      "markdown_report_path": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\recruitment_screening\\wp_20261125_172742_e1478e\\combined\\execution_report.md"
+    }
+  ],
+  "original_integrity_after": {
+    "original_unchanged": true,
+    "checked_file_count": 12,
+    "changed_files": [],
+    "missing_files": [],
+    "added_files": []
+  }
+}

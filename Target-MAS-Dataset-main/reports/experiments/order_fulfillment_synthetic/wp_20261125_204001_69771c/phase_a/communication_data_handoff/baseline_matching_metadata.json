@@ -1,0 +1,74 @@
+{
+  "fixed_baseline_reference_id": "hist_c86f1f3af77b",
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Ingestion_Traces_final\\Ingestion_Traces\\order_fulfillment_synthetic",
+  "total_historical_traces_found": 10,
+  "matched_input_count": 10,
+  "unmatched_input_count": 0,
+  "excluded_records": [],
+  "matched_identifiers": [
+    {
+      "record_id": "ORD-001",
+      "request_id": "ORD-001"
+    },
+    {
+      "record_id": "ORD-006",
+      "request_id": "ORD-006"
+    },
+    {
+      "record_id": "ORD-007",
+      "request_id": "ORD-007"
+    },
+    {
+      "record_id": "ORD-008",
+      "request_id": "ORD-008"
+    },
+    {
+      "record_id": "ORD-009",
+      "request_id": "ORD-009"
+    },
+    {
+      "record_id": "ORD-010",
+      "request_id": "ORD-010"
+    },
+    {
+      "record_id": "ORD-002",
+      "request_id": "ORD-002"
+    },
+    {
+      "record_id": "ORD-003",
+      "request_id": "ORD-003"
+    },
+    {
+      "record_id": "ORD-004",
+      "request_id": "ORD-004"
+    },
+    {
+      "record_id": "ORD-005",
+      "request_id": "ORD-005"
+    }
+  ],
+  "matched_run_ids": [
+    "live_20261125_201252_trace01",
+    "live_20261125_201311_trace06",
+    "live_20261125_201311_trace07",
+    "live_20261125_201311_trace08",
+    "live_20261125_201311_trace09",
+    "live_20261125_201311_trace10",
+    "live_20261125_201515_trace02",
+    "live_20261125_201515_trace03",
+    "live_20261125_201515_trace04",
+    "live_20261125_201515_trace05"
+  ],
+  "matched_input_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0",
+    "eb33705e438e24aeb7d929d79743ea2deb9926fef79dfd8aa106790c01f8f33b",
+    "908af0ceb3fc4774098873e0134fd6c350ddddb94c8b22377d97fa287632eead",
+    "e1dbf8e735e4514b32ef1bf8b5a64a9b35e950617db654c363d018f9e00fd0d9",
+    "7f4a4ff5d7e74aa9d2d026dace49a662c85666c4cd2b0124d43dff823ee4dda0",
+    "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+    "b85e64e9eca21b80700e4895a8bdf91dced8dbc2ff562c95050858ac4def4ff4",
+    "69bd7394d86d57efeea482baed691a5789c38d349909c55f7a0a3260aebce83e",
+    "2b232a04363ca99daca3f1049780a34c286307c23829f87b7a7257c7c21af953"
+  ]
+}

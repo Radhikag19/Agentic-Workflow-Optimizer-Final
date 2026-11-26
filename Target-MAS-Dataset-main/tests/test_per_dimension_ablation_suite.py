@@ -166,7 +166,7 @@ def _make_sample_workflow_and_evidence(tmp_path: Path):
             "candidate_id": "MODEL-INTAKE",
             "dimension": "model_selection",
             "target_agents": ["resume_intake_agent"],
-            "selected_model": "llama-3.1-8b-instant",
+            "selected_model": "openai/gpt-oss-20b",
         },
         {
             "candidate_id": "PROMPT-EXP",
@@ -232,7 +232,7 @@ def _make_mock_subprocess(calls_log: List[Dict[str, Any]]):
                     {
                         "order": 1,
                         "agent_id": "resume_intake_agent",
-                        "model": "llama-3.1-8b-instant",
+                        "model": "openai/gpt-oss-20b",
                         "duration_seconds": 1.0,
                         "status": "SUCCESS",
                         "tokens": 200,

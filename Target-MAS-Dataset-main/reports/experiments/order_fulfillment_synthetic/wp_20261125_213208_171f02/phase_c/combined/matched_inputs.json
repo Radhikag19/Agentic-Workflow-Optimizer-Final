@@ -1,0 +1,62 @@
+[
+  {
+    "record_id": "ORD-001",
+    "request_id": "ORD-001",
+    "customer_id": "CUST-101",
+    "customer_name": "Northstar Logistics LLC",
+    "customer_tier": "enterprise",
+    "billing_country": "US",
+    "shipping_region": "US-WEST",
+    "warehouse_region": "US-WEST",
+    "shipping_speed": "standard",
+    "order_total_usd": 420.0,
+    "sku_items": [
+      {
+        "sku": "SKU-RACK-10",
+        "qty": 2,
+        "unit_price_usd": 160.0,
+        "stock_available": 24
+      },
+      {
+        "sku": "SKU-CBL-04",
+        "qty": 5,
+        "unit_price_usd": 20.0,
+        "stock_available": 140
+      }
+    ],
+    "payment_verified": true,
+    "account_age_days": 920,
+    "_matched_baseline_run_id": "live_20261125_210453_trace01",
+    "_matched_identifiers": {
+      "record_id": "ORD-001",
+      "request_id": "ORD-001"
+    }
+  },
+  {
+    "record_id": "ORD-002",
+    "request_id": "ORD-002",
+    "customer_id": "CUST-102",
+    "customer_name": "Kestrel Retail Inc.",
+    "customer_tier": "standard",
+    "billing_country": "US",
+    "shipping_region": "US-EAST",
+    "warehouse_region": "US-EAST",
+    "shipping_speed": "expedited",
+    "order_total_usd": 1850.0,
+    "sku_items": [
+      {
+        "sku": "SKU-SRV-88",
+        "qty": 1,
+        "unit_price_usd": 1850.0,
+        "stock_available": 6
+      }
+    ],
+    "payment_verified": true,
+    "account_age_days": 410,
+    "_matched_baseline_run_id": "live_20261125_210453_trace02",
+    "_matched_identifiers": {
+      "record_id": "ORD-002",
+      "request_id": "ORD-002"
+    }
+  }
+]

@@ -59,6 +59,7 @@ class ExperimentService:
                 "experiment_dir": item["experiment_dir"],
                 "json_report_path": item["json_report_path"],
                 "markdown_report_path": item["markdown_report_path"],
+                "has_results": True,
             }
 
     def list_experiments(self, workflow_id: Optional[str] = None) -> List[Dict[str, Any]]:
@@ -245,6 +246,7 @@ class ExperimentService:
                 "experiment_dir": str(exp_dir),
                 "json_report_path": None,
                 "markdown_report_path": None,
+                "has_results": False,
             }
             self._records[exp_id] = record
 
@@ -362,6 +364,7 @@ class ExperimentService:
                 rec["completed_at"] = datetime.now(timezone.utc).isoformat()
                 rec["json_report_path"] = res.get("json_report_path")
                 rec["markdown_report_path"] = res.get("markdown_report_path")
+                rec["has_results"] = True
 
             self.events.publish({
                 "experiment_id": exp_id,

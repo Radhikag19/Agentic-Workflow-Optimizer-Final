@@ -126,4 +126,44 @@ describe('ExperimentsPage execution modes & human gate approval', () => {
     fireEvent.change(evalSelect, { target: { value: 'ragas' } });
     expect(screen.getByText('Max Faithfulness Drop')).toBeInTheDocument();
   });
+
+  it('displays human-readable execution mode labels in Experiment History & Live Studies', () => {
+    useWorkplaceStore.setState({
+      experiments: [
+        {
+          experiment_id: 'wp_20261125_060543_ac51b3',
+          workflow_id: 'contract_review',
+          experiment_type: 'two_phase_study',
+          status: 'completed',
+          report_paths: {},
+          has_results: true,
+        },
+        {
+          experiment_id: 'wp_20261125_091807_cbdcfb',
+          workflow_id: 'contract_review',
+          experiment_type: 'dimension_ablation_suite',
+          status: 'completed',
+          report_paths: {},
+          has_results: true,
+        },
+        {
+          experiment_id: 'exp_20261123_141035_637e9d',
+          workflow_id: 'contract_review',
+          experiment_type: 'combined_single_workflow',
+          status: 'completed',
+          report_paths: {},
+          has_results: true,
+        },
+      ],
+    });
+
+    render(<ExperimentsPage />);
+
+    expect(screen.getByText('Pareto Beam Search • completed')).toBeInTheDocument();
+    expect(screen.getByText('Customized Optimizations • completed')).toBeInTheDocument();
+    expect(screen.getByText('Combined Single Workflow • completed')).toBeInTheDocument();
+    expect(screen.queryByText(/two_phase_study/)).toBeNull();
+    expect(screen.queryByText(/dimension_ablation_suite/)).toBeNull();
+    expect(screen.queryByText(/combined_single_workflow/)).toBeNull();
+  });
 });

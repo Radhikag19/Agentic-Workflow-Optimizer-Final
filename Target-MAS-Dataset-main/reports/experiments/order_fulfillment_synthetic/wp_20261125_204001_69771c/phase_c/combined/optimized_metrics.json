@@ -1,0 +1,124 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_c_combined",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 14,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_c\\combined\\runtime_traces",
+  "execution_status": "FAILED",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported",
+    "unavailable"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_c\\combined\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_c\\combined\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "FAILED",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 43.1297,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_20261125_204001_69771c\\phase_c\\combined\\sandbox_workflow",
+    "error_details": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m unable to generate the required fulfillment summary because the necessary upstream values (\\u202fin_stock, review_flag, carrier_name, service_level, tax_jurisdiction, tax_amount_usd\\u202f) are not present in the input you provided. Please supply those fields so I can produce the correct JSON response.'}}; Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m unable to generate the required fulfillment summary because the necessary upstream values (in_stock, review_flag, carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag) were not provided in the input. Please supply those fields so I can produce the correct JSON response.'}}"
+  },
+  "total_runs": 2,
+  "successful_runs": 0,
+  "failed_runs": 2,
+  "incomplete_runs": [
+    {
+      "run_id": "sb_20261125_204817_3c1e87",
+      "run_index": 0,
+      "status": "FAILED",
+      "executed_agents": 7,
+      "expected_agents": 7,
+      "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m unable to generate the required fulfillment summary because the necessary upstream values (\\u202fin_stock, review_flag, carrier_name, service_level, tax_jurisdiction, tax_amount_usd\\u202f) are not present in the input you provided. Please supply those fields so I can produce the correct JSON response.'}}"
+    },
+    {
+      "run_id": "sb_20261125_204839_b747cd",
+      "run_index": 1,
+      "status": "FAILED",
+      "executed_agents": 7,
+      "expected_agents": 7,
+      "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m unable to generate the required fulfillment summary because the necessary upstream values (in_stock, review_flag, carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag) were not provided in the input. Please supply those fields so I can produce the correct JSON response.'}}"
+    }
+  ],
+  "success_rate_pct": 0.0,
+  "mean_latency_seconds": null,
+  "median_latency_seconds": null,
+  "mean_agent_latency_seconds": null,
+  "mean_tokens": null,
+  "mean_prompt_tokens": null,
+  "mean_completion_tokens": null,
+  "mean_cost_usd_catalog_normalized": null,
+  "schema_validation_passed": false,
+  "structural_validity_pass_rate_pct": 85.71,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [
+    {
+      "variant": "optimized",
+      "run_index": 0,
+      "run_id": "sb_20261125_204817_3c1e87",
+      "agent_id": "fulfillment_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m unable to generate the required fulfillment summary because the necessary upstream values (\\u202fin_stock, review_flag, carrier_name, service_level, tax_jurisdiction, tax_amount_usd\\u202f) are not present in the input you provided. Please supply those fields so I can produce the correct JSON response.'}}"
+    },
+    {
+      "variant": "optimized",
+      "run_index": 1,
+      "run_id": "sb_20261125_204839_b747cd",
+      "agent_id": "fulfillment_summary_agent",
+      "model": "openai/gpt-oss-120b",
+      "error": "Error code: 400 - {'error': {'message': \"Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.\", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': 'I\u2019m unable to generate the required fulfillment summary because the necessary upstream values (in_stock, review_flag, carrier_name, service_level, tax_jurisdiction, tax_amount_usd, and invoice_tag) were not provided in the input. Please supply those fields so I can produce the correct JSON response.'}}"
+    }
+  ],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261125_204817_3c1e87",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261125_201252_trace01",
+      "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "status": "FAILED",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 13.887,
+      "prompt_tokens": 3305,
+      "completion_tokens": 3066,
+      "total_tokens": 9676,
+      "estimated_cost_usd": 0.002548,
+      "schema_valid": false
+    },
+    {
+      "run_id": "sb_20261125_204839_b747cd",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261125_201311_trace06",
+      "input_hash": "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0",
+      "status": "FAILED",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 29.0688,
+      "prompt_tokens": 3642,
+      "completion_tokens": 3134,
+      "total_tokens": 10418,
+      "estimated_cost_usd": 0.002716,
+      "schema_valid": false
+    }
+  ],
+  "per_agent_metrics": {},
+  "input_dataset_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "4c5452ec6fc4da60a384a6b0bec63aea6f78bb05576b9a605542e411539e47e0"
+  ]
+}

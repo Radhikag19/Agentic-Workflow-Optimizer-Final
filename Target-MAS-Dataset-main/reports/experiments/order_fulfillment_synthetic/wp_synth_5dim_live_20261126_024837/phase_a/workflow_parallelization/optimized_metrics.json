@@ -1,0 +1,174 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_synth_5dim_live_20261126_024837__phase_a_workflow_parallelization",
+  "variant": "optimized",
+  "source": "current_experiment",
+  "re_executed": true,
+  "groq_api_calls": 14,
+  "trace_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\runtime_traces",
+  "execution_status": "SUCCESS",
+  "execution_modes": [
+    "live_llm_execution"
+  ],
+  "usage_sources": [
+    "api_reported"
+  ],
+  "cost_calculation_basis": "estimated_from_model_catalog_using_api_reported_tokens",
+  "process_metadata": {
+    "execution_backend": "local_subprocess",
+    "python_executable": "C:\\Users\\radhi\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "workflow_directory": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+    "cwd": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+    "exit_code": 0,
+    "process_exit_codes": [
+      0,
+      0
+    ],
+    "timed_out": false,
+    "execution_status": "SUCCESS",
+    "execution_mode": "live_llm_execution",
+    "process_duration_seconds": 117.0359,
+    "sys_path_head": "C:\\Users\\radhi\\Desktop\\Target-MAS-Dataset-main\\Target-MAS-Dataset-main\\reports\\experiments\\order_fulfillment_synthetic\\wp_synth_5dim_live_20261126_024837\\phase_a\\workflow_parallelization\\sandbox_workflow",
+    "error_details": null
+  },
+  "total_runs": 2,
+  "successful_runs": 2,
+  "failed_runs": 0,
+  "incomplete_runs": [],
+  "success_rate_pct": 100.0,
+  "mean_latency_seconds": 58.4753,
+  "median_latency_seconds": 58.4753,
+  "mean_agent_latency_seconds": 9.3272,
+  "mean_tokens": 18681.0,
+  "mean_prompt_tokens": 6414.5,
+  "mean_completion_tokens": 5852.0,
+  "mean_cost_usd_catalog_normalized": 0.005433,
+  "schema_validation_passed": true,
+  "structural_validity_pass_rate_pct": 100.0,
+  "schema_validation_failures": [],
+  "invalid_replay_samples": [],
+  "semantic_quality_evaluation": "unavailable",
+  "semantic_quality_status": "unavailable",
+  "semantic_quality_pass_rate_pct": null,
+  "api_errors": [],
+  "per_run_metrics": [
+    {
+      "run_id": "sb_20261125_212007_e445d9",
+      "run_index": 0,
+      "matched_baseline_run_id": "live_20261125_210453_trace01",
+      "input_hash": "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 63.1568,
+      "prompt_tokens": 6513,
+      "completion_tokens": 5958,
+      "total_tokens": 18984,
+      "estimated_cost_usd": 0.005526,
+      "schema_valid": true
+    },
+    {
+      "run_id": "sb_20261125_212114_9369be",
+      "run_index": 1,
+      "matched_baseline_run_id": "live_20261125_210453_trace02",
+      "input_hash": "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf",
+      "status": "SUCCESS",
+      "execution_mode": "live_llm_execution",
+      "duration_seconds": 53.7939,
+      "prompt_tokens": 6316,
+      "completion_tokens": 5746,
+      "total_tokens": 18378,
+      "estimated_cost_usd": 0.00534,
+      "schema_valid": true
+    }
+  ],
+  "per_agent_metrics": {
+    "order_intake_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 4.325,
+      "mean_tokens": 1560.5,
+      "mean_prompt_tokens": 853.0,
+      "mean_completion_tokens": 707.5,
+      "mean_cost_usd": 0.000553,
+      "schema_valid_rate_pct": 100.0
+    },
+    "inventory_check_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 12.6664,
+      "mean_tokens": 1062.0,
+      "mean_prompt_tokens": 738.5,
+      "mean_completion_tokens": 323.5,
+      "mean_cost_usd": 0.000304,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fraud_screen_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 11.2413,
+      "mean_tokens": 989.5,
+      "mean_prompt_tokens": 733.5,
+      "mean_completion_tokens": 256.0,
+      "mean_cost_usd": 0.000264,
+      "schema_valid_rate_pct": 100.0
+    },
+    "carrier_routing_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 3.1246,
+      "mean_tokens": 843.0,
+      "mean_prompt_tokens": 631.5,
+      "mean_completion_tokens": 211.5,
+      "mean_cost_usd": 0.000222,
+      "schema_valid_rate_pct": 100.0
+    },
+    "tax_classify_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 5.5583,
+      "mean_tokens": 1028.0,
+      "mean_prompt_tokens": 676.5,
+      "mean_completion_tokens": 351.5,
+      "mean_cost_usd": 0.000312,
+      "schema_valid_rate_pct": 100.0
+    },
+    "invoice_tag_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 8.3764,
+      "mean_tokens": 995.5,
+      "mean_prompt_tokens": 709.5,
+      "mean_completion_tokens": 286.0,
+      "mean_cost_usd": 0.000278,
+      "schema_valid_rate_pct": 100.0
+    },
+    "fulfillment_summary_agent": {
+      "runs_count": 2,
+      "models_observed": [
+        "openai/gpt-oss-120b"
+      ],
+      "mean_latency_seconds": 19.9984,
+      "mean_tokens": 2862.0,
+      "mean_prompt_tokens": 2072.0,
+      "mean_completion_tokens": 790.0,
+      "mean_cost_usd": 0.000785,
+      "schema_valid_rate_pct": 100.0
+    }
+  },
+  "input_dataset_hashes": [
+    "dcc58f2e03292c7b8fc512032ac58902de2b83aa2b7b321001bc6db6bee81957",
+    "26f4e6f535d0e06f5773b200c3652935c8f7796edbf49392eac7c4aee8c71daf"
+  ]
+}

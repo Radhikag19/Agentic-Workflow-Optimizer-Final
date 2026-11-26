@@ -9,6 +9,8 @@ orchestrated through a sequential LangGraph StateGraph.
 from optimization_agent.model_selection.orchestrator import (
     run_model_selection,
     build_model_selection_graph,
+    load_cached_jev_recommendation,
+    resolve_jev_agent2_recommendation,
     AWOModelSelectionState,
 )
 from optimization_agent.model_selection.mcp_context_builder import (
@@ -17,6 +19,7 @@ from optimization_agent.model_selection.mcp_context_builder import (
 )
 from optimization_agent.model_selection.groq_catalog import (
     MODEL_CATALOG,
+    GENERAL_PURPOSE_GROQ_MODELS,
     get_live_groq_models,
     resolve_available_llms,
 )
@@ -39,10 +42,13 @@ from optimization_agent.model_selection.jev_client import call_jev
 __all__ = [
     "run_model_selection",
     "build_model_selection_graph",
+    "load_cached_jev_recommendation",
+    "resolve_jev_agent2_recommendation",
     "AWOModelSelectionState",
     "build_agent_context_from_mcp",
     "calculate_workflow_token_reference",
     "MODEL_CATALOG",
+    "GENERAL_PURPOSE_GROQ_MODELS",
     "get_live_groq_models",
     "resolve_available_llms",
     "filter_eligible_models",

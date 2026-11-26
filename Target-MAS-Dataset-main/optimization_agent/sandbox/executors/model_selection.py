@@ -8,36 +8,74 @@ from __future__ import annotations
 
 from typing import Any, Dict, List, Optional
 
-from optimization_agent.model_selection.groq_catalog import MODEL_CATALOG
+from optimization_agent.model_selection.groq_catalog import (
+    GENERAL_PURPOSE_GROQ_MODELS,
+    MODEL_CATALOG,
+)
+from optimization_agent.model_selection.orchestrator import resolve_jev_agent2_recommendation
 from optimization_agent.sandbox.executors.base import BaseOptimizationExecutor
 from optimization_agent.sandbox.manager import SandboxEnvironment
 
-SUPPORTED_GROQ_MODELS = set(MODEL_CATALOG.keys()) | {
-    "llama-3.3-70b-versatile",
-    "llama-3.1-8b-instant",
-}
+SUPPORTED_GROQ_MODELS = set(GENERAL_PURPOSE_GROQ_MODELS)
 
 
 class ModelSelectionExecutor(BaseOptimizationExecutor):
-    """Applies approved model_selection candidates inside the sandbox."""
+    """Applies approved model_selection candidates inside the sandbox using JEV Agent 2 models."""
 
     dimension_name = "model_selection"
 
-    @staticmethod
-    def _resolve_proposed_model(candidate: Dict[str, Any]) -> Optional[str]:
-        supp = candidate.get("supporting_evidence") or {}
-        explicit = candidate.get("selected_model") or (
-            supp.get("selected_model") if isinstance(supp, dict) else None
-        )
-        if isinstance(explicit, str) and explicit.strip():
-            cand_id = explicit.strip()
-            return cand_id if cand_id in SUPPORTED_GROQ_MODELS else None
+    def __init__(
+        self,
+        jev_caller: Optional[Any] = None,
+        jev_live_groq_models: Optional[Dict[str, Any]] = None,
+        jev_results_dir: Optional[Any] = None,
+        use_cached_jev: bool = True,
+    ) -> None:
+        super().__init__()
+        self.jev_caller = jev_caller
+        self.jev_live_groq_models = jev_live_groq_models
+        self.jev_results_dir = jev_results_dir
+        self.use_cached_jev = use_cached_jev
 
+    @staticmethod
+    def _extract_explicit_model_candidate(candidate: Dict[str, Any]) -> Optional[str]:
+        supp = candidate.get("supporting_evidence") or {}
+        jev_rec_top = candidate.get("jev_model_selection") or {}
+        top_model_rec = candidate.get("model_recommendation") or {}
+        jev_rec_supp = supp.get("jev_agent2_recommendation") if isinstance(supp, dict) else {}
+        jev_bundle_supp = supp.get("jev_recommendation") if isinstance(supp, dict) else {}
+
+        raw_values = [
+            (jev_rec_top.get("model_recommendation") or {}).get("selected_model")
+            if isinstance(jev_rec_top, dict)
+            else None,
+            top_model_rec.get("selected_model") if isinstance(top_model_rec, dict) else None,
+            jev_rec_supp.get("selected_model") if isinstance(jev_rec_supp, dict) else None,
+            (jev_bundle_supp.get("model_recommendation") or {}).get("selected_model")
+            if isinstance(jev_bundle_supp, dict)
+            else None,
+            supp.get("jev_selected_model") if isinstance(supp, dict) else None,
+            candidate.get("selected_model"),
+            supp.get("selected_model") if isinstance(supp, dict) else None,
+        ]
+        for val in raw_values:
+            if isinstance(val, str) and val.strip():
+                return val.strip()
+        return None
+
+    @classmethod
+    def _resolve_proposed_model(cls, candidate: Dict[str, Any]) -> Optional[str]:
+        explicit = cls._extract_explicit_model_candidate(candidate)
+        if explicit is not None:
+            return explicit if explicit in SUPPORTED_GROQ_MODELS else None
+
+        supp = candidate.get("supporting_evidence") or {}
         proposed_list = supp.get("proposed_candidate_models") if isinstance(supp, dict) else None
         if isinstance(proposed_list, list):
-            for m in proposed_list:
-                if isinstance(m, str) and m.strip() in SUPPORTED_GROQ_MODELS:
-                    return m.strip()
+            for entry in proposed_list:
+                raw_id = entry.get("model") if isinstance(entry, dict) else entry
+                if isinstance(raw_id, str) and raw_id.strip() in SUPPORTED_GROQ_MODELS:
+                    return raw_id.strip()
         return None
 
     def execute(self, env: SandboxEnvironment, candidate: Dict[str, Any]) -> Dict[str, Any]:
@@ -50,12 +88,54 @@ class ModelSelectionExecutor(BaseOptimizationExecutor):
                 error="missing_target_agents",
             )
 
+        explicit_raw = self._extract_explicit_model_candidate(candidate)
+        if explicit_raw is not None and explicit_raw not in SUPPORTED_GROQ_MODELS:
+            return self.make_result(
+                candidate,
+                status="requires_manual_intervention",
+                description=(
+                    f"Proposed model '{explicit_raw}' is not in supported general-purpose "
+                    f"Groq MODEL_CATALOG ({sorted(SUPPORTED_GROQ_MODELS)})."
+                ),
+                error="unsupported_or_missing_model",
+            )
+
         proposed_model = self._resolve_proposed_model(candidate)
+        selection_source = candidate.get("selection_source") or (
+            (candidate.get("supporting_evidence") or {}).get("selection_source")
+            if isinstance(candidate.get("supporting_evidence"), dict)
+            else None
+        ) or "candidate_payload"
+        jev_agent2_resolved: Optional[Dict[str, Any]] = None
+
+        if not proposed_model:
+            try:
+                jev_res = resolve_jev_agent2_recommendation(
+                    workflow_id=env.workflow_id,
+                    agent_id=target_agents[0],
+                    custom_call_jev=self.jev_caller,
+                    live_groq_models=self.jev_live_groq_models,
+                    jev_results_dir=self.jev_results_dir,
+                    use_cached_jev=self.use_cached_jev,
+                )
+                rec = jev_res.get("model_recommendation") or {}
+                jev_choice = rec.get("selected_model")
+                if (
+                    rec.get("selection_validated") is True
+                    and isinstance(jev_choice, str)
+                    and jev_choice.strip() in SUPPORTED_GROQ_MODELS
+                ):
+                    proposed_model = jev_choice.strip()
+                    selection_source = str(jev_res.get("resolution_source") or "jev_agent2_langgraph")
+                    jev_agent2_resolved = rec
+            except Exception:
+                proposed_model = None
+
         if not proposed_model:
             return self.make_result(
                 candidate,
                 status="requires_manual_intervention",
-                description="Proposed model is missing or not in supported Groq LLM catalog.",
+                description="Proposed model is missing or not in supported general-purpose Groq LLM catalog.",
                 error="unsupported_or_missing_model",
             )
 
@@ -132,7 +212,12 @@ class ModelSelectionExecutor(BaseOptimizationExecutor):
             modified_files=modified_files,
             description=(
                 f"Updated model configuration for {target_agents} to '{proposed_model}' "
-                f"(provider={provider}) in sandbox while preserving API key bindings."
+                f"(provider={provider}, source={selection_source}) in sandbox while preserving API key bindings."
             ),
-            details={"model_transitions": transitions, "provider": provider},
+            details={
+                "model_transitions": transitions,
+                "provider": provider,
+                "selection_source": selection_source,
+                "jev_agent2_resolved": jev_agent2_resolved,
+            },
         )

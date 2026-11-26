@@ -27,6 +27,7 @@ WORKFLOW_KEY_ENV_MAP: Dict[str, Tuple[str, ...]] = {
     "incident_triage": ("GROQ_API_KEY_8", "GROQ_API_KEY_INCIDENT_TRIAGE"),
     "expense_reimbursement": ("GROQ_API_KEY_9", "GROQ_API_KEY_EXPENSE_REIMBURSEMENT"),
     "market_research": ("GROQ_API_KEY_10", "GROQ_API_KEY_MARKET_RESEARCH"),
+    "order_fulfillment_synthetic": ("GROQ_API_KEY_14", "GROQ_API_KEY_ORDER_FULFILLMENT"),
 }
 
 # Exactly 78 baseline agents across all 10 workflows
@@ -128,6 +129,15 @@ AGENT_WORKFLOW_MAP: Dict[str, str] = {
     "comparison_agent": "market_research",
     "synthesis_agent": "market_research",
     "fact_check_agent": "market_research",
+
+    # Synthetic 5-Dimension Validation Workflow (7 agents)
+    "order_intake_agent": "order_fulfillment_synthetic",
+    "inventory_check_agent": "order_fulfillment_synthetic",
+    "fraud_screen_agent": "order_fulfillment_synthetic",
+    "carrier_routing_agent": "order_fulfillment_synthetic",
+    "tax_classify_agent": "order_fulfillment_synthetic",
+    "invoice_tag_agent": "order_fulfillment_synthetic",
+    "fulfillment_summary_agent": "order_fulfillment_synthetic",
 }
 
 

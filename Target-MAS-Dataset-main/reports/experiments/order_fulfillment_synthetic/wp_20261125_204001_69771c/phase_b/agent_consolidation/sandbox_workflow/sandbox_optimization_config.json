@@ -1,0 +1,10 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "experiment_id": "wp_20261125_204001_69771c__phase_b_agent_consolidation",
+  "consolidations": [],
+  "parallel_groups": [],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {},
+  "applied_candidates": []
+}

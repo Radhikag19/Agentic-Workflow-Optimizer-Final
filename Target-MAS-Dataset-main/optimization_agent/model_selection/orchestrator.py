@@ -8,10 +8,11 @@ and compiles the standardized final structured recommendation report.
 
 from __future__ import annotations
 
+import copy
 import json
 import logging
 from pathlib import Path
-from typing import Any, Dict, List, Optional, TypedDict
+from typing import Any, Dict, List, Optional, TypedDict, Union
 
 from langgraph.graph import END, START, StateGraph
 
@@ -25,6 +26,7 @@ from optimization_agent.model_selection.eligibility_filter import (
     filter_eligible_models,
 )
 from optimization_agent.model_selection.groq_catalog import (
+    GENERAL_PURPOSE_GROQ_MODELS,
     resolve_available_llms,
 )
 from optimization_agent.model_selection.mcp_context_builder import (
@@ -179,4 +181,96 @@ def run_model_selection(
         logger.info(f"Saved AWO JEV Model Selection result to: {out_file}")
 
     return final_output
+
+
+def load_cached_jev_recommendation(
+    workflow_id: str,
+    agent_id: str,
+    jev_results_dir: Optional[Union[str, Path]] = None,
+) -> Optional[Dict[str, Any]]:
+    """
+    Load a validated JEV 2-agent recommendation artifact (produced by run_jev_workflow.py)
+    if present on disk and aligned with GENERAL_PURPOSE_GROQ_MODELS.
+    """
+    candidate_roots: List[Path] = []
+    if jev_results_dir:
+        candidate_roots.append(Path(jev_results_dir))
+
+    here = Path(__file__).resolve()
+    candidate_roots.extend([
+        here.parents[3] / "JEV_testing",
+        here.parents[2] / "JEV_testing",
+        Path.cwd() / "JEV_testing",
+    ])
+
+    seen: set[Path] = set()
+    for root in candidate_roots:
+        try:
+            resolved_root = root.resolve()
+        except Exception:
+            continue
+        if resolved_root in seen:
+            continue
+        seen.add(resolved_root)
+
+        path = resolved_root / workflow_id / f"{agent_id}.json"
+        if not path.is_file():
+            continue
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+
+        if (
+            data.get("workflow_id") != workflow_id
+            or data.get("selected_agent_id") != agent_id
+        ):
+            continue
+
+        rec = data.get("model_recommendation") or {}
+        if rec.get("selection_validated") is not True:
+            continue
+
+        selected = rec.get("selected_model")
+        if selected is None or selected in GENERAL_PURPOSE_GROQ_MODELS:
+            return data
+    return None
+
+
+def resolve_jev_agent2_recommendation(
+    workflow_id: str,
+    agent_id: str,
+    *,
+    evidence_dir: Optional[str] = None,
+    custom_call_jev: Optional[Any] = None,
+    live_groq_models: Optional[Dict[str, Any]] = None,
+    jev_results_dir: Optional[Union[str, Path]] = None,
+    use_cached_jev: bool = True,
+) -> Dict[str, Any]:
+    """
+    Resolve model selection for a target agent using the 2-agent JEV LangGraph workflow.
+    Uses live LangGraph invocation whenever custom_call_jev is provided or caching is disabled/absent,
+    and strictly excludes unhosted or non-general-purpose models.
+    """
+    if custom_call_jev is None and use_cached_jev:
+        cached = load_cached_jev_recommendation(
+            workflow_id=workflow_id,
+            agent_id=agent_id,
+            jev_results_dir=jev_results_dir,
+        )
+        if cached is not None:
+            out = copy.deepcopy(cached)
+            out["resolution_source"] = "jev_agent2_cached_langgraph"
+            return out
+
+    live_res = run_model_selection(
+        workflow_id=workflow_id,
+        agent_id=agent_id,
+        evidence_dir=evidence_dir,
+        custom_call_jev=custom_call_jev,
+        live_groq_models=live_groq_models,
+        export_report=False,
+    )
+    live_res["resolution_source"] = "jev_agent2_live_langgraph"
+    return live_res
 

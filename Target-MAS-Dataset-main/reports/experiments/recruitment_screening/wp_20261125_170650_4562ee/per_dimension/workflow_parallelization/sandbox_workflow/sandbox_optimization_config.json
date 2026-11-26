@@ -1,0 +1,21 @@
+{
+  "workflow_id": "recruitment_screening",
+  "experiment_id": "wp_20261125_170650_4562ee__dim_workflow_parallelization",
+  "consolidations": [],
+  "parallel_groups": [
+    {
+      "candidate_id": "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT",
+      "agents": [
+        "qualification_agent",
+        "job_criteria_agent"
+      ],
+      "verification_reason": "Verified mutually independent in sandbox DAG: ['qualification_agent', 'job_criteria_agent']"
+    }
+  ],
+  "model_overrides": {},
+  "prompt_overrides": {},
+  "handoff_projections": {},
+  "applied_candidates": [
+    "PARALLEL-QUALIFICATION_AGENT-JOB_CRITERIA_AGENT"
+  ]
+}

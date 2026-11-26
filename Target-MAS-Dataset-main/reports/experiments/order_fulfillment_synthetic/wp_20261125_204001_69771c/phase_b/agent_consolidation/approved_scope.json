@@ -1,0 +1,831 @@
+{
+  "workflow_id": "order_fulfillment_synthetic",
+  "selected_dimensions": [
+    "agent_consolidation",
+    "workflow_parallelization",
+    "model_selection",
+    "prompt_optimization",
+    "communication_data_handoff"
+  ],
+  "approved_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT"
+  ],
+  "excluded_candidate_ids": [],
+  "approved_candidates": [
+    {
+      "candidate_id": "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+      "dimension": "agent_consolidation",
+      "title": "Consolidate carrier_routing_agent -> tax_classify_agent into Unified Agent (CarrierRoutingAndTaxClassifier)",
+      "target_agents": [
+        "carrier_routing_agent",
+        "tax_classify_agent"
+      ],
+      "observed_problem": "Sequential agents carrier_routing_agent -> tax_classify_agent execute as 2 separate LLM dispatch steps along verified dependency chain chain_1 (baseline combined mean latency: 2.88s; combined mean input+output tokens: 1397), incurring intermediate serialization and 208 combined static prompt tokens.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_5_prompts",
+          "stage_6_latency",
+          "stage_7_tokens",
+          "stage_10_evidence"
+        ],
+        "original_sequential_chain": [
+          "carrier_routing_agent",
+          "tax_classify_agent",
+          "invoice_tag_agent",
+          "fulfillment_summary_agent"
+        ],
+        "candidate_group": [
+          "carrier_routing_agent",
+          "tax_classify_agent"
+        ],
+        "agent_execution_order": [
+          "carrier_routing_agent",
+          "tax_classify_agent"
+        ],
+        "per_agent_input_tokens": {
+          "carrier_routing_agent": 480.7,
+          "tax_classify_agent": 441.7
+        },
+        "per_agent_output_tokens": {
+          "carrier_routing_agent": 246.3,
+          "tax_classify_agent": 228.2
+        },
+        "per_agent_observation_counts": {
+          "carrier_routing_agent": 10,
+          "tax_classify_agent": 10
+        },
+        "per_agent_contribution_index": {
+          "carrier_routing_agent": 0.132679,
+          "tax_classify_agent": 0.122258
+        },
+        "group_contribution": {
+          "group_id": "chain_1_group_1",
+          "group_input_tokens": 1354.5,
+          "group_output_tokens": 751.1,
+          "group_contribution_tokens": 2105.6,
+          "group_contribution_pct_of_chain": 38.43,
+          "total_chain_contribution": 5479.4
+        },
+        "segmentation_boundary_and_reason": {
+          "boundary_after_agent": "invoice_tag_agent",
+          "cumulative_chain_pct_start": 0.0,
+          "cumulative_chain_pct_end": 38.43,
+          "segmentation_reason": "within_50pct_original_chain_contribution"
+        },
+        "independent_validation_classification": {
+          "carrier_routing_agent": {
+            "agent_id": "carrier_routing_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Goal and backstory state \"Assign carrier name, service level, and transit days\"",
+              "Declared responsibilities: \"Map shipping region and requested speed to carrier name, service level, and transit days\"",
+              "Task description explicitly instructs to produce JSON with carrier assignment",
+              "No mention of checking or gating upstream outputs"
+            ],
+            "reasoning": "The agent's primary function is to compute and output carrier routing decisions based on input data, which is core execution rather than independent validation or QA.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          },
+          "tax_classify_agent": {
+            "agent_id": "tax_classify_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Declared responsibilities and goal state the agent must assign tax jurisdiction, rate, and amount based on input fields.",
+              "Task description and prompt text show the agent performs a calculation using fixed tax rates and returns a JSON payload.",
+              "No mention of checking, auditing, or gating outputs from upstream agents; it directly transforms inputs into tax classification outputs."
+            ],
+            "reasoning": "The agent's primary function is to compute tax information from given inputs, which is a transformation/synthesis task rather than an independent validation or audit role.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          }
+        },
+        "validation_exclusion_evidence": [],
+        "original_prompt_token_count": 208,
+        "unified_prompt_token_count": 315,
+        "context_window_capacity": 131072,
+        "context_utilization_percentage": 0.9,
+        "context_budget_pass_fail": {
+          "pre_filter_passed": true,
+          "pre_filter_utilization_pct": 0.82,
+          "post_generation_passed": true,
+          "post_generation_utilization_pct": 0.9,
+          "budget_threshold_pct": 70.0,
+          "tokenization_method": "tiktoken:o200k_base",
+          "is_exact_tokenizer": true
+        },
+        "groq_prompt_combination_result": {
+          "group_id": "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+          "source_agent_ids": [
+            "carrier_routing_agent",
+            "tax_classify_agent"
+          ],
+          "combined_agent_name": "CarrierRoutingAndTaxClassifier",
+          "combined_role": "Carrier Routing and Regional Tax Classification",
+          "combined_goal": "Assign the appropriate carrier, service level, and transit days for a shipment, then determine the correct tax jurisdiction, tax rate percentage, and tax amount in USD based on the billing country and order total.",
+          "unified_prompt": "You are a combined Carrier Routing and Tax Classification assistant. For each record (identified by {rec_id}), perform the following steps in order:\n1. **Carrier Routing**: Using the inputs shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, and review_flag, assign a carrier_name (UPS, DHL, or FedEx), a service_level (Standard, Expedited, or Overnight), and estimated_days (1, 2, or 5). \n2. **Tax Classification**: Using the billing_country, order_total_usd, and the carrier_name and service_level obtained in step 1, assign tax_jurisdiction (e.g., \"US-TAX\"), tax_rate_pct (US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0), and calculate tax_amount_usd = order_total_usd * tax_rate_pct / 100.\nReturn ONLY a single JSON object with the exact fields:\n{\n  \"record_id\": \"{rec_id}\",\n  \"carrier_name\": \"UPS|DHL|FedEx\",\n  \"service_level\": \"Standard|Expedited|Overnight\",\n  \"estimated_days\": 1|2|5,\n  \"tax_jurisdiction\": \"{billing_country}-TAX\",\n  \"tax_rate_pct\": <float>,\n  \"tax_amount_usd\": <float>\n}\nAll values must be valid and conform to the schemas defined below. No additional text or formatting is allowed.",
+          "preserved_responsibilities": [
+            "Map shipping region and requested speed to carrier name, service level, and transit days.",
+            "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD."
+          ],
+          "merged_responsibilities": [
+            "Determine carrier assignment and service level based on shipment characteristics, then compute applicable tax details using billing information and the selected carrier."
+          ],
+          "removed_redundancies": [
+            "Duplicate backstory statements for each agent.",
+            "Repeated \"Return ONLY JSON\" phrasing in both agent prompts.",
+            "Separate task descriptions; merged into a single ordered workflow."
+          ],
+          "preserved_input_schema": [
+            "shipping_region",
+            "shipping_speed",
+            "warehouse_code",
+            "in_stock",
+            "risk_band",
+            "review_flag",
+            "billing_country",
+            "order_total_usd"
+          ],
+          "preserved_output_schema": [
+            "tax_jurisdiction",
+            "tax_rate_pct",
+            "tax_amount_usd"
+          ],
+          "compatibility_assessment": {
+            "is_compatible": true,
+            "incompatible_responsibilities": [],
+            "notes": "Both agents operate sequentially without conflicting logic; carrier outputs feed directly into tax classification inputs."
+          },
+          "combination_rationale": "The agents share a linear data flow where carrier routing output is required for tax classification. Consolidating them eliminates handoff overhead, preserves all business rules, and maintains the original execution order while delivering a single JSON response.",
+          "estimated_combined_prompt_tokens": 242,
+          "requires_validation": true,
+          "measured_unified_prompt_tokens": 315,
+          "measured_tokenization_method": "tiktoken:o200k_base"
+        },
+        "original_agent_responsibilities": {
+          "carrier_routing_agent": {
+            "role": "Carrier Zone Router",
+            "goal": "Assign carrier name, service level, and transit days.",
+            "declared_responsibilities": "Map shipping region and requested speed to carrier name, service level, and transit days."
+          },
+          "tax_classify_agent": {
+            "role": "Regional Tax Classifier",
+            "goal": "Assign tax jurisdiction, rate percentage, and USD tax amount.",
+            "declared_responsibilities": "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD."
+          }
+        },
+        "consolidated_responsibilities": {
+          "combined_agent_name": "CarrierRoutingAndTaxClassifier",
+          "combined_role": "Carrier Routing and Regional Tax Classification",
+          "combined_goal": "Assign the appropriate carrier, service level, and transit days for a shipment, then determine the correct tax jurisdiction, tax rate percentage, and tax amount in USD based on the billing country and order total.",
+          "preserved_responsibilities": [
+            "Map shipping region and requested speed to carrier name, service level, and transit days.",
+            "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD."
+          ],
+          "merged_responsibilities": [
+            "Determine carrier assignment and service level based on shipment characteristics, then compute applicable tax details using billing information and the selected carrier."
+          ],
+          "removed_redundancies": [
+            "Duplicate backstory statements for each agent.",
+            "Repeated \"Return ONLY JSON\" phrasing in both agent prompts.",
+            "Separate task descriptions; merged into a single ordered workflow."
+          ],
+          "preserved_input_schema": [
+            "shipping_region",
+            "shipping_speed",
+            "warehouse_code",
+            "in_stock",
+            "risk_band",
+            "review_flag",
+            "billing_country",
+            "order_total_usd"
+          ],
+          "preserved_output_schema": [
+            "tax_jurisdiction",
+            "tax_rate_pct",
+            "tax_amount_usd"
+          ]
+        },
+        "evidence_provenance": [
+          "groq_stage3_classification",
+          "groq_stage4_prompt_combination",
+          "stage_10_evidence",
+          "stage_2_overview",
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_5_prompts",
+          "stage_6_latency",
+          "stage_7_tokens",
+          "stage_9_comparison"
+        ]
+      },
+      "unified_prompt": "You are a combined Carrier Routing and Tax Classification assistant. For each record (identified by {rec_id}), perform the following steps in order:\n1. **Carrier Routing**: Using the inputs shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, and review_flag, assign a carrier_name (UPS, DHL, or FedEx), a service_level (Standard, Expedited, or Overnight), and estimated_days (1, 2, or 5). \n2. **Tax Classification**: Using the billing_country, order_total_usd, and the carrier_name and service_level obtained in step 1, assign tax_jurisdiction (e.g., \"US-TAX\"), tax_rate_pct (US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0), and calculate tax_amount_usd = order_total_usd * tax_rate_pct / 100.\nReturn ONLY a single JSON object with the exact fields:\n{\n  \"record_id\": \"{rec_id}\",\n  \"carrier_name\": \"UPS|DHL|FedEx\",\n  \"service_level\": \"Standard|Expedited|Overnight\",\n  \"estimated_days\": 1|2|5,\n  \"tax_jurisdiction\": \"{billing_country}-TAX\",\n  \"tax_rate_pct\": <float>,\n  \"tax_amount_usd\": <float>\n}\nAll values must be valid and conform to the schemas defined below. No additional text or formatting is allowed.",
+      "proposed_solution": "Consolidate sequential execution agents (carrier_routing_agent -> tax_classify_agent) into a single unified agent 'CarrierRoutingAndTaxClassifier' using the generated schema-preserving unified prompt (requiring regression validation against baseline traces prior to rollout).",
+      "expected_benefit": {
+        "is_estimate": true,
+        "empirical_evaluation_pending": true,
+        "eliminated_agent_handoffs_count": 1,
+        "baseline_combined_latency_seconds": 2.8754,
+        "baseline_combined_tokens": 1396.9,
+        "measured_static_prompt_token_reduction": -107,
+        "estimated_static_prompt_token_reduction_pct": -51.44,
+        "estimation_basis": "Static prompt delta computed from actual prompt tokenizations; runtime latency, end-to-end token savings, and quality preservation remain unverified estimates pending controlled shadow regression testing."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Eliminates intermediate dispatch round-trips; net end-to-end latency requires empirical validation.",
+        "token_cost_tradeoff": "Reduces duplicated static instruction prefill; output token impact requires shadow validation.",
+        "output_quality_risk": "Moderate (merging execution boundaries can alter instruction adherence if unvalidated).",
+        "implementation_complexity": "Medium"
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_4 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+      "dimension": "agent_consolidation",
+      "title": "Consolidate carrier_routing_agent -> tax_classify_agent -> invoice_tag_agent into Unified Agent (CarrierTaxInvoiceConsolidatedAgent)",
+      "target_agents": [
+        "carrier_routing_agent",
+        "tax_classify_agent",
+        "invoice_tag_agent"
+      ],
+      "observed_problem": "Sequential agents carrier_routing_agent -> tax_classify_agent -> invoice_tag_agent execute as 3 separate LLM dispatch steps along verified dependency chain chain_1 (baseline combined mean latency: 4.32s; combined mean input+output tokens: 2106), incurring intermediate serialization and 296 combined static prompt tokens.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_5_prompts",
+          "stage_6_latency",
+          "stage_7_tokens",
+          "stage_10_evidence"
+        ],
+        "original_sequential_chain": [
+          "carrier_routing_agent",
+          "tax_classify_agent",
+          "invoice_tag_agent",
+          "fulfillment_summary_agent"
+        ],
+        "candidate_group": [
+          "carrier_routing_agent",
+          "tax_classify_agent",
+          "invoice_tag_agent"
+        ],
+        "agent_execution_order": [
+          "carrier_routing_agent",
+          "tax_classify_agent",
+          "invoice_tag_agent"
+        ],
+        "per_agent_input_tokens": {
+          "carrier_routing_agent": 480.7,
+          "tax_classify_agent": 441.7,
+          "invoice_tag_agent": 432.1
+        },
+        "per_agent_output_tokens": {
+          "carrier_routing_agent": 246.3,
+          "tax_classify_agent": 228.2,
+          "invoice_tag_agent": 276.6
+        },
+        "per_agent_observation_counts": {
+          "carrier_routing_agent": 10,
+          "tax_classify_agent": 10,
+          "invoice_tag_agent": 10
+        },
+        "per_agent_contribution_index": {
+          "carrier_routing_agent": 0.132679,
+          "tax_classify_agent": 0.122258,
+          "invoice_tag_agent": 0.129339
+        },
+        "group_contribution": {
+          "group_id": "chain_1_group_1",
+          "group_input_tokens": 1354.5,
+          "group_output_tokens": 751.1,
+          "group_contribution_tokens": 2105.6,
+          "group_contribution_pct_of_chain": 38.43,
+          "total_chain_contribution": 5479.4
+        },
+        "segmentation_boundary_and_reason": {
+          "boundary_after_agent": "invoice_tag_agent",
+          "cumulative_chain_pct_start": 0.0,
+          "cumulative_chain_pct_end": 38.43,
+          "segmentation_reason": "within_50pct_original_chain_contribution"
+        },
+        "independent_validation_classification": {
+          "carrier_routing_agent": {
+            "agent_id": "carrier_routing_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Goal and backstory state \"Assign carrier name, service level, and transit days\"",
+              "Declared responsibilities: \"Map shipping region and requested speed to carrier name, service level, and transit days\"",
+              "Task description explicitly instructs to produce JSON with carrier assignment",
+              "No mention of checking or gating upstream outputs"
+            ],
+            "reasoning": "The agent's primary function is to compute and output carrier routing decisions based on input data, which is core execution rather than independent validation or QA.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          },
+          "tax_classify_agent": {
+            "agent_id": "tax_classify_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Declared responsibilities and goal state the agent must assign tax jurisdiction, rate, and amount based on input fields.",
+              "Task description and prompt text show the agent performs a calculation using fixed tax rates and returns a JSON payload.",
+              "No mention of checking, auditing, or gating outputs from upstream agents; it directly transforms inputs into tax classification outputs."
+            ],
+            "reasoning": "The agent's primary function is to compute tax information from given inputs, which is a transformation/synthesis task rather than an independent validation or audit role.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          },
+          "invoice_tag_agent": {
+            "agent_id": "invoice_tag_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Declared goal and responsibilities are to attach GL account code, invoice tag, and billing batch for each invoice",
+              "Task description explicitly instructs the agent to generate a JSON payload with those fields, indicating primary data transformation/synthesis",
+              "No mention of checking, verifying, or gating outputs from upstream agents; it simply consumes inputs from tax_classify_agent and produces downstream data"
+            ],
+            "reasoning": "The agent's sole function is to generate tagging information based on provided inputs, which is a primary extraction/transformation task rather than an independent validation or QA role.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          }
+        },
+        "validation_exclusion_evidence": [],
+        "original_prompt_token_count": 296,
+        "unified_prompt_token_count": 460,
+        "context_window_capacity": 131072,
+        "context_utilization_percentage": 1.22,
+        "context_budget_pass_fail": {
+          "pre_filter_passed": true,
+          "pre_filter_utilization_pct": 1.1,
+          "post_generation_passed": true,
+          "post_generation_utilization_pct": 1.22,
+          "budget_threshold_pct": 70.0,
+          "tokenization_method": "tiktoken:o200k_base",
+          "is_exact_tokenizer": true
+        },
+        "groq_prompt_combination_result": {
+          "group_id": "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+          "source_agent_ids": [
+            "carrier_routing_agent",
+            "tax_classify_agent",
+            "invoice_tag_agent"
+          ],
+          "combined_agent_name": "CarrierTaxInvoiceConsolidatedAgent",
+          "combined_role": "Unified Shipment Routing, Tax Classification, and Invoice Tagging Agent",
+          "combined_goal": "Determine the optimal carrier and service level, calculate applicable tax, and generate ledger tagging for each shipment record.",
+          "unified_prompt": "You are a unified agent that processes shipment records sequentially.\n\n**Inputs (per record)**: rec_id, shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, review_flag, billing_country, order_total_usd, customer_tier.\n\n**Step 1 \u2013 Carrier Routing**: Assign a carrier, service level, and estimated transit days based on shipping_region, shipping_speed, in_stock, risk_band, and review_flag. Use the mapping:\n- carrier_name: one of \"UPS\", \"DHL\", \"FedEx\" (choose based on region and speed).\n- service_level: \"Standard\", \"Expedited\", or \"Overnight\" (match speed).\n- estimated_days: 1 for Overnight, 2 for Expedited, 5 for Standard.\nReturn ONLY JSON with fields: record_id, carrier_name, service_level, estimated_days.\n\n**Step 2 \u2013 Tax Classification**: Using the carrier_name and service_level from Step\u202f1 together with billing_country and order_total_usd, determine tax_jurisdiction, tax_rate_pct, and tax_amount_usd. Apply rates: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0. Compute tax_amount_usd = order_total_usd * tax_rate_pct / 100. Return ONLY JSON with fields: record_id, tax_jurisdiction (\"{billing_country}-TAX\"), tax_rate_pct, tax_amount_usd.\n\n**Step 3 \u2013 Invoice Tagging**: Using customer_tier, tax_jurisdiction, and tax_amount_usd, assign:\n- gl_account_code: \"GL-4010\"\n- invoice_tag: \"INV-{record_id}\"\n- billing_batch: \"BATCH-{customer_tier.upper()}\"\nReturn ONLY JSON with fields: record_id, gl_account_code, invoice_tag, billing_batch.\n\n**Final Output**: Merge the three JSON objects into a single JSON per record containing all fields: record_id, carrier_name, service_level, estimated_days, tax_jurisdiction, tax_rate_pct, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Ensure the output is valid JSON and includes no additional text.",
+          "preserved_responsibilities": [
+            "Map shipping region and requested speed to carrier name, service level, and transit days.",
+            "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD.",
+            "Attach general ledger account code, invoice tag, and billing batch identifier."
+          ],
+          "merged_responsibilities": [
+            "Route shipments to an appropriate carrier and service level, compute applicable tax based on jurisdiction and order total, and generate ledger tagging information for invoicing."
+          ],
+          "removed_redundancies": [
+            "Duplicate backstory statements for each agent.",
+            "Repeated phrasing \"Return ONLY JSON\" in each individual task.",
+            "Separate prompt_text fields that duplicated the task descriptions."
+          ],
+          "preserved_input_schema": [
+            "shipping_region",
+            "shipping_speed",
+            "warehouse_code",
+            "in_stock",
+            "risk_band",
+            "review_flag",
+            "billing_country",
+            "order_total_usd",
+            "customer_tier",
+            "rec_id"
+          ],
+          "preserved_output_schema": [
+            "carrier_name",
+            "service_level",
+            "estimated_days",
+            "tax_jurisdiction",
+            "tax_rate_pct",
+            "tax_amount_usd",
+            "gl_account_code",
+            "invoice_tag",
+            "billing_batch",
+            "record_id"
+          ],
+          "compatibility_assessment": {
+            "is_compatible": true,
+            "incompatible_responsibilities": [],
+            "notes": "All three agents operate on the same record flow and share compatible inputs/outputs; no conflicting business rules were found."
+          },
+          "combination_rationale": "Consolidating the three sequential agents eliminates handoff overhead while preserving each domain's logic. The unified prompt maintains the exact execution order, retains all input and output fields, and merges responsibilities into a single coherent workflow without altering any thresholds or calculations.",
+          "estimated_combined_prompt_tokens": 340,
+          "requires_validation": true,
+          "measured_unified_prompt_tokens": 460,
+          "measured_tokenization_method": "tiktoken:o200k_base"
+        },
+        "original_agent_responsibilities": {
+          "carrier_routing_agent": {
+            "role": "Carrier Zone Router",
+            "goal": "Assign carrier name, service level, and transit days.",
+            "declared_responsibilities": "Map shipping region and requested speed to carrier name, service level, and transit days."
+          },
+          "tax_classify_agent": {
+            "role": "Regional Tax Classifier",
+            "goal": "Assign tax jurisdiction, rate percentage, and USD tax amount.",
+            "declared_responsibilities": "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD."
+          },
+          "invoice_tag_agent": {
+            "role": "Ledger Invoice Tagger",
+            "goal": "Attach general ledger account code, invoice tag, and billing batch.",
+            "declared_responsibilities": "Attach general ledger account code, invoice tag, and billing batch identifier."
+          }
+        },
+        "consolidated_responsibilities": {
+          "combined_agent_name": "CarrierTaxInvoiceConsolidatedAgent",
+          "combined_role": "Unified Shipment Routing, Tax Classification, and Invoice Tagging Agent",
+          "combined_goal": "Determine the optimal carrier and service level, calculate applicable tax, and generate ledger tagging for each shipment record.",
+          "preserved_responsibilities": [
+            "Map shipping region and requested speed to carrier name, service level, and transit days.",
+            "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD.",
+            "Attach general ledger account code, invoice tag, and billing batch identifier."
+          ],
+          "merged_responsibilities": [
+            "Route shipments to an appropriate carrier and service level, compute applicable tax based on jurisdiction and order total, and generate ledger tagging information for invoicing."
+          ],
+          "removed_redundancies": [
+            "Duplicate backstory statements for each agent.",
+            "Repeated phrasing \"Return ONLY JSON\" in each individual task.",
+            "Separate prompt_text fields that duplicated the task descriptions."
+          ],
+          "preserved_input_schema": [
+            "shipping_region",
+            "shipping_speed",
+            "warehouse_code",
+            "in_stock",
+            "risk_band",
+            "review_flag",
+            "billing_country",
+            "order_total_usd",
+            "customer_tier",
+            "rec_id"
+          ],
+          "preserved_output_schema": [
+            "carrier_name",
+            "service_level",
+            "estimated_days",
+            "tax_jurisdiction",
+            "tax_rate_pct",
+            "tax_amount_usd",
+            "gl_account_code",
+            "invoice_tag",
+            "billing_batch",
+            "record_id"
+          ]
+        },
+        "evidence_provenance": [
+          "groq_stage3_classification",
+          "groq_stage4_prompt_combination",
+          "stage_10_evidence",
+          "stage_2_overview",
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_5_prompts",
+          "stage_6_latency",
+          "stage_7_tokens",
+          "stage_9_comparison"
+        ]
+      },
+      "unified_prompt": "You are a unified agent that processes shipment records sequentially.\n\n**Inputs (per record)**: rec_id, shipping_region, shipping_speed, warehouse_code, in_stock, risk_band, review_flag, billing_country, order_total_usd, customer_tier.\n\n**Step 1 \u2013 Carrier Routing**: Assign a carrier, service level, and estimated transit days based on shipping_region, shipping_speed, in_stock, risk_band, and review_flag. Use the mapping:\n- carrier_name: one of \"UPS\", \"DHL\", \"FedEx\" (choose based on region and speed).\n- service_level: \"Standard\", \"Expedited\", or \"Overnight\" (match speed).\n- estimated_days: 1 for Overnight, 2 for Expedited, 5 for Standard.\nReturn ONLY JSON with fields: record_id, carrier_name, service_level, estimated_days.\n\n**Step 2 \u2013 Tax Classification**: Using the carrier_name and service_level from Step\u202f1 together with billing_country and order_total_usd, determine tax_jurisdiction, tax_rate_pct, and tax_amount_usd. Apply rates: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0. Compute tax_amount_usd = order_total_usd * tax_rate_pct / 100. Return ONLY JSON with fields: record_id, tax_jurisdiction (\"{billing_country}-TAX\"), tax_rate_pct, tax_amount_usd.\n\n**Step 3 \u2013 Invoice Tagging**: Using customer_tier, tax_jurisdiction, and tax_amount_usd, assign:\n- gl_account_code: \"GL-4010\"\n- invoice_tag: \"INV-{record_id}\"\n- billing_batch: \"BATCH-{customer_tier.upper()}\"\nReturn ONLY JSON with fields: record_id, gl_account_code, invoice_tag, billing_batch.\n\n**Final Output**: Merge the three JSON objects into a single JSON per record containing all fields: record_id, carrier_name, service_level, estimated_days, tax_jurisdiction, tax_rate_pct, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Ensure the output is valid JSON and includes no additional text.",
+      "proposed_solution": "Consolidate sequential execution agents (carrier_routing_agent -> tax_classify_agent -> invoice_tag_agent) into a single unified agent 'CarrierTaxInvoiceConsolidatedAgent' using the generated schema-preserving unified prompt (requiring regression validation against baseline traces prior to rollout).",
+      "expected_benefit": {
+        "is_estimate": true,
+        "empirical_evaluation_pending": true,
+        "eliminated_agent_handoffs_count": 2,
+        "baseline_combined_latency_seconds": 4.3219,
+        "baseline_combined_tokens": 2105.6,
+        "measured_static_prompt_token_reduction": -164,
+        "estimated_static_prompt_token_reduction_pct": -55.41,
+        "estimation_basis": "Static prompt delta computed from actual prompt tokenizations; runtime latency, end-to-end token savings, and quality preservation remain unverified estimates pending controlled shadow regression testing."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Eliminates intermediate dispatch round-trips; net end-to-end latency requires empirical validation.",
+        "token_cost_tradeoff": "Reduces duplicated static instruction prefill; output token impact requires shadow validation.",
+        "output_quality_risk": "Moderate (merging execution boundaries can alter instruction adherence if unvalidated).",
+        "implementation_complexity": "Medium"
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_4 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    },
+    {
+      "candidate_id": "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+      "dimension": "agent_consolidation",
+      "title": "Consolidate tax_classify_agent -> invoice_tag_agent into Unified Agent (TaxAndInvoiceTaggerAgent)",
+      "target_agents": [
+        "tax_classify_agent",
+        "invoice_tag_agent"
+      ],
+      "observed_problem": "Sequential agents tax_classify_agent -> invoice_tag_agent execute as 2 separate LLM dispatch steps along verified dependency chain chain_1 (baseline combined mean latency: 2.88s; combined mean input+output tokens: 1379), incurring intermediate serialization and 207 combined static prompt tokens.",
+      "supporting_evidence": {
+        "mcp_stage_source": [
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_5_prompts",
+          "stage_6_latency",
+          "stage_7_tokens",
+          "stage_10_evidence"
+        ],
+        "original_sequential_chain": [
+          "carrier_routing_agent",
+          "tax_classify_agent",
+          "invoice_tag_agent",
+          "fulfillment_summary_agent"
+        ],
+        "candidate_group": [
+          "tax_classify_agent",
+          "invoice_tag_agent"
+        ],
+        "agent_execution_order": [
+          "tax_classify_agent",
+          "invoice_tag_agent"
+        ],
+        "per_agent_input_tokens": {
+          "tax_classify_agent": 441.7,
+          "invoice_tag_agent": 432.1
+        },
+        "per_agent_output_tokens": {
+          "tax_classify_agent": 228.2,
+          "invoice_tag_agent": 276.6
+        },
+        "per_agent_observation_counts": {
+          "tax_classify_agent": 10,
+          "invoice_tag_agent": 10
+        },
+        "per_agent_contribution_index": {
+          "tax_classify_agent": 0.122258,
+          "invoice_tag_agent": 0.129339
+        },
+        "group_contribution": {
+          "group_id": "chain_1_group_1",
+          "group_input_tokens": 1354.5,
+          "group_output_tokens": 751.1,
+          "group_contribution_tokens": 2105.6,
+          "group_contribution_pct_of_chain": 38.43,
+          "total_chain_contribution": 5479.4
+        },
+        "segmentation_boundary_and_reason": {
+          "boundary_after_agent": "invoice_tag_agent",
+          "cumulative_chain_pct_start": 0.0,
+          "cumulative_chain_pct_end": 38.43,
+          "segmentation_reason": "within_50pct_original_chain_contribution"
+        },
+        "independent_validation_classification": {
+          "tax_classify_agent": {
+            "agent_id": "tax_classify_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Declared responsibilities and goal state the agent must assign tax jurisdiction, rate, and amount based on input fields.",
+              "Task description and prompt text show the agent performs a calculation using fixed tax rates and returns a JSON payload.",
+              "No mention of checking, auditing, or gating outputs from upstream agents; it directly transforms inputs into tax classification outputs."
+            ],
+            "reasoning": "The agent's primary function is to compute tax information from given inputs, which is a transformation/synthesis task rather than an independent validation or audit role.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          },
+          "invoice_tag_agent": {
+            "agent_id": "invoice_tag_agent",
+            "responsibility_type": "execution_extraction_transformation_analysis_synthesis",
+            "is_independent_validator": false,
+            "classification_confidence": 0.97,
+            "evidence": [
+              "Declared goal and responsibilities are to attach GL account code, invoice tag, and billing batch for each invoice",
+              "Task description explicitly instructs the agent to generate a JSON payload with those fields, indicating primary data transformation/synthesis",
+              "No mention of checking, verifying, or gating outputs from upstream agents; it simply consumes inputs from tax_classify_agent and produces downstream data"
+            ],
+            "reasoning": "The agent's sole function is to generate tagging information based on provided inputs, which is a primary extraction/transformation task rather than an independent validation or QA role.",
+            "consolidation_restrictions": [],
+            "excluded_from_consolidation": false,
+            "exclusion_category": null,
+            "retain_separately": false,
+            "validation_passed": true
+          }
+        },
+        "validation_exclusion_evidence": [],
+        "original_prompt_token_count": 207,
+        "unified_prompt_token_count": 343,
+        "context_window_capacity": 131072,
+        "context_utilization_percentage": 0.91,
+        "context_budget_pass_fail": {
+          "pre_filter_passed": true,
+          "pre_filter_utilization_pct": 0.81,
+          "post_generation_passed": true,
+          "post_generation_utilization_pct": 0.91,
+          "budget_threshold_pct": 70.0,
+          "tokenization_method": "tiktoken:o200k_base",
+          "is_exact_tokenizer": true
+        },
+        "groq_prompt_combination_result": {
+          "group_id": "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+          "source_agent_ids": [
+            "tax_classify_agent",
+            "invoice_tag_agent"
+          ],
+          "combined_agent_name": "TaxAndInvoiceTaggerAgent",
+          "combined_role": "Regional Tax Classifier and Ledger Invoice Tagger",
+          "combined_goal": "Classify tax jurisdiction, rate percentage, and USD tax amount, then attach the appropriate general ledger account code, invoice tag, and billing batch identifier.",
+          "unified_prompt": "You are a combined Tax Classifier and Invoice Tagger. Using the inputs provided, perform the following steps in order for each record (identified by {rec_id}):\n1. **Tax Classification**: Determine the tax jurisdiction and rate based on the billing_country using the fixed rates: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0. Compute tax_amount_usd = order_total_usd * tax_rate_pct / 100. Return ONLY a JSON object containing: \"record_id\", \"tax_jurisdiction\" (format \"{billing_country}-TAX\"), \"tax_rate_pct\", and \"tax_amount_usd\".\n2. **Invoice Tagging**: Using the customer_tier, the tax_jurisdiction and tax_amount_usd from step 1, generate the ledger details: gl_account_code = \"GL-4010\", invoice_tag = \"INV-{record_id}\", billing_batch = \"BATCH-{customer_tier.upper()}\". Return ONLY a JSON object that merges the tax fields from step 1 with these new fields, resulting in: \"record_id\", \"tax_jurisdiction\", \"tax_rate_pct\", \"tax_amount_usd\", \"gl_account_code\", \"invoice_tag\", \"billing_batch\".\n**Required Inputs**: billing_country, order_total_usd, carrier_name, service_level, customer_tier. **Required Outputs**: tax_jurisdiction, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Ensure the final output is a single valid JSON per record matching the combined schema. No additional text or explanations are allowed.",
+          "preserved_responsibilities": [
+            "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD.",
+            "Attach general ledger account code, invoice tag, and billing batch identifier."
+          ],
+          "merged_responsibilities": [
+            "Classify tax jurisdiction, rate, and amount, then attach GL account code, invoice tag, and billing batch for each record."
+          ],
+          "removed_redundancies": [
+            "Duplicate backstory statements for each agent.",
+            "Separate role headings; merged into a single combined role."
+          ],
+          "preserved_input_schema": [
+            "billing_country",
+            "order_total_usd",
+            "carrier_name",
+            "service_level",
+            "customer_tier"
+          ],
+          "preserved_output_schema": [
+            "tax_jurisdiction",
+            "tax_amount_usd",
+            "gl_account_code",
+            "invoice_tag",
+            "billing_batch"
+          ],
+          "compatibility_assessment": {
+            "is_compatible": true,
+            "incompatible_responsibilities": [],
+            "notes": "Both agents operate sequentially on the same record and share compatible data flow; no conflicting rules were found."
+          },
+          "combination_rationale": "The tax classification step provides outputs required by the invoice tagging step, making a natural sequential pipeline. Consolidating them eliminates handoff overhead while preserving all business rules, rate tables, and output formats.",
+          "estimated_combined_prompt_tokens": 320,
+          "requires_validation": true,
+          "measured_unified_prompt_tokens": 343,
+          "measured_tokenization_method": "tiktoken:o200k_base"
+        },
+        "original_agent_responsibilities": {
+          "tax_classify_agent": {
+            "role": "Regional Tax Classifier",
+            "goal": "Assign tax jurisdiction, rate percentage, and USD tax amount.",
+            "declared_responsibilities": "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD."
+          },
+          "invoice_tag_agent": {
+            "role": "Ledger Invoice Tagger",
+            "goal": "Attach general ledger account code, invoice tag, and billing batch.",
+            "declared_responsibilities": "Attach general ledger account code, invoice tag, and billing batch identifier."
+          }
+        },
+        "consolidated_responsibilities": {
+          "combined_agent_name": "TaxAndInvoiceTaggerAgent",
+          "combined_role": "Regional Tax Classifier and Ledger Invoice Tagger",
+          "combined_goal": "Classify tax jurisdiction, rate percentage, and USD tax amount, then attach the appropriate general ledger account code, invoice tag, and billing batch identifier.",
+          "preserved_responsibilities": [
+            "Assign regional tax jurisdiction, tax rate percentage, and calculated tax amount in USD.",
+            "Attach general ledger account code, invoice tag, and billing batch identifier."
+          ],
+          "merged_responsibilities": [
+            "Classify tax jurisdiction, rate, and amount, then attach GL account code, invoice tag, and billing batch for each record."
+          ],
+          "removed_redundancies": [
+            "Duplicate backstory statements for each agent.",
+            "Separate role headings; merged into a single combined role."
+          ],
+          "preserved_input_schema": [
+            "billing_country",
+            "order_total_usd",
+            "carrier_name",
+            "service_level",
+            "customer_tier"
+          ],
+          "preserved_output_schema": [
+            "tax_jurisdiction",
+            "tax_amount_usd",
+            "gl_account_code",
+            "invoice_tag",
+            "billing_batch"
+          ]
+        },
+        "evidence_provenance": [
+          "groq_stage3_classification",
+          "groq_stage4_prompt_combination",
+          "stage_10_evidence",
+          "stage_2_overview",
+          "stage_3_graph",
+          "stage_4_profiles",
+          "stage_5_prompts",
+          "stage_6_latency",
+          "stage_7_tokens",
+          "stage_9_comparison"
+        ]
+      },
+      "unified_prompt": "You are a combined Tax Classifier and Invoice Tagger. Using the inputs provided, perform the following steps in order for each record (identified by {rec_id}):\n1. **Tax Classification**: Determine the tax jurisdiction and rate based on the billing_country using the fixed rates: US=8.0, CA=13.0, DE=19.0, UK=20.0, JP=10.0, other=5.0. Compute tax_amount_usd = order_total_usd * tax_rate_pct / 100. Return ONLY a JSON object containing: \"record_id\", \"tax_jurisdiction\" (format \"{billing_country}-TAX\"), \"tax_rate_pct\", and \"tax_amount_usd\".\n2. **Invoice Tagging**: Using the customer_tier, the tax_jurisdiction and tax_amount_usd from step 1, generate the ledger details: gl_account_code = \"GL-4010\", invoice_tag = \"INV-{record_id}\", billing_batch = \"BATCH-{customer_tier.upper()}\". Return ONLY a JSON object that merges the tax fields from step 1 with these new fields, resulting in: \"record_id\", \"tax_jurisdiction\", \"tax_rate_pct\", \"tax_amount_usd\", \"gl_account_code\", \"invoice_tag\", \"billing_batch\".\n**Required Inputs**: billing_country, order_total_usd, carrier_name, service_level, customer_tier. **Required Outputs**: tax_jurisdiction, tax_amount_usd, gl_account_code, invoice_tag, billing_batch. Ensure the final output is a single valid JSON per record matching the combined schema. No additional text or explanations are allowed.",
+      "proposed_solution": "Consolidate sequential execution agents (tax_classify_agent -> invoice_tag_agent) into a single unified agent 'TaxAndInvoiceTaggerAgent' using the generated schema-preserving unified prompt (requiring regression validation against baseline traces prior to rollout).",
+      "expected_benefit": {
+        "is_estimate": true,
+        "empirical_evaluation_pending": true,
+        "eliminated_agent_handoffs_count": 1,
+        "baseline_combined_latency_seconds": 2.8778,
+        "baseline_combined_tokens": 1378.6,
+        "measured_static_prompt_token_reduction": -136,
+        "estimated_static_prompt_token_reduction_pct": -65.7,
+        "estimation_basis": "Static prompt delta computed from actual prompt tokenizations; runtime latency, end-to-end token savings, and quality preservation remain unverified estimates pending controlled shadow regression testing."
+      },
+      "tradeoffs_and_risks": {
+        "latency_tradeoff": "Eliminates intermediate dispatch round-trips; net end-to-end latency requires empirical validation.",
+        "token_cost_tradeoff": "Reduces duplicated static instruction prefill; output token impact requires shadow validation.",
+        "output_quality_risk": "Moderate (merging execution boundaries can alter instruction adherence if unvalidated).",
+        "implementation_complexity": "Medium"
+      },
+      "tier": "Tier 2",
+      "requires_validation": true,
+      "allocated_key": "GROQ_API_KEY_4 (masked: [REDACTED_API_KEY])",
+      "feasibility_tier": "Tier 2: High potential, moderate trade-off"
+    }
+  ],
+  "candidate_tiers": {
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT": "Tier 2",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "PARALLEL-INVENTORY_CHECK_AGENT-FRAUD_SCREEN_AGENT": "Tier 1",
+    "MODEL-ORDER_INTAKE_AGENT": "Tier 2",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT": "Tier 2",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT": "Tier 2",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT": "Tier 2",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT": "Tier 2",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT": "Tier 2",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT": "Tier 2",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT": "Tier 2"
+  },
+  "validation_required_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "risk_acknowledged_candidate_ids": [
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT",
+    "CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "CONSOLIDATE-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "MODEL-ORDER_INTAKE_AGENT",
+    "PROMPT-OPT-CONSOLIDATE-CARRIER_ROUTING_AGENT-TAX_CLASSIFY_AGENT-INVOICE_TAG_AGENT",
+    "PROMPT-OPT-FULFILLMENT_SUMMARY_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-INVENTORY_CHECK_AGENT",
+    "HANDOFF-ORDER_INTAKE_AGENT-TO-FRAUD_SCREEN_AGENT",
+    "HANDOFF-INVENTORY_CHECK_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-FRAUD_SCREEN_AGENT-TO-CARRIER_ROUTING_AGENT",
+    "HANDOFF-CARRIER_ROUTING_AGENT-TO-TAX_CLASSIFY_AGENT",
+    "HANDOFF-INVOICE_TAG_AGENT-TO-FULFILLMENT_SUMMARY_AGENT"
+  ],
+  "approval_status": "approved",
+  "approved_at": "2026-11-25T20:39:41.921568+00:00"
+}

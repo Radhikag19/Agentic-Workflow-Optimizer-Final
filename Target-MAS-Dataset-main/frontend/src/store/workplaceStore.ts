@@ -249,7 +249,7 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
       const evs = await workplaceApi.getExperimentEvents(experimentId).catch(() => []);
       for (const ev of evs) get().applyEvent(ev);
 
-      if (status.has_results) {
+      if (status.has_results || status.status === 'completed' || Boolean(status.json_report_path)) {
         const [results, reports] = await Promise.all([
           workplaceApi.getExperimentResults(experimentId).catch(() => null),
           workplaceApi.getReportBundle(experimentId).catch(() => null),
