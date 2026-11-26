@@ -55,7 +55,8 @@ def create_app(
     app.state.experiment_service = experiment_service
     app.state.custom_runner_factory = custom_runner_factory
 
-    @app.get("/api/health")
+    @app.api_route("/api/health", methods=["GET", "HEAD"])
+    @app.api_route("/health", methods=["GET", "HEAD"])
     def health_check() -> dict[str, str]:
         return {"status": "ok", "service": "agentic-workplace-api"}
 
