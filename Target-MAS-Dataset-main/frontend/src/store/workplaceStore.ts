@@ -1,5 +1,10 @@
 import { create } from 'zustand';
 import { workplaceApi } from '../services/api';
+import {
+  clearStaticPlaybackTimers,
+  isStaticDemoMode,
+  runStaticExperimentPlayback,
+} from '../services/staticMode';
 import { soundEngine } from '../services/sound';
 import { clearSocketResources, connectExperimentSocket } from './socketClient';
 import { buildSimulationWaves, computeSimulationStep } from './traceSimulator';
@@ -166,6 +171,9 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
         return;
       }
       const preferred =
+        (isStaticDemoMode()
+          ? workflows.find((w) => w.workflow_id === 'order_fulfillment_synthetic')?.workflow_id
+          : undefined) ||
         workflows.find((w) => w.workflow_id === 'recruitment_screening')?.workflow_id ||
         workflows[0].workflow_id;
       await get().selectWorkflow(preferred);
@@ -179,6 +187,7 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
 
   selectWorkflow: async (workflowId: string) => {
     clearSocketResources();
+    clearStaticPlaybackTimers();
     clearSimTimer();
     set({
       loading: true,
@@ -214,6 +223,7 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
       if (experiments.length > 0) {
         const preferredExp =
           experiments.find((e) => e.status === 'running') ||
+          experiments.find((e) => e.experiment_id.includes('wp_synth_5dim_live')) ||
           experiments.find((e) => e.experiment_id.includes('live_validation')) ||
           experiments[0];
         await get().selectExperiment(preferredExp.experiment_id);
@@ -228,6 +238,7 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
 
   selectExperiment: async (experimentId: string) => {
     clearSocketResources();
+    clearStaticPlaybackTimers();
     set({
       activeExperimentId: experimentId,
       activeExperimentResults: null,
@@ -282,7 +293,30 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
           ? buildInitialTelemetry(overview.agents, overview.baseline_model)
           : s.agentTelemetry,
       }));
-      openLiveSocket(created.experiment_id, get, set);
+      if (isStaticDemoMode()) {
+        runStaticExperimentPlayback(
+          created.experiment_id,
+          overview,
+          (ev) => get().applyEvent(ev),
+          (nextStatus) =>
+            set((s) => ({
+              activeExperimentStatus: nextStatus,
+              experiments: s.experiments.map((e) =>
+                e.experiment_id === nextStatus.experiment_id ? nextStatus : e
+              ),
+            })),
+          async () => {
+            if (get().activeExperimentId !== created.experiment_id) return;
+            const [results, reports] = await Promise.all([
+              workplaceApi.getExperimentResults(created.experiment_id).catch(() => null),
+              workplaceApi.getReportBundle(created.experiment_id).catch(() => null),
+            ]);
+            set({ activeExperimentResults: results, activeReportBundle: reports });
+          }
+        );
+      } else {
+        openLiveSocket(created.experiment_id, get, set);
+      }
       return created;
     } catch (err: any) {
       set({
@@ -435,6 +469,7 @@ export const useWorkplaceStore = create<WorkplaceState>((set, get) => ({
   clearError: () => set({ error: null }),
   disconnectSocket: () => {
     clearSocketResources();
+    clearStaticPlaybackTimers();
     clearSimTimer();
     set({ wsConnected: false, simPlaying: false });
   },

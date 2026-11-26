@@ -1,5 +1,6 @@
 import React from 'react';
 import { Volume2, VolumeX, Building2, FlaskConical, ShieldCheck, BarChart3, FileText } from 'lucide-react';
+import { isStaticDemoMode } from '../services/staticMode';
 import type { NavTab, WorkflowSummary } from '../types/workplace';
 
 interface HeaderProps {
@@ -61,9 +62,26 @@ export const Header: React.FC<HeaderProps> = ({
           AW
         </div>
         <div>
-          <h1 className="pixel-title" style={{ fontSize: 13, color: '#faf6ea' }}>
-            AGENTIC WORKPLACE
-          </h1>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <h1 className="pixel-title" style={{ fontSize: 13, color: '#faf6ea' }}>
+              AGENTIC WORKPLACE
+            </h1>
+            {isStaticDemoMode() && (
+              <span
+                className="mono"
+                style={{
+                  fontSize: 10,
+                  padding: '2px 7px',
+                  background: '#d9822b',
+                  color: '#1f3a2e',
+                  fontWeight: 700,
+                  borderRadius: 3,
+                }}
+              >
+                SIMULATION DEMO
+              </span>
+            )}
+          </div>
           <div className="mono" style={{ fontSize: 11, color: '#d4e2d4', marginTop: 3 }}>
             Where Multi-Agent Systems go to work.
           </div>

@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: agentic-workplace-demo
+    runtime: static
+    rootDir: Target-MAS-Dataset-main/frontend
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: VITE_STATIC_MODE
+        value: "true"
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

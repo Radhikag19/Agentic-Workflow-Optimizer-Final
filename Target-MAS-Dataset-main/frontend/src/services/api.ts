@@ -11,6 +11,7 @@ import type {
   WorkflowReviewResponse,
   WorkflowSummary,
 } from '../types/workplace';
+import { isStaticDemoMode, staticWorkplaceApi } from './staticMode';
 
 async function requestJson<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, {
@@ -35,7 +36,7 @@ async function requestJson<T>(url: string, init?: RequestInit): Promise<T> {
   return (await res.json()) as T;
 }
 
-export const workplaceApi = {
+const liveWorkplaceApi = {
   getHealth: () => requestJson<{ status: string; service: string }>('/api/health'),
   listWorkflows: () => requestJson<WorkflowSummary[]>('/api/workflows'),
   getWorkflowOverview: (workflowId: string) =>
@@ -72,6 +73,57 @@ export const workplaceApi = {
     requestJson<OfficeEvent[]>(`/api/experiments/${encodeURIComponent(experimentId)}/events`),
   getReportBundle: (experimentId: string) =>
     requestJson<ReportBundleResponse>(`/api/reports/${encodeURIComponent(experimentId)}`),
+};
+
+export const workplaceApi = {
+  getHealth: () =>
+    isStaticDemoMode() ? staticWorkplaceApi.getHealth() : liveWorkplaceApi.getHealth(),
+  listWorkflows: () =>
+    isStaticDemoMode() ? staticWorkplaceApi.listWorkflows() : liveWorkplaceApi.listWorkflows(),
+  getWorkflowOverview: (workflowId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getWorkflowOverview(workflowId)
+      : liveWorkplaceApi.getWorkflowOverview(workflowId),
+  getWorkflowBaseline: (workflowId: string, maxTraces = 10) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getWorkflowBaseline(workflowId)
+      : liveWorkplaceApi.getWorkflowBaseline(workflowId, maxTraces),
+  getWorkflowReview: (workflowId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getWorkflowReview(workflowId)
+      : liveWorkplaceApi.getWorkflowReview(workflowId),
+  approveWorkflowScope: (workflowId: string, payload: ApproveScopeRequest) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.approveWorkflowScope(workflowId, payload)
+      : liveWorkplaceApi.approveWorkflowScope(workflowId, payload),
+  getWorkflowAgents: (workflowId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getWorkflowAgents(workflowId)
+      : liveWorkplaceApi.getWorkflowAgents(workflowId),
+  listExperiments: (workflowId?: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.listExperiments(workflowId)
+      : liveWorkplaceApi.listExperiments(workflowId),
+  startExperiment: (payload: ExperimentStartRequest) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.startExperiment(payload)
+      : liveWorkplaceApi.startExperiment(payload),
+  getExperimentStatus: (experimentId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getExperimentStatus(experimentId)
+      : liveWorkplaceApi.getExperimentStatus(experimentId),
+  getExperimentResults: (experimentId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getExperimentResults(experimentId)
+      : liveWorkplaceApi.getExperimentResults(experimentId),
+  getExperimentEvents: (experimentId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getExperimentEvents(experimentId)
+      : liveWorkplaceApi.getExperimentEvents(experimentId),
+  getReportBundle: (experimentId: string) =>
+    isStaticDemoMode()
+      ? staticWorkplaceApi.getReportBundle(experimentId)
+      : liveWorkplaceApi.getReportBundle(experimentId),
 };
 
 export function buildExperimentWebSocketUrl(experimentId: string): string {
